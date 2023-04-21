@@ -11,6 +11,7 @@ html,body {
   max-width: 100vw;
   overflow-x: hidden;
   font-family: 'Source Sans Pro', sans-serif;
+  max-height: 100vh;
 }
 
 a {

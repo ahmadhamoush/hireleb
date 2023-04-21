@@ -1,0 +1,35 @@
+.container{
+    position: relative;
+    min-width: 275px;
+    height: 330px;
+    border-radius: 10px;
+    padding: 20px;
+    color: #fff;
+    cursor: pointer;
+    overflow: hidden;
+    scroll-snap-align: start;
+}
+.container:hover > img, .container:active>img{
+    transform: scale(1.1);
+}
+.container img{
+    object-fit: cover;
+    z-index: -2;
+    border-radius: 10px;
+    transition:transform .5s, visibility .5s ease-in-out;
+    -webkit-transition: transform .5s, visibility .5s ease-in-out;
+    -moz-transition: transform .5s, visibility .5s ease-in-out;
+    -ms-transition: transform .5s, visibility .5s ease-in-out;
+}
+.container .header p{
+    font-weight: 200;
+}
+.overlay{
+    position: absolute;
+    inset: 0;
+    z-index:-1;
+    border-radius: 10px;
+    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4));
+    
+}
+
