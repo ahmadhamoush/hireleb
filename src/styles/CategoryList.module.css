@@ -21,13 +21,13 @@
 .container .list::-webkit-scrollbar {
     display: none;
 }
-.category{
+.all{
     color: #10B3AF;
     text-transform: uppercase;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.category p{
+.all p{
     margin-right: 5px;
 }

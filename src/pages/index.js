@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Navbar from '@/components/Navbar'
 import Landing from '@/components/Landing'
 import CategoryList from '@/components/CategoryList'
+import Freelancers from '@/components/Freelancers'
 
 
 export default function Home() {
@@ -16,6 +17,7 @@ export default function Home() {
       <Navbar />
       <Landing />
       <CategoryList />
+      <Freelancers />
     </>
   )
 }

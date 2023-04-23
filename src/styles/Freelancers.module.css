@@ -1,0 +1,146 @@
+
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.container,.descriptions div{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.descriptions div{
+    padding: 20px;
+}
+.descriptions div{
+    margin: 10px 0;
+}
+.descriptions div p{
+margin: 0 10px;
+font-size: 20px;
+}
+.descriptionContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+.descriptionContainer h2{
+    margin-bottom: 40px;
+    }
+.descriptions{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+}
+ 
+.phone{
+    position: relative;
+    width: 350px;
+    height: 600px;
+    margin: 20px;
+}
+.freelancer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    line-height: 2;
+    height: 100%;
+}
+
+.freelancer span{
+    font-weight: 200;
+    font-size: 12px;
+}
+
+.phoneImage{
+    z-index: -1;
+    transform: translateX(8px);
+  object-fit: cover;
+
+}
+.image{
+    border-radius: 50%;
+    object-fit: cover;
+}
+.imageContainer{
+    position: relative;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+}
+.icon{
+    color: #FFD700;
+    margin-right: 5px;
+}
+.rate h3{
+    font-size: 15px;
+}
+.rates{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: scroll;
+    height:200px;
+    padding: 20px;
+    margin: 10px 0;
+}
+.rate{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.totalProjects{
+    font-size: 15px;
+}
+.totalProjects span{
+    font-weight: 600;
+    font-size: 15px;
+    margin: 0 2px;
+}
+.progressBar{
+    background-color: #e3e3e3;
+    border-radius: 20px;
+    width: 200px;
+    height: 15px;
+}
+.progress{
+        background-color: #10B3AF;
+        border-radius: 20px;
+        width: var(--i);
+        height: 15px;
+        animation: progressAnim 0.5s ease-in-out;
+}
+.all{
+    color: #10B3AF;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.all p{
+    margin-right: 5px;
+}
+
+@keyframes progressAnim {
+    0%{
+        width: 0;
+    }
+    100%{
+        width: var(--i);
+    }
+}
+@media (max-width:935px) {
+    .container{
+        flex-direction: column;
+    }
+    .descriptionContainer{
+        align-items: center;
+    }
+}
