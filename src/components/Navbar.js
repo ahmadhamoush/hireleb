@@ -7,7 +7,7 @@ const Navbar = () => {
   return (
    <>
     <nav className={style.nav}>
-        <h1>Hire<span>Leb</span></h1>
+        <Link href='/'> <h1>Hire<span>Leb</span></h1></Link>
         <input id={style.menu} type="checkbox" />
         <label className={style.menuIcon} htmlFor={style.menu}>
         </label>
@@ -19,8 +19,8 @@ const Navbar = () => {
         <div className={style.links}>
             <ul>
             <li><Link href='/'>How it works</Link></li>
-               <li><Link href='/services'>login</Link></li>
-               <li>Sign up</li>
+               <li><Link href='/login'>Login</Link></li>
+               <li><Link href='/signup'>signup</Link></li>
             </ul>
         </div>
       
