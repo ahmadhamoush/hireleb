@@ -1,11 +1,11 @@
 
-import style from '@/styles/ProductCard.module.css'
+import style from '@/styles/ProfileCard.module.css'
 import Link from "next/link"
 import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 
-const ProductCard = () => {
+const ProfileCard = () => {
   return (
    <div className={style.container}>
     <div className={style.imageContainer}>
@@ -21,4 +21,4 @@ const ProductCard = () => {
   )
 }
 
-export default ProductCard
+export default ProfileCard

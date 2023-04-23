@@ -6,6 +6,7 @@ import Freelancers from '@/components/Freelancers'
 import Banner from '@/components/Banner'
 import ServiceList from '@/components/ServiceList'
 import Testimonial from '@/components/Testimonial'
+import Footer from '@/components/Footer'
 
 
 export default function Home() {
@@ -24,6 +25,7 @@ export default function Home() {
       <Banner />
       <ServiceList />
       <Testimonial />
+      <Footer />
     </>
   )
 }

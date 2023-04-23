@@ -5,7 +5,7 @@ import Link from "next/link"
 import Image from 'next/image'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
-import ProductCard from './ProductCard'
+import ProfileCard from './ProfileCard'
 
 const Landing = () => {
   return (
@@ -50,11 +50,11 @@ const Landing = () => {
             <Carousel  showThumbs={false}  showArrows={false}>
                 <div>
                 <Image className={style.image} src='/showcase1.png' width={200} height={350} />
-                <ProductCard />
+                <ProfileCard />
                 </div>
                 <div>
                 <Image className={style.image} src='/showcase1.png' width={200} height={350} />
-                <ProductCard />
+                <ProfileCard />
                 </div>
             </Carousel>
            

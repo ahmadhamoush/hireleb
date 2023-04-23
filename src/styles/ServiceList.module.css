@@ -9,6 +9,8 @@
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
     width: 100%;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 .container h2{
     scroll-snap-align: start;
@@ -20,6 +22,9 @@
     align-items: center;
     padding: 10px;  
 }   
+.container::-webkit-scrollbar {
+    display: none;
+}
 /* @media (max-width:935px) {
     .services{
         flex-direction: column;
