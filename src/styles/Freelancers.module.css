@@ -3,13 +3,16 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     padding: 20px;
 }
 .container,.descriptions div{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+}
+.container{
+    width: 100%;
 }
 .descriptions div{
     padding: 20px;
@@ -19,7 +22,7 @@
 }
 .descriptions div p{
 margin: 0 10px;
-font-size: 20px;
+font-size: 18px;
 }
 .descriptionContainer{
     display: flex;

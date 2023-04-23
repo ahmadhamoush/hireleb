@@ -8,7 +8,7 @@ import {faArrowRight } from '@fortawesome/free-solid-svg-icons'
 const CategoryList = () => {
   return (
    <div className={style.container}>
-      <h1>Unlock Your Potential with Our Comprehensive Talent Solutions</h1>
+      <h2>Unlock Your Potential with Our Comprehensive Talent Solutions</h2>
        <div className={style.list}>
        <CategoryCard title='Create your digital presence' category='Website Development' image='/web.jpg' />
         <CategoryCard title='Get found online' category='SEO' image='/seo.jpg' />

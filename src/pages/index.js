@@ -3,6 +3,7 @@ import Navbar from '@/components/Navbar'
 import Landing from '@/components/Landing'
 import CategoryList from '@/components/CategoryList'
 import Freelancers from '@/components/Freelancers'
+import Banner from '@/components/Banner'
 
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
       <Landing />
       <CategoryList />
       <Freelancers />
+      <Banner />
     </>
   )
 }
