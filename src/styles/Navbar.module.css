@@ -9,6 +9,9 @@
     width: 100%;
     z-index: 4;
 }
+.nav{
+    color:#2D646D
+}
 
 .nav span{
     color: #10B3AF;
@@ -34,7 +37,6 @@
 }
 .nav h1{
     font-size: 35px;
-    cursor: pointer;
 }
 
 .nav .links ul li {
@@ -131,7 +133,7 @@
     height: 100%;
     width: 100%;
     position: relative;
-    background-color: #1e1e1e;
+    background-color: #2D646D;
     width: 24px;
     height: 3px;
     border-radius: 10px;

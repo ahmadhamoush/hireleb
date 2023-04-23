@@ -1,0 +1,30 @@
+.container{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 20px; 
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    width: 100%;
+}
+.container h2{
+    scroll-snap-align: start;
+    padding: 20px;
+}
+.services{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;  
+}   
+/* @media (max-width:935px) {
+    .services{
+        flex-direction: column;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        justify-content: flex-start;
+    }
+} */

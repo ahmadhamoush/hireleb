@@ -10,7 +10,6 @@ const Banner = () => {
     <button className={style.btn}>Build Now</button>
    </div>
    <div className={style.imageContainer}>
-    <Image src='/banner.png' fill className={style.image} />
    </div>
    </div>
   )

@@ -17,19 +17,15 @@
     width: 500px;
     height: 500px;
     border-radius: 20px;
+    margin: 20px;
+}
 
-}
-.image{ 
-    object-fit: cover;
-    display: none;
-}
 .description{
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 30px;
     align-items: flex-start;
-    padding: 20px;
     width: 500px;
     height: 500px;
 }
