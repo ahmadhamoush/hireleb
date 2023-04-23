@@ -5,6 +5,7 @@ import CategoryList from '@/components/CategoryList'
 import Freelancers from '@/components/Freelancers'
 import Banner from '@/components/Banner'
 import ServiceList from '@/components/ServiceList'
+import Testimonial from '@/components/Testimonial'
 
 
 export default function Home() {
@@ -22,6 +23,7 @@ export default function Home() {
       <Freelancers />
       <Banner />
       <ServiceList />
+      <Testimonial />
     </>
   )
 }
