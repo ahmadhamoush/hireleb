@@ -3,6 +3,7 @@ import style from '@/styles/Navbar.module.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
 import Link from "next/link"
+import { signIn } from 'next-auth/react'
 const Navbar = () => {
   return (
    <>
@@ -19,7 +20,7 @@ const Navbar = () => {
         <div className={style.links}>
             <ul>
             <li><Link href='/'>How it works</Link></li>
-               <li><Link href='/login'>Login</Link></li>
+               <li onClick={()=>signIn()}>Login</li>
                <li><Link href='/signup'>signup</Link></li>
             </ul>
         </div>
