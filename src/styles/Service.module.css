@@ -1,61 +1,61 @@
-.container{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    height: 300px;
-    width: 300px;
-    padding:5px;
-    margin: 20px;
-    scroll-snap-align: start;
-    cursor: pointer;
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 300px;
+  width: 300px;
+  padding: 5px;
+  margin: 20px;
+  scroll-snap-align: start;
+  cursor: pointer;
 }
-.headerContainer{
-    display: flex;
-    justify-content: space-between;
-    align-items: center; 
-    width: 100%;
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
-.header{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;  
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }
-.headerContainer .price{
-    background-color: #F6775A;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 12px;
+.headerContainer .price {
+  background-color: #f6775a;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
 }
-.circle{
-    background-color: #e3e3e3;
-    position:absolute;
-     width: inherit;
-     height: inherit;
-    border-radius: 50%;
-    z-index: -1;
+.circle {
+  background-color: #e3e3e3;
+  position: absolute;
+  width: inherit;
+  height: inherit;
+  border-radius: 50%;
+  z-index: -1;
 }
-.desc{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    padding: 20px;
+.desc {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
 }
-.skills{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;  
+.skills {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
-.skills div p{
-    margin: 0 10px;
-    background-color: #2D646D;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 12px;
+.skills div p {
+  margin: 0 10px;
+  background-color: #2d646d;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
 }

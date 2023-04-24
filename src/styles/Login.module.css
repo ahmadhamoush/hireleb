@@ -1,105 +1,116 @@
-.container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 20px;
-    height: 100%;
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  height: 100%;
 }
-.container h2{
-    font-size: 30px;
+.container h2 {
+  font-size: 30px;
 }
-.container form{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    gap: 20px;
-    padding: 30px;
-    border-radius: 20px;
+.container form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  gap: 20px;
+  padding: 30px;
+  border-radius: 20px;
 }
-.container form .userDetails,.container form .btns{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 5px;
-    margin: 0 10px;
-    text-transform: capitalize;
-    width: 100%;
-} 
-.container form input{
-    padding: 12px 20px;
-    border-radius: 10px;
-    outline: none;
-    border: none;
-    width: 100%;
-    font-size: 16px;
-    background-color: #eeeded;
+.container form .userDetails,
+.container form .btns {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 5px;
+  margin: 0 10px;
+  text-transform: capitalize;
+  width: 100%;
 }
-.container form .btns{
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: center;
-    align-items: center;
+.container form input {
+  padding: 12px 20px;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  width: 100%;
+  font-size: 16px;
+  background-color: #eeeded;
 }
-.container form button{
-    outline: none;
-    border: none;
-    font-size: 18px;
-    border-radius: 10px;
-    padding: 10px 30px;
-    color:#fff;
-    text-transform: uppercase;
-    margin: 0 auto;
-    cursor: pointer;
+.container form .btns {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
 }
-.btns button:first-child{
-    background-color: #F6775A;
+.container form button {
+  outline: none;
+  border: none;
+  font-size: 18px;
+  border-radius: 10px;
+  padding: 10px 30px;
+  color: #fff;
+  text-transform: uppercase;
+  margin: 0 auto;
+  cursor: pointer;
 }
-.btns button:last-child{
-    background-color: #1e1e1e;
+.btns button:first-child {
+  background-color: #f6775a;
 }
-.container a{
-    font-weight: 600;
-    text-decoration: underline;
+.btns button:last-child {
+  background-color: #1e1e1e;
 }
-.career{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+.container a {
+  font-weight: 600;
+  text-decoration: underline;
 }
-.career p{
-font-weight: 200;
+.career {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
-.career .careerBtns,.name{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    gap: 10px;
+.career p {
+  font-weight: 200;
 }
-.career .careerBtns button{
-padding: 25px 10px;
-background-color: transparent;
-border: 1px solid #2D646D;
-color:#2D646D;
-transition: 0.5 ease-in-out;
--webkit-transition: 0.5s ease-in-out;
--moz-transition: 0.5s ease-in-out;
+.career .careerBtns,
+.name {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
 }
-.career .careerBtns button:active,.career .careerBtns button:hover{
-background-color: #2D646D;
-color:#fff;
+.career .careerBtns button {
+  padding: 25px 10px;
+  background-color: transparent;
+  border: 1px solid #2d646d;
+  color: #2d646d;
+  transition: 0.5 ease-in-out;
+  -webkit-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+}
+.career .careerBtns button:active,
+.career .careerBtns button:hover {
+  background-color: #2d646d;
+  color: #fff;
 }
 
-@media (max-width:674px) {
-    .career .careerBtns,.name{
-        flex-direction: column;
-    }
+.err {
+  color: rgba(243, 56, 56, 0.908);
+  width: 100%;
+  padding: 2px;
+  border-radius: 20px;
+  text-transform: capitalize;
+}
+@media (max-width: 674px) {
+  .career .careerBtns,
+  .name {
+    flex-direction: column;
+  }
 }

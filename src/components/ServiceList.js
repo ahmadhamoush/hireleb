@@ -4,17 +4,17 @@ import Service from './Service'
 
 const ServiceList = () => {
   return (
-   <div className={style.container}>
-    <h2>Trending Services</h2>
-    <div className={style.services}>
-    <Service />
-    <Service />
-    <Service />
-    <Service />
-    <Service />
-    <Service />
+    <div className={style.container}>
+      <h2>Trending Services</h2>
+      <div className={style.services}>
+        <Service />
+        <Service />
+        <Service />
+        <Service />
+        <Service />
+        <Service />
+      </div>
     </div>
-   </div>
   )
 }
 

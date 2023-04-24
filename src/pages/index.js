@@ -8,7 +8,6 @@ import ServiceList from '@/components/ServiceList'
 import Testimonial from '@/components/Testimonial'
 import Footer from '@/components/Footer'
 
-
 export default function Home() {
   return (
     <>
