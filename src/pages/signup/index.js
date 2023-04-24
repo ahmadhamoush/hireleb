@@ -51,6 +51,7 @@ const Signup = () => {
             setErr(data.message)
           } else {
             setErr('')
+            alert('success')
           }
         })
         .catch(function (error) {
