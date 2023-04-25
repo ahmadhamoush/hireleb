@@ -11,7 +11,7 @@ export default async function handler(req, res) {
   if (foundUser) {
     res.json({ message: 'Email Taken' })
     // checking password length
-  } else if (req.body.password.length <= 6) {
+  } else if (req.body.password.length < 6) {
     res.json({
       message: `Password should contain at least 6 characters. ${
         6 - req.body.password.length
