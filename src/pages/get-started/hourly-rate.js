@@ -3,8 +3,9 @@ import Navbar from '@/components/Navbar'
 import style from '@/styles/getStarted.module.css'
 import { Animate } from 'react-simple-animate'
 import { useSession } from 'next-auth/react'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useRouter } from 'next/router'
+import GetStartedContext from '@/components/GetStartedContext'
 
 const index = () => {
   const session = useSession()
@@ -16,8 +17,15 @@ const index = () => {
   function navigateBack() {
     router.push('/get-started/freelancer-skills')
   }
-  const [lbpChecked, setLBPChecked] = useState(false)
-  const [usdChecked, setUSDChecked] = useState(false)
+
+  const {
+    hourlyrate,
+    setHourlyRate,
+    lbpChecked,
+    setLBPChecked,
+    usdChecked,
+    setUSDChecked,
+  } = useContext(GetStartedContext)
 
   return (
     <div>
@@ -43,7 +51,13 @@ const index = () => {
             <h3>SHARE YOUR FREELANCE DETAILS</h3>
             <div>
               <label htmlFor={style.title}>What is your hourly rate?*</label>
-              <input type="number" id={style.title} placeholder="Enter rate" />
+              <input
+                value={hourlyrate}
+                onChange={(e) => setHourlyRate(e.target.value)}
+                type="number"
+                id={style.title}
+                placeholder="Enter rate"
+              />
               <div className={style.currencyContainer}>
                 <label>Select Currency</label>
                 <div>

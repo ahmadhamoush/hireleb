@@ -12,9 +12,9 @@ const Landing = () => {
     <div className={style.container}>
       <div className={style.links}>
         <ul>
-          <li>Browse Jobs</li>
+          <li>Browse Freelance Services</li>
+          <li>Browse Company Jobs</li>
           <li>Find Talent</li>
-          <li>Looking For Work</li>
         </ul>
       </div>
       <div className={style.banner}>

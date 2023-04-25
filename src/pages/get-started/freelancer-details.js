@@ -3,12 +3,24 @@ import Navbar from '@/components/Navbar'
 import style from '@/styles/getStarted.module.css'
 import { Animate } from 'react-simple-animate'
 import { useSession } from 'next-auth/react'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useRouter } from 'next/router'
+import GetStartedContext from '@/components/GetStartedContext'
 
 const index = () => {
   const session = useSession()
   const router = useRouter()
+
+  const {
+    title,
+    setTitle,
+    about,
+    setAbout,
+    category,
+    setCategory,
+    subcategory,
+    setSubcategory,
+  } = useContext(GetStartedContext)
 
   function navigate() {
     router.push('/get-started/freelancer-skills')
@@ -42,6 +54,8 @@ const index = () => {
             <div>
               <label htmlFor={style.title}>Job title*</label>
               <input
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
                 id={style.title}
                 placeholder="What do you want to be known as? Example: Award Winning Web Developer"
               />
@@ -49,6 +63,8 @@ const index = () => {
             <div>
               <label htmlFor={style.about}>About You*</label>
               <textarea
+                value={about}
+                onChange={(e) => setAbout(e.target.value)}
                 rows="8"
                 cols="30"
                 id={style.about}
@@ -57,13 +73,21 @@ const index = () => {
             </div>
             <div>
               <label htmlFor={style.category}>Category*</label>
-              <select id={style.category}>
+              <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                id={style.category}
+              >
                 <option>Select Category</option>
               </select>
             </div>
             <div>
               <label htmlFor={style.subcategory}>Subcategory*</label>
-              <select id={style.subcategory}>
+              <select
+                value={subcategory}
+                onChange={(e) => setSubcategory(e.target.value)}
+                id={style.subcategory}
+              >
                 <option>Select Subcategory</option>
               </select>
             </div>

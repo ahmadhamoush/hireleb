@@ -3,13 +3,18 @@ import Navbar from '@/components/Navbar'
 import style from '@/styles/getStarted.module.css'
 import { Animate } from 'react-simple-animate'
 import { useSession } from 'next-auth/react'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useRouter } from 'next/router'
+import GetStartedContext from '@/components/GetStartedContext'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faClose } from '@fortawesome/free-solid-svg-icons'
 
 const index = () => {
   const session = useSession()
   const router = useRouter()
 
+  const { skills, setSkills, experience, setExperience } =
+    useContext(GetStartedContext)
   function navigate() {
     router.push('/get-started/hourly-rate')
   }
@@ -41,15 +46,49 @@ const index = () => {
             <h3>SHARE YOUR SKILLS WITH US</h3>
             <div>
               <label htmlFor={style.skills}>Your Skills*</label>
-              <select id={style.skills}>
-                <option>Select Skills</option>
+              <select
+                multiple={true}
+                onChange={(e) =>
+                  setSkills((prev) => [...new Set(prev).add(e.target.value)])
+                }
+                id={style.skills}
+              >
+                <option>Skill1</option>
+                <option>Skill2</option>
+                <option>Skill3</option>
+                <option>Skill4</option>
+                <option>Skill5</option>
               </select>
+              <div className={style.displayedSkillsContainer}>
+                {skills.map((skill, index) => {
+                  return (
+                    <div key={index} className={style.displayedSkills}>
+                      {skills.length && <p>{skill}</p>}
+                      <FontAwesomeIcon
+                        onClick={(e) =>
+                          setSkills((prev) =>
+                            prev.filter(
+                              (skill, prevIndex) => prevIndex !== index,
+                            ),
+                          )
+                        }
+                        className={style.close}
+                        icon={faClose}
+                      />
+                    </div>
+                  )
+                })}
+              </div>
             </div>
             <div>
               <label htmlFor={style.experience}>
                 Experience Level (Optional)
               </label>
-              <select id={style.experience}>
+              <select
+                value={experience}
+                onChange={(e) => setExperience(e.target.value)}
+                id={style.experience}
+              >
                 <option>Select your experience level </option>
               </select>
             </div>

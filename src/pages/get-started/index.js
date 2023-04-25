@@ -5,16 +5,17 @@ import Image from 'next/image'
 import { faAdd, faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useSession } from 'next-auth/react'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Animate } from 'react-simple-animate'
+import GetStartedContext from '@/components/GetStartedContext'
 
 const index = () => {
   const session = useSession()
   const router = useRouter()
   const [uploading, setUploading] = useState(false)
-  const [selectedImage, setSelectedImage] = useState('')
-  const [selectedFile, setSelectedFile] = useState('')
+  const { selectedImage, setSelectedImage, selectedFile, setSelectedFile } =
+    useContext(GetStartedContext)
 
   function navigate() {
     router.push('/get-started/freelancer-details')

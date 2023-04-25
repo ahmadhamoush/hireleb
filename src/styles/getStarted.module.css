@@ -197,8 +197,28 @@
   border-radius: 0em;
   transform: rotate(45deg);
 }
-
 .currencyContainer {
   display: flex;
   margin: 10px;
+}
+.displayedSkillsContainer {
+  display: flex;
+  flex-direction: row !important;
+  justify-content: flex-start !important;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  width: 100%;
+}
+.displayedSkills {
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: row !important;
+  align-items: center !important;
+  background-color: #e3e3e3;
+  border-radius: 10px;
+  padding: 5px 10px;
+}
+.close {
+  cursor: pointer;
 }

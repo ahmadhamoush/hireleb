@@ -4,14 +4,17 @@ import { SessionProvider } from 'next-auth/react'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 
 import { config } from '@fortawesome/fontawesome-svg-core'
+import { GetStartedContextProvide } from '@/components/GetStartedContext'
 // Tell Font Awesome to skip adding the CSS automatically
 // since it's already imported above
 config.autoAddCss = false
 
 export default function App({ Component, pageProps }) {
   return (
-    <SessionProvider>
-      <Component {...pageProps} />
-    </SessionProvider>
+    <GetStartedContextProvide>
+      <SessionProvider>
+        <Component {...pageProps} />
+      </SessionProvider>
+    </GetStartedContextProvide>
   )
 }
