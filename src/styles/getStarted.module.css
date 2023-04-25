@@ -204,14 +204,11 @@
 .displayedSkillsContainer {
   display: flex;
   flex-direction: row !important;
-  justify-content: flex-start !important;
   overflow-x: scroll;
   overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  width: 100%;
+  flex-wrap: wrap;
 }
 .displayedSkills {
-  scroll-snap-align: start;
   display: flex;
   flex-direction: row !important;
   align-items: center !important;
@@ -222,3 +219,10 @@
 .close {
   cursor: pointer;
 }
+
+.summary{
+  align-items: center !important;
+  text-transform: capitalize;
+  gap: 10px;
+}
+

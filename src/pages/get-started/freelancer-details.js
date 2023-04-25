@@ -3,13 +3,15 @@ import Navbar from '@/components/Navbar'
 import style from '@/styles/getStarted.module.css'
 import { Animate } from 'react-simple-animate'
 import { useSession } from 'next-auth/react'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState} from 'react'
 import { useRouter } from 'next/router'
 import GetStartedContext from '@/components/GetStartedContext'
+import jobCategories from '../../../lib/jobCategories'
 
 const index = () => {
   const session = useSession()
   const router = useRouter()
+  const [categoriesList,setCategoriesList] =useState([])
 
   const {
     title,
@@ -19,8 +21,12 @@ const index = () => {
     category,
     setCategory,
     subcategory,
-    setSubcategory,
+    setSubCategory,
   } = useContext(GetStartedContext)
+
+  useEffect(()=>{
+    setCategoriesList(jobCategories.categories)
+  },[categoriesList])
 
   function navigate() {
     router.push('/get-started/freelancer-skills')
@@ -78,17 +84,23 @@ const index = () => {
                 onChange={(e) => setCategory(e.target.value)}
                 id={style.category}
               >
-                <option>Select Category</option>
+                {categoriesList.map((list,index)=>{
+                  return <option key={index} value={list.name}>{list.name}</option>
+                })}
               </select>
             </div>
             <div>
               <label htmlFor={style.subcategory}>Subcategory*</label>
               <select
                 value={subcategory}
-                onChange={(e) => setSubcategory(e.target.value)}
+                onChange={(e) => setSubCategory(e.target.value)}
                 id={style.subcategory}
               >
-                <option>Select Subcategory</option>
+                {categoriesList.filter(categoryList=>categoryList.name === category).map((list)=>
+                  list.subcategories.map((subcat,index)=>{
+                     return <option key={index} value={subcat.name}>{subcat.name}</option>
+                })
+                )}
               </select>
             </div>
             <div className={style.btns}>

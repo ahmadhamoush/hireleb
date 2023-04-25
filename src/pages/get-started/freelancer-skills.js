@@ -3,17 +3,20 @@ import Navbar from '@/components/Navbar'
 import style from '@/styles/getStarted.module.css'
 import { Animate } from 'react-simple-animate'
 import { useSession } from 'next-auth/react'
-import { useContext, useState } from 'react'
+import { useContext, useState,useEffect } from 'react'
 import { useRouter } from 'next/router'
 import GetStartedContext from '@/components/GetStartedContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClose } from '@fortawesome/free-solid-svg-icons'
+import jobCategories from '../../../lib/jobCategories'
 
 const index = () => {
   const session = useSession()
   const router = useRouter()
 
-  const { skills, setSkills, experience, setExperience } =
+  const [categoriesList,setCategoriesList] =useState([])
+
+  const { skills, setSkills, experience, setExperience,category, subcategory } =
     useContext(GetStartedContext)
   function navigate() {
     router.push('/get-started/hourly-rate')
@@ -21,6 +24,11 @@ const index = () => {
   function navigateBack() {
     router.push('/get-started/freelancer-details')
   }
+
+  useEffect(()=>{
+    setCategoriesList(jobCategories.categories)
+  },[categoriesList])
+
 
   return (
     <div>
@@ -53,11 +61,13 @@ const index = () => {
                 }
                 id={style.skills}
               >
-                <option>Skill1</option>
-                <option>Skill2</option>
-                <option>Skill3</option>
-                <option>Skill4</option>
-                <option>Skill5</option>
+                  {categoriesList.filter(categoryList=>categoryList.name === category).map((list)=>
+                  list.subcategories.filter(subcat=>subcat.name === subcategory).map(
+                    (sub)=>
+                  sub.skills.map((skill,index)=>{
+                    return <option key={index} value={skill}>{skill}</option>
+                  }))
+                )}
               </select>
               <div className={style.displayedSkillsContainer}>
                 {skills.map((skill, index) => {
@@ -82,14 +92,18 @@ const index = () => {
             </div>
             <div>
               <label htmlFor={style.experience}>
-                Experience Level (Optional)
+                Experience Level
               </label>
               <select
                 value={experience}
                 onChange={(e) => setExperience(e.target.value)}
                 id={style.experience}
               >
-                <option>Select your experience level </option>
+                <option value='entry level' >Entry Level</option>
+                <option value='mid level'>Mid Level</option>
+                <option value='senior level'>Senior Level</option>
+                <option value='managerial'>Managerial</option>
+                <option value='executive'>Executive</option>
               </select>
             </div>
             <div className={style.btns}>

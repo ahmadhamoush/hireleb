@@ -97,7 +97,7 @@ const index = () => {
                   <Image
                     className={style.display}
                     src={selectedImage}
-                    alt=""
+                    alt="profile picture"
                     width={120}
                     height={120}
                   />

@@ -3,7 +3,7 @@ import Navbar from '@/components/Navbar'
 import style from '@/styles/getStarted.module.css'
 import { Animate } from 'react-simple-animate'
 import { useSession } from 'next-auth/react'
-import { useContext, useState } from 'react'
+import { useContext} from 'react'
 import { useRouter } from 'next/router'
 import GetStartedContext from '@/components/GetStartedContext'
 
@@ -12,7 +12,7 @@ const index = () => {
   const router = useRouter()
 
   function navigate() {
-    router.push('/freelancer/dashboard')
+    router.push('/get-started/summary')
   }
   function navigateBack() {
     router.push('/get-started/freelancer-skills')
@@ -89,13 +89,13 @@ const index = () => {
                   </label>
                 </div>
               </div>
-            </div>
+            </div>       
             <div className={style.btns}>
               <button type="button" onClick={navigateBack}>
                 Back
               </button>
               <button type="button" onClick={navigate}>
-                Get Started
+                Next
               </button>
             </div>
           </div>
