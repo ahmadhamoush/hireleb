@@ -1,4 +1,4 @@
-import { createContext } from 'react'
+import { createContext, useState } from 'react'
 import useSessionStorageState from 'use-session-storage-state'
 
 export const GetStartedContext = createContext({})
@@ -7,9 +7,7 @@ export function GetStartedContextProvide({ children }) {
   const [selectedImage, setSelectedImage] = useSessionStorageState('image', {
     defaultValue: '',
   })
-  const [selectedFile, setSelectedFile] = useSessionStorageState('file', {
-    defaultValue: '',
-  })
+  const [selectedFile, setSelectedFile] = useState('')
   const [title, setTitle] = useSessionStorageState('title', {
     defaultValue: '',
   })

@@ -98,6 +98,7 @@ const index = () => {
               >
                 {categoriesList.filter(categoryList=>categoryList.name === category).map((list)=>
                   list.subcategories.map((subcat,index)=>{
+                    <option>Select</option>
                      return <option key={index} value={subcat.name}>{subcat.name}</option>
                 })
                 )}

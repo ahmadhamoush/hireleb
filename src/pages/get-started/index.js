@@ -13,34 +13,13 @@ import GetStartedContext from '@/components/GetStartedContext'
 const index = () => {
   const session = useSession()
   const router = useRouter()
-  const [uploading, setUploading] = useState(false)
   const { selectedImage, setSelectedImage, selectedFile, setSelectedFile } =
     useContext(GetStartedContext)
 
   function navigate() {
     router.push('/get-started/freelancer-details')
   }
-  // const handleUpload = async ()=>{
-  //     try{
-  //         const formData = new FormData();
-  //         if(selectedFile!==''){
-  //             formData.append('img', selectedFile);
-  //             const {data} = await axios.post('/api/add',formData);
-  //             if(data.done==='ok'){
-  //                 setSelectedFile('')
-  //                 setSelectedImage('')
-  //             }
-  //         }
-  //         else{
-  //             throw new Error('Values should not be empty')
-  //         }
-  //     }
-  //     catch(err){
-  //         console.log(err.response?.data)
-  //     }
-
-  //    }
-
+ 
   return (
     <div>
       <Navbar />

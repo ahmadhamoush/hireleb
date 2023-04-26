@@ -2,9 +2,12 @@
 const nextConfig = {
   reactStrictMode: true,
   env: {
-    MONGODB_URI:
-      'mongodb+srv://hamoush:mThldMFdYBf37Tgr@cluster0.evplv1k.mongodb.net/hireleb?retryWrites=true&w=majority',
+    MONGODB_URI:process.env.MONGODB_URL,
+    CLOUD_NAME: process.env.CLOUD,
+    API_KEY: process.env.CLOUD_API,
+  API_SECRET: process.env.CLOUD_SECRET,
   },
+  
 }
 
 module.exports = nextConfig
