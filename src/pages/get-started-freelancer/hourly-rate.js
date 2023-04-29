@@ -12,10 +12,10 @@ const index = () => {
   const router = useRouter()
 
   function navigate() {
-    router.push('/get-started/summary')
+    router.push('/get-started-freelancer/summary')
   }
   function navigateBack() {
-    router.push('/get-started/freelancer-skills')
+    router.push('/get-started-freelancer/skills')
   }
 
   const {

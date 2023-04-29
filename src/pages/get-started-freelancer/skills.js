@@ -19,10 +19,10 @@ const index = () => {
   const { skills, setSkills, experience, setExperience,category, subcategory } =
     useContext(GetStartedContext)
   function navigate() {
-    router.push('/get-started/hourly-rate')
+    router.push('/get-started-freelancer/hourly-rate')
   }
   function navigateBack() {
-    router.push('/get-started/freelancer-details')
+    router.push('/get-started-freelancer/details')
   }
 
   useEffect(()=>{

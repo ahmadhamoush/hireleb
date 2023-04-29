@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import axios from 'axios'
+import { signIn } from 'next-auth/react'
+
 const Signup = () => {
   //user properties
   const [type, setType] = useState('')
@@ -27,7 +29,20 @@ const Signup = () => {
     return invalid.length ? false : true
   }
 
-  const signUp = (e) => {
+  async function login(loginData){
+    try {
+           await signIn('credentials',{
+            redirect:false,
+            email: loginData.email,
+            password: loginData.password  
+        })      
+        router.push('/get-started-freelancer')
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+  const signUp = async (e) => {
     e.preventDefault()
 
     try {
@@ -44,14 +59,15 @@ const Signup = () => {
           email,
           password,
         })
-        .then(function (response) {
+        .then(async function (response) {
           const { data } = response
           if (!data.valid) {
             // displaying error
             setErr(data.message)
           } else {
             setErr('')
-            alert('success')
+            const logdinData ={email,password}
+            await login(logdinData)  
           }
         })
         .catch(function (error) {

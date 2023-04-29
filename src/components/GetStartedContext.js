@@ -4,9 +4,7 @@ import useSessionStorageState from 'use-session-storage-state'
 export const GetStartedContext = createContext({})
 
 export function GetStartedContextProvide({ children }) {
-  const [selectedImage, setSelectedImage] = useSessionStorageState('image', {
-    defaultValue: '',
-  })
+  const [selectedImage, setSelectedImage] = useState('')
   const [selectedFile, setSelectedFile] = useState('')
   const [title, setTitle] = useSessionStorageState('title', {
     defaultValue: '',

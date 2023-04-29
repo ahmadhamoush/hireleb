@@ -20,7 +20,7 @@ const index = () => {
     router.push('/freelancer/dashboard')
   }
   function navigateBack() {
-    router.push('/get-started/hourly-rate')
+    router.push('/get-started-freelancer/hourly-rate')
   }
 
   const {
@@ -44,6 +44,7 @@ const index = () => {
       try{
           const formData = new FormData();
           if(selectedFile!==''){
+              formData.append('email',session.data.user.email)
               formData.append('hourlyralte',hourlyrate)
               formData.append('title',title)
               formData.append('about',about)

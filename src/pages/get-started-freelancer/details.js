@@ -29,10 +29,10 @@ const index = () => {
   },[categoriesList])
 
   function navigate() {
-    router.push('/get-started/freelancer-skills')
+    router.push('/get-started-freelancer/skills')
   }
   function navigateBack() {
-    router.push('/get-started/')
+    router.push('/get-started-freelancer')
   }
 
   return (
