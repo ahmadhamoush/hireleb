@@ -1,23 +1,28 @@
-import Footer from '@/components/Footer'
-import Navbar from '@/components/Navbar'
 import style from '@/styles/getStarted.module.css'
 import { Animate } from 'react-simple-animate'
 import { useSession } from 'next-auth/react'
-import { useContext, useState,useEffect } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import GetStartedContext from '@/components/GetStartedContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClose } from '@fortawesome/free-solid-svg-icons'
 import jobCategories from '../../../lib/jobCategories'
+import Layout from '@/components/Layout'
 
 const index = () => {
   const session = useSession()
   const router = useRouter()
 
-  const [categoriesList,setCategoriesList] =useState([])
+  const [categoriesList, setCategoriesList] = useState([])
 
-  const { skills, setSkills, experience, setExperience,category, subcategory } =
-    useContext(GetStartedContext)
+  const {
+    skills,
+    setSkills,
+    experience,
+    setExperience,
+    category,
+    subcategory,
+  } = useContext(GetStartedContext)
   function navigate() {
     router.push('/get-started-freelancer/hourly-rate')
   }
@@ -25,14 +30,12 @@ const index = () => {
     router.push('/get-started-freelancer/details')
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     setCategoriesList(jobCategories.categories)
-  },[categoriesList])
-
+  }, [categoriesList])
 
   return (
-    <div>
-      <Navbar />
+    <Layout>
       <Animate play start={{ width: '40%' }} end={{ width: '60%' }}>
         <div className={style.scroll}></div>
       </Animate>
@@ -61,13 +64,21 @@ const index = () => {
                 }
                 id={style.skills}
               >
-                  {categoriesList.filter(categoryList=>categoryList.name === category).map((list)=>
-                  list.subcategories.filter(subcat=>subcat.name === subcategory).map(
-                    (sub)=>
-                  sub.skills.map((skill,index)=>{
-                    return <option key={index} value={skill}>{skill}</option>
-                  }))
-                )}
+                {categoriesList
+                  .filter((categoryList) => categoryList.name === category)
+                  .map((list) =>
+                    list.subcategories
+                      .filter((subcat) => subcat.name === subcategory)
+                      .map((sub) =>
+                        sub.skills.map((skill, index) => {
+                          return (
+                            <option key={index} value={skill}>
+                              {skill}
+                            </option>
+                          )
+                        }),
+                      ),
+                  )}
               </select>
               <div className={style.displayedSkillsContainer}>
                 {skills.map((skill, index) => {
@@ -91,19 +102,17 @@ const index = () => {
               </div>
             </div>
             <div>
-              <label htmlFor={style.experience}>
-                Experience Level
-              </label>
+              <label htmlFor={style.experience}>Experience Level</label>
               <select
                 value={experience}
                 onChange={(e) => setExperience(e.target.value)}
                 id={style.experience}
               >
-                <option value='entry level' >Entry Level</option>
-                <option value='mid level'>Mid Level</option>
-                <option value='senior level'>Senior Level</option>
-                <option value='managerial'>Managerial</option>
-                <option value='executive'>Executive</option>
+                <option value="entry level">Entry Level</option>
+                <option value="mid level">Mid Level</option>
+                <option value="senior level">Senior Level</option>
+                <option value="managerial">Managerial</option>
+                <option value="executive">Executive</option>
               </select>
             </div>
             <div className={style.btns}>
@@ -117,8 +126,7 @@ const index = () => {
           </div>
         </Animate>
       </div>
-      <Footer />
-    </div>
+    </Layout>
   )
 }
 

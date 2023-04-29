@@ -1,11 +1,10 @@
-import Footer from '@/components/Footer'
-import Navbar from '@/components/Navbar'
 import style from '@/styles/Login.module.css'
 import { signIn } from 'next-auth/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { useSession } from 'next-auth/react'
+import Layout from '@/components/Layout'
 const Login = () => {
   const session = useSession()
   const router = useRouter()
@@ -34,8 +33,7 @@ const Login = () => {
   }
 
   return (
-    <>
-      <Navbar />
+    <Layout>
       <div className={style.container}>
         <form>
           <h2>Login</h2>
@@ -75,8 +73,7 @@ const Login = () => {
           </p>
         </form>
       </div>
-      <Footer />
-    </>
+    </Layout>
   )
 }
 

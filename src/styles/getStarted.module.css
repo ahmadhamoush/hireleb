@@ -220,9 +220,44 @@
   cursor: pointer;
 }
 
-.summary{
+.summary {
   align-items: center !important;
   text-transform: capitalize;
   gap: 10px;
 }
-
+.optionsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px 80px;
+}
+.optionsContainer div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 20px;
+}
+.optionsContainer div button {
+  background-color: #f6775a;
+  width: 100%;
+}
+.optionsContainer .iconContainer {
+  background-color: #10b3b051;
+  padding: 20px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+.optionsContainer .iconContainer .icon {
+  font-size: 40px;
+}
+@media (max-width: 900px) {
+  .optionsContainer {
+    flex-direction: column;
+  }
+}

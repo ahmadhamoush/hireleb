@@ -7,7 +7,6 @@ export default async function handler(req, res) {
   await initMongoose()
   const foundUser = await User.findOne({ email: req.body.email })
   //checking if another user exists with same email
-  console.log(validateEmail(req.body.email))
   if (foundUser) {
     res.json({ message: 'Email Taken' })
     // checking password length

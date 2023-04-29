@@ -6,17 +6,17 @@ const UserSchema = new mongoose.Schema({
   email: String,
   type: String,
   password: String,
-  image:String,
-  freelancer:{
-    title:String,
-    about:String,
-    category:String,
-    subcategory:String,
-    skills:String,
-    experience:String,
-    hourlyrate:Number,
-    currency:String,
-  }
+  image: String,
+  freelancer: {
+    title: String,
+    about: String,
+    category: String,
+    subcategory: String,
+    skills: String,
+    experience: String,
+    hourlyrate: Number,
+    currency: String,
+  },
 })
 
 module.exports = mongoose.models.User || mongoose.model('User', UserSchema)

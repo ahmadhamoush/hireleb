@@ -1,17 +1,16 @@
-import Footer from '@/components/Footer'
-import Navbar from '@/components/Navbar'
 import style from '@/styles/getStarted.module.css'
 import { Animate } from 'react-simple-animate'
 import { useSession } from 'next-auth/react'
-import { useContext, useEffect, useState} from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import GetStartedContext from '@/components/GetStartedContext'
 import jobCategories from '../../../lib/jobCategories'
+import Layout from '@/components/Layout'
 
 const index = () => {
   const session = useSession()
   const router = useRouter()
-  const [categoriesList,setCategoriesList] =useState([])
+  const [categoriesList, setCategoriesList] = useState([])
 
   const {
     title,
@@ -24,9 +23,9 @@ const index = () => {
     setSubCategory,
   } = useContext(GetStartedContext)
 
-  useEffect(()=>{
+  useEffect(() => {
     setCategoriesList(jobCategories.categories)
-  },[categoriesList])
+  }, [categoriesList])
 
   function navigate() {
     router.push('/get-started-freelancer/skills')
@@ -36,8 +35,7 @@ const index = () => {
   }
 
   return (
-    <div>
-      <Navbar />
+    <Layout>
       <Animate play start={{ width: '20%' }} end={{ width: '40%' }}>
         <div className={style.scroll}></div>
       </Animate>
@@ -84,8 +82,12 @@ const index = () => {
                 onChange={(e) => setCategory(e.target.value)}
                 id={style.category}
               >
-                {categoriesList.map((list,index)=>{
-                  return <option key={index} value={list.name}>{list.name}</option>
+                {categoriesList.map((list, index) => {
+                  return (
+                    <option key={index} value={list.name}>
+                      {list.name}
+                    </option>
+                  )
                 })}
               </select>
             </div>
@@ -96,12 +98,18 @@ const index = () => {
                 onChange={(e) => setSubCategory(e.target.value)}
                 id={style.subcategory}
               >
-                {categoriesList.filter(categoryList=>categoryList.name === category).map((list)=>
-                  list.subcategories.map((subcat,index)=>{
-                    <option>Select</option>
-                     return <option key={index} value={subcat.name}>{subcat.name}</option>
-                })
-                )}
+                {categoriesList
+                  .filter((categoryList) => categoryList.name === category)
+                  .map((list) =>
+                    list.subcategories.map((subcat, index) => {
+                      ;<option>Select</option>
+                      return (
+                        <option key={index} value={subcat.name}>
+                          {subcat.name}
+                        </option>
+                      )
+                    }),
+                  )}
               </select>
             </div>
             <div className={style.btns}>
@@ -115,8 +123,7 @@ const index = () => {
           </div>
         </Animate>
       </div>
-      <Footer />
-    </div>
+    </Layout>
   )
 }
 

@@ -1,11 +1,10 @@
-import Footer from '@/components/Footer'
-import Navbar from '@/components/Navbar'
 import style from '@/styles/getStarted.module.css'
 import { Animate } from 'react-simple-animate'
 import { useSession } from 'next-auth/react'
-import { useContext} from 'react'
+import { useContext } from 'react'
 import { useRouter } from 'next/router'
 import GetStartedContext from '@/components/GetStartedContext'
+import Layout from '@/components/Layout'
 
 const index = () => {
   const session = useSession()
@@ -28,8 +27,7 @@ const index = () => {
   } = useContext(GetStartedContext)
 
   return (
-    <div>
-      <Navbar />
+    <Layout>
       <Animate play start={{ width: '60%' }} end={{ width: '80%' }}>
         <div className={style.scroll}></div>
       </Animate>
@@ -89,7 +87,7 @@ const index = () => {
                   </label>
                 </div>
               </div>
-            </div>       
+            </div>
             <div className={style.btns}>
               <button type="button" onClick={navigateBack}>
                 Back
@@ -101,8 +99,7 @@ const index = () => {
           </div>
         </Animate>
       </div>
-      <Footer />
-    </div>
+    </Layout>
   )
 }
 

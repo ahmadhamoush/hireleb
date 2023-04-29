@@ -1,11 +1,10 @@
-import Footer from '@/components/Footer'
-import Navbar from '@/components/Navbar'
 import style from '@/styles/Login.module.css'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import axios from 'axios'
 import { signIn } from 'next-auth/react'
+import Layout from '@/components/Layout'
 
 const Signup = () => {
   //user properties
@@ -29,18 +28,22 @@ const Signup = () => {
     return invalid.length ? false : true
   }
 
-  async function login(loginData){
+  async function login(loginData) {
     try {
-           await signIn('credentials',{
-            redirect:false,
-            email: loginData.email,
-            password: loginData.password  
-        })      
+      await signIn('credentials', {
+        redirect: false,
+        email: loginData.email,
+        password: loginData.password,
+      })
+      if (type === 'freelancer') {
         router.push('/get-started-freelancer')
+      } else if (type === 'client') {
+        router.push('/get-started-client')
+      }
     } catch (err) {
-        console.log(err)
+      console.log(err)
     }
-}
+  }
 
   const signUp = async (e) => {
     e.preventDefault()
@@ -66,8 +69,8 @@ const Signup = () => {
             setErr(data.message)
           } else {
             setErr('')
-            const logdinData ={email,password}
-            await login(logdinData)  
+            const logdinData = { email, password }
+            await login(logdinData)
           }
         })
         .catch(function (error) {
@@ -85,8 +88,7 @@ const Signup = () => {
   }
 
   return (
-    <>
-      <Navbar />
+    <Layout>
       <div className={style.container}>
         <form>
           <h2>Sign Up</h2>
@@ -183,8 +185,7 @@ const Signup = () => {
           </p>
         </form>
       </div>
-      <Footer />
-    </>
+    </Layout>
   )
 }
 export default Signup

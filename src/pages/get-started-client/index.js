@@ -16,7 +16,7 @@ const index = () => {
     useContext(GetStartedContext)
 
   function navigate() {
-    router.push('/get-started-freelancer/details')
+    router.push('/get-started-client/options')
   }
 
   return (
@@ -28,9 +28,9 @@ const index = () => {
         <div className={style.header}>
           <h1>Welcome {session.data?.user.email},</h1>
           <p>
-            Create a strong profile and start applying to jobs today! Showcase
-            your skills and expertise to potential clients and stand out from
-            the competition.
+            Post your job requirements and find the best freelancers on our
+            platform! Connect with skilled professionals and complete your
+            project on time and within budget.
           </p>
         </div>
         <Animate
@@ -40,7 +40,7 @@ const index = () => {
           end={{ opacity: 1 }}
         >
           <div className={style.displayPicture}>
-            <h3>TELL US ABOUT YOURSELF IN THE NEXT SLIDES</h3>
+            <h3>LET FREELANCERS TRUST YOU</h3>
             <label>Profile Picture*</label>
             <label>
               <input
