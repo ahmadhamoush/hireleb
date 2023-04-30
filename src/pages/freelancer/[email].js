@@ -7,8 +7,9 @@ import { getUser } from '../api/get-user'
 import { initMongoose } from '../../../lib/initMongoose'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import { getProjects } from '../api/get-projects'
 
-const Freelancer = ({ user }) => {
+const Freelancer = ({ user, projects }) => {
   const [isPortfolio, setIsPortfolio] = useState(false)
   const [isServices, setIsServices] = useState(false)
   const [profileClicked, setProfileClicked] = useState(false)
@@ -101,7 +102,7 @@ const Freelancer = ({ user }) => {
                 htmlFor={style.portfolioLabel}
                 className={isPortfolio && style.selected}
               >
-                Portfolio (14)
+                Portfolio ({projects.length})
               </label>
               <input
                 checked={isServices}
@@ -125,17 +126,18 @@ const Freelancer = ({ user }) => {
               </label>
             </div>
             <div className={style.portfolio}>
-              <div className={style.project}></div>
-              <div className={style.project}></div>
-              <div className={style.project}></div>
-              <div className={style.project}></div>
-              <div className={style.project}></div>
-              <div className={style.project}></div>
-              <div className={style.project}></div>
-              <div className={style.project}></div>
-              <div className={style.project}></div>
-              <div className={style.project}></div>
-              <div className={style.project}></div>
+              {projects.map((project) => {
+                return (
+                  <Image
+                    key={project._id}
+                    src={project.image}
+                    width={180}
+                    height={100}
+                    alt={project.name}
+                    className={style.project}
+                  />
+                )
+              })}
             </div>
           </div>
         </div>
@@ -152,6 +154,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       user: JSON.parse(JSON.stringify(await getUser(email))),
+      projects: JSON.parse(JSON.stringify(await getProjects(email))),
     },
   }
 }
