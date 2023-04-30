@@ -10,7 +10,7 @@ import { useRouter } from 'next/router'
 import { getProjects } from '../api/get-projects'
 
 const Freelancer = ({ user, projects }) => {
-  const [isPortfolio, setIsPortfolio] = useState(false)
+  const [isPortfolio, setIsPortfolio] = useState(true)
   const [isServices, setIsServices] = useState(false)
   const [profileClicked, setProfileClicked] = useState(false)
   const router = useRouter()
@@ -135,6 +135,9 @@ const Freelancer = ({ user, projects }) => {
                     height={100}
                     alt={project.name}
                     className={style.project}
+                    onClick={()=>{
+                      router.push(`/freelancer/project/${project._id}`)
+                    }}
                   />
                 )
               })}
