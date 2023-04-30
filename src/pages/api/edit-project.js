@@ -28,6 +28,7 @@ const readFile = (req) => {
       if (err) reject(err)
       //if not then we access the files and files submitted
       resolve({ fields, files })
+        if(files.img){
       //getting the path of image
       var oldPath = files.img.filepath
       //reading and getting image data from the path
@@ -43,16 +44,29 @@ const readFile = (req) => {
         },
       )
       streamifier.createReadStream(rawData).pipe(stream)
+        }
+
       //connecting to db
       await initMongoose()
-      // creating new project and saving it to db
-      const addedProject = await Project.create({
-        owner: fields.email,
-        name: fields.name,
-        desc: fields.desc,
-        url: fields.url,
-        image: `https://res.cloudinary.com/hamoush/image/upload/v1678284450/hireleb/${files.img.originalFilename}`,
-      })
+      //updating project details
+      console.log(files.img)
+        if(files.img){
+            const editedProject = await Project.updateOne({_id:fields.id},{
+                owner: fields.email,
+                name: fields.name,
+                desc: fields.desc,
+                url: fields.url,
+                image: `https://res.cloudinary.com/hamoush/image/upload/v1678284450/hireleb/${files.img.originalFilename}`,
+              })
+        }
+        else{
+            const editedProject = await Project.updateOne({_id:fields.id},{
+                owner: fields.email,
+                name: fields.name,
+                desc: fields.desc,
+                url: fields.url,
+              })
+        }
     })
   })
 }

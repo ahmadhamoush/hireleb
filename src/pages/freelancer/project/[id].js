@@ -13,7 +13,7 @@ const Project = ({project}) => {
     router.back()
     }
     function edit(){
-       
+       router.push(`/freelancer/edit-project/${project[0]._id}`)
         }
   return (
     <Layout>
