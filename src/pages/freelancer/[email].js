@@ -6,12 +6,13 @@ import Image from 'next/image'
 import { getUser } from '../api/get-user'
 import { initMongoose } from '../../../lib/initMongoose'
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 
 const Freelancer = ({ user }) => {
   const [isPortfolio, setIsPortfolio] = useState(false)
   const [isServices, setIsServices] = useState(false)
   const [profileClicked, setProfileClicked] = useState(false)
-
+  const router = useRouter()
   useEffect(() => {
     if (profileClicked) {
       document.querySelector('body').style.overflow = 'hidden'
@@ -75,7 +76,10 @@ const Freelancer = ({ user }) => {
               </div>
             </div>
             <div className={style.btns}>
-              <button>Add New Project</button>
+              <button onClick={() => router.push('/freelancer/add-project')}>
+                Add New Project
+              </button>
+              <button>Add a Service</button>
               <button>Build CV</button>
               <button>Build Porfolio</button>
               <button>Change Account Type</button>
@@ -143,11 +147,11 @@ const Freelancer = ({ user }) => {
 export default Freelancer
 export async function getServerSideProps(context) {
   const { query } = context
-  const { id } = query
+  const { email } = query
   await initMongoose()
   return {
     props: {
-      user: JSON.parse(JSON.stringify(await getUser(id))),
+      user: JSON.parse(JSON.stringify(await getUser(email))),
     },
   }
 }

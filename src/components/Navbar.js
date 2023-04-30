@@ -36,7 +36,7 @@ const Navbar = () => {
               {session.data?.user && (
                 <FontAwesomeIcon
                   onClick={() =>
-                    router.push(`/freelancer/${session.data.user.id}`)
+                    router.push(`/freelancer/${session.data.user.email}`)
                   }
                   className={style.user}
                   icon={faUser}
