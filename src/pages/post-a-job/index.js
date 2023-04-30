@@ -102,7 +102,7 @@ const index = () => {
                   .filter((categoryList) => categoryList.name === jobCategory)
                   .map((list) =>
                     list.subcategories.map((subcat, index) => {
-                      <option>Select</option>
+                      ;<option>Select</option>
                       return (
                         <option key={index} value={subcat.name}>
                           {subcat.name}

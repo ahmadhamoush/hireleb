@@ -40,7 +40,7 @@ const index = () => {
         <div className={style.scroll}></div>
       </Animate>
       <div className={style.container}>
-      <div className={style.header}>
+        <div className={style.header}>
           <h1>Post a Job</h1>
           <p>
             Complete your profile today and start showcasing your skills as a
@@ -64,8 +64,7 @@ const index = () => {
                 }
                 id={style.jobSkills}
               >
-
-               {categoriesList
+                {categoriesList
                   .filter((categoryList) => categoryList.name === jobCategory)
                   .map((list) =>
                     list.subcategories
@@ -73,7 +72,7 @@ const index = () => {
                       .map((sub) =>
                         sub.skills.map((skill, index) => {
                           return (
-                            <option key={index} value={skill}>         
+                            <option key={index} value={skill}>
                               {skill}
                             </option>
                           )
@@ -103,7 +102,9 @@ const index = () => {
               </div>
             </div>
             <div>
-              <label htmlFor={style.jobExperience}>Required Experience Level</label>
+              <label htmlFor={style.jobExperience}>
+                Required Experience Level
+              </label>
               <select
                 value={jobExperience}
                 onChange={(e) => setJobExperience(e.target.value)}

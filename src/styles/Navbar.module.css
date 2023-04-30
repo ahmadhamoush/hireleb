@@ -181,7 +181,9 @@
   opacity: 1;
   transform: translateX(0);
 }
-
+.user {
+  cursor: pointer;
+}
 @media (max-width: 900px) {
   .menuIcon {
     display: block;

@@ -32,7 +32,7 @@ const index = () => {
         <div className={style.scroll}></div>
       </Animate>
       <div className={style.container}>
-      <div className={style.header}>
+        <div className={style.header}>
           <h1>Post a Job</h1>
           <p>
             Complete your profile today and start showcasing your skills as a
@@ -48,7 +48,9 @@ const index = () => {
           <div className={style.freelanceDetails}>
             <h3>SHARE YOUR PAYMENT DETAILS</h3>
             <div>
-              <label htmlFor={style.jobHourlyrate}>What is your hourly rate?*</label>
+              <label htmlFor={style.jobHourlyrate}>
+                What is your hourly rate?*
+              </label>
               <input
                 value={jobHourlyrate}
                 onChange={(e) => setJobHourlyRate(e.target.value)}

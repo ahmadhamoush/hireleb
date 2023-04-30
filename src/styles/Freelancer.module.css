@@ -1,0 +1,209 @@
+.container {
+}
+.banner {
+  background-color: #040404a8;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  gap: 10px;
+}
+.banner h1 {
+  font-size: 50px;
+}
+.add {
+  background-color: #e3e3e3;
+  color: #10b3af;
+  padding: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.details {
+  background-color: #e3e3e3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  text-transform: capitalize;
+  position: relative;
+  transform: translateY(-80px);
+  padding: 20px;
+}
+.details p {
+  margin: 10px 0;
+}
+.user {
+  width: 50px;
+  height: 50px;
+}
+.profile {
+  position: absolute;
+  top: -25px;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  margin: auto;
+  object-fit: cover;
+  cursor: pointer;
+}
+.profileClickedContainer {
+  position: absolute;
+  background-color: #1e1e1ee9;
+  width: 100%;
+  min-height: 100vh;
+  z-index: 111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.profileClickedContainer .close {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  font-size: 30px;
+  color: #fff;
+  cursor: pointer;
+}
+.profileClicked {
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.hourlyrate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hourlyrate p {
+  font-weight: 800;
+}
+.details span {
+  font-weight: 200;
+}
+.detailsWrapper {
+  width: 20%;
+}
+.wrapper {
+  display: flex;
+}
+.wrapper .showcase {
+  width: 80%;
+  background-color: #e3e3e3;
+  margin: 50px 20px;
+  border-radius: 10px;
+  position: relative;
+  padding: 20px;
+}
+
+.container button {
+  width: 100%;
+  height: 50px;
+  margin: 0.5em;
+  background: #2d646d;
+  color: white;
+  border: none;
+  border-radius: 0.625em;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+.btns {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.container button:hover {
+  color: black;
+}
+
+.container button:after {
+  content: '';
+  background: white;
+  position: absolute;
+  z-index: -1;
+  left: -20%;
+  right: -20%;
+  top: 0;
+  bottom: 0;
+  transform: skewX(-45deg) scale(0, 1);
+  transition: all 0.5s;
+}
+
+.container button:hover:after {
+  transform: skewX(-45deg) scale(1, 1);
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+.wrapper .details {
+  margin: 50px;
+}
+.desc {
+  margin: 10px 0;
+}
+.showcase .options {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: absolute;
+  top: -33px;
+}
+.showcase .options label {
+  margin: 0 10px;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+.selected {
+  color: #10b3af;
+  font-weight: 800;
+  transition: color 0.5 ease-in-out;
+  -webkit-transition: color 0.5s ease-in-out;
+  -moz-transition: color 0.5s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.showcase .options label:after {
+  content: '';
+  width: 0;
+  height: 5px;
+  background-color: #10b3af;
+  transition: 0.5 ease-in-out;
+  -webkit-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  border-radius: 10px;
+}
+
+#portfolioLabel:checked ~ .selected::after {
+  width: 100%;
+}
+#servicesLabel:checked ~ .selected::after {
+  width: 100%;
+}
+.portfolio {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.portfolio .project {
+  background-color: #82d7d6;
+  width: 180px;
+  height: 100px;
+  margin: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}

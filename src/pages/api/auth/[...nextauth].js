@@ -5,6 +5,21 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import { initMongoose } from '../../../../lib/initMongoose'
 
 export const authOptions = {
+  callbacks: {
+    async redirect({ url, baseUrl }) {
+      return baseUrl
+    },
+    async session({ session, user, token }) {
+      session.user.id = token.id
+      return session
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user._id
+      }
+      return token
+    },
+  },
   // Using Credentials Provider (Taking email and password from user)
   providers: [
     CredentialsProvider({

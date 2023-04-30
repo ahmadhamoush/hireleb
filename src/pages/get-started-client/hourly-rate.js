@@ -48,7 +48,9 @@ const index = () => {
           <div className={style.freelanceDetails}>
             <h3>SHARE YOUR PAYMENT DETAILS</h3>
             <div>
-              <label htmlFor={style.title}>What is your preferred hourly rate?*</label>
+              <label htmlFor={style.title}>
+                What is your preferred hourly rate?*
+              </label>
               <input
                 value={hourlyrate}
                 onChange={(e) => setHourlyRate(e.target.value)}

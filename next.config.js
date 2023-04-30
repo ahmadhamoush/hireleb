@@ -7,6 +7,9 @@ const nextConfig = {
     API_KEY: process.env.CLOUD_API,
     API_SECRET: process.env.CLOUD_SECRET,
   },
+  images: {
+    domains: ['res.cloudinary.com'],
+  },
 }
 
 module.exports = nextConfig

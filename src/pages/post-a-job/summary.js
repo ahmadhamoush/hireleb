@@ -33,19 +33,19 @@ const index = () => {
   const handleUpload = async () => {
     try {
       const formData = new FormData()
-        formData.append('email', session.data.user.email)
-        formData.append('hourlyrate', jobHourlyrate)
-        formData.append('title', jobTitle)
-        formData.append('desc', jobAbout)
-        formData.append('category', jobCategory)
-        formData.append('skills', jobSkills)
-        formData.append('subcategory', jobSubcategory)
-        formData.append('experience', jobExperience)
-        formData.append('currency', jobLbpChecked ? 'LBP' : 'USD')
-        const { data } = await axios.post('/api/post-job', formData)
-        if (data.done === 'ok') {
-          console.log(data)
-        }
+      formData.append('email', session.data.user.email)
+      formData.append('hourlyrate', jobHourlyrate)
+      formData.append('title', jobTitle)
+      formData.append('desc', jobAbout)
+      formData.append('category', jobCategory)
+      formData.append('skills', jobSkills)
+      formData.append('subcategory', jobSubcategory)
+      formData.append('experience', jobExperience)
+      formData.append('currency', jobLbpChecked ? 'LBP' : 'USD')
+      const { data } = await axios.post('/api/post-job', formData)
+      if (data.done === 'ok') {
+        console.log(data)
+      }
     } catch (err) {
       console.log(err)
     }
@@ -57,7 +57,7 @@ const index = () => {
         <div className={style.scroll}></div>
       </Animate>
       <div className={style.container}>
-      <div className={style.header}>
+        <div className={style.header}>
           <h1>Post a Job</h1>
           <p>
             Complete your profile today and start showcasing your skills as a

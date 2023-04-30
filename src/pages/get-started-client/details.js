@@ -43,7 +43,9 @@ const index = () => {
         <div className={style.header}>
           <h1>Welcome {session.data?.user.email},</h1>
           <p>
-          Post your job requirements and find the best freelancers on our platform! Connect with skilled professionals and complete your project on time and within budget.
+            Post your job requirements and find the best freelancers on our
+            platform! Connect with skilled professionals and complete your
+            project on time and within budget.
           </p>
         </div>
         <Animate

@@ -54,7 +54,9 @@ const index = () => {
               Share your project requirements with us and let our pool of
               talented freelancers send you their proposals.
             </p>
-            <button onClick={()=>router.push('/post-a-job')} type="button">Post Job</button>
+            <button onClick={() => router.push('/post-a-job')} type="button">
+              Post Job
+            </button>
           </div>
           <div>
             <div className={style.iconContainer}>

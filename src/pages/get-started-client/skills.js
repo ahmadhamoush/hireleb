@@ -102,7 +102,9 @@ const index = () => {
               </div>
             </div>
             <div>
-              <label htmlFor={style.experience}>Preferred Experience Level</label>
+              <label htmlFor={style.experience}>
+                Preferred Experience Level
+              </label>
               <select
                 value={experience}
                 onChange={(e) => setExperience(e.target.value)}

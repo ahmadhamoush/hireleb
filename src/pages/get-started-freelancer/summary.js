@@ -14,9 +14,6 @@ const index = () => {
   const session = useSession()
   const router = useRouter()
 
-  function getStarted() {
-    router.push('/freelancer/dashboard')
-  }
   function navigateBack() {
     router.push('/get-started-freelancer/hourly-rate')
   }
@@ -54,6 +51,7 @@ const index = () => {
         const { data } = await axios.post('/api/complete-profile', formData)
         if (data.done === 'ok') {
           console.log(data)
+          router.push('/freelancer')
         }
       } else {
         throw new Error('Values should not be empty')
