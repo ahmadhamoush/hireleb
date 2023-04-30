@@ -33,7 +33,6 @@ const index = () => {
   const handleUpload = async () => {
     try {
       const formData = new FormData()
-      if (selectedFile !== '') {
         formData.append('email', session.data.user.email)
         formData.append('hourlyrate', jobHourlyrate)
         formData.append('title', jobTitle)
@@ -47,9 +46,6 @@ const index = () => {
         if (data.done === 'ok') {
           console.log(data)
         }
-      } else {
-        throw new Error('Values should not be empty')
-      }
     } catch (err) {
       console.log(err)
     }

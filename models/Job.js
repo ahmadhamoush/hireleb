@@ -9,6 +9,8 @@ const JobSchema = new mongoose.Schema({
     experience: String,
     hourlyrate: Number,
     currency: String,
+    postedBy:String,
+    createdAt:String,
 })
 
 module.exports = mongoose.models.Job || mongoose.model('Job', JobSchema)
