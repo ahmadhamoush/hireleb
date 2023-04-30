@@ -256,6 +256,7 @@
 .optionsContainer .iconContainer .icon {
   font-size: 40px;
 }
+
 @media (max-width: 900px) {
   .optionsContainer {
     flex-direction: column;

@@ -1,7 +1,7 @@
 import style from '@/styles/getStarted.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useSession } from 'next-auth/react'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { useRouter } from 'next/router'
 import { Animate } from 'react-simple-animate'
 import GetStartedContext from '@/components/GetStartedContext'
@@ -54,7 +54,7 @@ const index = () => {
               Share your project requirements with us and let our pool of
               talented freelancers send you their proposals.
             </p>
-            <button type="button">Post Job</button>
+            <button onClick={()=>router.push('/post-a-job')} type="button">Post Job</button>
           </div>
           <div>
             <div className={style.iconContainer}>

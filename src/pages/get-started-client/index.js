@@ -16,7 +16,7 @@ const index = () => {
     useContext(GetStartedContext)
 
   function navigate() {
-    router.push('/get-started-client/options')
+    router.push('/get-started-client/details')
   }
 
   return (

@@ -38,7 +38,6 @@ const Login = () => {
         <form>
           <h2>Login</h2>
           <div className={style.userDetails}>
-            {' '}
             <label htmlFor={style.email}>email</label>
             <input
               id={style.email}

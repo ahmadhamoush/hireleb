@@ -13,14 +13,14 @@ const index = () => {
   const [categoriesList, setCategoriesList] = useState([])
 
   const {
-    jobTitle,
-    setJobTitle,
-    jobAbout,
-    setJobAbout,
-    jobCategory,
-    setJobCategory,
-    jobSubcategory,
-    setJobSubCategory,
+    title,
+    setTitle,
+    about,
+    setAbout,
+    category,
+    setCategory,
+    subcategory,
+    setSubCategory,
   } = useContext(GetStartedContext)
 
   useEffect(() => {
@@ -28,23 +28,22 @@ const index = () => {
   }, [categoriesList])
 
   function navigate() {
-    router.push('/post-a-job/skills')
+    router.push('/get-started-client/skills')
   }
   function navigateBack() {
-    router.back()
+    router.push('/get-started-client')
   }
 
   return (
     <Layout>
-      <Animate play start={{ width: '0%' }} end={{ width: '10%' }}>
+      <Animate play start={{ width: '20%' }} end={{ width: '40%' }}>
         <div className={style.scroll}></div>
       </Animate>
       <div className={style.container}>
         <div className={style.header}>
-          <h1>Post a Job</h1>
+          <h1>Welcome {session.data?.user.email},</h1>
           <p>
-            Complete your profile today and start showcasing your skills as a
-            freelancer on our platform!
+          Post your job requirements and find the best freelancers on our platform! Connect with skilled professionals and complete your project on time and within budget.
           </p>
         </div>
         <Animate
@@ -54,33 +53,33 @@ const index = () => {
           end={{ opacity: 1 }}
         >
           <div className={style.freelanceDetails}>
-            <h3>SHARE YOUR JOB DETAILS</h3>
+            <h3>SHARE YOUR CLIENT DETAILS</h3>
             <div>
-              <label htmlFor={style.jobTitle}>Job title*</label>
+              <label htmlFor={style.title}>Job title*</label>
               <input
-                value={jobTitle}
-                onChange={(e) => setJobTitle(e.target.value)}
-                id={style.jobTitle}
-                placeholder="Enter type of work needed to be done"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                id={style.title}
+                placeholder="What do you want to be known as? Example: Award Winning Web Developer"
               />
             </div>
             <div>
-              <label htmlFor={style.jobAbout}>Describe Your Job*</label>
+              <label htmlFor={style.about}>About You*</label>
               <textarea
-                value={jobAbout}
-                onChange={(e) => setJobAbout(e.target.value)}
+                value={about}
+                onChange={(e) => setAbout(e.target.value)}
                 rows="8"
                 cols="30"
-                id={style.jobAbout}
-                placeholder="Describe your project or job requirements. Example: Looking for a talented graphic designer to create a modern and unique logo for my new business."
+                id={style.about}
+                placeholder="Describe yourself for freelancers"
               />
             </div>
             <div>
-              <label htmlFor={style.jobCategory}>Category*</label>
+              <label htmlFor={style.category}>Preferred Category*</label>
               <select
-                value={jobCategory}
-                onChange={(e) => setJobCategory(e.target.value)}
-                id={style.jobCategory}
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                id={style.category}
               >
                 {categoriesList.map((list, index) => {
                   return (
@@ -92,17 +91,17 @@ const index = () => {
               </select>
             </div>
             <div>
-              <label htmlFor={style.jobSubcategory}>Subcategory*</label>
+              <label htmlFor={style.subcategory}>Preferred Subcategory*</label>
               <select
-                value={jobSubcategory}
-                onChange={(e) => setJobSubCategory(e.target.value)}
-                id={style.jobSubcategory}
+                value={subcategory}
+                onChange={(e) => setSubCategory(e.target.value)}
+                id={style.subcategory}
               >
                 {categoriesList
-                  .filter((categoryList) => categoryList.name === jobCategory)
+                  .filter((categoryList) => categoryList.name === category)
                   .map((list) =>
                     list.subcategories.map((subcat, index) => {
-                      <option>Select</option>
+                      ;<option>Select</option>
                       return (
                         <option key={index} value={subcat.name}>
                           {subcat.name}

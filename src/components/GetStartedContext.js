@@ -1,9 +1,9 @@
 import { createContext, useState } from 'react'
 import useSessionStorageState from 'use-session-storage-state'
-
 export const GetStartedContext = createContext({})
 
 export function GetStartedContextProvide({ children }) {
+  // get started context
   const [selectedImage, setSelectedImage] = useState('')
   const [selectedFile, setSelectedFile] = useState('')
   const [title, setTitle] = useSessionStorageState('title', {
@@ -27,12 +27,42 @@ export function GetStartedContextProvide({ children }) {
   const [hourlyrate, setHourlyRate] = useSessionStorageState('hourlyrate', {
     defaultValue: '',
   })
-  const [lbpChecked, setLBPChecked] = useSessionStorageState('lbp', {
+  const [lbpChecked, setLBPChecked] = useSessionStorageState('lbpChecked', {
     defaultValue: false,
   })
-  const [usdChecked, setUSDChecked] = useSessionStorageState('usd', {
+  const [usdChecked, setUSDChecked] = useSessionStorageState('usdChecked', {
     defaultValue: false,
   })
+
+  // post a job context
+  const [jobTitle, setJobTitle] = useSessionStorageState('jobTitle', {
+    defaultValue: '',
+  })
+  const [jobAbout, setJobAbout] = useSessionStorageState('jobAbout', {
+    defaultValue: '',
+  })
+  const [jobCategory, setJobCategory] = useSessionStorageState('jobCategory', {
+    defaultValue: '',
+  })
+  const [jobSubcategory, setJobSubCategory] = useSessionStorageState('jobSubcategory', {
+    defaultValue: '',
+  })
+  const [jobSkills, setJobSkills] = useSessionStorageState('jobSkills', {
+    defaultValue: [],
+  })
+  const [jobExperience, setJobExperience] = useSessionStorageState('jobExperience', {
+    defaultValue: '',
+  })
+  const [jobHourlyrate, setJobHourlyRate] = useSessionStorageState('hourlyrate', {
+    defaultValue: '',
+  })
+  const [jobLbpChecked, setJobLBPChecked] = useSessionStorageState('jobLbpChecked', {
+    defaultValue: false,
+  })
+  const [jobUsdChecked, setJobUSDChecked] = useSessionStorageState('jobUsdChecked', {
+    defaultValue: false,
+  })
+
 
   const value = {
     selectedImage,
@@ -57,6 +87,24 @@ export function GetStartedContextProvide({ children }) {
     setLBPChecked,
     usdChecked,
     setUSDChecked,
+    jobTitle,
+    setJobTitle,
+    jobAbout,
+    setJobAbout,
+    jobCategory,
+    setJobCategory,
+    jobSubcategory,
+    setJobSubCategory,
+    jobSkills,
+    setJobSkills,
+    jobExperience,
+    setJobExperience,
+    jobHourlyrate,
+    setJobHourlyRate,
+    jobLbpChecked,
+    setJobLBPChecked,
+    jobUsdChecked,
+    setJobUSDChecked
   }
   return (
     <GetStartedContext.Provider value={value}>

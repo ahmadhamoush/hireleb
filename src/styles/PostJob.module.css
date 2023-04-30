@@ -1,0 +1,20 @@
+.container form .userDetails,
+.container form .btns {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 5px;
+  margin: 0 10px;
+  text-transform: capitalize;
+  width: 100%;
+}
+.container .details input {
+  padding: 12px 20px;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  width: 100%;
+  font-size: 16px;
+  background-color: #eeeded;
+}

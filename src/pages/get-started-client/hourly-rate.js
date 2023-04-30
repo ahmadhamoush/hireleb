@@ -11,10 +11,10 @@ const index = () => {
   const router = useRouter()
 
   function navigate() {
-    router.push('/get-started-freelancer/summary')
+    router.push('/get-started-client/summary')
   }
   function navigateBack() {
-    router.push('/get-started-freelancer/skills')
+    router.push('/get-started-client/skills')
   }
 
   const {
@@ -48,7 +48,7 @@ const index = () => {
           <div className={style.freelanceDetails}>
             <h3>SHARE YOUR PAYMENT DETAILS</h3>
             <div>
-              <label htmlFor={style.title}>What is your hourly rate?*</label>
+              <label htmlFor={style.title}>What is your preferred hourly rate?*</label>
               <input
                 value={hourlyrate}
                 onChange={(e) => setHourlyRate(e.target.value)}
@@ -57,7 +57,7 @@ const index = () => {
                 placeholder="Enter rate"
               />
               <div className={style.currencyContainer}>
-                <label>Select Currency</label>
+                <label>Select preferred currency</label>
                 <div>
                   <p>LBP</p>
                   <label className={style.hourlyLabel}>

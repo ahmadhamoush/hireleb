@@ -17,6 +17,16 @@ const UserSchema = new mongoose.Schema({
     hourlyrate: Number,
     currency: String,
   },
+  client: {
+    title: String,
+    about: String,
+    category: String,
+    subcategory: String,
+    skills: String,
+    experience: String,
+    hourlyrate: Number,
+    currency: String,
+  },
 })
 
 module.exports = mongoose.models.User || mongoose.model('User', UserSchema)

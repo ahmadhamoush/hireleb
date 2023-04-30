@@ -45,24 +45,46 @@ const readFile = (req) => {
       streamifier.createReadStream(rawData).pipe(stream)
       //connecting to db
       await initMongoose()
+      const user =await User.findOne({email:fields.email})
       //updating user with new inputs
-      const updateUser = await User.updateOne(
-        { email: fields.email },
-        {
-          freelancer: {
-            title: fields.title,
-            about: fields.about,
-            category: fields.category,
-            subcategory: fields.subcategory,
-            skills: fields.skills,
-            about: fields.about,
-            experience: fields.experience,
-            hourlyrate: fields.hourlyrate,
-            currency: fields.currency,
-          },
-          image: `https://res.cloudinary.com/hamoush/image/upload/v1678284450/hireleb/${files.img.originalFilename}`,
-        },
-      )
+        if(user.type==='freelancer'){
+            const updateUser = await User.updateOne(
+                { email: fields.email },
+                {
+                  freelancer: {
+                    title: fields.title,
+                    about: fields.about,
+                    category: fields.category,
+                    subcategory: fields.subcategory,
+                    skills: fields.skills,
+                    about: fields.about,
+                    experience: fields.experience,
+                    hourlyrate: fields.hourlyrate,
+                    currency: fields.currency,
+                  },
+                  image: `https://res.cloudinary.com/hamoush/image/upload/v1678284450/hireleb/${files.img.originalFilename}`,
+                },
+              )
+        }
+        else if(user.type==='client'){
+            const updateUser = await User.updateOne(
+                { email: fields.email },
+                {
+                  client: {
+                    title: fields.title,
+                    about: fields.about,
+                    category: fields.category,
+                    subcategory: fields.subcategory,
+                    skills: fields.skills,
+                    about: fields.about,
+                    experience: fields.experience,
+                    hourlyrate: fields.hourlyrate,
+                    currency: fields.currency,
+                  },
+                  image: `https://res.cloudinary.com/hamoush/image/upload/v1678284450/hireleb/${files.img.originalFilename}`,
+                },
+              )
+        }
     })
   })
 }

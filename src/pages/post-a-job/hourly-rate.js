@@ -11,19 +11,19 @@ const index = () => {
   const router = useRouter()
 
   function navigate() {
-    router.push('/get-started-freelancer/summary')
+    router.push('/post-a-job/summary')
   }
   function navigateBack() {
-    router.push('/get-started-freelancer/skills')
+    router.push('/post-a-job/skills')
   }
 
   const {
-    hourlyrate,
-    setHourlyRate,
-    lbpChecked,
-    setLBPChecked,
-    usdChecked,
-    setUSDChecked,
+    jobHourlyrate,
+    setJobHourlyRate,
+    jobLbpChecked,
+    setJobLBPChecked,
+    jobUsdChecked,
+    setJobUSDChecked,
   } = useContext(GetStartedContext)
 
   return (
@@ -32,8 +32,8 @@ const index = () => {
         <div className={style.scroll}></div>
       </Animate>
       <div className={style.container}>
-        <div className={style.header}>
-          <h1>Welcome {session.data?.user.email},</h1>
+      <div className={style.header}>
+          <h1>Post a Job</h1>
           <p>
             Complete your profile today and start showcasing your skills as a
             freelancer on our platform!
@@ -48,12 +48,12 @@ const index = () => {
           <div className={style.freelanceDetails}>
             <h3>SHARE YOUR PAYMENT DETAILS</h3>
             <div>
-              <label htmlFor={style.title}>What is your hourly rate?*</label>
+              <label htmlFor={style.jobHourlyrate}>What is your hourly rate?*</label>
               <input
-                value={hourlyrate}
-                onChange={(e) => setHourlyRate(e.target.value)}
+                value={jobHourlyrate}
+                onChange={(e) => setJobHourlyRate(e.target.value)}
                 type="number"
-                id={style.title}
+                id={style.jobHourlyrate}
                 placeholder="Enter rate"
               />
               <div className={style.currencyContainer}>
@@ -63,10 +63,10 @@ const index = () => {
                   <label className={style.hourlyLabel}>
                     <input
                       onChange={() => {
-                        setLBPChecked((prev) => !prev)
-                        setUSDChecked(false)
+                        setJobLBPChecked((prev) => !prev)
+                        setJobUSDChecked(false)
                       }}
-                      checked={lbpChecked}
+                      checked={jobLbpChecked}
                       type="checkbox"
                     />
                     <div className={style.checkmark}></div>
@@ -77,10 +77,10 @@ const index = () => {
                   <label className={style.hourlyLabel}>
                     <input
                       onChange={() => {
-                        setLBPChecked(false)
-                        setUSDChecked((prev) => !prev)
+                        setJobLBPChecked(false)
+                        setJobUSDChecked((prev) => !prev)
                       }}
-                      checked={usdChecked}
+                      checked={jobUsdChecked}
                       type="checkbox"
                     />
                     <div className={style.checkmark}></div>
