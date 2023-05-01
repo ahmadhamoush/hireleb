@@ -152,7 +152,11 @@ const Freelancer = ({ user, projects, services }) => {
               <div className={style.services}>
                 {services.map((service) => {
                   return (
-                    <Service owner={user.freelancer.title} service={service} />
+                    <div onClick={() => {
+                      router.push(`/freelancer/service/${service._id}`)
+                    }}>
+                      <Service owner={user.freelancer.title} service={service} />
+                    </div>   
                   )
                 })}
               </div>

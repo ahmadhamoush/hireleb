@@ -2,40 +2,47 @@ import Layout from '@/components/Layout'
 import React, { useEffect, useState } from 'react'
 import style from '@/styles/Add.module.css'
 import { Animate } from 'react-simple-animate'
-import { useSession } from 'next-auth/react'
+import { getSession, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import jobCategories from '../../../../lib/jobCategories'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClose } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
+import { initMongoose } from '../../../../lib/initMongoose'
+import { getService } from '@/pages/api/get-services'
 
-const AddService = () => {
+const EditService = ({service}) => {
   const session = useSession()
   const router = useRouter()
 
-  const [name, setName] = useState('')
-  const [desc, setDesc] = useState('')
+  function navigateBack() {
+    router.back()
+  }
+
+  const [name, setName] = useState(service[0].name)
+  const [desc, setDesc] = useState(service[0].desc)
   const [categoriesList, setCategoriesList] = useState([])
-  const [category, setCategory] = useState('')
-  const [subcategory, setSubCategory] = useState('')
-  const [price, setPrice] = useState('')
-  const [payment, setPayment] = useState('')
-  const [delivery, setDelivery] = useState('')
-  const [duration, setDuration] = useState('')
-  const [durationTime, setDurationTime] = useState('')
-  const [lbpChecked, setLBPChecked] = useState(false)
-  const [usdChecked, setUSDChecked] = useState(false)
-  const [experience, setExperience] = useState('')
-  const [skills, setSkills] = useState([])
+  const [category, setCategory] = useState(service[0].category)
+  const [subcategory, setSubCategory] = useState(service[0].subcategory)
+  const [price, setPrice] = useState(service[0].price)
+  const [payment, setPayment] = useState(service[0].payment)
+  const [delivery, setDelivery] = useState(service[0].delivery)
+  const [duration, setDuration] = useState(service[0].duration)
+  const [durationTime, setDurationTime] = useState(service[0].time)
+  const [lbpChecked, setLBPChecked] = useState(service[0].currency == 'LBP' ? true : false)
+  const [usdChecked, setUSDChecked] = useState(service[0].currency == 'USD' ? true : false)
+  const [experience, setExperience] = useState(service[0].experience)
+  const [skills, setSkills] = useState(service[0].skills.split(','))
 
   useEffect(() => {
     setCategoriesList(jobCategories.categories)
+    console.log(service)
   }, [categoriesList])
 
   const handleUpload = async () => {
     try {
       const formData = new FormData()
-      formData.append('email', session.data.user.email)
+      formData.append('id', service[0]._id)
       formData.append('name', name)
       formData.append('desc', desc)
       formData.append('category', category)
@@ -48,7 +55,7 @@ const AddService = () => {
       formData.append('duration', duration)
       formData.append('delivery', delivery)
       formData.append('time', durationTime)
-      const { data } = await axios.post('/api/add-service', formData)
+      const { data } = await axios.post('/api/edit-service', formData)
       if (data) {
         router.push(`/freelancer/${session.data.user.email}`)
       }
@@ -66,14 +73,10 @@ const AddService = () => {
       >
         <div className={style.container}>
           <div className={style.header}>
-            <h1>Add New Service</h1>
-            <p>
-              Offer your skills to the world - add your services and start
-              growing your freelance business today!
-            </p>
+            <h1>Edit Service ({service[0].name})</h1>
           </div>
           <div className={style.projectDetails}>
-            <h3>SHARE YOUR SERVICE DETAILS</h3>
+            <h3>EDIT SERVICE DETAILS</h3>
             <div>
               <label htmlFor={style.name}>Service Name*</label>
               <input
@@ -332,7 +335,14 @@ const AddService = () => {
                 />
               </div>
             )}
-            <button onClick={handleUpload}>ADD</button>
+             <div className={style.btns}>
+            <button type="button" onClick={navigateBack}>
+              Back
+            </button>
+            <button type="button" onClick={handleUpload}>
+             SAVE
+            </button>
+          </div>
           </div>
         </div>
       </Animate>
@@ -340,4 +350,28 @@ const AddService = () => {
   )
 }
 
-export default AddService
+export default EditService
+export async function getServerSideProps(context) {
+  //destructuring context object to get id param
+  const { query } = context
+  const { id } = query
+  //getting session details
+  const session = await getSession(context)
+  //connecting to db
+  await initMongoose()
+  //getting project based on query id
+  let service = await getService(id)
+  let authenticated = false
+  //checking if logged user owns the project
+  if (session.user.email === service[0].freelancer) {
+    authenticated = true
+  } else {
+    service = []
+  }
+  return {
+    props: {
+      service: JSON.parse(JSON.stringify(service)),
+      authenticated,
+    },
+  }
+}

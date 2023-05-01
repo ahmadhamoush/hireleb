@@ -10,6 +10,7 @@ const ServiceSchema = new mongoose.Schema({
   experience: String,
   payment: String,
   price: Number,
+  delivery:String,
   duration: String,
   time: Number,
   currency: String,

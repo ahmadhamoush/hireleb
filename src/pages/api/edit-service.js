@@ -21,8 +21,7 @@ const parseForm = (req) => {
       //connecting to db
       await initMongoose()
       // creating new project and saving it to db
-      const addService = await Service.create({
-        freelancer: fields.email,
+      const updatedService = await Service.updateOne({_id:fields.id},{
         name: fields.name,
         desc: fields.desc,
         category: fields.category,
@@ -35,7 +34,6 @@ const parseForm = (req) => {
         delivery: fields.delivery,
         time: fields.time,
         currency: fields.currency,
-        createdAt: new Date().toISOString().slice(0, 10),
       })
     })
   })

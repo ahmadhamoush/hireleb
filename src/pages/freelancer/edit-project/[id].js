@@ -20,6 +20,10 @@ const EditProject = ({ project }) => {
   const session = useSession()
   const router = useRouter()
 
+  function navigateBack() {
+    router.back()
+  }
+
   const handleUpload = async () => {
     try {
       const formData = new FormData()
@@ -132,7 +136,14 @@ const EditProject = ({ project }) => {
                 </div>
               </label>
             </div>
-            <button onClick={handleUpload}>SAVE</button>
+            <div className={style.btns}>
+            <button type="button" onClick={navigateBack}>
+              Back
+            </button>
+            <button type="button" onClick={handleUpload}>
+             SAVE
+            </button>
+          </div>
           </div>
         </div>
       </Animate>
