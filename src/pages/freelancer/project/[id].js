@@ -17,30 +17,26 @@ const Project = ({ project }) => {
   }
   return (
     <Layout>
-       <Animate
-        play
-        start={{ opacity: 0 }}
-        end={{ opacity: 1 }}
-      >
-      <div className={style.container}>
-        <div>
-          <h3>Project Name</h3>
-          <p>{project[0].name}</p>
-          <h3>Project Description</h3>
-          <p>{project[0].desc}</p>
-          <h3>Project URL</h3>
-          <p>{project[0].url}</p>
-          <Image src={project[0].image} width={380} height={200} />
-          <div className={style.btns}>
-            <button type="button" onClick={navigateBack}>
-              Back
-            </button>
-            <button type="button" onClick={edit}>
-              Edit
-            </button>
+      <Animate play start={{ opacity: 0 }} end={{ opacity: 1 }}>
+        <div className={style.container}>
+          <div>
+            <h3>Project Name</h3>
+            <p>{project[0].name}</p>
+            <h3>Project Description</h3>
+            <p>{project[0].desc}</p>
+            <h3>Project URL</h3>
+            <p>{project[0].url}</p>
+            <Image src={project[0].image} width={380} height={200} />
+            <div className={style.btns}>
+              <button type="button" onClick={navigateBack}>
+                Back
+              </button>
+              <button type="button" onClick={edit}>
+                Edit
+              </button>
+            </div>
           </div>
         </div>
-      </div>
       </Animate>
     </Layout>
   )

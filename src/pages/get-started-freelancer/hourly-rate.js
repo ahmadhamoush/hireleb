@@ -13,15 +13,11 @@ const index = () => {
 
   function navigate() {
     let valid = true
-    if(hourlyrate ===''){
+    if (hourlyrate === '') {
       valid = false
       toast('Hourly rate is not valid')
     }
-    if(!lbpChecked && !usdChecked){
-      valid = false
-      toast('Select Currency')
-    }
-    if(valid){
+    if (valid) {
       router.push('/get-started-freelancer/summary')
     }
   }
@@ -29,14 +25,7 @@ const index = () => {
     router.push('/get-started-freelancer/skills')
   }
 
-  const {
-    hourlyrate,
-    setHourlyRate,
-    lbpChecked,
-    setLBPChecked,
-    usdChecked,
-    setUSDChecked,
-  } = useContext(GetStartedContext)
+  const { hourlyrate, setHourlyRate } = useContext(GetStartedContext)
 
   return (
     <Layout>
@@ -59,6 +48,11 @@ const index = () => {
         >
           <div className={style.freelanceDetails}>
             <h3>SHARE YOUR PAYMENT DETAILS</h3>
+            <h3>
+              The preferred amount of credits to be charged for a service
+              provided.{' '}
+              <span style={{ color: '#2d646d' }}>(1 Credit = 1 USD)</span>
+            </h3>
             <div>
               <label htmlFor={style.title}>What is your hourly rate?*</label>
               <input
@@ -66,39 +60,8 @@ const index = () => {
                 onChange={(e) => setHourlyRate(e.target.value)}
                 type="number"
                 id={style.title}
-                placeholder="Enter rate"
+                placeholder="Enter credits /hr"
               />
-              <div className={style.currencyContainer}>
-                <label>Select Currency</label>
-                <div>
-                  <p>LBP</p>
-                  <label className={style.hourlyLabel}>
-                    <input
-                      onChange={() => {
-                        setLBPChecked((prev) => !prev)
-                        setUSDChecked(false)
-                      }}
-                      checked={lbpChecked}
-                      type="checkbox"
-                    />
-                    <div className={style.checkmark}></div>
-                  </label>
-                </div>
-                <div>
-                  <p>USD</p>
-                  <label className={style.hourlyLabel}>
-                    <input
-                      onChange={() => {
-                        setLBPChecked(false)
-                        setUSDChecked((prev) => !prev)
-                      }}
-                      checked={usdChecked}
-                      type="checkbox"
-                    />
-                    <div className={style.checkmark}></div>
-                  </label>
-                </div>
-              </div>
             </div>
             <div className={style.btns}>
               <button type="button" onClick={navigateBack}>

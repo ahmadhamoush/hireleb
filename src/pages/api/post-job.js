@@ -21,13 +21,13 @@ const parseForm = (req) => {
       await initMongoose()
       const createJob = await Job.create({
         title: fields.title,
-        desc: fields.desc,
+        description: fields.desc,
         category: fields.category,
         subcategory: fields.subcategory,
         experience: fields.experience,
         skills: fields.skills,
-        currency: fields.currency,
-        hourlyrate: fields.hourlyrate,
+        credits: fields.credits,
+        payment: fields.payment,
         postedBy: fields.email,
         createdAt: new Date().toISOString().slice(0, 10),
       })

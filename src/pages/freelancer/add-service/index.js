@@ -20,103 +20,96 @@ const AddService = () => {
   const [categoriesList, setCategoriesList] = useState([])
   const [category, setCategory] = useState('')
   const [subcategory, setSubCategory] = useState('')
-  const [price, setPrice] = useState('')
+  const [credits, setCredits] = useState('')
   const [payment, setPayment] = useState('')
   const [delivery, setDelivery] = useState('')
   const [duration, setDuration] = useState('')
   const [durationTime, setDurationTime] = useState('')
-  const [lbpChecked, setLBPChecked] = useState(false)
-  const [usdChecked, setUSDChecked] = useState(false)
   const [experience, setExperience] = useState('')
   const [skills, setSkills] = useState([])
-  const [loading,setLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     setCategoriesList(jobCategories.categories)
   }, [categoriesList])
 
-  function navigateBack(){
+  function navigateBack() {
     router.back()
   }
   const handleUpload = async () => {
     setLoading(true)
     let valid = true
-    if(name===''){
+    if (name === '') {
       toast('Name is not valid')
       valid = false
     }
-    if(desc===''){
+    if (desc === '') {
       toast('Description is not valid')
       valid = false
     }
-    if(category===''){
+    if (category === '') {
       toast('Category is not valid')
       valid = false
     }
-    if(!skills.length){
+    if (!skills.length) {
       toast('Select Skills')
       valid = false
     }
-    if(subcategory===''){
+    if (subcategory === '') {
       toast('Subcategory is not valid')
       valid = false
     }
-    if(experience===''){
+    if (experience === '') {
       toast('Experience is not valid')
       valid = false
     }
-    if(!lbpChecked && !usdChecked){
-      toast('Currency is not valid')
-      valid = false
-    }
-    if(payment===''){
+    if (payment === '') {
       toast('Payment is not valid')
       valid = false
     }
-    if(price===''){
-      toast('Price is not valid')
+    if (credits === '') {
+      toast('credits is not valid')
       valid = false
     }
-    if(duration===''){
+    if (duration === '') {
       toast('Duration is not valid')
       valid = false
     }
-    if(delivery===''){
+    if (delivery === '') {
       toast('Delivery is not valid')
       valid = false
     }
-    if(durationTime===''){
+    if (durationTime === '') {
       toast('Duration time is not valid')
       valid = false
     }
-   if(valid){
-    try {
-      const formData = new FormData()
-      formData.append('email', session.data.user.email)
-      formData.append('name', name)
-      formData.append('desc', desc)
-      formData.append('category', category)
-      formData.append('skills', skills)
-      formData.append('subcategory', subcategory)
-      formData.append('experience', experience)
-      formData.append('currency', lbpChecked ? 'LBP' : 'USD')
-      formData.append('payment', payment)
-      formData.append('price', price)
-      formData.append('duration', duration)
-      formData.append('delivery', delivery)
-      formData.append('time', durationTime)
-      const { data } = await axios.post('/api/add-service', formData)
-      if (data) {
-        setLoading(false)
-        toast('Service Added')
-        router.push(`/freelancer/${session.data.user.email}`)
+    if (valid) {
+      try {
+        const formData = new FormData()
+        formData.append('email', session.data.user.email)
+        formData.append('name', name)
+        formData.append('desc', desc)
+        formData.append('category', category)
+        formData.append('skills', skills)
+        formData.append('subcategory', subcategory)
+        formData.append('experience', experience)
+        formData.append('payment', payment)
+        formData.append('credits', credits)
+        formData.append('duration', duration)
+        formData.append('delivery', delivery)
+        formData.append('time', durationTime)
+        const { data } = await axios.post('/api/add-service', formData)
+        if (data) {
+          setLoading(false)
+          toast('Service Added')
+          router.push(`/freelancer/${session.data.user.email}`)
+        }
+      } catch (err) {
+        console.log(err)
       }
-    } catch (err) {
-      console.log(err)
+    } else {
+      setLoading(false)
     }
-   }else{
-    setLoading(false)
-   }
   }
   return (
     <Layout>
@@ -269,94 +262,22 @@ const AddService = () => {
                 <option value="hourly">Hourly Rate</option>
               </select>
             </div>
-            {payment === 'fixed' && (
-              <div>
-                <div>
-                  <label htmlFor={style.price}>Service Price*</label>
-                  <input
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    id={style.price}
-                    placeholder="What do you want to charge for your service?"
-                  />
-                </div>{' '}
-                <div className={style.currencyContainer}>
-                  <label>Select preferred currency</label>
-                  <div>
-                    <p>LBP</p>
-                    <label className={style.hourlyLabel}>
-                      <input
-                        onChange={() => {
-                          setLBPChecked((prev) => !prev)
-                          setUSDChecked(false)
-                        }}
-                        checked={lbpChecked}
-                        type="checkbox"
-                      />
-                      <div className={style.checkmark}></div>
-                    </label>
-                  </div>
-                  <div>
-                    <p>USD</p>
-                    <label className={style.hourlyLabel}>
-                      <input
-                        onChange={() => {
-                          setLBPChecked(false)
-                          setUSDChecked((prev) => !prev)
-                        }}
-                        checked={usdChecked}
-                        type="checkbox"
-                      />
-                      <div className={style.checkmark}></div>
-                    </label>
-                  </div>
-                </div>
-              </div>
-            )}
-            {payment === 'hourly' && (
-              <div>
-                <div>
-                  <label htmlFor={style.price}>Service Price*</label>
-                  <input
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    id={style.price}
-                    placeholder="How much do you want to charge for your service per hr?"
-                  />
-                </div>{' '}
-                <div className={style.currencyContainer}>
-                  <label>Select preferred currency</label>
-                  <div>
-                    <p>LBP</p>
-                    <label className={style.hourlyLabel}>
-                      <input
-                        onChange={() => {
-                          setLBPChecked((prev) => !prev)
-                          setUSDChecked(false)
-                        }}
-                        checked={lbpChecked}
-                        type="checkbox"
-                      />
-                      <div className={style.checkmark}></div>
-                    </label>
-                  </div>
-                  <div>
-                    <p>USD</p>
-                    <label className={style.hourlyLabel}>
-                      <input
-                        onChange={() => {
-                          setLBPChecked(false)
-                          setUSDChecked((prev) => !prev)
-                        }}
-                        checked={usdChecked}
-                        type="checkbox"
-                      />
-                      <div className={style.checkmark}></div>
-                    </label>
-                  </div>
-                </div>
-              </div>
-            )}
+            <h3>
+              The amount of credits that will be charged for the service
+              provided."{' '}
+              <span style={{ color: '#2d646d' }}>(1 Credit = 1 USD)</span>
+            </h3>
+            <div>
+              <label htmlFor={style.credits}>Service credits*</label>
+              <input
+                value={credits}
+                onChange={(e) => setCredits(e.target.value)}
+                id={style.credits}
+                placeholder={`Enter Credits ${
+                  payment === 'hourly' ? '/hr' : ''
+                }`}
+              />
+            </div>{' '}
             <div>
               <label htmlFor={style.delivery}>Service Delivery*</label>
               <select
@@ -395,7 +316,7 @@ const AddService = () => {
                 />
               </div>
             )}
-              <div className={style.btns}>
+            <div className={style.btns}>
               <button type="button" onClick={navigateBack}>
                 Back
               </button>

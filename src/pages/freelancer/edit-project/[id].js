@@ -19,7 +19,7 @@ const EditProject = ({ project }) => {
   const [url, setUrl] = useState(project[0].url)
   const [selectedImage, setSelectedImage] = useState(project[0].image)
   const [selectedFile, setSelectedFile] = useState('')
-  const[loading,setLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
   const session = useSession()
   const router = useRouter()
 
@@ -30,23 +30,23 @@ const EditProject = ({ project }) => {
   const handleUpload = async () => {
     setLoading(true)
     let valid = true
-    if(name ===''){
+    if (name === '') {
       toast('Name is not valid')
       valid = false
     }
-    if(desc ===''){
+    if (desc === '') {
       toast('Description is not valid')
       valid = false
     }
-    if(url ===''){
+    if (url === '') {
       toast('Url is not valid')
       valid = false
     }
-    if(selectedImage ===''){
+    if (selectedImage === '') {
       toast('Please upload image')
       valid = false
     }
-    if(valid){
+    if (valid) {
       try {
         const formData = new FormData()
         formData.append('id', project[0]._id)
@@ -64,7 +64,7 @@ const EditProject = ({ project }) => {
       } catch (err) {
         console.log(err)
       }
-    }else{
+    } else {
       setLoading(false)
     }
   }

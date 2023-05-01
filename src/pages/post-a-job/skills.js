@@ -26,16 +26,16 @@ const index = () => {
   } = useContext(GetStartedContext)
   function navigate() {
     let valid = true
-    if(!jobSkills.length){
+    if (!jobSkills.length) {
       toast('Select Skills')
       valid = false
     }
-    if(jobExperience ===''){
+    if (jobExperience === '') {
       toast('Select Experience')
       valid = false
     }
-    if(valid){
-      router.push('/post-a-job/hourly-rate')
+    if (valid) {
+      router.push('/post-a-job/payment')
     }
   }
   function navigateBack() {
@@ -121,7 +121,9 @@ const index = () => {
                 value={jobExperience}
                 onChange={(e) => setJobExperience(e.target.value)}
                 id={style.jobExperience}
-              > <option value="">Select Experience</option>
+              >
+                {' '}
+                <option value="">Select Experience</option>
                 <option value="entry level">Entry Level</option>
                 <option value="mid level">Mid Level</option>
                 <option value="senior level">Senior Level</option>

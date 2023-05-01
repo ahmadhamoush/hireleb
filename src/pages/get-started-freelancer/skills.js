@@ -26,15 +26,15 @@ const index = () => {
   } = useContext(GetStartedContext)
   function navigate() {
     let valid = true
-    if(!skills.length){
+    if (!skills.length) {
       toast('Select Skills')
       valid = false
     }
-    if(experience ===''){
+    if (experience === '') {
       toast('Select Experience')
       valid = false
     }
-    if(valid){
+    if (valid) {
       router.push('/get-started-freelancer/hourly-rate')
     }
   }

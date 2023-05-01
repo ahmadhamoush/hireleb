@@ -17,10 +17,9 @@ const index = () => {
     useContext(GetStartedContext)
 
   function navigate() {
-    if(selectedImage===''){
+    if (selectedImage === '') {
       toast('Select Image')
-    }
-    else{
+    } else {
       router.push('/get-started-client/details')
     }
   }

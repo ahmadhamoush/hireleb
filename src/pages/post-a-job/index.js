@@ -30,23 +30,23 @@ const index = () => {
 
   function navigate() {
     let valid = true
-    if(jobTitle ===''){
+    if (jobTitle === '') {
       toast('Job title is invalid')
-      valid=false
+      valid = false
     }
-    if(jobAbout ===''){
+    if (jobAbout === '') {
       toast('Job description is invalid')
-      valid=false
+      valid = false
     }
-    if(jobCategory ===''){
+    if (jobCategory === '') {
       toast('Select job category')
-      valid=false
+      valid = false
     }
-    if(jobSubcategory ===''){
+    if (jobSubcategory === '') {
       toast('Select job subcategory')
-      valid=false
+      valid = false
     }
-    if(valid){
+    if (valid) {
       router.push('/post-a-job/skills')
     }
   }
@@ -101,7 +101,8 @@ const index = () => {
                 value={jobCategory}
                 onChange={(e) => setJobCategory(e.target.value)}
                 id={style.jobCategory}
-              ><option value=''>Select Category</option>
+              >
+                <option value="">Select Category</option>
                 {categoriesList.map((list, index) => {
                   return (
                     <option key={index} value={list.name}>
@@ -117,7 +118,8 @@ const index = () => {
                 value={jobSubcategory}
                 onChange={(e) => setJobSubCategory(e.target.value)}
                 id={style.jobSubcategory}
-              ><option value=''>Select Subcategory</option>
+              >
+                <option value="">Select Subcategory</option>
                 {categoriesList
                   .filter((categoryList) => categoryList.name === jobCategory)
                   .map((list) =>

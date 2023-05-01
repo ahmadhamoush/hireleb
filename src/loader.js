@@ -52,5 +52,5 @@ const loader = `
   -o-transform: rotate(360deg);
   transform: rotate(360deg);
  }
-}`;
+}`
 export default loader

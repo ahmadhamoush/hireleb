@@ -12,15 +12,14 @@ import { toast } from 'react-toastify'
 const index = () => {
   const session = useSession()
   const router = useRouter()
-  const[loading,setLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
   function navigateBack() {
-    router.push('/post-a-job/hourly-rate')
+    router.push('/post-a-job/payment')
   }
 
   const {
-    jobHourlyrate,
-    jobLbpChecked,
-    jobUsdChecked,
+    jobCredits,
+    jobPayment,
     jobTitle,
     jobAbout,
     jobCategory,
@@ -34,14 +33,14 @@ const index = () => {
     try {
       const formData = new FormData()
       formData.append('email', session.data.user.email)
-      formData.append('hourlyrate', jobHourlyrate)
+      formData.append('credits', jobCredits)
+      formData.append('payment', jobPayment)
       formData.append('title', jobTitle)
       formData.append('desc', jobAbout)
       formData.append('category', jobCategory)
       formData.append('skills', jobSkills)
       formData.append('subcategory', jobSubcategory)
       formData.append('experience', jobExperience)
-      formData.append('currency', jobLbpChecked ? 'LBP' : 'USD')
       const { data } = await axios.post('/api/post-job', formData)
       if (data.done === 'ok') {
         setLoading(false)
@@ -50,6 +49,7 @@ const index = () => {
       }
     } catch (err) {
       console.log(err)
+      setLoading(false)
     }
   }
 
@@ -97,11 +97,10 @@ const index = () => {
                 </div>
                 <h3>Experience</h3>
                 <p>{jobExperience}</p>
-                <h3>Hourly rate</h3>
-                <p>{jobHourlyrate}</p>
-                <h3>Currency</h3>
-                {jobLbpChecked && <p>LBP</p>}
-                {jobUsdChecked && <p>USD</p>}
+                <h3>Job Credits</h3>
+                <p>{jobCredits}</p>
+                <h3>Payment Type</h3>
+                <p>{jobPayment}</p>
               </div>
             </div>
           </div>

@@ -17,54 +17,53 @@ const AddProject = () => {
   const [url, setUrl] = useState('')
   const [selectedImage, setSelectedImage] = useState('')
   const [selectedFile, setSelectedFile] = useState('')
-  const [loading,setLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
   const session = useSession()
   const router = useRouter()
 
-   function navigateBack(){
+  function navigateBack() {
     router.back()
-   }
+  }
   const handleUpload = async () => {
     setLoading(true)
     let valid = true
-    if(name ===''){
+    if (name === '') {
       toast('Name is not valid')
       valid = false
     }
-    if(desc ===''){
+    if (desc === '') {
       toast('Description is not valid')
       valid = false
     }
-    if(url ===''){
+    if (url === '') {
       toast('Url is not valid')
       valid = false
     }
-    if(selectedImage ===''){
+    if (selectedImage === '') {
       toast('Please upload image')
       valid = false
     }
 
-   if(valid){
-    try {
-      const formData = new FormData()
-      formData.append('email', session.data.user.email)
-      formData.append('name', name)
-      formData.append('desc', desc)
-      formData.append('url', url)
-      formData.append('img', selectedFile)
-      const { data } = await axios.post('/api/add-project', formData)
-      if (data) {
-        toast('Project Added')
-        setLoading(false)
-        router.push(`/freelancer/${session.data.user.email}`)
+    if (valid) {
+      try {
+        const formData = new FormData()
+        formData.append('email', session.data.user.email)
+        formData.append('name', name)
+        formData.append('desc', desc)
+        formData.append('url', url)
+        formData.append('img', selectedFile)
+        const { data } = await axios.post('/api/add-project', formData)
+        if (data) {
+          toast('Project Added')
+          setLoading(false)
+          router.push(`/freelancer/${session.data.user.email}`)
+        }
+      } catch (err) {
+        console.log(err)
       }
-    } catch (err) {
-      console.log(err)
+    } else {
+      setLoading(false)
     }
-   }
-   else{
-    setLoading(false)
-   }
   }
   return (
     <Layout>

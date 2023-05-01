@@ -7,7 +7,7 @@ const UserSchema = new mongoose.Schema({
   type: String,
   password: String,
   image: String,
-  credits:Number,
+  credits: Number,
   freelancer: {
     title: String,
     about: String,
@@ -16,7 +16,6 @@ const UserSchema = new mongoose.Schema({
     skills: String,
     experience: String,
     hourlyrate: Number,
-    currency: String,
     banner: String,
   },
   client: {
@@ -27,7 +26,7 @@ const UserSchema = new mongoose.Schema({
     skills: String,
     experience: String,
     hourlyrate: Number,
-    currency: String,
+    banner: String,
   },
 })
 

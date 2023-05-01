@@ -16,55 +16,49 @@ const Service = ({ service }) => {
   }
   return (
     <Layout>
-       <Animate
-        play
-        start={{ opacity: 0 }}
-        end={{ opacity: 1 }}
-      >
-      <div className={style.container}>
-        <div>
-          <h3>Service Name</h3>
-          <p>{service[0].name}</p>
-          <h3>Service Description</h3>
-          <p>{service[0].desc}</p>
-          <h3>Service Category</h3>
-          <p>{service[0].category}</p>
-          <h3>Service Subcategory</h3>
-          <p>{service[0].subcategory}</p>
-          <h3>Service Skills</h3>
-          <div className={style.skills}>
-            {service[0].skills.split(',').map((skill) => {
-              return (
-                <div>
-                  <p>{skill}</p>
-                </div>
-              )
-            })}
-          </div>
-          <h3>Service Experience</h3>
-          <p>{service[0].experience}</p>
-          <h3>Service Payment Type</h3>
-          <p>{service[0].payment}</p>
-          <h3>Service Price</h3>
-          <p>{service[0].price}</p>
-          <h3>Price Currency</h3>
-          <p>{service[0].currency}</p>
-          <h3>Service delivery</h3>
-          <p>{service[0].delivery}</p>
-          <h3>Service Duration</h3>
-          <p>
-            {service[0].time} {service[0].duration}
-          </p>
-          <div className={style.btns}>
-            <button type="button" onClick={navigateBack}>
-              Back
-            </button>
-            <button type="button" onClick={edit}>
-              Edit
-            </button>
+      <Animate play start={{ opacity: 0 }} end={{ opacity: 1 }}>
+        <div className={style.container}>
+          <div>
+            <h3>Service Name</h3>
+            <p>{service[0].name}</p>
+            <h3>Service Description</h3>
+            <p>{service[0].desc}</p>
+            <h3>Service Category</h3>
+            <p>{service[0].category}</p>
+            <h3>Service Subcategory</h3>
+            <p>{service[0].subcategory}</p>
+            <h3>Service Skills</h3>
+            <div className={style.skills}>
+              {service[0].skills.split(',').map((skill) => {
+                return (
+                  <div>
+                    <p>{skill}</p>
+                  </div>
+                )
+              })}
+            </div>
+            <h3>Service Experience</h3>
+            <p>{service[0].experience}</p>
+            <h3>Service Payment Type</h3>
+            <p>{service[0].payment}</p>
+            <h3>Service Credits</h3>
+            <p>{service[0].credits}</p>
+            <h3>Service delivery</h3>
+            <p>{service[0].delivery}</p>
+            <h3>Service Duration</h3>
+            <p>
+              {service[0].time} {service[0].duration}
+            </p>
+            <div className={style.btns}>
+              <button type="button" onClick={navigateBack}>
+                Back
+              </button>
+              <button type="button" onClick={edit}>
+                Edit
+              </button>
+            </div>
           </div>
         </div>
-      </div>
       </Animate>
     </Layout>
   )

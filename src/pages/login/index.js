@@ -14,7 +14,7 @@ const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [err, setErr] = useState('')
-  const [loading,setLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
   const onSubmit = async () => {
     setLoading(true)
     //login logic
@@ -30,75 +30,68 @@ const Login = () => {
       if (loginData.status === 401) {
         setErr(loginData.error)
         toast(loginData.error)
-      }
-      else{
+      } else {
         toast('Login Success')
         setLoading(false)
       }
-     
     } catch (err) {
       setErr(err.message)
-      toast(err.message)    
+      toast(err.message)
     }
   }
 
-  useEffect(()=>{
-    if(session.status==='authenticated'){
-      if(session.data.user.type === 'freelancer'){
+  useEffect(() => {
+    if (session.status === 'authenticated') {
+      if (session.data.user.type === 'freelancer') {
         router.push(`/freelancer/${session.data.user.email}`)
-      }
-      else if(session.data.user.type === 'client'){
+      } else if (session.data.user.type === 'client') {
         router.push(`/client/${session.data.user.email}`)
       }
     }
-  },[session])
+  }, [session])
 
   return (
     <Layout>
       {loading && <Loader />}
-      <Animate
-          play
-          start={{ opacity: 0 }}
-          end={{ opacity: 1 }}
-        >
-      <div className={style.container}>
-        <form>
-          <h2>Login</h2>
-          <div className={style.userDetails}>
-            <label htmlFor={style.email}>email</label>
-            <input
-              id={style.email}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              type="email"
-              placeholder="Enter Email"
-            />
-          </div>
-          <div className={style.userDetails}>
-            <label htmlFor={style.password}>password</label>
-            <input
-              id={style.password}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              type="password"
-              placeholder="Enter Password"
-            />
-          </div>
-          <div>
-            <p className={style.err}>{err}</p>
-          </div>
-          <div className={style.btns}>
-            <button type="button" onClick={onSubmit}>
-              Login
-            </button>
-            <button onClick={() => router.push('/')}>Cancel</button>
-          </div>
-          <p>
-            Don't have an account?{' '}
-            <Link href="/signup">Sign Up Right Now!</Link>
-          </p>
-        </form>
-      </div>
+      <Animate play start={{ opacity: 0 }} end={{ opacity: 1 }}>
+        <div className={style.container}>
+          <form>
+            <h2>Login</h2>
+            <div className={style.userDetails}>
+              <label htmlFor={style.email}>email</label>
+              <input
+                id={style.email}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                type="email"
+                placeholder="Enter Email"
+              />
+            </div>
+            <div className={style.userDetails}>
+              <label htmlFor={style.password}>password</label>
+              <input
+                id={style.password}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                type="password"
+                placeholder="Enter Password"
+              />
+            </div>
+            <div>
+              <p className={style.err}>{err}</p>
+            </div>
+            <div className={style.btns}>
+              <button type="button" onClick={onSubmit}>
+                Login
+              </button>
+              <button onClick={() => router.push('/')}>Cancel</button>
+            </div>
+            <p>
+              Don't have an account?{' '}
+              <Link href="/signup">Sign Up Right Now!</Link>
+            </p>
+          </form>
+        </div>
       </Animate>
     </Layout>
   )

@@ -26,15 +26,15 @@ const index = () => {
   } = useContext(GetStartedContext)
   function navigate() {
     let valid = true
-    if(!skills.length){
+    if (!skills.length) {
       toast('Select Skills')
       valid = false
     }
-    if(experience ===''){
+    if (experience === '') {
       toast('Select Experience')
       valid = false
     }
-    if(valid){
+    if (valid) {
       router.push('/get-started-client/hourly-rate')
     }
   }
@@ -121,7 +121,9 @@ const index = () => {
                 value={experience}
                 onChange={(e) => setExperience(e.target.value)}
                 id={style.experience}
-              > <option value=''>Select Experience</option>
+              >
+                {' '}
+                <option value="">Select Experience</option>
                 <option value="entry level">Entry Level</option>
                 <option value="mid level">Mid Level</option>
                 <option value="senior level">Senior Level</option>

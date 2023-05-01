@@ -2,10 +2,10 @@ import mongoose from 'mongoose'
 
 const DepositSchema = new mongoose.Schema({
   user: String,
-  receipt:String,
+  receipt: String,
   credits: Number,
-  status:String,
-  date:String,
+  status: String,
+  date: String,
 })
 
 module.exports =

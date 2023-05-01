@@ -8,12 +8,11 @@ const ServiceSchema = new mongoose.Schema({
   subcategory: String,
   skills: String,
   experience: String,
+  credits: Number,
   payment: String,
-  price: Number,
   delivery: String,
   duration: String,
   time: Number,
-  currency: String,
   createdAt: String,
 })
 

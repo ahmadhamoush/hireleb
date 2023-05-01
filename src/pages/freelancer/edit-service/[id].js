@@ -26,20 +26,14 @@ const EditService = ({ service }) => {
   const [categoriesList, setCategoriesList] = useState([])
   const [category, setCategory] = useState(service[0].category)
   const [subcategory, setSubCategory] = useState(service[0].subcategory)
-  const [price, setPrice] = useState(service[0].price)
+  const [credits, setCredits] = useState(service[0].credits)
   const [payment, setPayment] = useState(service[0].payment)
   const [delivery, setDelivery] = useState(service[0].delivery)
   const [duration, setDuration] = useState(service[0].duration)
   const [durationTime, setDurationTime] = useState(service[0].time)
-  const [lbpChecked, setLBPChecked] = useState(
-    service[0].currency == 'LBP' ? true : false,
-  )
-  const [usdChecked, setUSDChecked] = useState(
-    service[0].currency == 'USD' ? true : false,
-  )
   const [experience, setExperience] = useState(service[0].experience)
   const [skills, setSkills] = useState(service[0].skills.split(','))
-  const [loading,setLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     setCategoriesList(jobCategories.categories)
@@ -49,55 +43,51 @@ const EditService = ({ service }) => {
   const handleUpload = async () => {
     setLoading(true)
     let valid = true
-    if(name===''){
+    if (name === '') {
       toast('Name is not valid')
       valid = false
     }
-    if(desc===''){
+    if (desc === '') {
       toast('Description is not valid')
       valid = false
     }
-    if(category===''){
+    if (category === '') {
       toast('Category is not valid')
       valid = false
     }
-    if(!skills.length){
+    if (!skills.length) {
       toast('Select Skills')
       valid = false
     }
-    if(subcategory===''){
+    if (subcategory === '') {
       toast('Subcategory is not valid')
       valid = false
     }
-    if(experience===''){
+    if (experience === '') {
       toast('Experience is not valid')
       valid = false
     }
-    if(!lbpChecked && !usdChecked){
-      toast('Currency is not valid')
-      valid = false
-    }
-    if(payment===''){
+    if (payment === '') {
       toast('Payment is not valid')
       valid = false
     }
-    if(price===''){
-      toast('Price is not valid')
+    if (credits === '') {
+      toast('credits is not valid')
       valid = false
     }
-    if(duration===''){
+    if (duration === '') {
       toast('Duration is not valid')
       valid = false
     }
-    if(delivery===''){
+    if (delivery === '') {
       toast('Delivery is not valid')
       valid = false
     }
-    if(durationTime===''){
+    if (durationTime === '') {
       toast('Duration time is not valid')
       valid = false
     }
-    if(valid){
+    if (valid) {
       try {
         const formData = new FormData()
         formData.append('id', service[0]._id)
@@ -107,9 +97,8 @@ const EditService = ({ service }) => {
         formData.append('skills', skills)
         formData.append('subcategory', subcategory)
         formData.append('experience', experience)
-        formData.append('currency', lbpChecked ? 'LBP' : 'USD')
         formData.append('payment', payment)
-        formData.append('price', price)
+        formData.append('credits', credits)
         formData.append('duration', duration)
         formData.append('delivery', delivery)
         formData.append('time', durationTime)
@@ -122,7 +111,7 @@ const EditService = ({ service }) => {
       } catch (err) {
         console.log(err)
       }
-    }else{
+    } else {
       setLoading(false)
     }
   }
@@ -273,94 +262,22 @@ const EditService = ({ service }) => {
                 <option value="hourly">Hourly Rate</option>
               </select>
             </div>
-            {payment === 'fixed' && (
-              <div>
-                <div>
-                  <label htmlFor={style.price}>Service Price*</label>
-                  <input
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    id={style.price}
-                    placeholder="What do you want to charge for your service?"
-                  />
-                </div>{' '}
-                <div className={style.currencyContainer}>
-                  <label>Select preferred currency</label>
-                  <div>
-                    <p>LBP</p>
-                    <label className={style.hourlyLabel}>
-                      <input
-                        onChange={() => {
-                          setLBPChecked((prev) => !prev)
-                          setUSDChecked(false)
-                        }}
-                        checked={lbpChecked}
-                        type="checkbox"
-                      />
-                      <div className={style.checkmark}></div>
-                    </label>
-                  </div>
-                  <div>
-                    <p>USD</p>
-                    <label className={style.hourlyLabel}>
-                      <input
-                        onChange={() => {
-                          setLBPChecked(false)
-                          setUSDChecked((prev) => !prev)
-                        }}
-                        checked={usdChecked}
-                        type="checkbox"
-                      />
-                      <div className={style.checkmark}></div>
-                    </label>
-                  </div>
-                </div>
-              </div>
-            )}
-            {payment === 'hourly' && (
-              <div>
-                <div>
-                  <label htmlFor={style.price}>Service Price*</label>
-                  <input
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    id={style.price}
-                    placeholder="How much do you want to charge for your service per hr?"
-                  />
-                </div>{' '}
-                <div className={style.currencyContainer}>
-                  <label>Select preferred currency</label>
-                  <div>
-                    <p>LBP</p>
-                    <label className={style.hourlyLabel}>
-                      <input
-                        onChange={() => {
-                          setLBPChecked((prev) => !prev)
-                          setUSDChecked(false)
-                        }}
-                        checked={lbpChecked}
-                        type="checkbox"
-                      />
-                      <div className={style.checkmark}></div>
-                    </label>
-                  </div>
-                  <div>
-                    <p>USD</p>
-                    <label className={style.hourlyLabel}>
-                      <input
-                        onChange={() => {
-                          setLBPChecked(false)
-                          setUSDChecked((prev) => !prev)
-                        }}
-                        checked={usdChecked}
-                        type="checkbox"
-                      />
-                      <div className={style.checkmark}></div>
-                    </label>
-                  </div>
-                </div>
-              </div>
-            )}
+            <h3>
+              The amount of credits that will be charged for the service
+              provided.{' '}
+              <span style={{ color: '#2d646d' }}>(1 Credit = 1 USD)</span>
+            </h3>
+            <div>
+              <label htmlFor={style.credits}>Service credits*</label>
+              <input
+                value={credits}
+                onChange={(e) => setCredits(e.target.value)}
+                id={style.credits}
+                placeholder={`Enter Credits ${
+                  payment === 'hourly' ? '/hr' : ''
+                }`}
+              />
+            </div>{' '}
             <div>
               <label htmlFor={style.delivery}>Service Delivery*</label>
               <select

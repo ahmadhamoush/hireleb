@@ -15,15 +15,13 @@ import Loader from '@/components/Loader'
 const index = () => {
   const session = useSession()
   const router = useRouter()
-  const [loading,setLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
   function navigateBack() {
     router.push('/get-started-freelancer/hourly-rate')
   }
 
   const {
     hourlyrate,
-    lbpChecked,
-    usdChecked,
     selectedFile,
     selectedImage,
     setSelectedFile,
@@ -49,7 +47,6 @@ const index = () => {
         formData.append('skills', skills)
         formData.append('subcategory', subcategory)
         formData.append('experience', experience)
-        formData.append('currency', lbpChecked ? 'LBP' : 'USD')
         formData.append('img', selectedFile)
         const { data } = await axios.post('/api/complete-profile', formData)
         if (data.done === 'ok') {
@@ -161,10 +158,7 @@ const index = () => {
                 <h3>Experience</h3>
                 <p>{experience}</p>
                 <h3>Hourly rate</h3>
-                <p>{hourlyrate}</p>
-                <h3>Currency</h3>
-                {lbpChecked && <p>LBP</p>}
-                {usdChecked && <p>USD</p>}
+                <p>{hourlyrate} credits/hr</p>
               </div>
             </div>
           </div>

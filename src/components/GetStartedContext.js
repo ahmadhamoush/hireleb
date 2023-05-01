@@ -27,12 +27,6 @@ export function GetStartedContextProvide({ children }) {
   const [hourlyrate, setHourlyRate] = useSessionStorageState('hourlyrate', {
     defaultValue: '',
   })
-  const [lbpChecked, setLBPChecked] = useSessionStorageState('lbpChecked', {
-    defaultValue: false,
-  })
-  const [usdChecked, setUSDChecked] = useSessionStorageState('usdChecked', {
-    defaultValue: false,
-  })
 
   // post a job context
   const [jobTitle, setJobTitle] = useSessionStorageState('jobTitle', {
@@ -59,24 +53,12 @@ export function GetStartedContextProvide({ children }) {
       defaultValue: '',
     },
   )
-  const [jobHourlyrate, setJobHourlyRate] = useSessionStorageState(
-    'hourlyrate',
-    {
-      defaultValue: '',
-    },
-  )
-  const [jobLbpChecked, setJobLBPChecked] = useSessionStorageState(
-    'jobLbpChecked',
-    {
-      defaultValue: false,
-    },
-  )
-  const [jobUsdChecked, setJobUSDChecked] = useSessionStorageState(
-    'jobUsdChecked',
-    {
-      defaultValue: false,
-    },
-  )
+  const [jobCredits, setJobCredits] = useSessionStorageState('jobCredits', {
+    defaultValue: '',
+  })
+  const [jobPayment, setJobPayment] = useSessionStorageState('jobPayment', {
+    defaultValue: '',
+  })
 
   const value = {
     selectedImage,
@@ -97,10 +79,6 @@ export function GetStartedContextProvide({ children }) {
     setExperience,
     hourlyrate,
     setHourlyRate,
-    lbpChecked,
-    setLBPChecked,
-    usdChecked,
-    setUSDChecked,
     jobTitle,
     setJobTitle,
     jobAbout,
@@ -113,12 +91,10 @@ export function GetStartedContextProvide({ children }) {
     setJobSkills,
     jobExperience,
     setJobExperience,
-    jobHourlyrate,
-    setJobHourlyRate,
-    jobLbpChecked,
-    setJobLBPChecked,
-    jobUsdChecked,
-    setJobUSDChecked,
+    jobCredits,
+    setJobCredits,
+    jobPayment,
+    setJobPayment,
   }
   return (
     <GetStartedContext.Provider value={value}>

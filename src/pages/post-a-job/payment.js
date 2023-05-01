@@ -13,19 +13,24 @@ const index = () => {
 
   function navigate() {
     let valid = true
-    if (hourlyrate === '') {
+    if (jobCredits === '') {
       valid = false
-      toast('Hourly rate is not valid')
+      toast('Job credits is not valid')
+    }
+    if (jobPayment === '') {
+      valid = false
+      toast('Job payment is not valid')
     }
     if (valid) {
-      router.push('/get-started-client/summary')
+      router.push('/post-a-job/summary')
     }
   }
   function navigateBack() {
-    router.push('/get-started-client/skills')
+    router.push('/post-a-job/skills')
   }
 
-  const { hourlyrate, setHourlyRate } = useContext(GetStartedContext)
+  const { jobPayment, setJobPayment, jobCredits, setJobCredits } =
+    useContext(GetStartedContext)
 
   return (
     <Layout>
@@ -34,7 +39,7 @@ const index = () => {
       </Animate>
       <div className={style.container}>
         <div className={style.header}>
-          <h1>Welcome {session.data?.user.email},</h1>
+          <h1>Post a Job</h1>
           <p>
             Complete your profile today and start showcasing your skills as a
             freelancer on our platform!
@@ -48,23 +53,38 @@ const index = () => {
         >
           <div className={style.freelanceDetails}>
             <h3>SHARE YOUR PAYMENT DETAILS</h3>
+
             <h3>
-              The preferred amount of credits to be charged for a service
-              provided.{' '}
+              The number of credits that applicants will receive upon completion
+              of this job{' '}
               <span style={{ color: '#2d646d' }}>(1 Credit = 1 USD)</span>
             </h3>
             <div>
-              <label htmlFor={style.title}>
-                What is your preferred hourly rate?*
-              </label>
+              <label htmlFor={style.payment}>Payment Type*</label>
+              <select
+                value={jobPayment}
+                onChange={(e) => setJobPayment(e.target.value)}
+                id={style.payment}
+              >
+                <option value="">Select Payment Type</option>
+                <option value="fixed">Fixed Fee</option>
+                <option value="hourly">Hourly Rate</option>
+              </select>
+            </div>
+
+            <div>
+              <label htmlFor={style.credits}>Credits*</label>
               <input
-                value={hourlyrate}
-                onChange={(e) => setHourlyRate(e.target.value)}
+                value={jobCredits}
+                onChange={(e) => setJobCredits(e.target.value)}
+                id={style.credits}
                 type="number"
-                id={style.title}
-                placeholder="Enter credits /hr"
+                placeholder={`Enter Credits ${
+                  jobPayment === 'hourly' ? '/hr' : ''
+                }`}
               />
             </div>
+
             <div className={style.btns}>
               <button type="button" onClick={navigateBack}>
                 Back

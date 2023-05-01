@@ -30,23 +30,23 @@ const index = () => {
 
   function navigate() {
     let valid = true
-    if(title ===''){
+    if (title === '') {
       valid = false
       toast('Title is not valid')
     }
-    if(about ===''){
+    if (about === '') {
       valid = false
       toast('About is not valid')
     }
-    if(category ===''){
+    if (category === '') {
       valid = false
       toast('Select Category')
     }
-    if(subcategory ===''){
+    if (subcategory === '') {
       valid = false
       toast('Select Subcategory')
     }
-    if(valid){
+    if (valid) {
       router.push('/get-started-client/skills')
     }
   }
@@ -103,7 +103,7 @@ const index = () => {
                 onChange={(e) => setCategory(e.target.value)}
                 id={style.category}
               >
-                <option value=''>Select Category</option>
+                <option value="">Select Category</option>
                 {categoriesList.map((list, index) => {
                   return (
                     <option key={index} value={list.name}>
@@ -119,7 +119,9 @@ const index = () => {
                 value={subcategory}
                 onChange={(e) => setSubCategory(e.target.value)}
                 id={style.subcategory}
-              > <option value=''>Select Subcategory</option>
+              >
+                {' '}
+                <option value="">Select Subcategory</option>
                 {categoriesList
                   .filter((categoryList) => categoryList.name === category)
                   .map((list) =>

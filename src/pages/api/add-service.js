@@ -30,7 +30,7 @@ const parseForm = (req) => {
         skills: fields.skills,
         experience: fields.experience,
         payment: fields.payment,
-        price: fields.price,
+        credits: fields.credits,
         duration: fields.duration,
         delivery: fields.delivery,
         time: fields.time,

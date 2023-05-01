@@ -7,8 +7,8 @@ const JobSchema = new mongoose.Schema({
   subcategory: String,
   skills: String,
   experience: String,
-  hourlyrate: Number,
-  currency: String,
+  credits: Number,
+  payment: String,
   postedBy: String,
   createdAt: String,
 })
