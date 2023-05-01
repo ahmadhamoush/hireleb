@@ -11,7 +11,7 @@ import axios from 'axios'
 import { initMongoose } from '../../../../lib/initMongoose'
 import { getService } from '@/pages/api/get-services'
 
-const EditService = ({service}) => {
+const EditService = ({ service }) => {
   const session = useSession()
   const router = useRouter()
 
@@ -29,8 +29,12 @@ const EditService = ({service}) => {
   const [delivery, setDelivery] = useState(service[0].delivery)
   const [duration, setDuration] = useState(service[0].duration)
   const [durationTime, setDurationTime] = useState(service[0].time)
-  const [lbpChecked, setLBPChecked] = useState(service[0].currency == 'LBP' ? true : false)
-  const [usdChecked, setUSDChecked] = useState(service[0].currency == 'USD' ? true : false)
+  const [lbpChecked, setLBPChecked] = useState(
+    service[0].currency == 'LBP' ? true : false,
+  )
+  const [usdChecked, setUSDChecked] = useState(
+    service[0].currency == 'USD' ? true : false,
+  )
   const [experience, setExperience] = useState(service[0].experience)
   const [skills, setSkills] = useState(service[0].skills.split(','))
 
@@ -335,14 +339,14 @@ const EditService = ({service}) => {
                 />
               </div>
             )}
-             <div className={style.btns}>
-            <button type="button" onClick={navigateBack}>
-              Back
-            </button>
-            <button type="button" onClick={handleUpload}>
-             SAVE
-            </button>
-          </div>
+            <div className={style.btns}>
+              <button type="button" onClick={navigateBack}>
+                Back
+              </button>
+              <button type="button" onClick={handleUpload}>
+                SAVE
+              </button>
+            </div>
           </div>
         </div>
       </Animate>

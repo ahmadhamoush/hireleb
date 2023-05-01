@@ -16,6 +16,7 @@ const UserSchema = new mongoose.Schema({
     experience: String,
     hourlyrate: Number,
     currency: String,
+    banner: String,
   },
   client: {
     title: String,

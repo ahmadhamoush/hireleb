@@ -21,20 +21,23 @@ const parseForm = (req) => {
       //connecting to db
       await initMongoose()
       // creating new project and saving it to db
-      const updatedService = await Service.updateOne({_id:fields.id},{
-        name: fields.name,
-        desc: fields.desc,
-        category: fields.category,
-        subcategory: fields.subcategory,
-        skills: fields.skills,
-        experience: fields.experience,
-        payment: fields.payment,
-        price: fields.price,
-        duration: fields.duration,
-        delivery: fields.delivery,
-        time: fields.time,
-        currency: fields.currency,
-      })
+      const updatedService = await Service.updateOne(
+        { _id: fields.id },
+        {
+          name: fields.name,
+          desc: fields.desc,
+          category: fields.category,
+          subcategory: fields.subcategory,
+          skills: fields.skills,
+          experience: fields.experience,
+          payment: fields.payment,
+          price: fields.price,
+          duration: fields.duration,
+          delivery: fields.delivery,
+          time: fields.time,
+          currency: fields.currency,
+        },
+      )
     })
   })
 }

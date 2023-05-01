@@ -62,16 +62,15 @@
   background-color: #1e1e1e;
 }
 .skills {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-  }
-  .skills div p {
-    margin: 0 10px;
-    background-color: #e3e3e3;
-    color: #1e1e1e;
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 12px;
-  }
-  
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.skills div p {
+  margin: 0 10px;
+  background-color: #e3e3e3;
+  color: #1e1e1e;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}

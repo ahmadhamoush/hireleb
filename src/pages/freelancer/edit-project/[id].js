@@ -137,13 +137,13 @@ const EditProject = ({ project }) => {
               </label>
             </div>
             <div className={style.btns}>
-            <button type="button" onClick={navigateBack}>
-              Back
-            </button>
-            <button type="button" onClick={handleUpload}>
-             SAVE
-            </button>
-          </div>
+              <button type="button" onClick={navigateBack}>
+                Back
+              </button>
+              <button type="button" onClick={handleUpload}>
+                SAVE
+              </button>
+            </div>
           </div>
         </div>
       </Animate>

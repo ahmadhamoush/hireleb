@@ -1,6 +1,5 @@
-.container {
-}
 .banner {
+  position: relative;
   background-color: #040404a8;
   height: 300px;
   display: flex;
@@ -8,6 +7,11 @@
   align-items: center;
   color: #fff;
   gap: 10px;
+}
+
+.banner img {
+  object-fit: cover;
+  cursor: pointer;
 }
 .banner h1 {
   font-size: 50px;

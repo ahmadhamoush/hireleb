@@ -27,14 +27,14 @@ const Service = ({ service }) => {
           <p>{service[0].subcategory}</p>
           <h3>Service Skills</h3>
           <div className={style.skills}>
-        {service[0].skills.split(',').map((skill) => {
-          return (
-            <div>
-              <p>{skill}</p>
-            </div>
-          )
-        })}
-      </div>
+            {service[0].skills.split(',').map((skill) => {
+              return (
+                <div>
+                  <p>{skill}</p>
+                </div>
+              )
+            })}
+          </div>
           <h3>Service Experience</h3>
           <p>{service[0].experience}</p>
           <h3>Service Payment Type</h3>
@@ -46,7 +46,9 @@ const Service = ({ service }) => {
           <h3>Service delivery</h3>
           <p>{service[0].delivery}</p>
           <h3>Service Duration</h3>
-          <p>{service[0].time} {service[0].duration}</p>
+          <p>
+            {service[0].time} {service[0].duration}
+          </p>
           <div className={style.btns}>
             <button type="button" onClick={navigateBack}>
               Back

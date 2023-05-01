@@ -204,10 +204,10 @@
   margin: 0 5px;
 }
 .btns {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-  }
-  .btns button:first-child {
-    background-color: #1e1e1e;
-  }
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.btns button:first-child {
+  background-color: #1e1e1e;
+}

@@ -10,12 +10,17 @@ import { useRouter } from 'next/router'
 import { getProjects } from '../api/get-projects'
 import { getServices } from '../api/get-services'
 import Service from '@/components/Service'
+import axios from 'axios'
+import { useSession } from 'next-auth/react'
 
 const Freelancer = ({ user, projects, services }) => {
   const [isPortfolio, setIsPortfolio] = useState(true)
   const [isServices, setIsServices] = useState(false)
   const [profileClicked, setProfileClicked] = useState(false)
+  const [selectedImage, setSelectedImage] = useState(user.freelancer.banner)
+  const [selectedFile, setSelectedFile] = useState('')
   const router = useRouter()
+  const session = useSession()
   useEffect(() => {
     if (profileClicked) {
       document.querySelector('body').style.overflow = 'hidden'
@@ -25,6 +30,26 @@ const Freelancer = ({ user, projects, services }) => {
       document.querySelector('body').style.overflowY = 'scroll'
     }
   }, [profileClicked])
+
+  useEffect(() => {
+    const updateBanner = async () => {
+      try {
+        const formData = new FormData()
+        formData.append('email', session.data.user.email)
+        formData.append('img', selectedFile)
+        const { data } = await axios.post('/api/update-banner', formData)
+        if (data) {
+          //add toast
+          console.log(data)
+        }
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    if (selectedFile) {
+      updateBanner()
+    }
+  }, [selectedFile])
   return (
     <Layout>
       <div className={style.container}>
@@ -45,7 +70,50 @@ const Freelancer = ({ user, projects, services }) => {
         )}
         <div className={style.banner}>
           <h1>Banner</h1>
-          <FontAwesomeIcon className={style.add} icon={faAdd} />
+          <div className={style.imgContainer}>
+            <label>
+              <input
+                type="file"
+                hidden
+                onChange={async ({ target }) => {
+                  //types of images allowed
+                  const types = [
+                    'image/jpeg',
+                    'image/jpg',
+                    'image/png',
+                    'image/webp',
+                  ]
+                  //accessing files
+                  if (target.files) {
+                    // getting first file
+                    const file = target.files[0]
+                    //checking if type of image is valid
+                    if (types.includes(file.type)) {
+                      //creating a new url image to display selected image on frontend
+                      setSelectedImage(window.URL.createObjectURL(file))
+                      setSelectedFile(file)
+                    } else {
+                      toast('File Type Not Accepted')
+                    }
+                  }
+                }}
+              />
+              <div>
+                {/* displaying selected image */}
+                {selectedImage ? (
+                  <Image
+                    className={style.display}
+                    src={selectedImage}
+                    alt="profile picture"
+                    fill
+                    sizes="100vw"
+                  />
+                ) : (
+                  <FontAwesomeIcon className={style.add} icon={faAdd} />
+                )}
+              </div>
+            </label>
+          </div>
         </div>
         <div className={style.wrapper}>
           <div className={style.detailsWrapper}>
@@ -152,11 +220,16 @@ const Freelancer = ({ user, projects, services }) => {
               <div className={style.services}>
                 {services.map((service) => {
                   return (
-                    <div onClick={() => {
-                      router.push(`/freelancer/service/${service._id}`)
-                    }}>
-                      <Service owner={user.freelancer.title} service={service} />
-                    </div>   
+                    <div
+                      onClick={() => {
+                        router.push(`/freelancer/service/${service._id}`)
+                      }}
+                    >
+                      <Service
+                        owner={user.freelancer.title}
+                        service={service}
+                      />
+                    </div>
                   )
                 })}
               </div>
