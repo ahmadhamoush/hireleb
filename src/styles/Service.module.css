@@ -6,8 +6,8 @@
   align-items: flex-start;
   height: 100%;
   width: 100%;
-  padding: 20px;
-  margin: 10px;
+  padding: 15px;
+  margin:5px;
   scroll-snap-align: start;
   cursor: pointer;
   background-color: #2d646d;
@@ -51,8 +51,10 @@
 }
 .skills {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 .skills div p {
   margin: 0 10px;

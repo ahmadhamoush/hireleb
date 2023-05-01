@@ -194,7 +194,7 @@ const Freelancer = ({ user, projects, services }) => {
                 }}
                 className={isServices && style.selected}
               >
-                Services (23)
+                Services ({services.length})
               </label>
             </div>
             {isPortfolio && (
@@ -234,6 +234,31 @@ const Freelancer = ({ user, projects, services }) => {
                 })}
               </div>
             )}
+          </div>
+          <div className={style.creditsWrapper}>
+            <div>
+              <p>Credits</p>
+              <h2>30</h2>
+              <button className={style.creditsbtn}>Deposit</button>
+            </div>
+            <div>
+              <p className={style.transactionHeader}>Transactions</p>
+              <div className={style.transactions}>
+              <p><span>20 Credits</span> have been deposited</p>
+              <p><span>12 Credits</span> have been transferred</p>
+              <p><span>8 Credits</span> have been deposited</p>
+              <p><span>22 Credits</span> Credits have been deposited</p>
+              <p><span>5 Credits</span> Credits have been transferred</p>
+              </div>
+                <button className={style.creditsbtn}>View All</button>
+            </div>
+            <div>
+              <p>Sent Proposals</p>
+              <h2>18</h2>
+              <p>Recieved Proposals</p>
+              <h2>7</h2>
+              <button className={style.creditsbtn}>View All</button>
+            </div>
           </div>
         </div>
       </div>

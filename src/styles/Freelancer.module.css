@@ -26,7 +26,7 @@
   cursor: pointer;
 }
 .details {
-  background-color: #e3e3e3;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -34,7 +34,6 @@
   border-radius: 10px;
   text-transform: capitalize;
   position: relative;
-  transform: translateY(-80px);
   padding: 20px;
 }
 .details p {
@@ -90,21 +89,24 @@
   font-weight: 200;
 }
 .detailsWrapper {
-  width: 20%;
+  width: 30%;
+  transform: translateY(-80px);
 }
 .wrapper {
   display: flex;
 }
 .wrapper .showcase {
-  width: 80%;
-  background-color: #e3e3e3;
+  width: 60%;
+  background-color: #fff;
   margin: 50px 20px;
+  height: 100%;
   border-radius: 10px;
   position: relative;
   padding: 20px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
-.container button {
+.container button:not(.creditsbtn){
   width: 150px;
   height: 150px;
   margin: 0.5em;
@@ -121,10 +123,12 @@
 }
 .btns {
   display: flex;
-  flex-direction: column;
+  overflow-x: scroll;
+  width: 100%;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+margin: 5px;
+padding: 20px 10px;
 }
 .container button:hover {
   color: #fff;
@@ -150,6 +154,7 @@
 }
 .wrapper .details {
   margin: 50px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 .desc {
   margin: 10px 0;
@@ -204,25 +209,120 @@
   align-items: center;
   flex-wrap: wrap;
 }
+.services{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;  
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding: 10px; 
+    max-height: 700px;
+}
 .portfolio .project {
   background-color: #82d7d6;
   width: 180px;
   height: 100px;
-  margin: 10px;
+  margin: 5px;
   border-radius: 20px;
   cursor: pointer;
   object-fit: cover;
 }
+
+.creditsWrapper{
+    width: 30%;
+    padding: 10px;
+}
+.creditsWrapper button {
+    width: 6.5em;
+    height: 2.3em;
+    margin: 0.5em;
+    background: #2d646d;
+    color: white;
+    border: none;
+    border-radius: 0.625em;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+  }
+  
+  .creditsWrapper button:hover {
+    color: black;
+  }
+  
+  .creditsWrapper button:after {
+    content: '';
+    background: white;
+    position: absolute;
+    z-index: -1;
+    left: -20%;
+    right: -20%;
+    top: 0;
+    bottom: 0;
+    transform: skewX(-45deg) scale(0, 1);
+    transition: all 0.5s;
+  }
+  
+  .creditsWrapper button:hover:after {
+    transform: skewX(-45deg) scale(1, 1);
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+  }
+  .creditsWrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .creditsWrapper div{
+    margin: 10px;
+  }
+  .creditsWrapper div:not(.transactions){
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 10px;
+    border-radius: 20px;
+  }
+.transactionHeader{
+    font-weight: 800;
+  }
+  .transactions{
+    padding: 5px;
+  }
+  .transactions  span{
+    font-weight: 700;
+  }
+  .transactions p{
+    margin: 5px 0;
+  }
 @media (max-width: 900px) {
   .wrapper {
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
   }
   .detailsWrapper {
     width: 100%;
   }
   .wrapper .details {
     margin: 0;
+  }
+  .btns {
+    padding: 30px;
+  }
+  .wrapper .showcase {
+    width: 95%;
+    transform: translateY(-60px);
+
+  }
+  .creditsWrapper{
+    width: 100%;
+    align-items: stretch; transform: translateY(-60px);
   }
 }
