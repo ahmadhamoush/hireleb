@@ -8,6 +8,7 @@ import jobCategories from '../../../../lib/jobCategories'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClose } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
+import { toast } from 'react-toastify'
 
 const AddService = () => {
   const session = useSession()
@@ -27,6 +28,7 @@ const AddService = () => {
   const [usdChecked, setUSDChecked] = useState(false)
   const [experience, setExperience] = useState('')
   const [skills, setSkills] = useState([])
+  const [loading,setLoading] = useState(false)
 
   useEffect(() => {
     setCategoriesList(jobCategories.categories)
@@ -36,6 +38,57 @@ const AddService = () => {
     router.back()
   }
   const handleUpload = async () => {
+    setLoading(true)
+    let valid = true
+    if(name===''){
+      toast('Name is not valid')
+      valid = false
+    }
+    if(desc===''){
+      toast('Description is not valid')
+      valid = false
+    }
+    if(category===''){
+      toast('Category is not valid')
+      valid = false
+    }
+    if(!skills.length){
+      toast('Select Skills')
+      valid = false
+    }
+    if(subcategory===''){
+      toast('Subcategory is not valid')
+      valid = false
+    }
+    if(experience===''){
+      toast('Experience is not valid')
+      valid = false
+    }
+    if(!lbpChecked && !usdChecked){
+      toast('Currency is not valid')
+      valid = false
+    }
+    if(payment===''){
+      toast('Payment is not valid')
+      valid = false
+    }
+    if(price===''){
+      toast('Price is not valid')
+      valid = false
+    }
+    if(duration===''){
+      toast('Duration is not valid')
+      valid = false
+    }
+    if(delivery===''){
+      toast('Delivery is not valid')
+      valid = false
+    }
+    if(durationTime===''){
+      toast('Duration time is not valid')
+      valid = false
+    }
+   if(valid){
     try {
       const formData = new FormData()
       formData.append('email', session.data.user.email)
@@ -53,11 +106,16 @@ const AddService = () => {
       formData.append('time', durationTime)
       const { data } = await axios.post('/api/add-service', formData)
       if (data) {
+        setLoading(false)
+        toast('Service Added')
         router.push(`/freelancer/${session.data.user.email}`)
       }
     } catch (err) {
       console.log(err)
     }
+   }else{
+    setLoading(false)
+   }
   }
   return (
     <Layout>

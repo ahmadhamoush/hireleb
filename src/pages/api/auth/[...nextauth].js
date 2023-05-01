@@ -11,11 +11,13 @@ export const authOptions = {
     },
     async session({ session, user, token }) {
       session.user.id = token.id
+      session.user.type = token.type
       return session
     },
     async jwt({ token, user }) {
       if (user) {
         token.id = user._id
+        token.type = user.type
       }
       return token
     },

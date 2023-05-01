@@ -8,11 +8,14 @@ import { useRouter } from 'next/router'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAdd, faCamera } from '@fortawesome/free-solid-svg-icons'
 import Image from 'next/image'
+import { toast } from 'react-toastify'
+import Loader from '@/components/Loader'
 
-const AddProject = () => {
+const Deposit = () => {
   const [credits, setCredits] = useState('')
   const [selectedImage, setSelectedImage] = useState('')
   const [selectedFile, setSelectedFile] = useState('')
+  const [loading,setLoading] = useState(false)
   const session = useSession()
   const router = useRouter()
 
@@ -20,21 +23,41 @@ const AddProject = () => {
     router.back()
    }
   const handleUpload = async () => {
-    try {
-      const formData = new FormData()
-      formData.append('user', session.data.user.email)
-      formData.append('cedits', credits)
-      formData.append('img', selectedFile)
-      const { data } = await axios.post('/api/request-deposit', formData)
-      if (data) {
-        //toast
+    setLoading(true)
+    let valid = true;
+    if(credits===''){
+      valid=false
+      toast('Credits is not valid')
+    }
+    if(selectedFile ===''){
+      valid=false
+      toast('Please upload image')
+    }
+    if(valid){
+      try {
+        const formData = new FormData()
+        formData.append('user', session.data.user.email)
+        formData.append('credits', credits)
+        formData.append('img', selectedFile)
+        const { data } = await axios.post('/api/request-deposit', formData)
+        if (data) {
+          toast('Deposit Requested')
+          setLoading(false)
+          setCredits('')
+          setSelectedFile('')
+          setSelectedImage('')
+        }
+      } catch (err) {
+        console.log(err)
       }
-    } catch (err) {
-      console.log(err)
+    }
+    else{
+      setLoading(false)
     }
   }
   return (
     <Layout>
+      {loading && <Loader />}
       <Animate
         className={style.animate}
         play
@@ -144,4 +167,4 @@ const AddProject = () => {
   )
 }
 
-export default AddProject
+export default Deposit

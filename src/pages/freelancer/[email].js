@@ -12,6 +12,7 @@ import { getServices } from '../api/get-services'
 import Service from '@/components/Service'
 import axios from 'axios'
 import { useSession } from 'next-auth/react'
+import { Animate } from 'react-simple-animate'
 
 const Freelancer = ({ user, projects, services }) => {
   const [isPortfolio, setIsPortfolio] = useState(true)
@@ -57,6 +58,11 @@ const Freelancer = ({ user, projects, services }) => {
   },[session])
   return (
     <Layout>
+          <Animate
+          play
+          start={{ opacity: 0 }}
+          end={{ opacity: 1 }}
+        >
       {loggedIn ? <div className={style.container}>
         {profileClicked && (
           <div className={style.profileClickedContainer}>
@@ -140,6 +146,7 @@ const Freelancer = ({ user, projects, services }) => {
                 <p>
                   {user.fName} {user.lName}
                 </p>
+                <p>{user.type}</p>
                 <p>{user.freelancer.title}</p>
                 <p>{user.freelancer.about}</p>
               </div>
@@ -267,6 +274,7 @@ const Freelancer = ({ user, projects, services }) => {
           </div>
         </div>
       </div> : <p>Not Authorized</p>}
+      </Animate>
     </Layout>
   )
 }

@@ -134,3 +134,8 @@ padding: 10px 60px;
 .infos ul li{
     margin: 0 10px;
 }
+@media (max-width:900px) {
+    .paymentWrapper{
+        flex-direction: column;
+    }
+}

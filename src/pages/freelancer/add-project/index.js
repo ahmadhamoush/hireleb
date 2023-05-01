@@ -8,6 +8,8 @@ import Image from 'next/image'
 import axios from 'axios'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
+import { toast } from 'react-toastify'
+import Loader from '@/components/Loader'
 
 const AddProject = () => {
   const [name, setName] = useState('')
@@ -15,6 +17,7 @@ const AddProject = () => {
   const [url, setUrl] = useState('')
   const [selectedImage, setSelectedImage] = useState('')
   const [selectedFile, setSelectedFile] = useState('')
+  const [loading,setLoading] = useState(false)
   const session = useSession()
   const router = useRouter()
 
@@ -22,6 +25,26 @@ const AddProject = () => {
     router.back()
    }
   const handleUpload = async () => {
+    setLoading(true)
+    let valid = true
+    if(name ===''){
+      toast('Name is not valid')
+      valid = false
+    }
+    if(desc ===''){
+      toast('Description is not valid')
+      valid = false
+    }
+    if(url ===''){
+      toast('Url is not valid')
+      valid = false
+    }
+    if(selectedImage ===''){
+      toast('Please upload image')
+      valid = false
+    }
+
+   if(valid){
     try {
       const formData = new FormData()
       formData.append('email', session.data.user.email)
@@ -31,14 +54,21 @@ const AddProject = () => {
       formData.append('img', selectedFile)
       const { data } = await axios.post('/api/add-project', formData)
       if (data) {
+        toast('Project Added')
+        setLoading(false)
         router.push(`/freelancer/${session.data.user.email}`)
       }
     } catch (err) {
       console.log(err)
     }
+   }
+   else{
+    setLoading(false)
+   }
   }
   return (
     <Layout>
+      {loading && <Loader />}
       <Animate
         className={style.animate}
         play

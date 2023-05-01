@@ -2,16 +2,20 @@ import style from '@/styles/Login.module.css'
 import { signIn } from 'next-auth/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import Layout from '@/components/Layout'
+import { toast } from 'react-toastify'
+import Loader from '@/components/Loader'
 const Login = () => {
   const session = useSession()
   const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [err, setErr] = useState('')
+  const [loading,setLoading] = useState(false)
   const onSubmit = async () => {
+    setLoading(true)
     //login logic
     try {
       if (!email.length > 0 || !password.length > 0) {
@@ -24,16 +28,33 @@ const Login = () => {
       })
       if (loginData.status === 401) {
         setErr(loginData.error)
-      } else {
-        alert('Login Success')
+        toast(loginData.error)
       }
+      else{
+        toast('Login Success')
+        setLoading(false)
+      }
+     
     } catch (err) {
       setErr(err.message)
+      toast(err.message)    
     }
   }
 
+  useEffect(()=>{
+    if(session.status==='authenticated'){
+      if(session.data.user.type === 'freelancer'){
+        router.push(`/freelancer/${session.data.user.email}`)
+      }
+      else if(session.data.user.type === 'client'){
+        router.push(`/client/${session.data.user.email}`)
+      }
+    }
+  },[session])
+
   return (
     <Layout>
+      {loading && <Loader />}
       <div className={style.container}>
         <form>
           <h2>Login</h2>
