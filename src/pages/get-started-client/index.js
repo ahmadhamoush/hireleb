@@ -8,6 +8,7 @@ import { useRouter } from 'next/router'
 import { Animate } from 'react-simple-animate'
 import GetStartedContext from '@/components/GetStartedContext'
 import Layout from '@/components/Layout'
+import { toast } from 'react-toastify'
 
 const index = () => {
   const session = useSession()
@@ -16,7 +17,12 @@ const index = () => {
     useContext(GetStartedContext)
 
   function navigate() {
-    router.push('/get-started-client/details')
+    if(selectedImage===''){
+      toast('Select Image')
+    }
+    else{
+      router.push('/get-started-client/details')
+    }
   }
 
   return (

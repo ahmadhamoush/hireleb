@@ -2,21 +2,20 @@ import style from '@/styles/getStarted.module.css'
 import axios from 'axios'
 import { Animate } from 'react-simple-animate'
 import { useSession } from 'next-auth/react'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { useRouter } from 'next/router'
 import GetStartedContext from '@/components/GetStartedContext'
 import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAdd, faUser } from '@fortawesome/free-solid-svg-icons'
 import Layout from '@/components/Layout'
+import { toast } from 'react-toastify'
+import Loader from '@/components/Loader'
 
 const index = () => {
   const session = useSession()
   const router = useRouter()
-
-  function getStarted() {
-    router.push('/freelancer/dashboard')
-  }
+  const [loading,setLoading] = useState(false)
   function navigateBack() {
     router.push('/get-started-freelancer/hourly-rate')
   }
@@ -38,6 +37,7 @@ const index = () => {
   } = useContext(GetStartedContext)
 
   const handleUpload = async () => {
+    setLoading(true)
     try {
       const formData = new FormData()
       if (selectedFile !== '') {
@@ -53,9 +53,13 @@ const index = () => {
         formData.append('img', selectedFile)
         const { data } = await axios.post('/api/complete-profile', formData)
         if (data.done === 'ok') {
-          console.log(data)
+          setLoading(false)
+          toast('Setup Complete')
+          router.push('/get-started-client/options')
         }
       } else {
+        setLoading(false)
+        toast('Select Image')
         throw new Error('Values should not be empty')
       }
     } catch (err) {
@@ -65,6 +69,7 @@ const index = () => {
 
   return (
     <Layout>
+      {loading && <Loader />}
       <Animate play start={{ width: '80%' }} end={{ width: '100%' }}>
         <div className={style.scroll}></div>
       </Animate>

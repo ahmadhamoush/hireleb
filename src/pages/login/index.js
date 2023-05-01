@@ -7,6 +7,7 @@ import { useSession } from 'next-auth/react'
 import Layout from '@/components/Layout'
 import { toast } from 'react-toastify'
 import Loader from '@/components/Loader'
+import { Animate } from 'react-simple-animate'
 const Login = () => {
   const session = useSession()
   const router = useRouter()
@@ -55,6 +56,11 @@ const Login = () => {
   return (
     <Layout>
       {loading && <Loader />}
+      <Animate
+          play
+          start={{ opacity: 0 }}
+          end={{ opacity: 1 }}
+        >
       <div className={style.container}>
         <form>
           <h2>Login</h2>
@@ -93,6 +99,7 @@ const Login = () => {
           </p>
         </form>
       </div>
+      </Animate>
     </Layout>
   )
 }

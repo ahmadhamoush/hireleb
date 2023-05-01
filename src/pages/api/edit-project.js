@@ -49,7 +49,6 @@ const readFile = (req) => {
       //connecting to db
       await initMongoose()
       //updating project details
-      console.log(files.img)
       if (files.img) {
         const editedProject = await Project.updateOne(
           { _id: fields.id },

@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import GetStartedContext from '@/components/GetStartedContext'
 import jobCategories from '../../../lib/jobCategories'
 import Layout from '@/components/Layout'
+import { toast } from 'react-toastify'
 
 const index = () => {
   const session = useSession()
@@ -28,7 +29,26 @@ const index = () => {
   }, [categoriesList])
 
   function navigate() {
-    router.push('/post-a-job/skills')
+    let valid = true
+    if(jobTitle ===''){
+      toast('Job title is invalid')
+      valid=false
+    }
+    if(jobAbout ===''){
+      toast('Job description is invalid')
+      valid=false
+    }
+    if(jobCategory ===''){
+      toast('Select job category')
+      valid=false
+    }
+    if(jobSubcategory ===''){
+      toast('Select job subcategory')
+      valid=false
+    }
+    if(valid){
+      router.push('/post-a-job/skills')
+    }
   }
   function navigateBack() {
     router.back()
@@ -81,7 +101,7 @@ const index = () => {
                 value={jobCategory}
                 onChange={(e) => setJobCategory(e.target.value)}
                 id={style.jobCategory}
-              >
+              ><option value=''>Select Category</option>
                 {categoriesList.map((list, index) => {
                   return (
                     <option key={index} value={list.name}>
@@ -97,7 +117,7 @@ const index = () => {
                 value={jobSubcategory}
                 onChange={(e) => setJobSubCategory(e.target.value)}
                 id={style.jobSubcategory}
-              >
+              ><option value=''>Select Subcategory</option>
                 {categoriesList
                   .filter((categoryList) => categoryList.name === jobCategory)
                   .map((list) =>

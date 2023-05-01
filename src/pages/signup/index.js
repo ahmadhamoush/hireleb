@@ -5,6 +5,9 @@ import { useState } from 'react'
 import axios from 'axios'
 import { signIn } from 'next-auth/react'
 import Layout from '@/components/Layout'
+import Loader from '@/components/Loader'
+import { Animate } from 'react-simple-animate'
+import { toast } from 'react-toastify'
 
 const Signup = () => {
   //user properties
@@ -14,6 +17,7 @@ const Signup = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [err, setErr] = useState('')
+  const [loading,setLoading] =useState(false)
 
   const router = useRouter()
 
@@ -29,6 +33,7 @@ const Signup = () => {
   }
 
   async function login(loginData) {
+    setLoading(true)
     try {
       await signIn('credentials', {
         redirect: false,
@@ -36,8 +41,12 @@ const Signup = () => {
         password: loginData.password,
       })
       if (type === 'freelancer') {
+        toast('Account Created')
+        setLoading(false)
         router.push('/get-started-freelancer')
       } else if (type === 'client') {
+        toast('Account Created')
+        setLoading(false)
         router.push('/get-started-client')
       }
     } catch (err) {
@@ -89,6 +98,12 @@ const Signup = () => {
 
   return (
     <Layout>
+      {loading && <Loader />}
+      <Animate
+          play
+          start={{ opacity: 0 }}
+          end={{ opacity: 1 }}
+        >
       <div className={style.container}>
         <form>
           <h2>Sign Up</h2>
@@ -185,6 +200,7 @@ const Signup = () => {
           </p>
         </form>
       </div>
+      </Animate>
     </Layout>
   )
 }

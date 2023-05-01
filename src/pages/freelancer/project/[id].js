@@ -5,6 +5,7 @@ import { getProject } from '@/pages/api/get-projects'
 import { getSession } from 'next-auth/react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { Animate } from 'react-simple-animate'
 
 const Project = ({ project }) => {
   const router = useRouter()
@@ -16,6 +17,11 @@ const Project = ({ project }) => {
   }
   return (
     <Layout>
+       <Animate
+        play
+        start={{ opacity: 0 }}
+        end={{ opacity: 1 }}
+      >
       <div className={style.container}>
         <div>
           <h3>Project Name</h3>
@@ -35,6 +41,7 @@ const Project = ({ project }) => {
           </div>
         </div>
       </div>
+      </Animate>
     </Layout>
   )
 }

@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import GetStartedContext from '@/components/GetStartedContext'
 import jobCategories from '../../../lib/jobCategories'
 import Layout from '@/components/Layout'
+import { toast } from 'react-toastify'
 
 const index = () => {
   const session = useSession()
@@ -28,7 +29,26 @@ const index = () => {
   }, [categoriesList])
 
   function navigate() {
-    router.push('/get-started-freelancer/skills')
+    let valid = true
+    if(title ===''){
+      valid = false
+      toast('Title is not valid')
+    }
+    if(about ===''){
+      valid = false
+      toast('About is not valid')
+    }
+    if(category ===''){
+      valid = false
+      toast('Select Category')
+    }
+    if(subcategory ===''){
+      valid = false
+      toast('Select Subcategory')
+    }
+    if(valid){
+      router.push('/get-started-freelancer/skills')
+    }
   }
   function navigateBack() {
     router.push('/get-started-freelancer')
@@ -82,6 +102,7 @@ const index = () => {
                 onChange={(e) => setCategory(e.target.value)}
                 id={style.category}
               >
+                <option value=''>Select Category</option>
                 {categoriesList.map((list, index) => {
                   return (
                     <option key={index} value={list.name}>
@@ -98,6 +119,7 @@ const index = () => {
                 onChange={(e) => setSubCategory(e.target.value)}
                 id={style.subcategory}
               >
+                 <option value=''>Select Subcategory</option>
                 {categoriesList
                   .filter((categoryList) => categoryList.name === category)
                   .map((list) =>

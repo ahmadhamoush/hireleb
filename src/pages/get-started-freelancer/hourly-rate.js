@@ -5,13 +5,25 @@ import { useContext } from 'react'
 import { useRouter } from 'next/router'
 import GetStartedContext from '@/components/GetStartedContext'
 import Layout from '@/components/Layout'
+import { toast } from 'react-toastify'
 
 const index = () => {
   const session = useSession()
   const router = useRouter()
 
   function navigate() {
-    router.push('/get-started-freelancer/summary')
+    let valid = true
+    if(hourlyrate ===''){
+      valid = false
+      toast('Hourly rate is not valid')
+    }
+    if(!lbpChecked && !usdChecked){
+      valid = false
+      toast('Select Currency')
+    }
+    if(valid){
+      router.push('/get-started-freelancer/summary')
+    }
   }
   function navigateBack() {
     router.push('/get-started-freelancer/skills')

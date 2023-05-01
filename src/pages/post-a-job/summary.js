@@ -2,18 +2,17 @@ import style from '@/styles/getStarted.module.css'
 import axios from 'axios'
 import { Animate } from 'react-simple-animate'
 import { useSession } from 'next-auth/react'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { useRouter } from 'next/router'
 import GetStartedContext from '@/components/GetStartedContext'
 import Layout from '@/components/Layout'
+import Loader from '@/components/Loader'
+import { toast } from 'react-toastify'
 
 const index = () => {
   const session = useSession()
   const router = useRouter()
-
-  function postJob() {
-    router.push('/freelancer/dashboard')
-  }
+  const[loading,setLoading] = useState(false)
   function navigateBack() {
     router.push('/post-a-job/hourly-rate')
   }
@@ -31,6 +30,7 @@ const index = () => {
   } = useContext(GetStartedContext)
 
   const handleUpload = async () => {
+    setLoading(true)
     try {
       const formData = new FormData()
       formData.append('email', session.data.user.email)
@@ -44,7 +44,9 @@ const index = () => {
       formData.append('currency', jobLbpChecked ? 'LBP' : 'USD')
       const { data } = await axios.post('/api/post-job', formData)
       if (data.done === 'ok') {
-        console.log(data)
+        setLoading(false)
+        toast('Job Posted')
+        router.push(`/client/${session.data.user.email}`)
       }
     } catch (err) {
       console.log(err)
@@ -53,6 +55,7 @@ const index = () => {
 
   return (
     <Layout>
+      {loading && <Loader />}
       <Animate play start={{ width: '80%' }} end={{ width: '100%' }}>
         <div className={style.scroll}></div>
       </Animate>

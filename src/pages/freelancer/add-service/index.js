@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClose } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import Loader from '@/components/Loader'
 
 const AddService = () => {
   const session = useSession()
@@ -119,6 +120,7 @@ const AddService = () => {
   }
   return (
     <Layout>
+      {loading && <Loader />}
       <Animate
         className={style.animate}
         play

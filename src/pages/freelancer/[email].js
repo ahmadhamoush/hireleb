@@ -13,6 +13,7 @@ import Service from '@/components/Service'
 import axios from 'axios'
 import { useSession } from 'next-auth/react'
 import { Animate } from 'react-simple-animate'
+import { toast } from 'react-toastify'
 
 const Freelancer = ({ user, projects, services }) => {
   const [isPortfolio, setIsPortfolio] = useState(true)
@@ -41,8 +42,7 @@ const Freelancer = ({ user, projects, services }) => {
         formData.append('img', selectedFile)
         const { data } = await axios.post('/api/update-banner', formData)
         if (data) {
-          //add toast
-          console.log(data)
+          toast('Banner Updated')
         }
       } catch (err) {
         console.log(err)
@@ -54,7 +54,7 @@ const Freelancer = ({ user, projects, services }) => {
   }, [selectedFile])
 
   useEffect(()=>{
-    setIsloggedin(session.status === 'authenticated')
+    setIsloggedin(session.status === 'authenticated' && session.data.user.email === user.email)
   },[session])
   return (
     <Layout>
@@ -211,6 +211,7 @@ const Freelancer = ({ user, projects, services }) => {
             </div>
             {isPortfolio && (
               <div className={style.portfolio}>
+                {!projects.length  && <h4>No Projects</h4>}
                 {projects.map((project) => {
                   return (
                     <Image
@@ -230,6 +231,7 @@ const Freelancer = ({ user, projects, services }) => {
             )}
             {isServices && (
               <div className={style.services}>
+                 {!services.length  && <h4>No Services</h4>}
                 {services.map((service) => {
                   return (
                     <div

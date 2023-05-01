@@ -10,6 +10,8 @@ import { faClose } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import { initMongoose } from '../../../../lib/initMongoose'
 import { getService } from '@/pages/api/get-services'
+import { toast } from 'react-toastify'
+import Loader from '@/components/Loader'
 
 const EditService = ({ service }) => {
   const session = useSession()
@@ -37,6 +39,7 @@ const EditService = ({ service }) => {
   )
   const [experience, setExperience] = useState(service[0].experience)
   const [skills, setSkills] = useState(service[0].skills.split(','))
+  const [loading,setLoading] = useState(false)
 
   useEffect(() => {
     setCategoriesList(jobCategories.categories)
@@ -44,31 +47,88 @@ const EditService = ({ service }) => {
   }, [categoriesList])
 
   const handleUpload = async () => {
-    try {
-      const formData = new FormData()
-      formData.append('id', service[0]._id)
-      formData.append('name', name)
-      formData.append('desc', desc)
-      formData.append('category', category)
-      formData.append('skills', skills)
-      formData.append('subcategory', subcategory)
-      formData.append('experience', experience)
-      formData.append('currency', lbpChecked ? 'LBP' : 'USD')
-      formData.append('payment', payment)
-      formData.append('price', price)
-      formData.append('duration', duration)
-      formData.append('delivery', delivery)
-      formData.append('time', durationTime)
-      const { data } = await axios.post('/api/edit-service', formData)
-      if (data) {
-        router.push(`/freelancer/${session.data.user.email}`)
+    setLoading(true)
+    let valid = true
+    if(name===''){
+      toast('Name is not valid')
+      valid = false
+    }
+    if(desc===''){
+      toast('Description is not valid')
+      valid = false
+    }
+    if(category===''){
+      toast('Category is not valid')
+      valid = false
+    }
+    if(!skills.length){
+      toast('Select Skills')
+      valid = false
+    }
+    if(subcategory===''){
+      toast('Subcategory is not valid')
+      valid = false
+    }
+    if(experience===''){
+      toast('Experience is not valid')
+      valid = false
+    }
+    if(!lbpChecked && !usdChecked){
+      toast('Currency is not valid')
+      valid = false
+    }
+    if(payment===''){
+      toast('Payment is not valid')
+      valid = false
+    }
+    if(price===''){
+      toast('Price is not valid')
+      valid = false
+    }
+    if(duration===''){
+      toast('Duration is not valid')
+      valid = false
+    }
+    if(delivery===''){
+      toast('Delivery is not valid')
+      valid = false
+    }
+    if(durationTime===''){
+      toast('Duration time is not valid')
+      valid = false
+    }
+    if(valid){
+      try {
+        const formData = new FormData()
+        formData.append('id', service[0]._id)
+        formData.append('name', name)
+        formData.append('desc', desc)
+        formData.append('category', category)
+        formData.append('skills', skills)
+        formData.append('subcategory', subcategory)
+        formData.append('experience', experience)
+        formData.append('currency', lbpChecked ? 'LBP' : 'USD')
+        formData.append('payment', payment)
+        formData.append('price', price)
+        formData.append('duration', duration)
+        formData.append('delivery', delivery)
+        formData.append('time', durationTime)
+        const { data } = await axios.post('/api/edit-service', formData)
+        if (data) {
+          setLoading(false)
+          toast('Service Saved')
+          router.push(`/freelancer/${session.data.user.email}`)
+        }
+      } catch (err) {
+        console.log(err)
       }
-    } catch (err) {
-      console.log(err)
+    }else{
+      setLoading(false)
     }
   }
   return (
     <Layout>
+      {loading && <Loader />}
       <Animate
         className={style.animate}
         play

@@ -5,13 +5,25 @@ import { useContext } from 'react'
 import { useRouter } from 'next/router'
 import GetStartedContext from '@/components/GetStartedContext'
 import Layout from '@/components/Layout'
+import { toast } from 'react-toastify'
 
 const index = () => {
   const session = useSession()
   const router = useRouter()
 
   function navigate() {
-    router.push('/post-a-job/summary')
+    let valid = true
+    if(jobHourlyrate   ===''){
+      valid = false
+      toast('Hourly rate is not valid')
+    }
+    if(!jobLbpChecked && !jobUsdChecked){
+      valid = false
+      toast('Select Currency')
+    }
+    if(valid){
+      router.push('/post-a-job/summary')
+    }
   }
   function navigateBack() {
     router.push('/post-a-job/skills')

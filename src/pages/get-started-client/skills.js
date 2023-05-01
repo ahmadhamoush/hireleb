@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClose } from '@fortawesome/free-solid-svg-icons'
 import jobCategories from '../../../lib/jobCategories'
 import Layout from '@/components/Layout'
+import { toast } from 'react-toastify'
 
 const index = () => {
   const session = useSession()
@@ -24,7 +25,18 @@ const index = () => {
     subcategory,
   } = useContext(GetStartedContext)
   function navigate() {
-    router.push('/get-started-client/hourly-rate')
+    let valid = true
+    if(!skills.length){
+      toast('Select Skills')
+      valid = false
+    }
+    if(experience ===''){
+      toast('Select Experience')
+      valid = false
+    }
+    if(valid){
+      router.push('/get-started-client/hourly-rate')
+    }
   }
   function navigateBack() {
     router.push('/get-started-client/details')
@@ -109,7 +121,7 @@ const index = () => {
                 value={experience}
                 onChange={(e) => setExperience(e.target.value)}
                 id={style.experience}
-              >
+              > <option value=''>Select Experience</option>
                 <option value="entry level">Entry Level</option>
                 <option value="mid level">Mid Level</option>
                 <option value="senior level">Senior Level</option>

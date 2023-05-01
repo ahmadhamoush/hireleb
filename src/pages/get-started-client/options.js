@@ -1,10 +1,7 @@
 import style from '@/styles/getStarted.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useSession } from 'next-auth/react'
-import { useContext } from 'react'
 import { useRouter } from 'next/router'
 import { Animate } from 'react-simple-animate'
-import GetStartedContext from '@/components/GetStartedContext'
 import {
   faGears,
   faProjectDiagram,
@@ -13,20 +10,17 @@ import {
 import Layout from '@/components/Layout'
 
 const index = () => {
-  const session = useSession()
   const router = useRouter()
-  const { selectedImage, setSelectedImage, selectedFile, setSelectedFile } =
-    useContext(GetStartedContext)
-
-  function navigate() {
-    router.push('/get-started-clients/options')
-  }
-
   return (
     <Layout>
       <Animate play start={{ width: '20%' }} end={{ width: '100%' }}>
         <div className={style.scroll}></div>
       </Animate>
+      <Animate
+          play
+          start={{ opacity: 0 }}
+          end={{ opacity: 1 }}
+        >
       <div className={style.container}>
         <div className={style.header}>
           <h1>Great - You're now part of the HireLeb community!</h1>
@@ -71,6 +65,7 @@ const index = () => {
           </div>
         </div>
       </div>
+      </Animate>
     </Layout>
   )
 }

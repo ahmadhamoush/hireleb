@@ -10,6 +10,8 @@ import { getSession, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { getProject } from '@/pages/api/get-projects'
 import { initMongoose } from '../../../../lib/initMongoose'
+import Loader from '@/components/Loader'
+import { toast } from 'react-toastify'
 
 const EditProject = ({ project }) => {
   const [name, setName] = useState(project[0].name)
@@ -17,6 +19,7 @@ const EditProject = ({ project }) => {
   const [url, setUrl] = useState(project[0].url)
   const [selectedImage, setSelectedImage] = useState(project[0].image)
   const [selectedFile, setSelectedFile] = useState('')
+  const[loading,setLoading] = useState(false)
   const session = useSession()
   const router = useRouter()
 
@@ -25,24 +28,49 @@ const EditProject = ({ project }) => {
   }
 
   const handleUpload = async () => {
-    try {
-      const formData = new FormData()
-      formData.append('id', project[0]._id)
-      formData.append('email', session.data.user.email)
-      formData.append('name', name)
-      formData.append('desc', desc)
-      formData.append('url', url)
-      formData.append('img', selectedFile)
-      const { data } = await axios.post('/api/edit-project', formData)
-      if (data) {
-        router.push(`/freelancer/${session.data.user.email}`)
+    setLoading(true)
+    let valid = true
+    if(name ===''){
+      toast('Name is not valid')
+      valid = false
+    }
+    if(desc ===''){
+      toast('Description is not valid')
+      valid = false
+    }
+    if(url ===''){
+      toast('Url is not valid')
+      valid = false
+    }
+    if(selectedImage ===''){
+      toast('Please upload image')
+      valid = false
+    }
+    if(valid){
+      try {
+        const formData = new FormData()
+        formData.append('id', project[0]._id)
+        formData.append('email', session.data.user.email)
+        formData.append('name', name)
+        formData.append('desc', desc)
+        formData.append('url', url)
+        formData.append('img', selectedFile)
+        const { data } = await axios.post('/api/edit-project', formData)
+        if (data) {
+          setLoading(false)
+          toast('Project Saved')
+          router.push(`/freelancer/${session.data.user.email}`)
+        }
+      } catch (err) {
+        console.log(err)
       }
-    } catch (err) {
-      console.log(err)
+    }else{
+      setLoading(false)
     }
   }
   return (
     <Layout>
+      {loading && <Loader />}
       <Animate
         className={style.animate}
         play

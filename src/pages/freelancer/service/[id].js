@@ -4,6 +4,7 @@ import { initMongoose } from '../../../../lib/initMongoose'
 import { getService } from '@/pages/api/get-services'
 import { getSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
+import { Animate } from 'react-simple-animate'
 
 const Service = ({ service }) => {
   const router = useRouter()
@@ -15,6 +16,11 @@ const Service = ({ service }) => {
   }
   return (
     <Layout>
+       <Animate
+        play
+        start={{ opacity: 0 }}
+        end={{ opacity: 1 }}
+      >
       <div className={style.container}>
         <div>
           <h3>Service Name</h3>
@@ -59,6 +65,7 @@ const Service = ({ service }) => {
           </div>
         </div>
       </div>
+      </Animate>
     </Layout>
   )
 }
