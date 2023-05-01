@@ -1,64 +1,63 @@
-.container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    margin: auto;
-    padding: 20px;
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  margin: auto;
+  padding: 20px;
 }
-.container div{
-    margin: auto;
+.container div {
+  margin: auto;
 }
-.container div>*{
-    margin: 10px;
+.container div > * {
+  margin: 10px;
 }
-.container img{
-    border-radius: 20px;
+.container img {
+  border-radius: 20px;
 }
 .container button {
-    width: 6.5em;
-    height: 2.3em;
-    margin: 0.5em;
-    background: #2d646d;
-    color: white;
-    border: none;
-    border-radius: 0.625em;
-    font-size: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    position: relative;
-    z-index: 1;
-    overflow: hidden;
-  }
-  
-  .container button:hover {
-    color: black;
-  }
-  
-  .container button:after {
-    content: '';
-    background: white;
-    position: absolute;
-    z-index: -1;
-    left: -20%;
-    right: -20%;
-    top: 0;
-    bottom: 0;
-    transform: skewX(-45deg) scale(0, 1);
-    transition: all 0.5s;
-  }
-  
-  .container button:hover:after {
-    transform: skewX(-45deg) scale(1, 1);
-    -webkit-transition: all 0.5s;
-    transition: all 0.5s;
-  }
-  .btns {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-  }
-  .btns button:first-child {
-    background-color: #1e1e1e;
-  }
-  
+  width: 6.5em;
+  height: 2.3em;
+  margin: 0.5em;
+  background: #2d646d;
+  color: white;
+  border: none;
+  border-radius: 0.625em;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.container button:hover {
+  color: black;
+}
+
+.container button:after {
+  content: '';
+  background: white;
+  position: absolute;
+  z-index: -1;
+  left: -20%;
+  right: -20%;
+  top: 0;
+  bottom: 0;
+  transform: skewX(-45deg) scale(0, 1);
+  transition: all 0.5s;
+}
+
+.container button:hover:after {
+  transform: skewX(-45deg) scale(1, 1);
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+.btns {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.btns button:first-child {
+  background-color: #1e1e1e;
+}

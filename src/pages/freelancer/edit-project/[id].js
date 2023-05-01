@@ -11,7 +11,7 @@ import { useRouter } from 'next/router'
 import { getProject } from '@/pages/api/get-projects'
 import { initMongoose } from '../../../../lib/initMongoose'
 
-const EditProject = ({project}) => {
+const EditProject = ({ project }) => {
   const [name, setName] = useState(project[0].name)
   const [desc, setDesc] = useState(project[0].desc)
   const [url, setUrl] = useState(project[0].url)
@@ -142,30 +142,28 @@ const EditProject = ({project}) => {
 
 export default EditProject
 
+export async function getServerSideProps(context) {
+  //destructuring context object to get id param
+  const { query } = context
+  const { id } = query
+  //getting session details
+  const session = await getSession(context)
+  //connecting to db
+  await initMongoose()
+  //getting project based on query id
+  let project = await getProject(id)
+  let authenticated = false
+  //checking if logged user owns the project
+  if (session.user.email === project[0].owner) {
+    authenticated = true
+  } else {
+    project = []
+  }
 
-export async function getServerSideProps(context){
-    //destructuring context object to get id param
-    const {query} = context
-    const {id} = query
-    //getting session details
-    const session = await getSession(context)
-    //connecting to db
-    await initMongoose()
-    //getting project based on query id
-    let project = await getProject(id)
-    let authenticated = false
-    //checking if logged user owns the project
-    if(session.user.email===project[0].owner){
-        authenticated = true
-    }
-    else{
-        project = []
-    }
-
-    return{
-        props:{
-            project: JSON.parse(JSON.stringify(project)),
-            authenticated,
-        }
-    }
+  return {
+    props: {
+      project: JSON.parse(JSON.stringify(project)),
+      authenticated,
+    },
+  }
 }

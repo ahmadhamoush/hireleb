@@ -28,45 +28,50 @@ const readFile = (req) => {
       if (err) reject(err)
       //if not then we access the files and files submitted
       resolve({ fields, files })
-        if(files.img){
-      //getting the path of image
-      var oldPath = files.img.filepath
-      //reading and getting image data from the path
-      var rawData = fs.readFileSync(oldPath)
-      //uploading image to cloud based image storage (cloudinary)
-      const stream = cloudinary.uploader.upload_stream(
-        {
-          folder: 'hireleb',
-          public_id: path.parse(files.img.originalFilename).name,
-        },
-        (error, result) => {
-          if (error) return console.error(error)
-        },
-      )
-      streamifier.createReadStream(rawData).pipe(stream)
-        }
+      if (files.img) {
+        //getting the path of image
+        var oldPath = files.img.filepath
+        //reading and getting image data from the path
+        var rawData = fs.readFileSync(oldPath)
+        //uploading image to cloud based image storage (cloudinary)
+        const stream = cloudinary.uploader.upload_stream(
+          {
+            folder: 'hireleb',
+            public_id: path.parse(files.img.originalFilename).name,
+          },
+          (error, result) => {
+            if (error) return console.error(error)
+          },
+        )
+        streamifier.createReadStream(rawData).pipe(stream)
+      }
 
       //connecting to db
       await initMongoose()
       //updating project details
       console.log(files.img)
-        if(files.img){
-            const editedProject = await Project.updateOne({_id:fields.id},{
-                owner: fields.email,
-                name: fields.name,
-                desc: fields.desc,
-                url: fields.url,
-                image: `https://res.cloudinary.com/hamoush/image/upload/v1678284450/hireleb/${files.img.originalFilename}`,
-              })
-        }
-        else{
-            const editedProject = await Project.updateOne({_id:fields.id},{
-                owner: fields.email,
-                name: fields.name,
-                desc: fields.desc,
-                url: fields.url,
-              })
-        }
+      if (files.img) {
+        const editedProject = await Project.updateOne(
+          { _id: fields.id },
+          {
+            owner: fields.email,
+            name: fields.name,
+            desc: fields.desc,
+            url: fields.url,
+            image: `https://res.cloudinary.com/hamoush/image/upload/v1678284450/hireleb/${files.img.originalFilename}`,
+          },
+        )
+      } else {
+        const editedProject = await Project.updateOne(
+          { _id: fields.id },
+          {
+            owner: fields.email,
+            name: fields.name,
+            desc: fields.desc,
+            url: fields.url,
+          },
+        )
+      }
     })
   })
 }

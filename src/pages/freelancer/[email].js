@@ -80,7 +80,9 @@ const Freelancer = ({ user, projects }) => {
               <button onClick={() => router.push('/freelancer/add-project')}>
                 Add New Project
               </button>
-              <button>Add a Service</button>
+              <button onClick={() => router.push('/freelancer/add-service')}>
+                Add a Service
+              </button>
               <button>Build CV</button>
               <button>Build Porfolio</button>
               <button>Change Account Type</button>
@@ -135,7 +137,7 @@ const Freelancer = ({ user, projects }) => {
                     height={100}
                     alt={project.name}
                     className={style.project}
-                    onClick={()=>{
+                    onClick={() => {
                       router.push(`/freelancer/project/${project._id}`)
                     }}
                   />

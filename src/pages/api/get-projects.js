@@ -7,12 +7,12 @@ export async function getProjects(email) {
 }
 //fetching all projects
 export async function getAllProjects() {
-    return Project.find().exec()
-  }
+  return Project.find().exec()
+}
 
 export async function getProject(id) {
-    return Project.find({ _id: id }).exec()
-  }
+  return Project.find({ _id: id }).exec()
+}
 
 export default async function handler(req, res) {
   await initMongoose()
