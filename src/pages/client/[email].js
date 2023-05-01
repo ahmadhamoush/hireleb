@@ -6,22 +6,18 @@ import Image from 'next/image'
 import { getUser } from '../api/get-user'
 import { initMongoose } from '../../../lib/initMongoose'
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
-import { getProjects } from '../api/get-projects'
-import { getServices } from '../api/get-services'
-import Service from '@/components/Service'
+import { useRouter } from 'next/router' 
 import axios from 'axios'
 import { useSession } from 'next-auth/react'
 import { Animate } from 'react-simple-animate'
 import { toast } from 'react-toastify'
 
-const Freelancer = ({ user, projects, services }) => {
-  const [isPortfolio, setIsPortfolio] = useState(true)
-  const [isServices, setIsServices] = useState(false)
+const Client = ({ user }) => {
   const [profileClicked, setProfileClicked] = useState(false)
-  const [selectedImage, setSelectedImage] = useState(user.freelancer?.banner ? user.freelancer.banner : '')
+  const [selectedImage, setSelectedImage] = useState(user.client?.banner ? user.client.banner :'')
   const [selectedFile, setSelectedFile] = useState('')
   const[loggedIn, setIsloggedin] = useState(false)
+  const[isAccountType, setIsAccountType] = useState(false)
   const router = useRouter()
   const session = useSession()
   useEffect(() => {
@@ -56,6 +52,9 @@ const Freelancer = ({ user, projects, services }) => {
   useEffect(()=>{
     setIsloggedin(session.status === 'authenticated' && session.data.user.email === user.email)
   },[session])
+  useEffect(()=>{
+   setIsAccountType(router.asPath.includes(user.type))
+  },[session])
   return (
     <Layout>
           <Animate
@@ -63,7 +62,7 @@ const Freelancer = ({ user, projects, services }) => {
           start={{ opacity: 0 }}
           end={{ opacity: 1 }}
         >
-      {loggedIn ? <div className={style.container}>
+      {loggedIn && isAccountType ? <div className={style.container}>
         {profileClicked && (
           <div className={style.profileClickedContainer}>
             <Image
@@ -147,107 +146,43 @@ const Freelancer = ({ user, projects, services }) => {
                   {user.fName} {user.lName}
                 </p>
                 <p>{user.type}</p>
-                <p>{user.freelancer.title}</p>
-                <p>{user.freelancer.about}</p>
+                <p>{user.client.title}</p>
+                <p>{user.client.about}</p>
               </div>
               <div className={style.hourlyrate}>
-                <p>{user.freelancer.hourlyrate}</p>
+                <p>{user.client.hourlyrate}</p>
                 <p>
-                  {user.freelancer.currency === 'USD' ? '$' : 'LL'}{' '}
+                  {user.client.currency === 'USD' ? '$' : 'LL'}{' '}
                   <span>/hr</span>{' '}
                 </p>
               </div>
             </div>
             <div className={style.btns}>
-              <button onClick={() => router.push('/freelancer/add-project')}>
-                Add New Project
+              <button onClick={() => router.push('/post-a-job')}>
+                Post a Job
               </button>
-              <button onClick={() => router.push('/freelancer/add-service')}>
-                Add a Service
-              </button>
-              <button>Build CV</button>
-              <button>Build Porfolio</button>
-              <button>Change Account Type</button>
             </div>
           </div>
           <div className={style.showcase}>
-            <div className={style.options}>
+          <div className={style.options}>
               <input
-                checked={isPortfolio}
-                onChange={(e) => {
-                  setIsPortfolio(true)
-                  setIsServices(false)
-                }}
+                checked={true}
                 id={style.portfolioLabel}
                 hidden
                 type="checkbox"
               />
               <label
                 htmlFor={style.portfolioLabel}
-                className={isPortfolio && style.selected}
+                className={style.selected}
               >
-                Portfolio ({projects.length})
-              </label>
-              <input
-                checked={isServices}
-                onChange={() => {
-                  setIsPortfolio(false)
-                  setIsServices(true)
-                }}
-                id={style.servicesLabel}
-                hidden
-                type="checkbox"
-              />
-              <label
-                htmlFor={style.servicesLabel}
-                onClick={() => {
-                  setIsPortfolio(false)
-                  setIsServices(true)
-                }}
-                className={isServices && style.selected}
-              >
-                Services ({services.length})
+                Jobs (2) 
               </label>
             </div>
-            {isPortfolio && (
-              <div className={style.portfolio}>
-                {!projects.length  && <h4>No Projects</h4>}
-                {projects.map((project) => {
-                  return (
-                    <Image
-                      key={project._id}
-                      src={project.image}
-                      width={180}
-                      height={100}
-                      alt={project.name}
-                      className={style.project}
-                      onClick={() => {
-                        router.push(`/freelancer/project/${project._id}`)
-                      }}
-                    />
-                  )
-                })}
+       
+              <div className={style.jobs}>
+                
               </div>
-            )}
-            {isServices && (
-              <div className={style.services}>
-                 {!services.length  && <h4>No Services</h4>}
-                {services.map((service) => {
-                  return (
-                    <div
-                      onClick={() => {
-                        router.push(`/freelancer/service/${service._id}`)
-                      }}
-                    >
-                      <Service
-                        owner={user.freelancer.title}
-                        service={service}
-                      />
-                    </div>
-                  )
-                })}
-              </div>
-            )}
+       
           </div>
           <div className={style.creditsWrapper}>
             <div>
@@ -276,12 +211,13 @@ const Freelancer = ({ user, projects, services }) => {
           </div>
         </div>
       </div> : <p className={style.err}>Not Authorized</p>}
+      {loggedIn && !isAccountType && <p className={style.err}>Change account type to access {user.type ==='client' ? 'client' : 'client'} account</p>}
       </Animate>
     </Layout>
   )
 }
 
-export default Freelancer
+export default Client
 export async function getServerSideProps(context) {
   const { query } = context
   const { email } = query
@@ -289,8 +225,6 @@ export async function getServerSideProps(context) {
   return {
     props: {
       user: JSON.parse(JSON.stringify(await getUser(email))),
-      projects: JSON.parse(JSON.stringify(await getProjects(email))),
-      services: JSON.parse(JSON.stringify(await getServices(email))),
     },
   }
 }

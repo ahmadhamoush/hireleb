@@ -302,6 +302,10 @@ padding: 20px 10px;
   .transactions p{
     margin: 5px 0;
   }
+  .err{
+    color: rgb(204, 70, 70);
+    padding: 20px;
+  }
 @media (max-width: 900px) {
   .wrapper {
     flex-direction: column;
