@@ -19,6 +19,7 @@ const Freelancer = ({ user, projects, services }) => {
   const [profileClicked, setProfileClicked] = useState(false)
   const [selectedImage, setSelectedImage] = useState(user.freelancer.banner)
   const [selectedFile, setSelectedFile] = useState('')
+  const[loggedIn, setIsloggedin] = useState(false)
   const router = useRouter()
   const session = useSession()
   useEffect(() => {
@@ -50,9 +51,13 @@ const Freelancer = ({ user, projects, services }) => {
       updateBanner()
     }
   }, [selectedFile])
+
+  useEffect(()=>{
+    setIsloggedin(session.status === 'authenticated')
+  },[session])
   return (
     <Layout>
-      <div className={style.container}>
+      {loggedIn ? <div className={style.container}>
         {profileClicked && (
           <div className={style.profileClickedContainer}>
             <Image
@@ -239,7 +244,7 @@ const Freelancer = ({ user, projects, services }) => {
             <div>
               <p>Credits</p>
               <h2>30</h2>
-              <button className={style.creditsbtn}>Deposit</button>
+              <button onClick={()=>router.push('/deposit')} className={style.creditsbtn}>Deposit</button>
             </div>
             <div>
               <p className={style.transactionHeader}>Transactions</p>
@@ -261,7 +266,7 @@ const Freelancer = ({ user, projects, services }) => {
             </div>
           </div>
         </div>
-      </div>
+      </div> : <p>Not Authorized</p>}
     </Layout>
   )
 }

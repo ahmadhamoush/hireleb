@@ -1,18 +1,16 @@
 import Layout from '@/components/Layout'
-import React, { useState } from 'react'
-import style from '@/styles/Add.module.css'
+import { useState } from 'react'
+import style from '@/styles/Deposit.module.css'
 import { Animate } from 'react-simple-animate'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAdd, faCamera } from '@fortawesome/free-solid-svg-icons'
-import Image from 'next/image'
 import axios from 'axios'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faAdd, faCamera } from '@fortawesome/free-solid-svg-icons'
+import Image from 'next/image'
 
 const AddProject = () => {
-  const [name, setName] = useState('')
-  const [desc, setDesc] = useState('')
-  const [url, setUrl] = useState('')
+  const [credits, setCredits] = useState('')
   const [selectedImage, setSelectedImage] = useState('')
   const [selectedFile, setSelectedFile] = useState('')
   const session = useSession()
@@ -24,14 +22,12 @@ const AddProject = () => {
   const handleUpload = async () => {
     try {
       const formData = new FormData()
-      formData.append('email', session.data.user.email)
-      formData.append('name', name)
-      formData.append('desc', desc)
-      formData.append('url', url)
+      formData.append('user', session.data.user.email)
+      formData.append('cedits', credits)
       formData.append('img', selectedFile)
-      const { data } = await axios.post('/api/add-project', formData)
+      const { data } = await axios.post('/api/request-deposit', formData)
       if (data) {
-        router.push(`/freelancer/${session.data.user.email}`)
+        //toast
       }
     } catch (err) {
       console.log(err)
@@ -47,45 +43,27 @@ const AddProject = () => {
       >
         <div className={style.container}>
           <div className={style.header}>
-            <h1>Add New Project</h1>
+            <h1>Deposit Credits</h1>
             <p>
-              Share your talents with the world by adding your project to our
-              platform
+            Pay and get paid with ease - Use credits to power your freelance needs!
             </p>
           </div>
-          <div className={style.projectDetails}>
-            <h3>SHARE YOUR PROJECT DETAILS</h3>
+          <div className={style.details}>
+            <h3>Deposit Details</h3>
             <div>
-              <label htmlFor={style.name}>Project Name*</label>
+              <label htmlFor={style.name}>Credits*</label>
               <input
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={credits}
+                onChange={(e) => setCredits(e.target.value)}
                 id={style.name}
-                placeholder="Enter Project Name"
+                type='number'
+                placeholder="Enter Credits to be deposited"
               />
             </div>
-            <div>
-              <label htmlFor={style.desc}>Project Description*</label>
-              <textarea
-                value={desc}
-                onChange={(e) => setDesc(e.target.value)}
-                rows="8"
-                cols="30"
-                id={style.desc}
-                placeholder="Describe your project"
-              />
-            </div>
-            <div>
-              <label htmlFor={style.name}>Project URL*</label>
-              <input
-                value={url}
-                onChange={(e) => setUrl(e.target.value)}
-                id={style.url}
-                placeholder="Enter Project URL"
-              />
-            </div>
-            <div className={style.imgContainer}>
-              <label htmlFor={style.name}>Project Image*</label>
+          
+           <div className={style.paymentWrapper}>
+           <div className={style.imgContainer}>
+              <label htmlFor={style.name}>OMT Receipt*</label>
               <label>
                 <input
                   type="file"
@@ -136,15 +114,30 @@ const AddProject = () => {
                 </div>
               </label>
             </div>
+            <div>
+              <ul>
+                <li>To deposit credits, upload a receipt as proof of payment.</li>
+                <li>It may take some time to verify the payment, but once it's verified, the credits will be deposited into your account.</li>
+                <li>You will receive a notification once the payment has been verified and the credits have been deposited.</li>
+              </ul>
+            </div>
+           </div>
             <div className={style.btns}>
               <button type="button" onClick={navigateBack}>
                 Back
               </button>
               <button type="button" onClick={handleUpload}>
-                ADD
+                DEPOSIT
               </button>
             </div>
           </div>
+          <ul className={style.info}>
+          <li>Our platform allows you to easily pay for freelancer services or receive payment as a client using credits. Credits can be purchased through our website or earned by completing tasks within the platform.</li>
+            <li>When you pay for a freelancer's services, the payment will be deducted from your credit balance. The freelancer will then receive the payment in credits, which they can use to purchase services or withdraw as cash.</li>  
+          <li>As a freelancer, you can also receive payment in credits from clients. When a client pays for your services, the payment will be made in credits, which you can use to purchase other services on the platform or withdraw as cash.</li>
+        <li>By using credits for payments and transactions, you can avoid the hassle of traditional payment methods and enjoy faster, more secure transactions. Plus, earning and using credits can also give you access to exclusive perks and discounts on the platform.</li>
+        <li>Overall, our credit system provides a convenient and flexible way to pay for and receive payment for freelancer services, making it easier for you to get the work you need done and earn money for your skills and expertise.</li>
+        </ul>
         </div>
       </Animate>
     </Layout>

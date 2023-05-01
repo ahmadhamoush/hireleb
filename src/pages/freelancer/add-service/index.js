@@ -32,6 +32,9 @@ const AddService = () => {
     setCategoriesList(jobCategories.categories)
   }, [categoriesList])
 
+  function navigateBack(){
+    router.back()
+  }
   const handleUpload = async () => {
     try {
       const formData = new FormData()
@@ -332,7 +335,14 @@ const AddService = () => {
                 />
               </div>
             )}
-            <button onClick={handleUpload}>ADD</button>
+              <div className={style.btns}>
+              <button type="button" onClick={navigateBack}>
+                Back
+              </button>
+              <button type="button" onClick={handleUpload}>
+                ADD
+              </button>
+            </div>
           </div>
         </div>
       </Animate>
