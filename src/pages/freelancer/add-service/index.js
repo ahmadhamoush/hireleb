@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import jobCategories from '../../../../lib/jobCategories'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClose } from '@fortawesome/free-solid-svg-icons'
+import axios from 'axios'
 
 const AddService = () => {
   const session = useSession()
@@ -35,7 +36,6 @@ const AddService = () => {
     try {
       const formData = new FormData()
       formData.append('email', session.data.user.email)
-      formData.append('hourlyrate', hourlyrate)
       formData.append('name', name)
       formData.append('desc', desc)
       formData.append('category', category)

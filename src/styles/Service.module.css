@@ -3,13 +3,16 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  align-items: center;
-  height: 300px;
-  width: 300px;
-  padding: 5px;
-  margin: 20px;
+  align-items: flex-start;
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+  margin: 10px;
   scroll-snap-align: start;
   cursor: pointer;
+  background-color: #2d646d;
+  color: #fff;
+  border-radius: 20px;
 }
 .headerContainer {
   display: flex;
@@ -42,9 +45,9 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   gap: 20px;
-  padding: 20px;
+  padding: 10px;
 }
 .skills {
   display: flex;
@@ -53,8 +56,8 @@
 }
 .skills div p {
   margin: 0 10px;
-  background-color: #2d646d;
-  color: #fff;
+  background-color: #e3e3e3;
+  color: #1e1e1e;
   padding: 5px 10px;
   border-radius: 20px;
   font-size: 12px;

@@ -8,8 +8,10 @@ import { initMongoose } from '../../../lib/initMongoose'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { getProjects } from '../api/get-projects'
+import { getServices } from '../api/get-services'
+import Service from '@/components/Service'
 
-const Freelancer = ({ user, projects }) => {
+const Freelancer = ({ user, projects, services }) => {
   const [isPortfolio, setIsPortfolio] = useState(true)
   const [isServices, setIsServices] = useState(false)
   const [profileClicked, setProfileClicked] = useState(false)
@@ -127,23 +129,34 @@ const Freelancer = ({ user, projects }) => {
                 Services (23)
               </label>
             </div>
-            <div className={style.portfolio}>
-              {projects.map((project) => {
-                return (
-                  <Image
-                    key={project._id}
-                    src={project.image}
-                    width={180}
-                    height={100}
-                    alt={project.name}
-                    className={style.project}
-                    onClick={() => {
-                      router.push(`/freelancer/project/${project._id}`)
-                    }}
-                  />
-                )
-              })}
-            </div>
+            {isPortfolio && (
+              <div className={style.portfolio}>
+                {projects.map((project) => {
+                  return (
+                    <Image
+                      key={project._id}
+                      src={project.image}
+                      width={180}
+                      height={100}
+                      alt={project.name}
+                      className={style.project}
+                      onClick={() => {
+                        router.push(`/freelancer/project/${project._id}`)
+                      }}
+                    />
+                  )
+                })}
+              </div>
+            )}
+            {isServices && (
+              <div className={style.services}>
+                {services.map((service) => {
+                  return (
+                    <Service owner={user.freelancer.title} service={service} />
+                  )
+                })}
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -160,6 +173,7 @@ export async function getServerSideProps(context) {
     props: {
       user: JSON.parse(JSON.stringify(await getUser(email))),
       projects: JSON.parse(JSON.stringify(await getProjects(email))),
+      services: JSON.parse(JSON.stringify(await getServices(email))),
     },
   }
 }
