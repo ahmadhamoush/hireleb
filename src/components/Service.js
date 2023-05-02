@@ -20,7 +20,13 @@ const Service = (props) => {
     fetchFreelancer()
   }, [])
   return (
-    <div onClick={()=>!props.currentUser && router.push(`/services/service/${props.service._id}`)} className={style.container}>
+    <div
+      onClick={() =>
+        !props.currentUser &&
+        router.push(`/services/service/${props.service._id}`)
+      }
+      className={style.container}
+    >
       <div className={style.headerContainer}>
         <div className={style.header}>
           {props.currentUser && <h3>{props.service.category}</h3>}
@@ -31,8 +37,12 @@ const Service = (props) => {
                 <h3>
                   {freelancer?.fName} {freelancer?.lName}
                 </h3>
-                <p style={{fontWeight:'400'}}>{freelancer.freelancer?.title}</p>
-                <span style={{fontSize:'13px',fontWeight:'300'}}>{freelancer?.type}</span>
+                <p style={{ fontWeight: '400' }}>
+                  {freelancer.freelancer?.title}
+                </p>
+                <span style={{ fontSize: '13px', fontWeight: '300' }}>
+                  {freelancer?.type}
+                </span>
               </div>
             </div>
           )}

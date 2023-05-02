@@ -1,6 +1,6 @@
 import formidable from 'formidable'
-import { initMongoose } from '../../../lib/initMongoose'
 import ServiceProposal from 'models/ServiceProposal'
+import { initMongoose } from 'lib/initMongoose'
 
 export const config = {
   api: {
@@ -8,30 +8,32 @@ export const config = {
   },
 }
 
+//function to be called in body
 const parseForm = (req) => {
   return new Promise((resolve, reject) => {
+    //parsing form using formidable
     const form = formidable()
-    //parsing req form
     form.parse(req, async (err, fields) => {
-      //reject if err
+      //checking if there are errors
       if (err) reject(err)
-      //get fields if no errors
+      //if not then we access the files and files submitted
       resolve({ fields })
       //connecting to db
       await initMongoose()
-      const proposal = ServiceProposal.create({
-        serviceID: fields.id,
-        client: fields.client,
-        freelancer: fields.freelancer,
-        proposal: fields.proposal,
-        status: 'pending',
-        createdAt: new Date().toISOString().slice(0, 10),
-      })
+      // creating new project and saving it to db
+      const updatedProposal = await ServiceProposal.updateOne(
+        {
+          _id: fields.id,
+        },
+        {
+          status: fields.status,
+        },
+      )
     })
   })
 }
-
 export default async function handler(req, res) {
+  //calling function
   await parseForm(req)
   res.json({ done: 'ok' })
 }

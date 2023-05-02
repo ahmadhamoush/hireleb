@@ -20,7 +20,12 @@ const JobCard = (props) => {
     fetchClient()
   }, [])
   return (
-    <div onClick={()=>!props.currentUser && router.push(`/jobs/job/${props.job._id}`)} className={style.container}>
+    <div
+      onClick={() =>
+        !props.currentUser && router.push(`/jobs/job/${props.job._id}`)
+      }
+      className={style.container}
+    >
       <div className={style.headerContainer}>
         <div className={style.header}>
           {props.currentUser && <h3>{props.job.category}</h3>}
@@ -31,8 +36,10 @@ const JobCard = (props) => {
                 <h3>
                   {client?.fName} {client?.lName}
                 </h3>
-                <p style={{fontWeight:'400'}}>{client?.client?.title}</p>
-                <span style={{fontSize:'13px',fontWeight:'300'}}>{client?.type}</span>
+                <p style={{ fontWeight: '400' }}>{client?.client?.title}</p>
+                <span style={{ fontSize: '13px', fontWeight: '300' }}>
+                  {client?.type}
+                </span>
               </div>
             </div>
           )}

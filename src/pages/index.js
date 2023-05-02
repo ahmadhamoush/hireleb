@@ -10,7 +10,7 @@ import { initMongoose } from '../../lib/initMongoose'
 import { getAllServices } from './api/get-services'
 import { getJobs } from './api/get-jobs'
 
-export default function Home({ services,jobs }) {
+export default function Home({ services, jobs }) {
   return (
     <Layout>
       <Landing />

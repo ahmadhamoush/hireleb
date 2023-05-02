@@ -16,7 +16,7 @@
   border-radius: 20px;
 }
 .container button {
- padding: 10px 30px;
+  padding: 10px 30px;
   margin: 0.5em;
   background: #2d646d;
   color: white;
@@ -85,7 +85,7 @@
   border-radius: 50%;
   object-fit: cover;
 }
-.btnsWrapper{
+.btnsWrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -102,12 +102,11 @@
   background-color: #eeeded;
 }
 @media (max-width: 674px) {
- 
   .freelancerDetails {
     flex-direction: column;
     gap: 0;
   }
-  .btns{
+  .btns {
     flex-direction: column;
   }
 }

@@ -7,8 +7,8 @@ export async function getClientJobProposals(client) {
 }
 //fetching freelancer's proposals // sent
 export async function getFreelancerJobProposals(freelancer) {
-    return JobProposal.find({ freelancer: freelancer }).exec()
-  }
+  return JobProposal.find({ freelancer: freelancer }).exec()
+}
 //fetching all proposals
 export async function getAllJobProposals() {
   return JobProposal.find().exec()

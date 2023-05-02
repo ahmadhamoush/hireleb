@@ -25,7 +25,7 @@ const parseForm = (req) => {
         category: fields.category,
         subcategory: fields.subcategory,
         experience: fields.experience,
-        type:fields.type,
+        type: fields.type,
         skills: fields.skills,
         credits: fields.credits,
         payment: fields.payment,

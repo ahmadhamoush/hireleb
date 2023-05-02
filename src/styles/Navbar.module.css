@@ -179,7 +179,6 @@
 
 #menu:checked ~ .responsive {
   display: flex;
-  
 }
 .user {
   cursor: pointer;

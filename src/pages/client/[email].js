@@ -15,7 +15,7 @@ import { getUserJobs } from '../api/get-jobs'
 import Job from '@/components/Job'
 import { getClientServiceProposals } from '../api/get-service-proposals'
 
-const Client = ({ user, jobs,sentProposals }) => {
+const Client = ({ user, jobs, sentProposals }) => {
   const [profileClicked, setProfileClicked] = useState(false)
   const [selectedImage, setSelectedImage] = useState(
     user.client?.banner ? user.client.banner : '',
@@ -185,11 +185,15 @@ const Client = ({ user, jobs,sentProposals }) => {
                   </label>
                 </div>
 
-                <div className={style.jobs}>
+                <div className={style.services}>
                   {jobs.map((job) => {
-                    return <div onClick={()=> router.push(`/client/job/${job._id}`)}>
-                      <Job job={job} />
-                    </div>
+                    return (
+                      <div
+                        onClick={() => router.push(`/client/job/${job._id}`)}
+                      >
+                        <Job job={job} />
+                      </div>
+                    )
                   })}
                 </div>
               </div>
@@ -230,7 +234,12 @@ const Client = ({ user, jobs,sentProposals }) => {
                   <h2>{sentProposals?.length}</h2>
                   <p>Recieved Proposals</p>
                   <h2>7</h2>
-                  <button onClick={()=>router.push('/client/proposals')} className={style.creditsbtn}>View All</button>
+                  <button
+                    onClick={() => router.push('/client/proposals')}
+                    className={style.creditsbtn}
+                  >
+                    View All
+                  </button>
                 </div>
               </div>
             </div>
@@ -258,7 +267,9 @@ export async function getServerSideProps(context) {
     props: {
       user: JSON.parse(JSON.stringify(await getUser(email))),
       jobs: JSON.parse(JSON.stringify(await getUserJobs(email))),
-      sentProposals: JSON.parse(JSON.stringify(await getClientServiceProposals(email))),
+      sentProposals: JSON.parse(
+        JSON.stringify(await getClientServiceProposals(email)),
+      ),
     },
   }
 }

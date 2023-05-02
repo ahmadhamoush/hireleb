@@ -12,13 +12,13 @@ import { toast } from 'react-toastify'
 import { getClientServiceProposals } from '@/pages/api/get-service-proposals'
 import Loader from '@/components/Loader'
 
-const Service = ({ service,proposed }) => {
+const Service = ({ service, proposed }) => {
   const router = useRouter()
   const session = useSession()
   const [freelancer, setFreelancer] = useState({})
-  const [isProposal,setIsProposal] = useState(false)
-  const [proposal,setProposal] = useState('')
-  const [loading,setLoading] = useState(false)
+  const [isProposal, setIsProposal] = useState(false)
+  const [proposal, setProposal] = useState('')
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const fetchFreelancer = async () => {
@@ -60,7 +60,7 @@ const Service = ({ service,proposed }) => {
       <Animate play start={{ opacity: 0 }} end={{ opacity: 1 }}>
         <div className={style.container}>
           <div>
-          <div className={style.freelancerDetails}>
+            <div className={style.freelancerDetails}>
               <Image src={freelancer?.image} width={80} height={80} />
               <div>
                 <h3>
@@ -99,37 +99,47 @@ const Service = ({ service,proposed }) => {
             <p>
               {service[0].time} {service[0].duration}
             </p>
-          
+
             <div className={style.btnsWrapper}>
-           {!proposed &&  <h3>
-            Interested? Send a 
-              <span style={{ color: '#2d646d' }}> Proposal</span> now!
-            </h3>}
-             {!isProposal &&  <div className={style.btns}>
-              <button style={{color:proposed && 'rgb(241, 84, 84)'}} disabled={proposed ? true : false} onClick={()=>setIsProposal(true)} type="button" >
-                
-                {proposed ? 'Already Proposed ':'Send a Proposal'}
-              </button>
-              </div>}
+              {!proposed && (
+                <h3>
+                  Interested? Send a
+                  <span style={{ color: '#2d646d' }}> Proposal</span> now!
+                </h3>
+              )}
+              {!isProposal && (
+                <div className={style.btns}>
+                  <button
+                    style={{ color: proposed && 'rgb(241, 84, 84)' }}
+                    disabled={proposed ? true : false}
+                    onClick={() => setIsProposal(true)}
+                    type="button"
+                  >
+                    {proposed ? 'Already Proposed ' : 'Send a Proposal'}
+                  </button>
+                </div>
+              )}
             </div>
-            {isProposal && <div>
-              <textarea
-                value={proposal}
-                onChange={(e) => setProposal(e.target.value)}
-                rows="8"
-                cols="30"
-                id={style.desc}
-                placeholder="Write a proposal"
-              />
-              <div className={style.btns}>
-              <button onClick={()=>setIsProposal(false)} type="button" >
-                Cancel
-              </button>
-              <button onClick={handleUpload} type="button" >
-                Send 
-              </button>
+            {isProposal && (
+              <div>
+                <textarea
+                  value={proposal}
+                  onChange={(e) => setProposal(e.target.value)}
+                  rows="8"
+                  cols="30"
+                  id={style.desc}
+                  placeholder="Write a proposal"
+                />
+                <div className={style.btns}>
+                  <button onClick={() => setIsProposal(false)} type="button">
+                    Cancel
+                  </button>
+                  <button onClick={handleUpload} type="button">
+                    Send
+                  </button>
+                </div>
               </div>
-              </div>}
+            )}
           </div>
         </div>
       </Animate>
@@ -149,10 +159,14 @@ export async function getServerSideProps(context) {
   //getting project based on query id
   let service = await getService(id)
   let proposals = await getClientServiceProposals(session.user.email)
-  
+
   let proposed = false
-  proposals.forEach(proposal=>{
-    if(proposal.serviceID === id &&  proposal.client === session.user.email && proposal.status ==='pending'){
+  proposals.forEach((proposal) => {
+    if (
+      proposal.serviceID === id &&
+      proposal.client === session.user.email &&
+      proposal.status === 'pending'
+    ) {
       proposed = true
     }
   })
