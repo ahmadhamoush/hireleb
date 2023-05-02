@@ -5,5 +5,5 @@ export async function getUser(email) {
 }
 export default async function handler(req, res) {
   await initMongoose()
-  return res.json(await getUser(req.body.email))
+  return res.json(await getUser(req.query.email))
 }

@@ -1,23 +1,32 @@
-import Head from 'next/head'
-import Navbar from '@/components/Navbar'
 import Landing from '@/components/Landing'
 import CategoryList from '@/components/CategoryList'
 import Freelancers from '@/components/Freelancers'
 import Banner from '@/components/Banner'
 import ServiceList from '@/components/ServiceList'
 import Testimonial from '@/components/Testimonial'
-import Footer from '@/components/Footer'
 import Layout from '@/components/Layout'
+import { initMongoose } from '../../lib/initMongoose'
+import { getAllServices } from './api/get-services'
 
-export default function Home() {
+export default function Home({ services }) {
   return (
     <Layout>
       <Landing />
       <CategoryList />
       <Freelancers />
       <Banner />
-      <ServiceList />
+      <ServiceList services={services} />
       <Testimonial />
     </Layout>
   )
+}
+
+export async function getServerSideProps() {
+  await initMongoose()
+
+  return {
+    props: {
+      services: JSON.parse(JSON.stringify(await getAllServices())),
+    },
+  }
 }

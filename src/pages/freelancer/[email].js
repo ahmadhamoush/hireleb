@@ -245,10 +245,7 @@ const Freelancer = ({ user, projects, services }) => {
                             router.push(`/freelancer/service/${service._id}`)
                           }}
                         >
-                          <Service
-                            title={user.freelancer.title}
-                            service={service}
-                          />
+                          <Service service={service} currentUser={true} />
                         </div>
                       )
                     })}

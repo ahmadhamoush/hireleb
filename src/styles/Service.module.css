@@ -6,13 +6,13 @@
   align-items: flex-start;
   height: 100%;
   width: 100%;
-  padding: 15px;
+  padding: 20px;
   margin: 5px;
-  scroll-snap-align: start;
   cursor: pointer;
   background-color: #2d646d;
   color: #fff;
   border-radius: 20px;
+  scroll-snap-align: start;
 }
 .headerContainer {
   display: flex;
@@ -26,6 +26,16 @@
   justify-content: center;
   align-items: flex-start;
 }
+.freelancerDetails {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+.freelancerDetails img {
+  border-radius: 50%;
+  object-fit: cover;
+}
 .headerContainer .price {
   background-color: #f6775a;
   color: #fff;
@@ -33,13 +43,18 @@
   border-radius: 20px;
   font-size: 12px;
 }
-.circle {
-  background-color: #e3e3e3;
-  position: absolute;
-  width: inherit;
-  height: inherit;
-  border-radius: 50%;
-  z-index: -1;
+.headerContainer .delivery {
+  background-color: #10b3af;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 5px;
 }
 .desc {
   display: flex;
@@ -63,4 +78,19 @@
   padding: 5px 10px;
   border-radius: 20px;
   font-size: 12px;
+}
+@media (max-width: 674px) {
+  .container {
+    width: unset;
+    height: unset;
+  }
+  .headerContainer {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .details {
+    width: 100%;
+    margin: 5px;
+    padding: 20px;
+  }
 }

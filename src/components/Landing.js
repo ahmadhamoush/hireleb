@@ -12,8 +12,11 @@ const Landing = () => {
     <div className={style.container}>
       <div className={style.links}>
         <ul>
-          <li>Browse Freelance Services</li>
-          <li>Browse Company Jobs</li>
+          <Link href="/services">
+            {' '}
+            <li>Browse Services</li>
+          </Link>
+          <li>Browse Jobs</li>
           <li>Find Talent</li>
         </ul>
       </div>
