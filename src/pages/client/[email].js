@@ -187,7 +187,7 @@ const Client = ({ user, jobs,sentProposals }) => {
 
                 <div className={style.jobs}>
                   {jobs.map((job) => {
-                    return <div>
+                    return <div onClick={()=> router.push(`/client/job/${job._id}`)}>
                       <Job job={job} />
                     </div>
                   })}
@@ -230,7 +230,7 @@ const Client = ({ user, jobs,sentProposals }) => {
                   <h2>{sentProposals?.length}</h2>
                   <p>Recieved Proposals</p>
                   <h2>7</h2>
-                  <button className={style.creditsbtn}>View All</button>
+                  <button onClick={()=>router.push('/client/proposals')} className={style.creditsbtn}>View All</button>
                 </div>
               </div>
             </div>

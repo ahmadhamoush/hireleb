@@ -49,6 +49,8 @@ const Service = ({ service }) => {
             <p>
               {service[0].time} {service[0].duration}
             </p>
+            <h3>Service Created At</h3>
+            <p>{service[0].createdAt}</p>
             <div className={style.btns}>
               <button type="button" onClick={navigateBack}>
                 Back

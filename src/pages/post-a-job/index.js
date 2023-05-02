@@ -22,6 +22,8 @@ const index = () => {
     setJobCategory,
     jobSubcategory,
     setJobSubCategory,
+    jobType,
+    setJobType,
   } = useContext(GetStartedContext)
 
   useEffect(() => {
@@ -132,6 +134,18 @@ const index = () => {
                       )
                     }),
                   )}
+              </select>
+            </div>
+            <div>
+              <label htmlFor={style.type}>Job Type*</label>
+              <select
+                value={jobType}
+                onChange={(e) => setJobType(e.target.value)}
+                id={style.type}
+              >
+                <option value="">Select Service Delivery</option>
+                <option value="remote">Remote</option>
+                <option value="onsite">On Site</option>
               </select>
             </div>
             <div className={style.btns}>

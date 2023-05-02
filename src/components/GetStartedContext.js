@@ -44,6 +44,9 @@ export function GetStartedContextProvide({ children }) {
       defaultValue: '',
     },
   )
+  const [jobType, setJobType] = useSessionStorageState('jobType', {
+    defaultValue: '',
+  })
   const [jobSkills, setJobSkills] = useSessionStorageState('jobSkills', {
     defaultValue: [],
   })
@@ -95,6 +98,8 @@ export function GetStartedContextProvide({ children }) {
     setJobCredits,
     jobPayment,
     setJobPayment,
+    jobType,
+    setJobType,
   }
   return (
     <GetStartedContext.Provider value={value}>

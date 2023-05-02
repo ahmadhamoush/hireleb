@@ -11,11 +11,12 @@ import { getProjects } from '../api/get-projects'
 import { getServices } from '../api/get-services'
 import Service from '@/components/Service'
 import axios from 'axios'
-import { useSession } from 'next-auth/react'
+import { getSession, useSession } from 'next-auth/react'
 import { Animate } from 'react-simple-animate'
 import { toast } from 'react-toastify'
+import { getFreelancerServiceProposals } from '../api/get-service-proposals'
 
-const Freelancer = ({ user, projects, services }) => {
+const Freelancer = ({ user, projects, services,receivedProposals }) => {
   const [isPortfolio, setIsPortfolio] = useState(true)
   const [isServices, setIsServices] = useState(false)
   const [profileClicked, setProfileClicked] = useState(false)
@@ -288,8 +289,8 @@ const Freelancer = ({ user, projects, services }) => {
                   <p>Sent Proposals</p>
                   <h2>18</h2>
                   <p>Recieved Proposals</p>
-                  <h2>7</h2>
-                  <button className={style.creditsbtn}>View All</button>
+                  <h2>{receivedProposals.length}</h2>
+                  <button onClick={()=>router.push('/freelancer/proposals')}  className={style.creditsbtn}>View All</button>
                 </div>
               </div>
             </div>
@@ -306,12 +307,14 @@ export default Freelancer
 export async function getServerSideProps(context) {
   const { query } = context
   const { email } = query
+  const  session = getSession(context)
   await initMongoose()
   return {
     props: {
       user: JSON.parse(JSON.stringify(await getUser(email))),
       projects: JSON.parse(JSON.stringify(await getProjects(email))),
       services: JSON.parse(JSON.stringify(await getServices(email))),
+      receivedProposals: JSON.parse(JSON.stringify(await getFreelancerServiceProposals((await session)?.user.email))),
     },
   }
 }

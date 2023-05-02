@@ -4,44 +4,44 @@ import axios from 'axios'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
-const Service = (props) => {
-  const [freelancer, setFreelancer] = useState({})
+const JobCard = (props) => {
+  const [client, setClient] = useState({})
   const router = useRouter()
   useEffect(() => {
-    const fetchFreelancer = async () => {
-      setFreelancer(
+    const fetchClient = async () => {
+      setClient(
         (
           await axios.get(
-            `http://localhost:3000/api/get-user?email=${props.service.freelancer}`,
+            `http://localhost:3000/api/get-user?email=${props.job.postedBy}`,
           )
         ).data,
       )
     }
-    fetchFreelancer()
+    fetchClient()
   }, [])
   return (
-    <div onClick={()=>!props.currentUser && router.push(`/services/service/${props.service._id}`)} className={style.container}>
+    <div onClick={()=>!props.currentUser && router.push(`/jobs/job/${props.job._id}`)} className={style.container}>
       <div className={style.headerContainer}>
         <div className={style.header}>
-          {props.currentUser && <h3>{props.service.category}</h3>}
+          {props.currentUser && <h3>{props.job.category}</h3>}
           {!props.currentUser && (
             <div className={style.freelancerDetails}>
-              <Image src={freelancer?.image} width={80} height={80} />
+              <Image src={client?.image} width={80} height={80} />
               <div>
                 <h3>
-                  {freelancer?.fName} {freelancer?.lName}
+                  {client?.fName} {client?.lName}
                 </h3>
-                <p style={{fontWeight:'400'}}>{freelancer.freelancer?.title}</p>
-                <span style={{fontSize:'13px',fontWeight:'300'}}>{freelancer?.type}</span>
+                <p style={{fontWeight:'400'}}>{client?.client?.title}</p>
+                <span style={{fontSize:'13px',fontWeight:'300'}}>{client?.type}</span>
               </div>
             </div>
           )}
           <div>
             <div className={style.desc}>
-              <p>Service Description: {props.service.desc}</p>
+              <p>Job Description: {props.job.description}</p>
             </div>
             <div className={style.skills}>
-              {props.service.skills.split(',').map((skill) => {
+              {props.job.skills.split(',').map((skill) => {
                 return (
                   <div>
                     <p>{skill}</p>
@@ -53,14 +53,14 @@ const Service = (props) => {
         </div>
         <div className={style.details}>
           <div>
-            <h3>{props.service.name}</h3>
-            <p>{props.service.createdAt}</p>
+            <h3>{props.job.title}</h3>
+            <p>{props.job.createdAt}</p>
           </div>
           <div className={style.price}>
-            <p>{props.service.payment} Price</p>
+            <p>{props.job.payment} Price</p>
           </div>
           <div className={style.delivery}>
-            <p>{props.service.delivery}</p>
+            <p>{props.job.type}</p>
           </div>
         </div>
       </div>
@@ -68,4 +68,4 @@ const Service = (props) => {
   )
 }
 
-export default Service
+export default JobCard

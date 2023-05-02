@@ -1,7 +1,6 @@
 import Layout from '@/components/Layout'
 import style from '@/styles/Project.module.css'
 import { initMongoose } from '../../../../lib/initMongoose'
-import { getService } from '@/pages/api/get-services'
 import { getSession, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { Animate } from 'react-simple-animate'
@@ -9,44 +8,45 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import { getClientServiceProposals } from '@/pages/api/get-service-proposals'
 import Loader from '@/components/Loader'
+import { getJob } from '@/pages/api/get-jobs'
+import { getFreelancerJobProposals } from '@/pages/api/get-job-proposals'
 
-const Service = ({ service,proposed }) => {
+const Job = ({ job,proposed }) => {
   const router = useRouter()
   const session = useSession()
-  const [freelancer, setFreelancer] = useState({})
+  const [client, setClient] = useState({})
   const [isProposal,setIsProposal] = useState(false)
   const [proposal,setProposal] = useState('')
   const [loading,setLoading] = useState(false)
 
   useEffect(() => {
-    const fetchFreelancer = async () => {
-      setFreelancer(
+    const fetchClient = async () => {
+      setClient(
         (
           await axios.get(
-            `http://localhost:3000/api/get-user?email=${service[0].freelancer}`,
+            `http://localhost:3000/api/get-user?email=${job.postedBy}`,
           )
         ).data,
       )
     }
-    fetchFreelancer()
+    fetchClient()
   }, [])
 
   const handleUpload = async () => {
     setLoading(true)
     try {
       const formData = new FormData()
-      formData.append('id', service[0]._id)
-      formData.append('client', session.data.user.email)
-      formData.append('freelancer', service[0].freelancer)
+      formData.append('id', job._id)
+      formData.append('freelancer', session.data.user.email)
+      formData.append('client', job.postedBy)
       formData.append('proposal', proposal)
 
-      const { data } = await axios.post('/api/service-proposal', formData)
+      const { data } = await axios.post('/api/job-proposal', formData)
       if (data.done === 'ok') {
         setLoading(false)
         toast('Proposal Sent')
-        // router.push(`/client/${session.data.user.email}`)
+        router.push(`/freelancer/${session.data.user.email}`)
       }
     } catch (err) {
       console.log(err)
@@ -61,25 +61,25 @@ const Service = ({ service,proposed }) => {
         <div className={style.container}>
           <div>
           <div className={style.freelancerDetails}>
-              <Image src={freelancer?.image} width={80} height={80} />
+              <Image src={client?.image} width={80} height={80} />
               <div>
                 <h3>
-                  {freelancer?.fName} {freelancer?.lName}
+                  {client?.fName} {client?.lName}
                 </h3>
-                <p>{freelancer.freelancer?.title}</p>
+                <p>{client.client?.title}</p>
               </div>
             </div>
-            <h3>Service Name</h3>
-            <p>{service[0].name}</p>
-            <h3>Service Description</h3>
-            <p>{service[0].desc}</p>
-            <h3>Service Category</h3>
-            <p>{service[0].category}</p>
-            <h3>Service Subcategory</h3>
-            <p>{service[0].subcategory}</p>
-            <h3>Service Skills</h3>
+            <h3>Job Name</h3>
+            <p>{job.title}</p>
+            <h3>Job Description</h3>
+            <p>{job.description}</p>
+            <h3>Job Category</h3>
+            <p>{job.category}</p>
+            <h3>Job Subcategory</h3>
+            <p>{job.subcategory}</p>
+            <h3>Job Skills</h3>
             <div className={style.skills}>
-              {service[0].skills.split(',').map((skill) => {
+              {job.skills.split(',').map((skill) => {
                 return (
                   <div>
                     <p>{skill}</p>
@@ -87,18 +87,14 @@ const Service = ({ service,proposed }) => {
                 )
               })}
             </div>
-            <h3>Service Experience</h3>
-            <p>{service[0].experience}</p>
-            <h3>Service Payment Type</h3>
-            <p>{service[0].payment}</p>
-            <h3>Service Credits</h3>
-            <p>{service[0].credits}</p>
-            <h3>Service delivery</h3>
-            <p>{service[0].delivery}</p>
-            <h3>Service Duration</h3>
-            <p>
-              {service[0].time} {service[0].duration}
-            </p>
+            <h3>Job Experience</h3>
+            <p>{job.experience}</p>
+            <h3>Job Payment Type</h3>
+            <p>{job.payment}</p>
+            <h3>Job Credits</h3>
+            <p>{job.credits}</p>
+            <h3>Job Type</h3>
+            <p>{job.type}</p>
           
             <div className={style.btnsWrapper}>
            {!proposed &&  <h3>
@@ -137,7 +133,7 @@ const Service = ({ service,proposed }) => {
   )
 }
 
-export default Service
+export default Job
 export async function getServerSideProps(context) {
   //destructuring context object to get id param
   const { query } = context
@@ -147,19 +143,19 @@ export async function getServerSideProps(context) {
   //connecting to db
   await initMongoose()
   //getting project based on query id
-  let service = await getService(id)
-  let proposals = await getClientServiceProposals(session.user.email)
+  let job = await getJob(id)
+  let proposals = await getFreelancerJobProposals(session.user.email)
   
   let proposed = false
   proposals.forEach(proposal=>{
-    if(proposal.serviceID === id &&  proposal.client === session.user.email && proposal.status ==='pending'){
+    if(proposal.jobID === id && proposal.freelancer === session.user.email && proposal.status ==='pending'){
       proposed = true
     }
   })
 
   return {
     props: {
-      service: JSON.parse(JSON.stringify(service)),
+      job: JSON.parse(JSON.stringify(job)),
       proposed,
     },
   }

@@ -26,6 +26,7 @@ const index = () => {
     jobSubcategory,
     jobSkills,
     jobExperience,
+    jobType,
   } = useContext(GetStartedContext)
 
   const handleUpload = async () => {
@@ -37,6 +38,7 @@ const index = () => {
       formData.append('payment', jobPayment)
       formData.append('title', jobTitle)
       formData.append('desc', jobAbout)
+      formData.append('type', jobType)
       formData.append('category', jobCategory)
       formData.append('skills', jobSkills)
       formData.append('subcategory', jobSubcategory)

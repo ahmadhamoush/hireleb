@@ -1,0 +1,81 @@
+.container{
+    padding: 20px;
+}
+.header {
+    display: flex;
+    justify-content:center;
+    align-items: center;
+  }
+.header label {
+    margin: 0 10px;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .selected {
+    color: #10b3af;
+    font-weight: 800;
+    transition: color 0.5 ease-in-out;
+    -webkit-transition: color 0.5s ease-in-out;
+    -moz-transition: color 0.5s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+   .header label:after {
+    content: '';
+    width: 0;
+    height: 5px;
+    background-color: #10b3af;
+    transition: 0.5 ease-in-out;
+    -webkit-transition: 0.5s ease-in-out;
+    -moz-transition: 0.5s ease-in-out;
+    border-radius: 10px;
+  }
+  #label:checked ~ .selected::after {
+    width: 100%;
+  }
+  #label:checked ~ .selected::after {
+    width: 100%;
+  }
+  #label1:checked ~ .selected::after {
+    width: 100%;
+  }
+  #label1:checked ~ .selected::after {
+    width: 100%;
+  }
+  .sent{
+    display: flex;
+    padding: 20px;
+  }
+  .sent a{
+    text-decoration: underline;
+  }
+  .service{
+    position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding: 20px;
+  margin: 5px;
+  cursor: pointer;
+  background-color: #2d646d;
+  color: #fff;
+  border-radius: 20px;
+  scroll-snap-align: start;
+  }
+  .yellow{
+    color:rgb(251, 255, 0);
+    background-color: rgb(200, 205, 157);
+    padding: 5px 8px;
+    border-radius: 10px;
+
+  }
+  .green{
+    color: rgb(103, 233, 103);
+  }
