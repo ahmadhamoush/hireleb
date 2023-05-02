@@ -2,9 +2,11 @@ import style from '@/styles/Service.module.css'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 const Service = (props) => {
   const [freelancer, setFreelancer] = useState({})
+  const router = useRouter()
   useEffect(() => {
     const fetchFreelancer = async () => {
       setFreelancer(
@@ -18,7 +20,7 @@ const Service = (props) => {
     fetchFreelancer()
   }, [])
   return (
-    <div className={style.container}>
+    <div onClick={()=>!props.currentUser && router.push(`/services/service/${props.service._id}`)} className={style.container}>
       <div className={style.headerContainer}>
         <div className={style.header}>
           {props.currentUser && <h3>{props.service.category}</h3>}

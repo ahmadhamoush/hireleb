@@ -178,8 +178,8 @@
 }
 
 #menu:checked ~ .responsive {
-  opacity: 1;
-  transform: translateX(0);
+  display: flex;
+  
 }
 .user {
   cursor: pointer;
@@ -192,9 +192,7 @@
     flex-direction: column;
   }
   .responsive {
-    transform: translateX(300px);
-    opacity: 0;
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: space-around;
     position: absolute;
