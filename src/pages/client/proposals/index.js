@@ -1,24 +1,18 @@
 import Layout from '@/components/Layout'
 import style from '@/styles/Proposals.module.css'
-import { getSession, useSession } from 'next-auth/react'
-import { useEffect, useState } from 'react'
+import { getSession } from 'next-auth/react'
+import { useState } from 'react'
 import { initMongoose } from '../../../../lib/initMongoose'
 import { getClientServiceProposals } from '@/pages/api/get-service-proposals'
 import Link from 'next/link'
-const Proposals = ({sentProposals}) => {
+import { getClientJobProposals } from '@/pages/api/get-job-proposals'
+const Proposals = ({sentProposals,receivedProposals,authenticated}) => {
     const [isSent,setIsSent] = useState(true)
     const [isReceived, setIsReceived] = useState(false)
-    const session = useSession()
-    const [loggedIn, setLoggedIn]=useState(false)
-    
-    useEffect(()=>{
-        if(session.status==='authenticated'){
-            setLoggedIn(true)
-        }
-    },[session])
+
   return (
     <Layout>
-        {sentProposals.length ? <div className={style.container}>
+        {authenticated ? <div className={style.container}>
         <div className={style.header}>
                  <input
                     checked={isSent}
@@ -34,7 +28,7 @@ const Proposals = ({sentProposals}) => {
                     htmlFor={style.label1}
                     className={isSent && style.selected}
                   >
-                    Sent (1)
+                    Sent ({sentProposals.length})
                   </label>
                   <input
                     checked={isReceived}
@@ -54,14 +48,29 @@ const Proposals = ({sentProposals}) => {
                     }}
                     className={isReceived && style.selected}
                   >
-                    Recieved (1)
+                    Recieved ({receivedProposals.length})
                   </label>
                 </div>
-                {isSent && <div className={style.sent}>
+                {isSent && <div className={style.proposalsContainer}>
                     {sentProposals.map(proposal=>{return(
-                        <div className={style.service} key={proposal._id}>
+                        <div className={style.proposals} key={proposal._id}>
                       <Link href={`/services/service/${proposal.serviceID}`}><p>View Service</p></Link>
-                      <h3>Service By</h3>
+                      <h3>Freelancer</h3>
+                      <p>{proposal.freelancer}</p>
+                      <h3>Status</h3>
+                      <p className={proposal.status ==='pending' ? style.yellow :style.green}>{proposal.status}</p>
+                      <h3>Date Sent</h3>
+                      <p>{proposal.createdAt}</p>
+                      <h3>Proposal Message</h3>
+                      <p>{proposal.proposal}</p>
+                        </div>
+                    )})}
+                    </div>}
+                    {isReceived && <div className={style.proposalsContainer}>
+                    {sentProposals.map(proposal=>{return(
+                        <div className={style.proposals} key={proposal._id}>
+                      <Link href={`/services/service/${proposal.serviceID}`}><p>View Service</p></Link>
+                      <h3>Freelancer</h3>
                       <p>{proposal.freelancer}</p>
                       <h3>Status</h3>
                       <p className={proposal.status ==='pending' ? style.yellow :style.green}>{proposal.status}</p>
@@ -83,14 +92,21 @@ export default Proposals
 export async function getServerSideProps(context) {
     const session = getSession(context)
     await initMongoose()
+    let authenticated  = true
     let sentProposals =[]
+    let receivedProposals =[]
     if((await (session))?.user.email.length){
         sentProposals = await getClientServiceProposals((await session).user.email)
+        receivedProposals = await getClientJobProposals((await session).user.email)
     }
-
+    if(!receivedProposals.length && !sentProposals.length){
+        authenticated= false
+      }
     return {
       props: {
         sentProposals: JSON.parse(JSON.stringify(sentProposals)),
+        receivedProposals: JSON.parse(JSON.stringify(receivedProposals)),
+        authenticated
       },
     }
   }
