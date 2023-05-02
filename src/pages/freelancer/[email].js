@@ -125,7 +125,7 @@ const Freelancer = ({
                       <Image
                         className={style.display}
                         src={selectedImage}
-                        alt="profile picture"
+                        alt="banner"
                         fill
                         sizes="100vw"
                       />
@@ -181,7 +181,6 @@ const Freelancer = ({
                   </button>
                   <button>Build CV</button>
                   <button>Build Porfolio</button>
-                  <button>Change Account Type</button>
                 </div>
               </div>
               <div className={style.showcase}>
@@ -263,7 +262,7 @@ const Freelancer = ({
               <div className={style.creditsWrapper}>
                 <div>
                   <p>Credits</p>
-                  <h2>30</h2>
+                  <h2>{user.credits}</h2>
                   <button
                     onClick={() => router.push('/deposit')}
                     className={style.creditsbtn}

@@ -14,8 +14,9 @@ import { toast } from 'react-toastify'
 import { getUserJobs } from '../api/get-jobs'
 import Job from '@/components/Job'
 import { getClientServiceProposals } from '../api/get-service-proposals'
+import { getClientJobProposals } from '../api/get-job-proposals'
 
-const Client = ({ user, jobs, sentProposals }) => {
+const Client = ({ user, jobs, sentProposals, receivedProposals }) => {
   const [profileClicked, setProfileClicked] = useState(false)
   const [selectedImage, setSelectedImage] = useState(
     user.client?.banner ? user.client.banner : '',
@@ -200,7 +201,7 @@ const Client = ({ user, jobs, sentProposals }) => {
               <div className={style.creditsWrapper}>
                 <div>
                   <p>Credits</p>
-                  <h2>30</h2>
+                  <h2>{user.credits}</h2>
                   <button
                     onClick={() => router.push('/deposit')}
                     className={style.creditsbtn}
@@ -233,7 +234,7 @@ const Client = ({ user, jobs, sentProposals }) => {
                   <p>Sent Proposals</p>
                   <h2>{sentProposals?.length}</h2>
                   <p>Recieved Proposals</p>
-                  <h2>7</h2>
+                  <h2>{receivedProposals?.length}</h2>
                   <button
                     onClick={() => router.push('/client/proposals')}
                     className={style.creditsbtn}
@@ -269,6 +270,9 @@ export async function getServerSideProps(context) {
       jobs: JSON.parse(JSON.stringify(await getUserJobs(email))),
       sentProposals: JSON.parse(
         JSON.stringify(await getClientServiceProposals(email)),
+      ),
+      receivedProposals: JSON.parse(
+        JSON.stringify(await getClientJobProposals(email)),
       ),
     },
   }

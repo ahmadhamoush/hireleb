@@ -31,6 +31,7 @@ export default async function handler(req, res) {
         email: req.body.email,
         password: hash,
         type: req.body.type,
+        credits: 0,
       })
     })
     res.status(201).json({ message: 'User Created', valid })

@@ -1,0 +1,117 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 20px;
+  gap: 20px;
+}
+.container div {
+  background-color: #f4f4f4;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.container h3 {
+  cursor: pointer;
+}
+.delete {
+  color: rgb(255, 80, 80);
+}
+.container button {
+  width: 6.5em;
+  height: 2.3em;
+  margin: 0.5em;
+  background: #2d646d;
+  color: white;
+  border: none;
+  border-radius: 0.625em;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.container button:hover {
+  color: black;
+}
+
+.container button:after {
+  content: '';
+  background: white;
+  position: absolute;
+  z-index: -1;
+  left: -20%;
+  right: -20%;
+  top: 0;
+  bottom: 0;
+  transform: skewX(-45deg) scale(0, 1);
+  transition: all 0.5s;
+}
+
+.container button:hover:after {
+  transform: skewX(-45deg) scale(1, 1);
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+.btns {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.btns button:first-child {
+  background-color: #1e1e1e;
+}
+.container input {
+  padding: 12px 20px;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  width: 100%;
+  margin: 10px 0;
+  font-size: 16px;
+  background-color: #e4e4e4;
+}
+.displayPicture {
+  padding: 50px 80px;
+  line-height: 2;
+  transition: 0.5 ease-in-out;
+  -webkit-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.select,
+.display {
+  position: relative;
+  background-color: #10b3af;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  margin: 15px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  object-fit: cover;
+}
+.user {
+  width: 120px;
+  height: 120px;
+}
+.add {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #e3e3e3;
+  padding: 10px;
+  font-size: 30px;
+  border-radius: 50%;
+}

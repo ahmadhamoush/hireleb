@@ -1,6 +1,6 @@
 import style from '@/styles/Navbar.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faCog, faSearch, faUser } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
 import { signIn, signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
@@ -32,17 +32,25 @@ const Navbar = () => {
               </li>
               {/* display login and sign up if no user is logged in else display logout */}
               {!session.data?.user && <li onClick={() => signIn()}>Login</li>}
-              {session.data?.user && <li onClick={() => signOut()}>Logout</li>}
+
               {session.data?.user && (
-                <FontAwesomeIcon
-                  onClick={() =>
-                    router.push(
-                      `/${session.data.user.type}/${session.data.user.email}`,
-                    )
-                  }
-                  className={style.user}
-                  icon={faUser}
-                />
+                <li onClick={() => router.push('/settings')}>
+                  {' '}
+                  <FontAwesomeIcon icon={faCog} />
+                </li>
+              )}
+              {session.data?.user && (
+                <div>
+                  <FontAwesomeIcon
+                    onClick={() =>
+                      router.push(
+                        `/${session.data.user.type}/${session.data.user.email}`,
+                      )
+                    }
+                    className={style.user}
+                    icon={faUser}
+                  />
+                </div>
               )}
               {!session.data?.user && (
                 <li>
