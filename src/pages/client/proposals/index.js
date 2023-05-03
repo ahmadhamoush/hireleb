@@ -56,7 +56,7 @@ const Proposals = ({ sentProposals, receivedProposals, authenticated }) => {
     <Layout>
       {loading && <Loader />}
       <Animate play start={{ opacity: 0 }} end={{ opacity: 1 }}>
-        {authenticated ? (
+
           <div className={style.container}>
             <div className={style.header}>
               <input
@@ -171,9 +171,7 @@ const Proposals = ({ sentProposals, receivedProposals, authenticated }) => {
               </div>
             )}
           </div>
-        ) : (
-          <p>Not Authorized</p>
-        )}
+     
       </Animate>
     </Layout>
   )
@@ -191,14 +189,11 @@ export async function getServerSideProps(context) {
     sentProposals = await getClientServiceProposals((await session).user.email)
     receivedProposals = await getClientJobProposals((await session).user.email)
   }
-  if (!receivedProposals.length && !sentProposals.length) {
-    authenticated = false
-  }
+
   return {
     props: {
       sentProposals: JSON.parse(JSON.stringify(sentProposals)),
       receivedProposals: JSON.parse(JSON.stringify(receivedProposals)),
-      authenticated,
     },
   }
 }

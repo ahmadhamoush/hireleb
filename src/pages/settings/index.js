@@ -1,12 +1,17 @@
 import Layout from '@/components/Layout'
-import { getSession, signOut } from 'next-auth/react'
+import { getSession, signOut, useSession } from 'next-auth/react'
 import style from '@/styles/Settings.module.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAdd, faUser } from '@fortawesome/free-solid-svg-icons'
 import Image from 'next/image'
 import { initMongoose } from '../../../lib/initMongoose'
 import { getUser } from '../api/get-user'
+import axios from 'axios'
+import { toast } from 'react-toastify'
+import Loader from '@/components/Loader'
+import { useRouter } from 'next/router'
+import { Animate } from 'react-simple-animate'
 
 const Settings = ({ user }) => {
   const [namedClicked, setNameClicked] = useState(false)
@@ -18,8 +23,105 @@ const Settings = ({ user }) => {
   const [selectedFile, setSelectedFile] = useState('')
   const [typeClicked, setTypeClicked] = useState(false)
   const [deleteClicked, setDeleteClicked] = useState(false)
+  const [loading,setLoading] = useState(false)
+  const session = useSession()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (selectedFile) {
+      changePicture()
+    }
+  }, [selectedFile])
+
+  const deleteAccount = async ()=>{
+    setLoading(true)
+    try{
+        const formData = new FormData()
+        formData.append('email', session.data.user.email)
+        const {data}= await axios.post('/api/settings/delete-account',formData)
+        if(data.done =='ok'){
+            setLoading(false)
+            toast('Account Deleted')
+            signOut()
+        }
+    }
+    catch(err){
+        console.log(err)
+        setLoading(false)
+    }
+  }
+
+  const changeName = async () => {
+    setLoading(true)
+    try {
+      const formData = new FormData()
+      formData.append('email', session.data.user.email)
+      formData.append('fName', fName)
+      formData.append('lName', lName)
+      const { data } = await axios.post('/api/settings/update-name', formData)
+      if (data.done === 'ok') {
+        setLoading(false)
+        toast('Name Updated')
+      }
+    } catch (err) {
+      console.log(err)
+      setLoading(false)
+    }
+  }
+  const changeEmail = async () => {
+    setLoading(true)
+    try {
+      const formData = new FormData()
+      formData.append('email', session.data.user.email)
+      formData.append('newEmail', email)
+      const { data } = await axios.post('/api/settings/update-email', formData)
+      if (data.done === 'ok') {
+        setLoading(false)
+        toast('Email Updated')
+        signOut()
+      }
+    } catch (err) {
+      console.log(err)
+      setLoading(false)
+    }
+  }
+  const switchAccount = async ()=>{
+    setLoading(true)
+    try{
+        const formData = new FormData()
+        formData.append('email',session.data.user.email)
+        formData.append('type',user?.type === 'freelancer' ? 'client' : 'freelancer')
+        const {data} = await axios.post('/api/settings/update-type',formData)
+        if(data.done=='ok'){
+            setLoading(false)
+            toast('Account Type Updated')
+            router.push(`/get-started-${user?.type === 'freelancer' ? 'client' : 'freelancer'}`)
+        } 
+    }
+    catch(err){
+        console.log(err)
+    }
+  }
+  const changePicture = async () => {
+    setLoading(true)
+    try {
+      const formData = new FormData()
+      formData.append('email', session.data.user.email)
+      formData.append('img', selectedFile)
+      const { data } = await axios.post('/api/settings/update-picture', formData)
+      if (data.done === 'ok') {
+        setLoading(false)
+        toast('Picture Updated')
+      }
+    } catch (err) {
+      console.log(err)
+      setLoading(false)
+    }
+  }
   return (
     <Layout>
+        {loading && <Loader />}
+        <Animate play start={{ opacity: 0 }} end={{ opacity: 1 }}>
       <div className={style.container}>
         <label>
           <input
@@ -83,7 +185,7 @@ const Settings = ({ user }) => {
                 onChange={(e) => setLname(e.target.value)}
                 placeholder="New Last Name"
               />
-              <button>Update</button>
+              <button onClick={changeName}>Update</button>
             </>
           )}
         </div>
@@ -97,7 +199,7 @@ const Settings = ({ user }) => {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="New Email"
               />
-              <button>Update</button>
+              <button onClick={changeEmail}>Update</button>
             </>
           )}
         </div>
@@ -109,12 +211,12 @@ const Settings = ({ user }) => {
               setTypeClicked((prev) => !prev)
             }}
           >
-            Switch to {user.type === 'freelancer' ? 'Client' : 'Freelancer'}{' '}
+            Switch to {user?.type === 'freelancer' ? 'Client' : 'Freelancer'}{' '}
             Account
           </h3>
           {typeClicked && (
             <div>
-              <button>Switch</button>
+              <button onClick={switchAccount}>Switch</button>
               <button
                 onClick={() => setTypeClicked((prev) => !prev)}
                 style={{ background: '#1e1e1e' }}
@@ -140,9 +242,9 @@ const Settings = ({ user }) => {
           </h3>
           {deleteClicked && (
             <div>
-              <button style={{ background: 'red' }}>Delete</button>
+              <button onClick={deleteAccount}  style={{ background: 'red' }}>Delete</button>
               <button
-                onClick={() => setTypeClicked((prev) => !prev)}
+                onClick={() => setDeleteClicked((prev) => !prev)}
                 style={{ background: '#1e1e1e' }}
               >
                 Cancel
@@ -151,6 +253,7 @@ const Settings = ({ user }) => {
           )}
         </div>
       </div>
+      </Animate>
     </Layout>
   )
 }

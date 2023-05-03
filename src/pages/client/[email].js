@@ -19,7 +19,7 @@ import { getClientJobProposals } from '../api/get-job-proposals'
 const Client = ({ user, jobs, sentProposals, receivedProposals }) => {
   const [profileClicked, setProfileClicked] = useState(false)
   const [selectedImage, setSelectedImage] = useState(
-    user.client?.banner ? user.client.banner : '',
+    user?.client?.banner ? user.client.banner : '',
   )
   const [selectedFile, setSelectedFile] = useState('')
   const [loggedIn, setIsloggedin] = useState(false)
@@ -58,11 +58,11 @@ const Client = ({ user, jobs, sentProposals, receivedProposals }) => {
   useEffect(() => {
     setIsloggedin(
       session.status === 'authenticated' &&
-        session.data.user.email === user.email,
+        session.data.user.email === user?.email,
     )
   }, [session])
   useEffect(() => {
-    setIsAccountType(router.asPath.includes(user.type))
+    setIsAccountType(router.asPath.includes(user?.type))
   }, [session])
   return (
     <Layout>

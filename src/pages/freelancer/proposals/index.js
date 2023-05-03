@@ -63,7 +63,7 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
     <Layout>
       {loading && <Loader />}
       <Animate play start={{ opacity: 0 }} end={{ opacity: 1 }}>
-        {authenticated ? (
+      
           <div className={style.container}>
             <div className={style.header}>
               <input
@@ -179,9 +179,8 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
               </div>
             )}
           </div>
-        ) : (
-          <p>Not Authorized</p>
-        )}
+       
+   
       </Animate>
     </Layout>
   )
@@ -192,7 +191,7 @@ export default Proposals
 export async function getServerSideProps(context) {
   const session = getSession(context)
   await initMongoose()
-  let authenticated = true
+  
   let receivedProposals = []
   let sentProposals = []
   if ((await session)?.user.email.length) {
@@ -203,15 +202,13 @@ export async function getServerSideProps(context) {
     )
     sentProposals = await getFreelancerJobProposals((await session)?.user.email)
   }
-  if (!receivedProposals.length && !sentProposals.length) {
-    authenticated = false
-  }
+   
 
   return {
     props: {
       receivedProposals: JSON.parse(JSON.stringify(receivedProposals)),
       sentProposals: JSON.parse(JSON.stringify(sentProposals)),
-      authenticated,
+   
     },
   }
 }

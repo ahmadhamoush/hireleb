@@ -30,6 +30,7 @@ const Login = () => {
       if (loginData.status === 401) {
         setErr(loginData.error)
         toast(loginData.error)
+        setLoading(false)
       } else {
         toast('Login Success')
         setLoading(false)
@@ -37,6 +38,7 @@ const Login = () => {
     } catch (err) {
       setErr(err.message)
       toast(err.message)
+      setLoading(false)
     }
   }
 
