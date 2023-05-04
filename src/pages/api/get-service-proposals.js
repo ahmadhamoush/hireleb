@@ -9,6 +9,13 @@ export async function getClientServiceProposals(client) {
 export async function getFreelancerServiceProposals(freelancer) {
   return ServiceProposal.find({ freelancer: freelancer }).exec()
 }
+//fetching accepted proposals
+export async function getFreelancerServiceAcceptedProposals(freelancer) {
+  return ServiceProposal.find({ freelancer: freelancer })
+}
+export async function getClientServiceAcceptedProposals(client) {
+  return ServiceProposal.find({ client: client })
+}
 //fetching all proposals
 export async function getAllServiceProposals() {
   return ServiceProposal.find().exec()

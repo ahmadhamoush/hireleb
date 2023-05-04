@@ -28,7 +28,7 @@ const Freelancer = ({
   const [isServices, setIsServices] = useState(false)
   const [profileClicked, setProfileClicked] = useState(false)
   const [selectedImage, setSelectedImage] = useState(
-    user.freelancer?.banner ? user.freelancer.banner : '',
+    user?.freelancer.banner ? user?.freelancer.banner : '',
   )
   const [selectedFile, setSelectedFile] = useState('')
   const [loggedIn, setIsloggedin] = useState(false)
@@ -66,7 +66,7 @@ const Freelancer = ({
   useEffect(() => {
     setIsloggedin(
       session.status === 'authenticated' &&
-        session.data.user.email === user.email,
+        session.data.user.email === user?.email,
     )
   }, [session])
   return (
@@ -78,7 +78,7 @@ const Freelancer = ({
               <div className={style.profileClickedContainer}>
                 <Image
                   className={style.profileClicked}
-                  src={user.image}
+                  src={user?.image}
                   width={300}
                   height={300}
                 />
@@ -140,11 +140,11 @@ const Freelancer = ({
               <div className={style.detailsWrapper}>
                 <div className={style.details}>
                   <div className={style.profile}>
-                    {user.image ? (
+                    {user?.image ? (
                       <Image
                         onClick={() => setProfileClicked(true)}
                         className={style.profile}
-                        src={user.image}
+                        src={user?.image}
                         width={80}
                         height={80}
                       />
@@ -154,16 +154,16 @@ const Freelancer = ({
                   </div>
                   <div className={style.desc}>
                     <p>
-                      {user.fName} {user.lName}
+                      {user?.fName} {user?.lName}
                     </p>
-                    <p>{user.type}</p>
-                    <p>{user.freelancer.title}</p>
-                    <p>{user.freelancer.about}</p>
+                    <p>{user?.type}</p>
+                    <p>{user?.freelancer.title}</p>
+                    <p>{user?.freelancer.about}</p>
                   </div>
                   <div className={style.hourlyrate}>
-                    <p>{user.freelancer.hourlyrate}</p>
+                    <p>{user?.freelancer.hourlyrate}</p>
                     <p>
-                      {user.freelancer.currency === 'USD' ? '$' : 'LL'}{' '}
+                      {user?.freelancer.currency === 'USD' ? '$' : 'LL'}{' '}
                       <span>/hr</span>{' '}
                     </p>
                   </div>
@@ -298,6 +298,16 @@ const Freelancer = ({
                   <h2>{receivedProposals.length}</h2>
                   <button
                     onClick={() => router.push('/freelancer/proposals')}
+                    className={style.creditsbtn}
+                  >
+                    View All
+                  </button>
+                </div>
+                <div>
+                  <p>On going jobs</p>
+                  <h2>{receivedProposals.filter(proposal=>proposal.status ==='accepted').length +sentProposals.filter(proposal=>proposal.status ==='accepted').length}</h2>
+                  <button
+                    onClick={() => router.push('/freelancer/on-going')}
                     className={style.creditsbtn}
                   >
                     View All

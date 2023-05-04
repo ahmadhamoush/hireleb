@@ -12,7 +12,7 @@ import Loader from '@/components/Loader'
 import { getJob } from '@/pages/api/get-jobs'
 import { getFreelancerJobProposals } from '@/pages/api/get-job-proposals'
 
-const Job = ({ job, proposed }) => {
+const Job = ({ job, proposed,ongoing }) => {
   const router = useRouter()
   const session = useSession()
   const [client, setClient] = useState({})
@@ -97,17 +97,17 @@ const Job = ({ job, proposed }) => {
             <p>{job.type}</p>
 
             <div className={style.btnsWrapper}>
-              {!proposed && (
+              {!proposed || !ongoing && (
                 <h3>
                   Interested? Send a
                   <span style={{ color: '#2d646d' }}> Proposal</span> now!
                 </h3>
               )}
-              {!isProposal && (
+              {!isProposal && !ongoing && (
                 <div className={style.btns}>
                   <button
-                    style={{ color: proposed && 'rgb(241, 84, 84)' }}
-                    disabled={proposed ? true : false}
+                    style={{ color: proposed && 'rgb(241, 84, 84)', color:ongoing && 'green' }}
+                    disabled={proposed || ongoing ? true : false}
                     onClick={() => setIsProposal(true)}
                     type="button"
                   >
@@ -115,6 +115,11 @@ const Job = ({ job, proposed }) => {
                   </button>
                 </div>
               )}
+              {ongoing &&  <h3
+                    style={{ color:ongoing && 'green' }}
+                  >
+                  ...Job is currently on going...
+                  </h3>}
             </div>
             {isProposal && (
               <div>
@@ -157,13 +162,21 @@ export async function getServerSideProps(context) {
   let proposals = await getFreelancerJobProposals(session.user.email)
 
   let proposed = false
+  let ongoing = false
   proposals.forEach((proposal) => {
     if (
-      proposal.jobID === id &&
+      proposal.job._id.toString() === id &&
       proposal.freelancer === session.user.email &&
       proposal.status === 'pending'
     ) {
       proposed = true
+    }
+    if (
+      proposal.job._id.toString() === id &&
+      proposal.freelancer === session.user.email &&
+      proposal.status === 'accepted'
+    ) {
+      ongoing = true
     }
   })
 
@@ -171,6 +184,7 @@ export async function getServerSideProps(context) {
     props: {
       job: JSON.parse(JSON.stringify(job)),
       proposed,
+      ongoing
     },
   }
 }

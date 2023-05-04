@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 
 const ServiceProposalSchema = new mongoose.Schema({
-  serviceID: String,
+  service: Object,
   client: String,
   freelancer: String,
   status: String,

@@ -95,7 +95,25 @@ const Settings = ({ user }) => {
         if(data.done=='ok'){
             setLoading(false)
             toast('Account Type Updated')
-            router.push(`/get-started-${user?.type === 'freelancer' ? 'client' : 'freelancer'}`)
+            if(user?.type ==='freelancer'){
+                if(!user.client){
+                    router.push('/get-started-client')
+                }
+                else{
+                    router.push(`/client/${session.data.user.email}`)
+                }
+               
+            }
+            if(user?.type ==='client'){
+                if(!user.freelancer){
+                    router.push('/get-started-freelancer')
+                }
+                else{
+                    router.push(`/freelancer/${session.data.user.email}`)
+                }
+               
+            }
+
         } 
     }
     catch(err){
@@ -265,7 +283,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       user: JSON.parse(
-        JSON.stringify(await getUser((await session).user.email)),
+        JSON.stringify(await getUser((await session)?.user.email)),
       ),
     },
   }

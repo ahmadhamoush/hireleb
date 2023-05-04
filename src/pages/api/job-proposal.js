@@ -1,6 +1,7 @@
 import formidable from 'formidable'
 import { initMongoose } from '../../../lib/initMongoose'
 import JobProposal from 'models/JobProposal'
+import { getJob } from './get-jobs'
 
 export const config = {
   api: {
@@ -20,7 +21,7 @@ const parseForm = (req) => {
       //connecting to db
       await initMongoose()
       const proposal = JobProposal.create({
-        jobID: fields.id,
+        job: await getJob(fields.id),
         client: fields.client,
         freelancer: fields.freelancer,
         proposal: fields.proposal,

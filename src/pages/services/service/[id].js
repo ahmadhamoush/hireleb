@@ -12,7 +12,7 @@ import { toast } from 'react-toastify'
 import { getClientServiceProposals } from '@/pages/api/get-service-proposals'
 import Loader from '@/components/Loader'
 
-const Service = ({ service, proposed }) => {
+const Service = ({ service, proposed ,ongoing}) => {
   const router = useRouter()
   const session = useSession()
   const [freelancer, setFreelancer] = useState({})
@@ -50,6 +50,7 @@ const Service = ({ service, proposed }) => {
       }
     } catch (err) {
       console.log(err)
+      toast('You must be logged in to send a proposal')
       setLoading(false)
     }
   }
@@ -101,17 +102,17 @@ const Service = ({ service, proposed }) => {
             </p>
 
             <div className={style.btnsWrapper}>
-              {!proposed && (
+              {!proposed || !ongoing && (
                 <h3>
                   Interested? Send a
                   <span style={{ color: '#2d646d' }}> Proposal</span> now!
                 </h3>
               )}
-              {!isProposal && (
+              {!isProposal && !ongoing && (
                 <div className={style.btns}>
                   <button
-                    style={{ color: proposed && 'rgb(241, 84, 84)' }}
-                    disabled={proposed ? true : false}
+                    style={{ color: proposed && 'rgb(241, 84, 84)', color:ongoing && 'green' }}
+                    disabled={proposed || ongoing ? true : false}
                     onClick={() => setIsProposal(true)}
                     type="button"
                   >
@@ -119,6 +120,11 @@ const Service = ({ service, proposed }) => {
                   </button>
                 </div>
               )}
+              {ongoing &&  <h3
+                    style={{ color:ongoing && 'green' }}
+                  >
+                  ...Service is currently on going...
+                  </h3>}
             </div>
             {isProposal && (
               <div>
@@ -158,16 +164,25 @@ export async function getServerSideProps(context) {
   await initMongoose()
   //getting project based on query id
   let service = await getService(id)
-  let proposals = await getClientServiceProposals(session.user.email)
+  let proposals = await getClientServiceProposals(session?.user.email)
 
   let proposed = false
+  let ongoing = false
   proposals.forEach((proposal) => {
+
     if (
-      proposal.serviceID === id &&
+      proposal.service[0]._id.toString() === id &&
       proposal.client === session.user.email &&
       proposal.status === 'pending'
     ) {
       proposed = true
+    }
+    if (
+      proposal.service[0]._id.toString() === id &&
+      proposal.client === session.user.email &&
+      proposal.status === 'accepted'
+    ) {
+      ongoing = true
     }
   })
 
@@ -175,6 +190,7 @@ export async function getServerSideProps(context) {
     props: {
       service: JSON.parse(JSON.stringify(service)),
       proposed,
+      ongoing
     },
   }
 }

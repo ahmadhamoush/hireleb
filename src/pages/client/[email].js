@@ -242,8 +242,20 @@ const Client = ({ user, jobs, sentProposals, receivedProposals }) => {
                     View All
                   </button>
                 </div>
+                <div>
+                  <p>On going jobs</p>
+                  <h2>{receivedProposals.filter(proposal=>proposal.status ==='accepted').length +sentProposals.filter(proposal=>proposal.status ==='accepted').length}</h2>
+                  <button
+                    onClick={() => router.push('/client/on-going')}
+                    className={style.creditsbtn}
+                  >
+                    View All
+                  </button>
+                </div>
               </div>
+              
             </div>
+            
           </div>
         ) : (
           <p className={style.err}>Not Authorized</p>

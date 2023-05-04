@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 
 const JobProposalSchema = new mongoose.Schema({
-  jobID: String,
+  job: Object,
   client: String,
   freelancer: String,
   status: String,
