@@ -27,6 +27,7 @@ const parseForm = (req) => {
         },
         {
           status: fields.status,
+          updates:{message:'Service Started', date:new Date().toLocaleString(),sender:fields.sender}
         },
       )
     })

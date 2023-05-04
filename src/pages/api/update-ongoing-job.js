@@ -26,8 +26,8 @@ const parseForm = (req) => {
           _id: fields.id,
         },
         {
-          status: fields.status,
-          updates:{message:'Job Started', date:new Date().toLocaleString(),sender:fields.sender}
+            $push: { 'updates': {message:fields.message, date:new Date().toLocaleString(),sender:fields.sender} }
+        
         },
       )
     })

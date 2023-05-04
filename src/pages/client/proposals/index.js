@@ -23,6 +23,7 @@ const Proposals = ({ sentProposals, receivedProposals, authenticated }) => {
       const formData = new FormData()
       formData.append('id', id)
       formData.append('status', 'accepted')
+      formData.append('sender', session.data.user.email)
       const { data } = await axios.post('/api/update-job-proposal', formData)
       if (data.done === 'ok') {
         setLoading(false)

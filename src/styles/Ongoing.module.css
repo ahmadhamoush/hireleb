@@ -156,3 +156,65 @@
     flex-direction: column-reverse;
   }
 }
+
+.updatesContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 30px;
+}
+.updates{
+  display: flex;
+  flex-direction: column;
+ align-items: flex-start;
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 200px;
+  gap: 20px;
+}
+.updateSender{
+  background-color: #f2f2f2;
+  border-radius: 20px;
+  padding: 10px 30px;
+ 
+}
+.updateReceiver{
+  background-color: #2d646d;
+  border-radius: 20px;
+  padding: 10px 30px;
+  color: #fff;
+  margin-left: auto;
+}
+.sendContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.from{
+  font-weight: 300;
+}
+ .msg{
+  font-weight: 600;
+}
+.sendContainer input{
+  padding: 12px 20px;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  width: 100%;
+  font-size: 16px;
+  background-color: #eeeded;
+  flex: 1;
+}
+.sendContainer button{
+  background-color: #1e1e1e;
+  color:#10b3af;
+}
+.sendContainer button:hover{
+  background-color: #1e1e1e;
+  color:#fff;
+}

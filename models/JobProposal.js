@@ -7,6 +7,7 @@ const JobProposalSchema = new mongoose.Schema({
   status: String,
   proposal: String,
   createdAt: String,
+  updates:Array,
 })
 
 module.exports =

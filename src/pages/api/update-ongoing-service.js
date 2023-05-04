@@ -1,5 +1,5 @@
 import formidable from 'formidable'
-import JobProposal from 'models/JobProposal'
+import ServiceProposal from 'models/ServiceProposal'
 import { initMongoose } from 'lib/initMongoose'
 
 export const config = {
@@ -21,13 +21,13 @@ const parseForm = (req) => {
       //connecting to db
       await initMongoose()
       // creating new project and saving it to db
-      const updatedProposal = await JobProposal.updateOne(
+      const updatedProposal = await ServiceProposal.updateOne(
         {
           _id: fields.id,
         },
         {
-          status: fields.status,
-          updates:{message:'Job Started', date:new Date().toLocaleString(),sender:fields.sender}
+            $push: { 'updates': {message:fields.message, date:new Date().toLocaleString(),sender:fields.sender} }
+        
         },
       )
     })

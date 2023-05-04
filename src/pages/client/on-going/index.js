@@ -1,7 +1,7 @@
 import Layout from '@/components/Layout'
-import style from '@/styles/Proposals.module.css'
+import style from '@/styles/Ongoing.module.css'
 import { getSession, useSession } from 'next-auth/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { initMongoose } from '../../../../lib/initMongoose'
 import { getClientServiceProposals } from '@/pages/api/get-service-proposals'
 import Link from 'next/link'
@@ -16,49 +16,59 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
   const [isSent, setIsSent] = useState(true)
   const [isReceived, setIsReceived] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [updateValue,setUpdate] = useState('')
   const router = useRouter()
   const session = useSession()
 
-  const accept = async (id) => {
+  useEffect(()=>{
+    var elem = document.querySelector(`.${style.updates}`)
+  elem.scrollTop = elem.scrollHeight;
+  },[])
+  const updateService = async (id) => {
     setLoading(true)
     try {
       const formData = new FormData()
       formData.append('id', id)
-      formData.append('status', 'accepted')
+      formData.append('message', updateValue)
+      formData.append('sender', session.data.user.email)
       const { data } = await axios.post(
-        '/api/update-service-proposal',
+        '/api/update-ongoing-service',
         formData,
       )
       if (data.done === 'ok') {
         setLoading(false)
-        toast('Proposal Updated')
-        router.push(`/freelancer/${session.data.user.email}`)
+        toast('Update Sent')
+        router.reload()
+      
       }
     } catch (err) {
       console.log(err)
       setLoading(false)
     }
   }
-  const decline = async (id) => {
+
+  const updateJob = async (id) => {
     setLoading(true)
     try {
       const formData = new FormData()
       formData.append('id', id)
-      formData.append('status', 'declined')
+      formData.append('message', updateValue)
+      formData.append('sender', session.data.user.email)
       const { data } = await axios.post(
-        '/api/update-service-proposal',
+        '/api/update-ongoing-job',
         formData,
       )
       if (data.done === 'ok') {
         setLoading(false)
-        toast('Proposal Updated')
-        router.push(`/freelancer/${session.data.user.email}`)
+        toast('Update Sent')
+        router.reload()
       }
     } catch (err) {
       console.log(err)
       setLoading(false)
     }
   }
+
 
   return (
     <Layout>
@@ -110,6 +120,7 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
               <div className={style.proposalsContainer}>
                 {receivedProposals.map((proposal) => {
                   return (
+               <>
                     <div className={style.proposals} key={proposal._id}>
                       <Link href={`/client/job/${proposal.job._id.toString()}`}>
                         <p>View Job</p>
@@ -120,14 +131,26 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
                       <p>{proposal.job.title}</p>  
                       <h3>Description</h3>
                       <p>{proposal.job.description}</p>     
-                      <button
-                          style={{background:'#1E1E1E',color:'#fff',width:'100%'}}
-                            type="button"
-                            onClick={()=>router.push(`client/on-going/${proposal._id}`)}
-                          >
-                            Send Update
-                          </button>             
+                      <h3 style={{color:'#feff5c'}}>In Progress...</h3>     
                     </div>
+                           <div className={style.updatesContainer}>
+                           <h3>Updates</h3>
+                         <div className={style.updates}>
+                         {proposal.updates.map(update=>{
+                             return (<div className={update.sender === proposal.freelancer ? style.updateSender:style.updateReceiver}>
+                               <p className={style.msg}>{update.message}</p>
+                              <div className={style.from}> <p>from {update.sender}</p>
+                               <p>{update.date}</p></div>
+                             </div>)
+                           })}
+                     
+                         </div>
+                         <div className={style.sendContainer}>
+                           <input  value={updateValue} onChange={(e)=>setUpdate(e.target.value)} placeholder='Send an Update!'/>
+                           <button disabled={!updateValue.length && true} onClick={()=>updateJob(proposal._id)} className={style.send}>Send</button>
+                         </div>
+                           </div>
+                           </>
                   )
                 })}
               </div>
@@ -136,6 +159,7 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
               <div className={style.proposalsContainer}>
                 {sentProposals.map((proposal) => {
                   return (
+              <>
                     <div className={style.proposals} key={proposal._id}>
                       <Link href={`/services/service/${proposal.service[0]._id}`}>
                         <p>View Service</p>
@@ -146,14 +170,26 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
                       <p>{proposal.service[0].name}</p>
                       <h3>Description</h3>
                       <p>{proposal.service[0].desc}</p>
-                      <button
-                          style={{background:'#1E1E1E',color:'#fff',width:'100%'}}
-                            type="button"
-                            onClick={()=>router.push(`client/on-going/${proposal._id}`)}
-                          >
-                            Send Update
-                          </button>
+                      <h3 style={{color:'#feff5c'}}>In Progress...</h3>     
                     </div>
+                      <div className={style.updatesContainer}>
+                      <h3>Updates</h3>
+                    <div className={style.updates}>
+                    {proposal.updates.map(update=>{
+                        return (<div className={update.sender === proposal.freelancer ? style.updateSender:style.updateReceiver}>
+                          <p className={style.msg}>{update.message}</p>
+                         <div className={style.from}> <p>from {update.sender}</p>
+                          <p>{update.date}</p></div>
+                        </div>)
+                      })}
+                
+                    </div>
+                    <div className={style.sendContainer}>
+                      <input  value={updateValue} onChange={(e)=>setUpdate(e.target.value)} placeholder='Send an Update!'/>
+                      <button disabled={!updateValue.length && true} onClick={()=>updateService(proposal._id)} className={style.send}>Send</button>
+                    </div>
+                      </div>
+                      </>
                   )
                 })}
               </div>
