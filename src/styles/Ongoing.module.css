@@ -64,6 +64,7 @@
 
 }
 .proposalsContainer {
+  position: relative;
   display: flex;
   flex-direction: column;
   padding: 20px;  overflow-x: hidden;
@@ -114,7 +115,7 @@
   margin: 0.5em;
   background: #fff;
   color: #fff;
-  background-color:#10b3af;
+  background-color:#1e1e1e;
   border: none;
   border-radius: 0.625em;
   font-size: 20px;
@@ -123,6 +124,9 @@
   position: relative;
   z-index: 1;
   overflow: hidden;
+}
+.container button:first-child{
+  background-color: #10b3af;
 }
 
 .container button:hover {
@@ -147,8 +151,6 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-
-  margin: auto;
 }
 
 
@@ -244,4 +246,20 @@
 }
 .updatesHeader ul li:hover{
   color: #10b3af;
+}
+.pay{
+  position: absolute;
+  top: 10px;
+  right:10px;
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.pay .btns button{
+ padding: 5px 30px;
+ text-align: center;
 }

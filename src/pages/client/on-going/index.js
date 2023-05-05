@@ -1,7 +1,7 @@
 import Layout from '@/components/Layout'
 import style from '@/styles/Ongoing.module.css'
 import { getSession, useSession } from 'next-auth/react'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { initMongoose } from '../../../../lib/initMongoose'
 import { getClientServiceProposals } from '@/pages/api/get-service-proposals'
 import Link from 'next/link'
@@ -17,9 +17,9 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
   const [isReceived, setIsReceived] = useState(false)
   const [loading, setLoading] = useState(false)
   const [updateValue,setUpdate] = useState('')
+  const[isPaying,setIsPaying] = useState(false)
   const router = useRouter()
   const session = useSession()
-  const ref = useRef()
 
   useEffect(()=>{
     if(document.querySelector(`.${style.updates}`)){
@@ -42,6 +42,7 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
       )
       if (data.done === 'ok') {
         setLoading(false)
+        setUpdate('')
         toast('Update Sent')
         const refreshData = () => router.replace(router.asPath)
         refreshData()
@@ -76,6 +77,28 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
     }
   }
 
+  const markAsPaid = async (id) => {
+    setLoading(true)
+    try {
+      const formData = new FormData()
+      formData.append('id', id)
+      formData.append('sender', session.data.user.email)
+      const { data } = await axios.post(
+        '/api/pay-service',
+        formData,
+      )
+      if (data.done === 'ok') {
+        setLoading(false)
+        toast('Payment Successfull! Credits has been transfered.')
+        setIsPaying(false)
+        const refreshData = () => router.replace(router.asPath)
+        refreshData()
+      }
+    } catch (err) {
+      console.log(err)
+      setLoading(false)
+    }
+  }
 
   return (
     <Layout>
@@ -171,6 +194,12 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
                   return (
               <>
                   <div className={style.proposalFlex}>
+                    {isPaying && <div className={style.pay}>
+                      <h3>Credits to be paid</h3>
+                      <h1>{proposal.service[0].credits}</h1>
+                      <div className={style.btns}><button onClick={()=>markAsPaid(proposal._id)}>Pay</button>
+                      <button onClick={()=>setIsPaying(false)}>Cancel</button></div>
+                      </div>}
                   <div className={style.proposals} key={proposal._id}>
                       <Link href={`/services/service/${proposal.service[0]._id}`}>
                         <p>View Service</p>
@@ -184,8 +213,16 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
                       <h3 style={{color:'#feff5c'}}>In Progress...</h3>     
                     </div>
                       <div className={style.updatesContainer}>
+                      <div className={style.updatesHeader}>
                       <h3>Updates</h3>
-                    <div ref={ref} className={style.updates}>
+                      <ul>
+                       {!proposal.paid &&  <li onClick={()=>setIsPaying(prev=>!prev)}>Pay ({proposal.service[0].credits} credits)</li>}
+                       {proposal.paid &&  <li style={{fontWeight:'800'}}>SERVICE PAID</li>}
+                        <li>Send project file</li>
+                      </ul>
+                      </div>
+
+                    <div className={style.updates}>
                     {proposal.updates.map(update=>{
                         return (<div className={update.sender === proposal.freelancer ? style.updateSender:style.updateReceiver}>
                           <p className={style.msg}>{update.message}</p>
@@ -193,12 +230,12 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
                           <p>{update.date}</p></div>
                         </div>)
                       })}
-                 <div className={style.sendContainer}>
+               
+                    </div>
+                    <div className={style.sendContainer}>
                       <input  value={updateValue} onChange={(e)=>setUpdate(e.target.value)} placeholder='Send an Update!'/>
                       <button disabled={!updateValue.length && true} onClick={()=>updateService(proposal._id)} className={style.send}>Send</button>
                     </div>
-                    </div>
-                   
                       </div>
                   </div>
                       </>
