@@ -1,10 +1,16 @@
 .container {
   padding: 20px;
+
 }
 .header {
   padding: 20px;
   color: #2d646d;
   font-size: 30px;
+ z-index: 1;
+ background-color: #f4f4f4;
+ width: 100%;
+ margin: 10px 0;
+ border-radius: 10px;
 }
 .header label {
   margin: 0 10px;
@@ -26,10 +32,7 @@
   justify-content: center;
   align-items: center;
 }
-.proposalsContainer {
-  display: flex;
-  flex-direction: row;
-}
+
 .header label:after {
   content: '';
   width: 0;
@@ -52,19 +55,28 @@
 #label1:checked ~ .selected::after {
   width: 100%;
 }
+.proposalFlex{
+  display: flex;
+  scroll-snap-align: start;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+
+}
 .proposalsContainer {
   display: flex;
-  flex-direction: row;
-
-  overflow-x: scroll;
-  overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  padding: 20px;
+  flex-direction: column;
+  padding: 20px;  overflow-x: hidden;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  padding: 50px;
   width: 100%;
   margin: 10px 0;
   scrollbar-width: 0;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  height: 500px;
+ 
 }
 .proposalsContainer::-webkit-scrollbar {
   display: none;
@@ -97,12 +109,12 @@
   color: rgb(251, 120, 120);
 }
 .container button {
-  width: 6.5em;
+  width: 100%;
   height: 2.3em;
   margin: 0.5em;
   background: #fff;
-  color: green;
-  background-color: rgb(75, 186, 75);
+  color: #fff;
+  background-color:#10b3af;
   border: none;
   border-radius: 0.625em;
   font-size: 20px;
@@ -114,12 +126,12 @@
 }
 
 .container button:hover {
-  color: green;
+  color: #fff;
 }
 
 .container button:after {
   content: '';
-  background: #2d646d;
+  background: #1e1e1e;
   position: absolute;
   z-index: -1;
   left: -20%;
@@ -130,11 +142,7 @@
   transition: all 0.5s;
 }
 
-.container button:hover:after {
-  transform: skewX(-45deg) scale(1, 1);
-  -webkit-transition: all 0.5s;
-  transition: all 0.5s;
-}
+
 .btns {
   display: flex;
   justify-content: space-around;
@@ -142,11 +150,7 @@
 
   margin: auto;
 }
-.btns button:first-child {
-  background-color: #1e1e1e;
-  background-color: rgb(251, 120, 120);
-  color: red;
-}
+
 
 @media (max-width: 674px) {
   .proposals {
@@ -154,6 +158,9 @@
   }
   .btns {
     flex-direction: column-reverse;
+  }
+  .proposalsContainer{
+    flex-direction: column;
   }
 }
 
@@ -164,6 +171,7 @@
   align-items: center;
   width: 100%;
   padding: 30px;
+  gap: 20px;
 }
 .updates{
   display: flex;
@@ -174,9 +182,12 @@
   overflow-x: hidden;
   height: 200px;
   gap: 20px;
+  padding: 10px;
+  background-color: #f4f4f4;
+  border-radius: 20px;
 }
 .updateSender{
-  background-color: #f2f2f2;
+  background-color: #fff;
   border-radius: 20px;
   padding: 10px 30px;
  
@@ -205,10 +216,9 @@
   border-radius: 10px;
   outline: none;
   border: none;
-  width: 100%;
+  width: 230%;
   font-size: 16px;
-  background-color: #eeeded;
-  flex: 1;
+  background-color: #f4f4f4;
 }
 .sendContainer button{
   background-color: #1e1e1e;
@@ -217,4 +227,21 @@
 .sendContainer button:hover{
   background-color: #1e1e1e;
   color:#fff;
+}
+.updatesHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;gap: 5px;
+}
+.updatesHeader ul{
+  display: flex;
+}
+.updatesHeader ul li{
+  list-style: none;margin: 0 10px;
+  cursor: pointer;
+  font-weight: 300;
+}
+.updatesHeader ul li:hover{
+  color: #10b3af;
 }

@@ -8,6 +8,7 @@ const JobProposalSchema = new mongoose.Schema({
   proposal: String,
   createdAt: String,
   updates:Array,
+  paid:Boolean,
 })
 
 module.exports =

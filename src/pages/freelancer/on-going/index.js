@@ -11,6 +11,7 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
 import { Animate } from 'react-simple-animate'
+
 const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
   const [isSent, setIsSent] = useState(true)
   const [isReceived, setIsReceived] = useState(false)
@@ -21,9 +22,13 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
 
 
   useEffect(()=>{
-    var elem = document.querySelector(`.${style.updates}`)
-  elem.scrollTop = elem.scrollHeight;
-  },[])
+    if(document.querySelector(`.${style.updates}`)){
+     document.querySelectorAll(`.${style.updates}`).forEach(element=>{
+      element.scrollTop = element.scrollHeight;
+     })
+    }
+
+  },[isReceived,isSent])
   const updateService = async (id) => {
     setLoading(true)
     try {
@@ -38,7 +43,8 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
       if (data.done === 'ok') {
         setLoading(false)
         toast('Update Sent')
-        router.reload()
+        const refreshData = () => router.replace(router.asPath)
+        refreshData()
       }
     } catch (err) {
       console.log(err)
@@ -60,7 +66,29 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
       if (data.done === 'ok') {
         setLoading(false)
         toast('Update Sent')
-        router.reload()
+        const refreshData = () => router.replace(router.asPath)
+        refreshData()
+      }
+    } catch (err) {
+      console.log(err)
+      setLoading(false)
+    }
+  }
+  const markAsComplete = async (id) => {
+    setLoading(true)
+    try {
+      const formData = new FormData()
+      formData.append('id', id)
+      formData.append('sender', session.data.user.email)
+      const { data } = await axios.post(
+        '/api/complete-service',
+        formData,
+      )
+      if (data.done === 'ok') {
+        setLoading(false)
+        toast('Job Completed!')
+        const refreshData = () => router.replace(router.asPath)
+        refreshData()
       }
     } catch (err) {
       console.log(err)
@@ -119,7 +147,7 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
               <div className={style.proposalsContainer}>
                 {receivedProposals.map((proposal) => {
                   return (
-                  <>
+                    <div className={style.proposalFlex}>
                     <div className={style.proposals} key={proposal._id}>
                       <Link href={`/freelancer/service/${proposal.service[0]._id}`}>
                         <p>View Service</p>
@@ -130,10 +158,18 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
                       <p>{proposal.service[0].name}</p>
                       <h3>Description</h3>
                       <p>{proposal.service[0].desc}</p>
-   <h3 style={{color:'#feff5c'}}>In Progress...</h3>
+          {proposal.status === 'accepted' &&  <h3 style={{color:'#feff5c'}}>In Progress...</h3>}
+          {proposal.status === 'completed' &&  <h3 style={{color:'#feff5c'}}>Service Completed!</h3>}
                     </div>
                         <div className={style.updatesContainer}>
-                        <h3>Updates</h3>
+                      <div className={style.updatesHeader}>
+                      <h3>Updates</h3>
+                      <ul>
+                        <li onClick={()=>markAsComplete(proposal._id)}>Mark as complete</li>
+                        <li>Send project file</li>
+                      </ul>
+                      </div>
+
                       <div className={style.updates}>
                       {proposal.updates.map(update=>{
                           return (<div className={update.sender === proposal.client ? style.updateSender:style.updateReceiver}>
@@ -149,7 +185,7 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
                         <button disabled={!updateValue.length && true} onClick={()=>updateService(proposal._id)} className={style.send}>Send</button>
                       </div>
                         </div>
-                        </>
+                        </div>
                   )
                 })}
               </div>
@@ -158,7 +194,7 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
               <div className={style.proposalsContainer}>
                 {sentProposals.map((proposal) => {
                   return (
-                   <>
+                   <div className={style.proposalFlex}>
                     <div className={style.proposals} key={proposal._id}>
                       <Link href={`/jobs/job/${proposal.job._id}`}>
                         <p>View Job</p>
@@ -172,7 +208,7 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
                       <h3 style={{color:'#feff5c'}}>In Progress...</h3>
                     </div>
                     <div className={style.updatesContainer}>
-                    <h3>Updates</h3>
+                    <h3>Update</h3>
                   <div className={style.updates}>
                   {proposal.updates.map(update=>{
                       return (<div className={update.sender === proposal.client ? style.updateSender:style.updateReceiver}>
@@ -188,7 +224,7 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
                     <button disabled={!updateValue.length && true} onClick={()=>updateJob(proposal._id)} className={style.send}>Send</button>
                   </div>
                     </div>
-                    </>
+                    </div>
                   )
                 })}
               </div>
@@ -229,7 +265,6 @@ export async function getServerSideProps(context) {
     props: {
       receivedProposals: JSON.parse(JSON.stringify(receivedProposals)),
       sentProposals: JSON.parse(JSON.stringify(sentProposals)),
-   
     },
   }
 }

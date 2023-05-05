@@ -1,7 +1,7 @@
 import Layout from '@/components/Layout'
 import style from '@/styles/Ongoing.module.css'
 import { getSession, useSession } from 'next-auth/react'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { initMongoose } from '../../../../lib/initMongoose'
 import { getClientServiceProposals } from '@/pages/api/get-service-proposals'
 import Link from 'next/link'
@@ -19,11 +19,16 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
   const [updateValue,setUpdate] = useState('')
   const router = useRouter()
   const session = useSession()
+  const ref = useRef()
 
   useEffect(()=>{
-    var elem = document.querySelector(`.${style.updates}`)
-  elem.scrollTop = elem.scrollHeight;
-  },[])
+    if(document.querySelector(`.${style.updates}`)){
+     document.querySelectorAll(`.${style.updates}`).forEach(element=>{
+      element.scrollTop = element.scrollHeight;
+     })
+    }
+
+  },[isReceived,isSent])
   const updateService = async (id) => {
     setLoading(true)
     try {
@@ -38,7 +43,8 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
       if (data.done === 'ok') {
         setLoading(false)
         toast('Update Sent')
-        router.reload()
+        const refreshData = () => router.replace(router.asPath)
+        refreshData()
       
       }
     } catch (err) {
@@ -61,7 +67,8 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
       if (data.done === 'ok') {
         setLoading(false)
         toast('Update Sent')
-        router.reload()
+        const refreshData = () => router.replace(router.asPath)
+        refreshData()
       }
     } catch (err) {
       console.log(err)
@@ -121,7 +128,8 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
                 {receivedProposals.map((proposal) => {
                   return (
                <>
-                    <div className={style.proposals} key={proposal._id}>
+                   <div className={style.proposalFlex}>
+                   <div className={style.proposals} key={proposal._id}>
                       <Link href={`/client/job/${proposal.job._id.toString()}`}>
                         <p>View Job</p>
                       </Link>
@@ -134,7 +142,7 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
                       <h3 style={{color:'#feff5c'}}>In Progress...</h3>     
                     </div>
                            <div className={style.updatesContainer}>
-                           <h3>Updates</h3>
+                           <h3>Update</h3>
                          <div className={style.updates}>
                          {proposal.updates.map(update=>{
                              return (<div className={update.sender === proposal.freelancer ? style.updateSender:style.updateReceiver}>
@@ -150,6 +158,8 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
                            <button disabled={!updateValue.length && true} onClick={()=>updateJob(proposal._id)} className={style.send}>Send</button>
                          </div>
                            </div>
+
+                   </div>
                            </>
                   )
                 })}
@@ -160,7 +170,8 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
                 {sentProposals.map((proposal) => {
                   return (
               <>
-                    <div className={style.proposals} key={proposal._id}>
+                  <div className={style.proposalFlex}>
+                  <div className={style.proposals} key={proposal._id}>
                       <Link href={`/services/service/${proposal.service[0]._id}`}>
                         <p>View Service</p>
                       </Link>
@@ -174,7 +185,7 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
                     </div>
                       <div className={style.updatesContainer}>
                       <h3>Updates</h3>
-                    <div className={style.updates}>
+                    <div ref={ref} className={style.updates}>
                     {proposal.updates.map(update=>{
                         return (<div className={update.sender === proposal.freelancer ? style.updateSender:style.updateReceiver}>
                           <p className={style.msg}>{update.message}</p>
@@ -182,13 +193,14 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
                           <p>{update.date}</p></div>
                         </div>)
                       })}
-                
-                    </div>
-                    <div className={style.sendContainer}>
+                 <div className={style.sendContainer}>
                       <input  value={updateValue} onChange={(e)=>setUpdate(e.target.value)} placeholder='Send an Update!'/>
                       <button disabled={!updateValue.length && true} onClick={()=>updateService(proposal._id)} className={style.send}>Send</button>
                     </div>
+                    </div>
+                   
                       </div>
+                  </div>
                       </>
                   )
                 })}
