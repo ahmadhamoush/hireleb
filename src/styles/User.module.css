@@ -107,8 +107,8 @@
 }
 
 .container button:not(.creditsbtn) {
-  width: 150px;
-  height: 150px;
+  width: 100%;
+  height: 50px;
   margin: 0.5em;
   background: #2d646d;
   color: #1e1e1e;
@@ -123,11 +123,11 @@
 }
 .btns {
   display: flex;
-  overflow-x: scroll;
-  width: 100%;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 5px;
+  width: 100%;
   padding: 20px 10px;
 }
 .container button:hover {
@@ -153,7 +153,8 @@
   transition: all 0.5s;
 }
 .wrapper .details {
-  margin: 50px;
+  margin: 20px;
+  padding:10px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 .desc {
@@ -186,6 +187,7 @@
   justify-content: center;
   align-items: center;
 }
+  
 .showcase .options label:after {
   content: '';
   width: 0;
@@ -281,7 +283,7 @@
 .creditsWrapper {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 .creditsWrapper div {
@@ -311,6 +313,73 @@
 .err {
   color: rgb(204, 70, 70);
   padding: 20px;
+}
+.leftWrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.proposals{
+  display: flex;
+
+}
+.proposals div button {
+  width: 6.5em;
+  height: 2.3em;
+  margin: 0.5em;
+  background: #2d646d;
+  color: white;
+  border: none;
+  border-radius: 0.625em;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.proposals div button:hover {
+  color: black;
+}
+
+.proposals div button:after {
+  content: '';
+  background: white;
+  position: absolute;
+  z-index: -1;
+  left: -20%;
+  right: -20%;
+  top: 0;
+  bottom: 0;
+  transform: skewX(-45deg) scale(0, 1);
+  transition: all 0.5s;
+}
+
+.proposals div button:hover:after {
+  transform: skewX(-45deg) scale(1, 1);
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+.proposals div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.proposals div {
+  margin: 5px;
+}
+.proposals  div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 10px;
+  border-radius: 20px;
 }
 @media (max-width: 900px) {
   .wrapper {

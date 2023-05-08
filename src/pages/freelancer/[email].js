@@ -16,6 +16,7 @@ import { Animate } from 'react-simple-animate'
 import { toast } from 'react-toastify'
 import { getFreelancerServiceProposals } from '../api/get-service-proposals'
 import { getFreelancerJobProposals } from '../api/get-job-proposals'
+import { getTransactions } from '../api/get-transactions'
 
 const Freelancer = ({
   user,
@@ -23,6 +24,7 @@ const Freelancer = ({
   services,
   receivedProposals,
   sentProposals,
+  transactions
 }) => {
   const [isPortfolio, setIsPortfolio] = useState(true)
   const [isServices, setIsServices] = useState(false)
@@ -168,8 +170,9 @@ const Freelancer = ({
                     </p>
                   </div>
                 </div>
-                <div className={style.btns}>
-                  <button
+                <div className={style.leftWrapper}>
+                 <div className={style.btns}>
+                 <button
                     onClick={() => router.push('/freelancer/add-project')}
                   >
                     Add New Project
@@ -181,7 +184,33 @@ const Freelancer = ({
                   </button>
                   <button>Build CV</button>
                   <button>Build Porfolio</button>
+                 </div>
+                 <div className={style.proposals}>
+                 <div >
+                  <p>Sent Proposals</p>
+                  <h2>{sentProposals.length}</h2>
+                  <p>Recieved Proposals</p>
+                  <h2>{receivedProposals.length}</h2>
+                  <button
+                    onClick={() => router.push('/freelancer/proposals')}
+                    className={style.creditsbtn}
+                  >
+                    View All
+                  </button>
                 </div>
+                <div>
+                  <p>On going jobs</p>
+                  <h2>{receivedProposals.filter(proposal=>proposal.status ==='accepted').length +sentProposals.filter(proposal=>proposal.status ==='accepted').length}</h2>
+                  <button
+                    onClick={() => router.push('/freelancer/on-going')}
+                    className={style.creditsbtn}
+                  >
+                    View All
+                  </button>
+                </div>
+                 </div>
+                </div>
+                
               </div>
               <div className={style.showcase}>
                 <div className={style.options}>
@@ -273,46 +302,26 @@ const Freelancer = ({
                 <div>
                   <p className={style.transactionHeader}>Transactions</p>
                   <div className={style.transactions}>
-                    <p>
-                      <span>20 Credits</span> have been deposited
-                    </p>
-                    <p>
-                      <span>12 Credits</span> have been transferred
-                    </p>
-                    <p>
-                      <span>8 Credits</span> have been deposited
-                    </p>
-                    <p>
-                      <span>22 Credits</span> Credits have been deposited
-                    </p>
-                    <p>
-                      <span>5 Credits</span> Credits have been transferred
-                    </p>
+                    {transactions?.deposits.slice(0,3).map((deposit,index)=>{
+                      return ( <p key={index}>
+                        <span>{deposit.credits} Credits</span> have been deposited
+                      </p>)
+                    })}
+                     {transactions?.transfers.slice(0,3).map((transfer,index)=>{
+                      return ( <p key={index}>
+                        <span>{transfer.credits} Credits</span> have been transfered
+                      </p>)
+                    })}
+                      {transactions?.received.slice(0,3).map((receive,index)=>{
+                      return ( <p key={index}>
+                        <span>{receive.credits} Credits</span> have been received
+                      </p>)
+                    })}
+                   
                   </div>
-                  <button className={style.creditsbtn}>View All</button>
+                  <button onClick={()=>router.push('/freelancer/transactions')} className={style.creditsbtn}>View All</button>
                 </div>
-                <div>
-                  <p>Sent Proposals</p>
-                  <h2>{sentProposals.length}</h2>
-                  <p>Recieved Proposals</p>
-                  <h2>{receivedProposals.length}</h2>
-                  <button
-                    onClick={() => router.push('/freelancer/proposals')}
-                    className={style.creditsbtn}
-                  >
-                    View All
-                  </button>
-                </div>
-                <div>
-                  <p>On going jobs</p>
-                  <h2>{receivedProposals.filter(proposal=>proposal.status ==='accepted').length +sentProposals.filter(proposal=>proposal.status ==='accepted').length}</h2>
-                  <button
-                    onClick={() => router.push('/freelancer/on-going')}
-                    className={style.creditsbtn}
-                  >
-                    View All
-                  </button>
-                </div>
+               
               </div>
             </div>
           </div>
@@ -344,7 +353,8 @@ export async function getServerSideProps(context) {
         JSON.stringify(
           await getFreelancerJobProposals((await session)?.user.email),
         ),
-      ),
-    },
+      
+      ),transactions: JSON.parse(JSON.stringify(await getTransactions(email))),
+    },  
   }
 }

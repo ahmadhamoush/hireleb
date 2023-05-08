@@ -52,7 +52,13 @@
 #label1:checked ~ .selected::after {
   width: 100%;
 }
-.proposalsContainer {
+#label3:checked ~ .selected::after {
+  width: 100%;
+}
+#label3:checked ~ .selected::after {
+  width: 100%;
+}
+.proposalsContainer,.transactionsContainer {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -72,7 +78,7 @@
 .proposalsContainer a {
   text-decoration: underline;
 }
-.proposals {
+.proposals,.transactions {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -148,6 +154,23 @@
   color: red;
 }
 
+.transactions h3 span{
+  font-weight: 800;
+  font-size: 30px;
+  margin: 0 10px;
+  color: #10b3af;
+}
+.transactions h5 span{
+  font-weight: 400;
+  margin-right:10px;
+  color: #10b3af;
+}
+.transactions h4{
+font-weight: 500;
+}
+.transactions h5{
+  font-weight: 300;
+  }
 @media (max-width: 674px) {
   .proposals {
     flex-direction: column;
