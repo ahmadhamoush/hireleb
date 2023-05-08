@@ -84,11 +84,16 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
         '/api/complete-service',
         formData,
       )
-      if (data.done === 'ok') {
+      console.log(data)
+      if (data.foundProposal.paid) {
         setLoading(false)
         toast('Job Completed!')
         const refreshData = () => router.replace(router.asPath)
         refreshData()
+      }
+      else{
+        setLoading(false)
+        toast('Cannot mark as complete since service is not paid')
       }
     } catch (err) {
       console.log(err)
@@ -160,6 +165,8 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
                       <p>{proposal.service[0].desc}</p>
           {proposal.status === 'accepted' &&  <h3 style={{color:'#feff5c'}}>In Progress...</h3>}
           {proposal.status === 'completed' &&  <h3 style={{color:'#feff5c'}}>Service Completed!</h3>}
+          <h3>Paid</h3>
+          <p>{proposal.paid ? 'yes' :'no' }</p>
                     </div>
                         <div className={style.updatesContainer}>
                       <div className={style.updatesHeader}>

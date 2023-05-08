@@ -17,7 +17,7 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
   const [isReceived, setIsReceived] = useState(false)
   const [loading, setLoading] = useState(false)
   const [updateValue,setUpdate] = useState('')
-  const[isPaying,setIsPaying] = useState(false)
+  const[isPaying,setIsPaying] = useState({})
   const router = useRouter()
   const session = useSession()
 
@@ -77,12 +77,14 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
     }
   }
 
-  const markAsPaid = async (id) => {
+  const markAsPaid = async (id,credits,to) => {
     setLoading(true)
     try {
       const formData = new FormData()
       formData.append('id', id)
-      formData.append('sender', session.data.user.email)
+      formData.append('from', session.data.user.email)
+      formData.append('to', to)
+      formData.append('credits', credits)
       const { data } = await axios.post(
         '/api/pay-service',
         formData,
@@ -194,11 +196,11 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
                   return (
               <>
                   <div className={style.proposalFlex}>
-                    {isPaying && <div className={style.pay}>
+                    {isPaying.clicked && isPaying.id === proposal._id && <div className={style.pay}>
                       <h3>Credits to be paid</h3>
                       <h1>{proposal.service[0].credits}</h1>
-                      <div className={style.btns}><button onClick={()=>markAsPaid(proposal._id)}>Pay</button>
-                      <button onClick={()=>setIsPaying(false)}>Cancel</button></div>
+                      <div className={style.btns}><button onClick={()=>markAsPaid(proposal._id,proposal.service[0].credits,proposal.freelancer)}>Pay</button>
+                      <button onClick={()=>setIsPaying({clicked:false})}>Cancel</button></div>
                       </div>}
                   <div className={style.proposals} key={proposal._id}>
                       <Link href={`/services/service/${proposal.service[0]._id}`}>
@@ -216,7 +218,7 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
                       <div className={style.updatesHeader}>
                       <h3>Updates</h3>
                       <ul>
-                       {!proposal.paid &&  <li onClick={()=>setIsPaying(prev=>!prev)}>Pay ({proposal.service[0].credits} credits)</li>}
+                       {!proposal.paid &&  <li onClick={()=>setIsPaying({id:proposal._id, clicked:true})}>Pay ({proposal.service[0].credits} credits)</li>}
                        {proposal.paid &&  <li style={{fontWeight:'800'}}>SERVICE PAID</li>}
                         <li>Send project file</li>
                       </ul>

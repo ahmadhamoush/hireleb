@@ -1,10 +1,10 @@
 import mongoose from 'mongoose'
 
 const TransactionSchema = new mongoose.Schema({
-  from: String,
-  to: String,
-  credits: Number,
-  date: String,
+  user:String,
+  deposits:Array,
+  transfers: Array,
+  received: Array,
 })
 
 module.exports =
