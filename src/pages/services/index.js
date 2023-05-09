@@ -48,7 +48,7 @@ const Services = ({ services }) => {
         <div className={style.wrapper}>
           <div className={style.filterContainer}>
             <div>
-              <label htmlFor={style.category}>Category*</label>
+              <label htmlFor={style.category}>Category</label>
               <select
                 value={category}
                 onChange={(e) => {
@@ -68,7 +68,7 @@ const Services = ({ services }) => {
               </select>
             </div>
             <div>
-              <label htmlFor={style.subcategory}>Subcategory*</label>
+              <label htmlFor={style.subcategory}>Subcategory</label>
               <select
                 value={subcategory}
                 onChange={(e) => {

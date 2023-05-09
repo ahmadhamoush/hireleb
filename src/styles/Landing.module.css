@@ -10,6 +10,7 @@
 .banner .carousel {
   padding: 20px;
   position: relative;
+  width: 50%;
 }
 
 .banner .vision {

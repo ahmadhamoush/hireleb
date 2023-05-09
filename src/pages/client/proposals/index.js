@@ -139,6 +139,9 @@ const Proposals = ({ sentProposals, receivedProposals, authenticated }) => {
                     {proposal.status === 'accepted' && (
                       <p className={style.green}>{proposal.status}</p>
                     )}
+                     {proposal.status === 'completed' && (
+                      <p className={style.green}>{proposal.status}</p>
+                    )}
                     {proposal.status === 'declined' && (
                       <p className={style.red}>{proposal.status}</p>
                     )}

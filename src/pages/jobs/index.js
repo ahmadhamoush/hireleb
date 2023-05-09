@@ -48,7 +48,7 @@ const Jobs = ({ jobs }) => {
         <div className={style.wrapper}>
           <div className={style.filterContainer}>
             <div>
-              <label htmlFor={style.category}>Category*</label>
+              <label htmlFor={style.category}>Category</label>
               <select
                 value={category}
                 onChange={(e) => {
@@ -68,7 +68,7 @@ const Jobs = ({ jobs }) => {
               </select>
             </div>
             <div>
-              <label htmlFor={style.subcategory}>Subcategory*</label>
+              <label htmlFor={style.subcategory}>Subcategory</label>
               <select
                 value={subcategory}
                 onChange={(e) => {
@@ -148,7 +148,7 @@ const Jobs = ({ jobs }) => {
             </div>
             <div className={style.radio}>
               <form>
-                <label>job Payment</label>
+                <label>Job Payment</label>
                 <label>
                   <input
                     type="radio"
@@ -181,7 +181,7 @@ const Jobs = ({ jobs }) => {
             </div>
             <div className={style.radio}>
               <form>
-                <label>job Delivery</label>
+                <label>Job Delivery</label>
                 <label>
                   <input
                     type="radio"

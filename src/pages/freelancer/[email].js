@@ -26,8 +26,8 @@ const Freelancer = ({
   sentProposals,
   transactions,
 }) => {
-  const [isPortfolio, setIsPortfolio] = useState(true)
-  const [isServices, setIsServices] = useState(false)
+  const [isPortfolio, setIsPortfolio] = useState(false)
+  const [isServices, setIsServices] = useState(true)
   const [profileClicked, setProfileClicked] = useState(false)
   const [selectedImage, setSelectedImage] = useState(
     user?.freelancer.banner ? user?.freelancer.banner : '',
@@ -221,22 +221,6 @@ const Freelancer = ({
               <div className={style.showcase}>
                 <div className={style.options}>
                   <input
-                    checked={isPortfolio}
-                    onChange={(e) => {
-                      setIsPortfolio(true)
-                      setIsServices(false)
-                    }}
-                    id={style.portfolioLabel}
-                    hidden
-                    type="checkbox"
-                  />
-                  <label
-                    htmlFor={style.portfolioLabel}
-                    className={isPortfolio && style.selected}
-                  >
-                    Portfolio ({projects.length})
-                  </label>
-                  <input
                     checked={isServices}
                     onChange={() => {
                       setIsPortfolio(false)
@@ -255,6 +239,22 @@ const Freelancer = ({
                     className={isServices && style.selected}
                   >
                     Services ({services.length})
+                  </label>
+                  <input
+                    checked={isPortfolio}
+                    onChange={(e) => {
+                      setIsPortfolio(true)
+                      setIsServices(false)
+                    }}
+                    id={style.portfolioLabel}
+                    hidden
+                    type="checkbox"
+                  />
+                  <label
+                    htmlFor={style.portfolioLabel}
+                    className={isPortfolio && style.selected}
+                  >
+                    Portfolio ({projects.length})
                   </label>
                 </div>
                 {isPortfolio && (

@@ -74,7 +74,7 @@ const Deposit = () => {
           <div className={style.details}>
             <h3>Deposit Details</h3>
             <div>
-              <label htmlFor={style.name}>Credits*</label>
+              <label htmlFor={style.name}>Credits*  (1 Credit = 1USD)</label>
               <input
                 value={credits}
                 onChange={(e) => setCredits(e.target.value)}

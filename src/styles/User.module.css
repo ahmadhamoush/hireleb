@@ -91,6 +91,7 @@
 .detailsWrapper {
   width: 30%;
   transform: translateY(-80px);
+  padding:0 30px;
 }
 .wrapper {
   display: flex;
