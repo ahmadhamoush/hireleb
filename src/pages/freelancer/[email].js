@@ -347,10 +347,10 @@ const Freelancer = ({
                   </button>
                 </div>
                 <div>
-                      <p>Completed Jobs</p>
+                      <p>Rate Completed Jobs</p>
                       <h2>{sentProposals.filter(proposal=>proposal.status==='completed').length +receivedProposals.filter(proposal=>proposal.status==='completed').length }</h2>
                       <button
-                        onClick={() => router.push('/freelancer/completed-jobs')}
+                        onClick={() => router.push('/freelancer/rate-clients')}
                         className={style.creditsbtn}
                       >
                         View All
