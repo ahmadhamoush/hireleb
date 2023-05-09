@@ -16,7 +16,10 @@ const Landing = () => {
             {' '}
             <li>Browse Services</li>
           </Link>
-          <li>Browse Jobs</li>
+          <Link href="/jobs">
+            {' '}
+            <li>Browse Jobs</li>
+          </Link>
           <li>Find Talent</li>
         </ul>
       </div>

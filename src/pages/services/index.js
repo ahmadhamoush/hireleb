@@ -38,7 +38,7 @@ const Services = ({ services }) => {
           <div className={style.search}>
             <input
               type="text"
-              placeholder="search"
+              placeholder="Search for services"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />

@@ -172,6 +172,9 @@
 .display {
   width: 70%;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 .radio form {
   display: flex;
@@ -226,4 +229,17 @@
   margin-right: 0.375em;
   transition: 0.25s ease;
   box-shadow: inset 0 0 0 0.125em #2d646d;
+}
+
+@media (max-width:674px) {
+    .wrapper{
+        flex-direction: column;
+    }
+    .filterContainer{
+        width: 100%;
+    }
+    .display{
+        width: 100%;
+
+    }
 }
