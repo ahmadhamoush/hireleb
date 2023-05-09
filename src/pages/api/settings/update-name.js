@@ -27,7 +27,7 @@ const parseForm = (req) => {
         },
         {
           fName: fields.fName,
-          lName:fields.lName
+          lName: fields.lName,
         },
       )
     })

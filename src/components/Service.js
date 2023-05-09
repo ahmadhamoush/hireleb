@@ -48,7 +48,11 @@ const Service = (props) => {
           )}
           <div>
             <div className={style.desc}>
-              <p>Service Description: {props.service.desc}</p>
+              <p>Service Category: {props.service.category}</p>
+              <p>
+                Service Description: {props.service.desc.substring(0, 40)}...
+                <span> Read more</span>
+              </p>
             </div>
             <div className={style.skills}>
               {props.service.skills.split(',').map((skill) => {
@@ -71,6 +75,11 @@ const Service = (props) => {
           </div>
           <div className={style.delivery}>
             <p>{props.service.delivery}</p>
+          </div>
+          <div className={style.credits}>
+            <h4>
+              Credits <span>({props.service.credits})</span>
+            </h4>
           </div>
         </div>
       </div>

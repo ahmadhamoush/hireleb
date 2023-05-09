@@ -80,6 +80,17 @@
   border-radius: 20px;
   font-size: 12px;
 }
+.credits span {
+  color: #f6775a;
+  font-weight: 800;
+  font-size: 30px;
+  margin: 0 10px;
+}
+.desc span {
+  color: #f6775a;
+  font-weight: 800;
+  text-decoration: underline;
+}
 @media (max-width: 674px) {
   .container {
     width: unset;

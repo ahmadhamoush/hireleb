@@ -1,0 +1,229 @@
+.container {
+  background-color: #efefef;
+  position: relative;
+}
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 20px;
+  gap: 30px;
+}
+.search {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  padding: 5px;
+  background-color: #10b3af;
+  width: 70%;
+  margin: 20px auto;
+}
+
+.search input {
+  width: 100%;
+  font-size: 16px;
+  padding: 15px 8px;
+  outline: none;
+  border: none;
+  border-radius: 20px;
+  color: #087472;
+
+  transition: 0.5 ease-in-out;
+  -webkit-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+}
+.search input::placeholder {
+  color: #087472;
+}
+
+.search .icon {
+  right: 0;
+  padding: 0 10px;
+  background-color: #10b3af;
+  color: #ffffff;
+  border-radius: 20px;
+  transition: 0.5 ease-in-out;
+  -webkit-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+}
+.search input:hover ~ .icon,
+.nav .search input:active ~ .icon {
+  padding: 0 20px;
+}
+.search input:hover,
+.nav .search input:active {
+  border-radius: 20px;
+}
+.banner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  gap: 3px;
+  line-height: 2;
+  background-color: #c5eded92;
+}
+.banner h1 span {
+  color: #10b3af;
+}
+.banner h1 {
+  font-weight: 600;
+}
+
+.filterContainer {
+  width: 30%;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 10px;
+  padding: 15px;
+}
+.filterContainer input,
+.filterContainer textarea {
+  padding: 12px 20px;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  width: 100%;
+  font-size: 16px;
+  background-color: #f8f8f8;
+}
+.filterContainer select {
+  padding: 12px 20px;
+  border-radius: 10px;
+  outline: none;
+  border: 1px solid #2d646d;
+  appearance: none;
+  width: 100%;
+  font-size: 16px;
+  text-shadow: none;
+  background-color: #f8f8f8;
+  cursor: pointer;
+}
+.filterContainer button {
+  width: 6.5em;
+  height: 2.3em;
+  margin: 0.5em;
+  background: #2d646d;
+  color: white;
+  border: none;
+  border-radius: 0.625em;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.filterContainer button:hover {
+  color: black;
+}
+
+.filterContainer button:after {
+  content: '';
+  background: white;
+  position: absolute;
+  z-index: -1;
+  left: -20%;
+  right: -20%;
+  top: 0;
+  bottom: 0;
+  transform: skewX(-45deg) scale(0, 1);
+  transition: all 0.5s;
+}
+
+.filterContainer button:hover:after {
+  transform: skewX(-45deg) scale(1, 1);
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+.filterContainer div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 10px;
+  gap: 10px;
+}
+
+.displayedSkillsContainer {
+  display: flex;
+  flex-direction: row !important;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  width: 100%;
+}
+.displayedSkills {
+  display: flex;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  padding: 5px 10px;
+}
+.close {
+  cursor: pointer;
+}
+.display {
+  width: 70%;
+  padding: 20px;
+}
+.radio form {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.radio label {
+  display: flex;
+  cursor: pointer;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0.375em;
+}
+
+.radio label input {
+  position: absolute;
+  left: -9999px;
+}
+
+.radio label input:checked + span {
+  background-color: #2d646d;
+  color: white;
+}
+
+.radio label input:checked + span:before {
+  box-shadow: inset 0 0 0 0.4375em #10b3af;
+}
+
+.radio label span {
+  display: flex;
+  align-items: center;
+  padding: 0.375em 0.75em 0.375em 0.375em;
+  border-radius: 99em;
+  transition: 0.25s ease;
+  color: #2d646d;
+}
+
+.radio label span:hover {
+  background-color: #10b3b057;
+}
+
+.radio label span:before {
+  display: flex;
+  flex-shrink: 0;
+  content: '';
+  background-color: #fff;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  margin-right: 0.375em;
+  transition: 0.25s ease;
+  box-shadow: inset 0 0 0 0.125em #2d646d;
+}

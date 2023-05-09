@@ -27,7 +27,11 @@ const parseForm = (req) => {
         },
         {
           status: fields.status,
-          updates:{message:'Job Started', date:new Date().toLocaleString(),sender:fields.sender}
+          updates: {
+            message: 'Job Started',
+            date: new Date().toLocaleString(),
+            sender: fields.sender,
+          },
         },
       )
     })

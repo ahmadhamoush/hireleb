@@ -21,11 +21,9 @@ const parseForm = (req) => {
       //connecting to db
       await initMongoose()
       // creating new project and saving it to db
-      const deletedUser = await User.deleteOne(
-        {
-          email: fields.email,
-        },
-      )
+      const deletedUser = await User.deleteOne({
+        email: fields.email,
+      })
     })
   })
 }

@@ -12,7 +12,7 @@ import { toast } from 'react-toastify'
 import { getClientServiceProposals } from '@/pages/api/get-service-proposals'
 import Loader from '@/components/Loader'
 
-const Service = ({ service, proposed ,ongoing}) => {
+const Service = ({ service, proposed, ongoing }) => {
   const router = useRouter()
   const session = useSession()
   const [freelancer, setFreelancer] = useState({})
@@ -102,16 +102,20 @@ const Service = ({ service, proposed ,ongoing}) => {
             </p>
 
             <div className={style.btnsWrapper}>
-              {!proposed || !ongoing && (
-                <h3>
-                  Interested? Send a
-                  <span style={{ color: '#2d646d' }}> Proposal</span> now!
-                </h3>
-              )}
+              {!proposed ||
+                (!ongoing && (
+                  <h3>
+                    Interested? Send a
+                    <span style={{ color: '#2d646d' }}> Proposal</span> now!
+                  </h3>
+                ))}
               {!isProposal && !ongoing && (
                 <div className={style.btns}>
                   <button
-                    style={{ color: proposed && 'rgb(241, 84, 84)', color:ongoing && 'green' }}
+                    style={{
+                      color: proposed && 'rgb(241, 84, 84)',
+                      color: ongoing && 'green',
+                    }}
                     disabled={proposed || ongoing ? true : false}
                     onClick={() => setIsProposal(true)}
                     type="button"
@@ -120,11 +124,11 @@ const Service = ({ service, proposed ,ongoing}) => {
                   </button>
                 </div>
               )}
-              {ongoing &&  <h3
-                    style={{ color:ongoing && 'green' }}
-                  >
+              {ongoing && (
+                <h3 style={{ color: ongoing && 'green' }}>
                   ...Service is currently on going...
-                  </h3>}
+                </h3>
+              )}
             </div>
             {isProposal && (
               <div>
@@ -169,7 +173,6 @@ export async function getServerSideProps(context) {
   let proposed = false
   let ongoing = false
   proposals.forEach((proposal) => {
-
     if (
       proposal.service[0]._id.toString() === id &&
       proposal.client === session.user.email &&
@@ -190,7 +193,7 @@ export async function getServerSideProps(context) {
     props: {
       service: JSON.parse(JSON.stringify(service)),
       proposed,
-      ongoing
+      ongoing,
     },
   }
 }

@@ -23,7 +23,7 @@ const Settings = ({ user }) => {
   const [selectedFile, setSelectedFile] = useState('')
   const [typeClicked, setTypeClicked] = useState(false)
   const [deleteClicked, setDeleteClicked] = useState(false)
-  const [loading,setLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
   const session = useSession()
   const router = useRouter()
 
@@ -33,21 +33,23 @@ const Settings = ({ user }) => {
     }
   }, [selectedFile])
 
-  const deleteAccount = async ()=>{
+  const deleteAccount = async () => {
     setLoading(true)
-    try{
-        const formData = new FormData()
-        formData.append('email', session.data.user.email)
-        const {data}= await axios.post('/api/settings/delete-account',formData)
-        if(data.done =='ok'){
-            setLoading(false)
-            toast('Account Deleted')
-            signOut()
-        }
-    }
-    catch(err){
-        console.log(err)
+    try {
+      const formData = new FormData()
+      formData.append('email', session.data.user.email)
+      const { data } = await axios.post(
+        '/api/settings/delete-account',
+        formData,
+      )
+      if (data.done == 'ok') {
         setLoading(false)
+        toast('Account Deleted')
+        signOut()
+      }
+    } catch (err) {
+      console.log(err)
+      setLoading(false)
     }
   }
 
@@ -85,39 +87,36 @@ const Settings = ({ user }) => {
       setLoading(false)
     }
   }
-  const switchAccount = async ()=>{
+  const switchAccount = async () => {
     setLoading(true)
-    try{
-        const formData = new FormData()
-        formData.append('email',session.data.user.email)
-        formData.append('type',user?.type === 'freelancer' ? 'client' : 'freelancer')
-        const {data} = await axios.post('/api/settings/update-type',formData)
-        if(data.done=='ok'){
-            setLoading(false)
-            toast('Account Type Updated')
-            if(user?.type ==='freelancer'){
-                if(!user.client){
-                    router.push('/get-started-client')
-                }
-                else{
-                    router.push(`/client/${session.data.user.email}`)
-                }
-               
-            }
-            if(user?.type ==='client'){
-                if(!user.freelancer){
-                    router.push('/get-started-freelancer')
-                }
-                else{
-                    router.push(`/freelancer/${session.data.user.email}`)
-                }
-               
-            }
-
-        } 
-    }
-    catch(err){
-        console.log(err)
+    try {
+      const formData = new FormData()
+      formData.append('email', session.data.user.email)
+      formData.append(
+        'type',
+        user?.type === 'freelancer' ? 'client' : 'freelancer',
+      )
+      const { data } = await axios.post('/api/settings/update-type', formData)
+      if (data.done == 'ok') {
+        setLoading(false)
+        toast('Account Type Updated')
+        if (user?.type === 'freelancer') {
+          if (!user.client) {
+            router.push('/get-started-client')
+          } else {
+            router.push(`/client/${session.data.user.email}`)
+          }
+        }
+        if (user?.type === 'client') {
+          if (!user.freelancer) {
+            router.push('/get-started-freelancer')
+          } else {
+            router.push(`/freelancer/${session.data.user.email}`)
+          }
+        }
+      }
+    } catch (err) {
+      console.log(err)
     }
   }
   const changePicture = async () => {
@@ -126,7 +125,10 @@ const Settings = ({ user }) => {
       const formData = new FormData()
       formData.append('email', session.data.user.email)
       formData.append('img', selectedFile)
-      const { data } = await axios.post('/api/settings/update-picture', formData)
+      const { data } = await axios.post(
+        '/api/settings/update-picture',
+        formData,
+      )
       if (data.done === 'ok') {
         setLoading(false)
         toast('Picture Updated')
@@ -138,139 +140,143 @@ const Settings = ({ user }) => {
   }
   return (
     <Layout>
-        {loading && <Loader />}
-        <Animate play start={{ opacity: 0 }} end={{ opacity: 1 }}>
-      <div className={style.container}>
-        <label>
-          <input
-            type="file"
-            hidden
-            onChange={({ target }) => {
-              //types of images allowed
-              const types = [
-                'image/jpeg',
-                'image/jpg',
-                'image/png',
-                'image/webp',
-              ]
-              //accessing files
-              if (target.files) {
-                // getting first file
-                const file = target.files[0]
-                //checking if type of image is valid
-                if (types.includes(file.type)) {
-                  //creating a new url image to display selected image on frontend
-                  setSelectedImage(window.URL.createObjectURL(file))
-                  setSelectedFile(file)
-                } else {
-                  toast('File Type Not Accepted')
+      {loading && <Loader />}
+      <Animate play start={{ opacity: 0 }} end={{ opacity: 1 }}>
+        <div className={style.container}>
+          <label>
+            <input
+              type="file"
+              hidden
+              onChange={({ target }) => {
+                //types of images allowed
+                const types = [
+                  'image/jpeg',
+                  'image/jpg',
+                  'image/png',
+                  'image/webp',
+                ]
+                //accessing files
+                if (target.files) {
+                  // getting first file
+                  const file = target.files[0]
+                  //checking if type of image is valid
+                  if (types.includes(file.type)) {
+                    //creating a new url image to display selected image on frontend
+                    setSelectedImage(window.URL.createObjectURL(file))
+                    setSelectedFile(file)
+                  } else {
+                    toast('File Type Not Accepted')
+                  }
                 }
-              }
-            }}
-          />
-
-          {/* displaying selected image */}
-          {selectedImage ? (
-            <Image
-              className={style.display}
-              src={selectedImage}
-              alt="profile picture"
-              width={120}
-              height={120}
+              }}
             />
-          ) : (
-            <p className={style.select}>
-              {' '}
-              <FontAwesomeIcon className={style.user} icon={faUser} />{' '}
-              <FontAwesomeIcon className={style.add} icon={faAdd} />
-            </p>
-          )}
-        </label>
-        <div>
-          <p>
-            Current name : {user?.fName} {user?.lName}
-          </p>
-          <h3 onClick={() => setNameClicked((prev) => !prev)}>Change Name</h3>
-          {namedClicked && (
-            <>
-              <input
-                value={fName}
-                onChange={(e) => setFname(e.target.value)}
-                placeholder="New First Name"
-              />
-              <input
-                value={lName}
-                onChange={(e) => setLname(e.target.value)}
-                placeholder="New Last Name"
-              />
-              <button onClick={changeName}>Update</button>
-            </>
-          )}
-        </div>
-        <div>
-          <p>Current email : {user?.email}</p>
-          <h3 onClick={() => setEmailClicked((prev) => !prev)}>Change Email</h3>
-          {emailClicked && (
-            <>
-              <input
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="New Email"
-              />
-              <button onClick={changeEmail}>Update</button>
-            </>
-          )}
-        </div>
-        <div>
-          {' '}
-          <p>Current Account Type : {user?.type}</p>{' '}
-          <h3
-            onClick={() => {
-              setTypeClicked((prev) => !prev)
-            }}
-          >
-            Switch to {user?.type === 'freelancer' ? 'Client' : 'Freelancer'}{' '}
-            Account
-          </h3>
-          {typeClicked && (
-            <div>
-              <button onClick={switchAccount}>Switch</button>
-              <button
-                onClick={() => setTypeClicked((prev) => !prev)}
-                style={{ background: '#1e1e1e' }}
-              >
-                Cancel
-              </button>
-            </div>
-          )}
-        </div>
 
-        <div>
-          <h3 onClick={() => signOut()}>Logout</h3>
+            {/* displaying selected image */}
+            {selectedImage ? (
+              <Image
+                className={style.display}
+                src={selectedImage}
+                alt="profile picture"
+                width={120}
+                height={120}
+              />
+            ) : (
+              <p className={style.select}>
+                {' '}
+                <FontAwesomeIcon className={style.user} icon={faUser} />{' '}
+                <FontAwesomeIcon className={style.add} icon={faAdd} />
+              </p>
+            )}
+          </label>
+          <div>
+            <p>
+              Current name : {user?.fName} {user?.lName}
+            </p>
+            <h3 onClick={() => setNameClicked((prev) => !prev)}>Change Name</h3>
+            {namedClicked && (
+              <>
+                <input
+                  value={fName}
+                  onChange={(e) => setFname(e.target.value)}
+                  placeholder="New First Name"
+                />
+                <input
+                  value={lName}
+                  onChange={(e) => setLname(e.target.value)}
+                  placeholder="New Last Name"
+                />
+                <button onClick={changeName}>Update</button>
+              </>
+            )}
+          </div>
+          <div>
+            <p>Current email : {user?.email}</p>
+            <h3 onClick={() => setEmailClicked((prev) => !prev)}>
+              Change Email
+            </h3>
+            {emailClicked && (
+              <>
+                <input
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="New Email"
+                />
+                <button onClick={changeEmail}>Update</button>
+              </>
+            )}
+          </div>
+          <div>
+            {' '}
+            <p>Current Account Type : {user?.type}</p>{' '}
+            <h3
+              onClick={() => {
+                setTypeClicked((prev) => !prev)
+              }}
+            >
+              Switch to {user?.type === 'freelancer' ? 'Client' : 'Freelancer'}{' '}
+              Account
+            </h3>
+            {typeClicked && (
+              <div>
+                <button onClick={switchAccount}>Switch</button>
+                <button
+                  onClick={() => setTypeClicked((prev) => !prev)}
+                  style={{ background: '#1e1e1e' }}
+                >
+                  Cancel
+                </button>
+              </div>
+            )}
+          </div>
+
+          <div>
+            <h3 onClick={() => signOut()}>Logout</h3>
+          </div>
+          <div>
+            {' '}
+            <h3
+              onClick={() => {
+                setDeleteClicked((prev) => !prev)
+              }}
+              className={style.delete}
+            >
+              Delect Account
+            </h3>
+            {deleteClicked && (
+              <div>
+                <button onClick={deleteAccount} style={{ background: 'red' }}>
+                  Delete
+                </button>
+                <button
+                  onClick={() => setDeleteClicked((prev) => !prev)}
+                  style={{ background: '#1e1e1e' }}
+                >
+                  Cancel
+                </button>
+              </div>
+            )}
+          </div>
         </div>
-        <div>
-          {' '}
-          <h3
-            onClick={() => {
-              setDeleteClicked((prev) => !prev)
-            }}
-            className={style.delete}
-          >
-            Delect Account
-          </h3>
-          {deleteClicked && (
-            <div>
-              <button onClick={deleteAccount}  style={{ background: 'red' }}>Delete</button>
-              <button
-                onClick={() => setDeleteClicked((prev) => !prev)}
-                style={{ background: '#1e1e1e' }}
-              >
-                Cancel
-              </button>
-            </div>
-          )}
-        </div>
-      </div>
       </Animate>
     </Layout>
   )

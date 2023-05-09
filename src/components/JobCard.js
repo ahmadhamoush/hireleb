@@ -45,7 +45,11 @@ const JobCard = (props) => {
           )}
           <div>
             <div className={style.desc}>
-              <p>Job Description: {props.job.description}</p>
+              <p>Job Category: {props.job.category}</p>
+              <p>
+                Job Description: {props.job.description.substring(0, 40)}...
+                <span> Read more</span>
+              </p>
             </div>
             <div className={style.skills}>
               {props.job.skills.split(',').map((skill) => {
@@ -68,6 +72,11 @@ const JobCard = (props) => {
           </div>
           <div className={style.delivery}>
             <p>{props.job.type}</p>
+          </div>
+          <div className={style.credits}>
+            <h4>
+              Credits <span>({props.job.credits})</span>
+            </h4>
           </div>
         </div>
       </div>

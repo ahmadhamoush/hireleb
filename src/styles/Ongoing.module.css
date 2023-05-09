@@ -1,16 +1,15 @@
 .container {
   padding: 20px;
-
 }
 .header {
   padding: 20px;
   color: #2d646d;
   font-size: 30px;
- z-index: 1;
- background-color: #f4f4f4;
- width: 100%;
- margin: 10px 0;
- border-radius: 10px;
+  z-index: 1;
+  background-color: #f4f4f4;
+  width: 100%;
+  margin: 10px 0;
+  border-radius: 10px;
 }
 .header label {
   margin: 0 10px;
@@ -55,19 +54,19 @@
 #label1:checked ~ .selected::after {
   width: 100%;
 }
-.proposalFlex{
+.proposalFlex {
   display: flex;
   scroll-snap-align: start;
   justify-content: space-between;
   align-items: center;
   gap: 30px;
-
 }
 .proposalsContainer {
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 20px;  overflow-x: hidden;
+  padding: 20px;
+  overflow-x: hidden;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
   padding: 50px;
@@ -77,7 +76,6 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
   height: 500px;
- 
 }
 .proposalsContainer::-webkit-scrollbar {
   display: none;
@@ -115,7 +113,7 @@
   margin: 0.5em;
   background: #fff;
   color: #fff;
-  background-color:#1e1e1e;
+  background-color: #1e1e1e;
   border: none;
   border-radius: 0.625em;
   font-size: 20px;
@@ -125,7 +123,7 @@
   z-index: 1;
   overflow: hidden;
 }
-.container button:first-child{
+.container button:first-child {
   background-color: #10b3af;
 }
 
@@ -146,13 +144,11 @@
   transition: all 0.5s;
 }
 
-
 .btns {
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
-
 
 @media (max-width: 674px) {
   .proposals {
@@ -161,12 +157,12 @@
   .btns {
     flex-direction: column-reverse;
   }
-  .proposalsContainer{
+  .proposalsContainer {
     flex-direction: column;
   }
 }
 
-.updatesContainer{
+.updatesContainer {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -175,10 +171,10 @@
   padding: 30px;
   gap: 20px;
 }
-.updates{
+.updates {
   display: flex;
   flex-direction: column;
- align-items: flex-start;
+  align-items: flex-start;
   width: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -188,32 +184,31 @@
   background-color: #f4f4f4;
   border-radius: 20px;
 }
-.updateSender{
+.updateSender {
   background-color: #fff;
   border-radius: 20px;
   padding: 10px 30px;
- 
 }
-.updateReceiver{
+.updateReceiver {
   background-color: #2d646d;
   border-radius: 20px;
   padding: 10px 30px;
   color: #fff;
   margin-left: auto;
 }
-.sendContainer{
+.sendContainer {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
 }
-.from{
+.from {
   font-weight: 300;
 }
- .msg{
+.msg {
   font-weight: 600;
 }
-.sendContainer input{
+.sendContainer input {
   padding: 12px 20px;
   border-radius: 10px;
   outline: none;
@@ -222,35 +217,37 @@
   font-size: 16px;
   background-color: #f4f4f4;
 }
-.sendContainer button{
+.sendContainer button {
   background-color: #1e1e1e;
-  color:#10b3af;
+  color: #10b3af;
 }
-.sendContainer button:hover{
+.sendContainer button:hover {
   background-color: #1e1e1e;
-  color:#fff;
+  color: #fff;
 }
 .updatesHeader {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;gap: 5px;
+  align-items: center;
+  gap: 5px;
 }
-.updatesHeader ul{
+.updatesHeader ul {
   display: flex;
 }
-.updatesHeader ul li{
-  list-style: none;margin: 0 10px;
+.updatesHeader ul li {
+  list-style: none;
+  margin: 0 10px;
   cursor: pointer;
   font-weight: 300;
 }
-.updatesHeader ul li:hover{
+.updatesHeader ul li:hover {
   color: #10b3af;
 }
-.pay{
+.pay {
   position: absolute;
   top: 10px;
-  right:10px;
+  right: 10px;
   background-color: #f4f4f4;
   padding: 20px;
   border-radius: 20px;
@@ -259,7 +256,7 @@
   justify-content: center;
   align-items: center;
 }
-.pay .btns button{
- padding: 5px 30px;
- text-align: center;
+.pay .btns button {
+  padding: 5px 30px;
+  text-align: center;
 }

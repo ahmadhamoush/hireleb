@@ -8,7 +8,6 @@ export const config = {
   },
 }
 
-
 //function to be called in body
 const parseForm = (req) => {
   return new Promise((resolve, reject) => {
@@ -22,26 +21,31 @@ const parseForm = (req) => {
       //connecting to db
       await initMongoose()
 
-      const foundProposal = await ServiceProposal.findOne({_id:fields.id})
+      const foundProposal = await ServiceProposal.findOne({ _id: fields.id })
       //updating status to complete only if service is pa
-      resolve({ fields,foundProposal })
-      if(foundProposal.paid){
-      // updating service status and saving it to db
-      const updatedProposal = await ServiceProposal.updateOne(
-        {
-          _id: fields.id,
-        },
-        {
-          status: 'completed',
-          $push: { 'updates': {message:'Service Completed', date:new Date().toLocaleString(),sender:fields.sender} }
-        },
-      )
+      resolve({ fields, foundProposal })
+      if (foundProposal.paid) {
+        // updating service status and saving it to db
+        const updatedProposal = await ServiceProposal.updateOne(
+          {
+            _id: fields.id,
+          },
+          {
+            status: 'completed',
+            $push: {
+              updates: {
+                message: 'Service Completed',
+                date: new Date().toLocaleString(),
+                sender: fields.sender,
+              },
+            },
+          },
+        )
       }
-     
     })
   })
 }
 export default async function handler(req, res) {
   //calling function
-  res.json(  await parseForm(req))
+  res.json(await parseForm(req))
 }

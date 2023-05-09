@@ -49,7 +49,7 @@ const readFile = (req) => {
       const updatedUser = await User.updateOne(
         { email: fields.email },
         {
-          'image': `https://res.cloudinary.com/hamoush/image/upload/v1678284450/hireleb/${files.img.originalFilename}`,
+          image: `https://res.cloudinary.com/hamoush/image/upload/v1678284450/hireleb/${files.img.originalFilename}`,
         },
       )
     })

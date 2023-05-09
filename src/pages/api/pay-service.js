@@ -28,58 +28,91 @@ const parseForm = (req) => {
           _id: fields.id,
         },
         {
-          paid:true,
-          $push: { 'updates': {message:'Service Paid', date:new Date().toLocaleString(),sender:fields.from} }
+          paid: true,
+          $push: {
+            updates: {
+              message: 'Service Paid',
+              date: new Date().toLocaleString(),
+              sender: fields.from,
+            },
+          },
         },
       )
-      
+
       //checking if user currently has a transaction object
-        let foundFromUser =await Transaction.findOne({user:fields.from})
-        let foundToUser =await Transaction.findOne({user:fields.to})
-        
-        //update transaction if found
-        if(foundFromUser){
-          //transfering credits
-          await Transaction.updateOne(
-            {user:fields.from},
-            { $push: { 'transfers': { credits:fields.credits,
-              to:fields.to,
-              date:new Date().toLocaleString()} }})
-        }
-        //create a new transaction object if doesnt exist
-        else{
-          await Transaction.create({user:fields.from,
-            transfers:[{
-              credits:fields.credits,
-              to:fields.to,
-              date:new Date().toLocaleString()
-            }],})
-        }
-        const deductUser = await User.findOne({email:fields.from})
-         // deducting credits fron client's account
-        await User.updateOne({_id:deductUser._id}, {credits:Number(deductUser.credits) - Number(fields.credits)})
+      let foundFromUser = await Transaction.findOne({ user: fields.from })
+      let foundToUser = await Transaction.findOne({ user: fields.to })
+
       //update transaction if found
-        if(foundToUser){
-          //receiving credits
-          await Transaction.updateOne(
-            {user:fields.to},
-            { $push: { 'received': { credits:fields.credits,
-              from:fields.from,
-              date:new Date().toLocaleString()} }})
-        }
-               //create a new transaction object if doesnt exist
-        else{
-          await Transaction.create({user:fields.to,
-            received:[{
-              credits:fields.credits,
-              from:fields.from,
-              date:new Date().toLocaleString()
-            }],})
-        }
-        const addUser = await User.findOne({email:fields.to})
-        // adding credits to freelancer's account
-        await User.updateOne({_id:addUser._id}, {credits:Number(addUser.credits) + Number(fields.credits)})
-      
+      if (foundFromUser) {
+        //transfering credits
+        await Transaction.updateOne(
+          { user: fields.from },
+          {
+            $push: {
+              transfers: {
+                credits: fields.credits,
+                to: fields.to,
+                date: new Date().toLocaleString(),
+              },
+            },
+          },
+        )
+      }
+      //create a new transaction object if doesnt exist
+      else {
+        await Transaction.create({
+          user: fields.from,
+          transfers: [
+            {
+              credits: fields.credits,
+              to: fields.to,
+              date: new Date().toLocaleString(),
+            },
+          ],
+        })
+      }
+      const deductUser = await User.findOne({ email: fields.from })
+      // deducting credits fron client's account
+      await User.updateOne(
+        { _id: deductUser._id },
+        { credits: Number(deductUser.credits) - Number(fields.credits) },
+      )
+      //update transaction if found
+      if (foundToUser) {
+        //receiving credits
+        await Transaction.updateOne(
+          { user: fields.to },
+          {
+            $push: {
+              received: {
+                credits: fields.credits,
+                from: fields.from,
+                date: new Date().toLocaleString(),
+              },
+            },
+          },
+        )
+      }
+      //create a new transaction object if doesnt exist
+      else {
+        await Transaction.create({
+          user: fields.to,
+          received: [
+            {
+              credits: fields.credits,
+              from: fields.from,
+              date: new Date().toLocaleString(),
+            },
+          ],
+        })
+      }
+      const addUser = await User.findOne({ email: fields.to })
+      // adding credits to freelancer's account
+      await User.updateOne(
+        { _id: addUser._id },
+        { credits: Number(addUser.credits) + Number(fields.credits) },
+      )
     })
   })
 }

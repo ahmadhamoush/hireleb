@@ -1,8 +1,8 @@
 import mongoose from 'mongoose'
 
 const TransactionSchema = new mongoose.Schema({
-  user:String,
-  deposits:Array,
+  user: String,
+  deposits: Array,
   transfers: Array,
   received: Array,
 })

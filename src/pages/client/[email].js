@@ -17,7 +17,13 @@ import { getClientServiceProposals } from '../api/get-service-proposals'
 import { getClientJobProposals } from '../api/get-job-proposals'
 import { getTransactions } from '../api/get-transactions'
 
-const Client = ({ user, jobs, sentProposals, receivedProposals,transactions }) => {
+const Client = ({
+  user,
+  jobs,
+  sentProposals,
+  receivedProposals,
+  transactions,
+}) => {
   const [profileClicked, setProfileClicked] = useState(false)
   const [selectedImage, setSelectedImage] = useState(
     user?.client?.banner ? user.client.banner : '',
@@ -165,35 +171,42 @@ const Client = ({ user, jobs, sentProposals, receivedProposals,transactions }) =
                   </div>
                 </div>
                 <div className={style.leftWrapper}>
-                 <div className={style.btns}>
-                 <button onClick={() => router.push('/post-a-job')}>
-                    Post a Job
-                  </button>
-                  <button>Change Account Type</button>
-                 </div>
+                  <div className={style.btns}>
+                    <button onClick={() => router.push('/post-a-job')}>
+                      Post a Job
+                    </button>
+                    <button>Change Account Type</button>
+                  </div>
                   <div className={style.proposals}>
-                  <div>
-                  <p>Sent Proposals</p>
-                  <h2>{sentProposals?.length}</h2>
-                  <p>Recieved Proposals</p>
-                  <h2>{receivedProposals?.length}</h2>
-                  <button
-                    onClick={() => router.push('/client/proposals')}
-                    className={style.creditsbtn}
-                  >
-                    View All
-                  </button>
-                </div>
-                <div>
-                  <p>On going jobs</p>
-                  <h2>{receivedProposals.filter(proposal=>proposal.status ==='accepted').length +sentProposals.filter(proposal=>proposal.status ==='accepted').length}</h2>
-                  <button
-                    onClick={() => router.push('/client/on-going')}
-                    className={style.creditsbtn}
-                  >
-                    View All
-                  </button>
-                </div>
+                    <div>
+                      <p>Sent Proposals</p>
+                      <h2>{sentProposals?.length}</h2>
+                      <p>Recieved Proposals</p>
+                      <h2>{receivedProposals?.length}</h2>
+                      <button
+                        onClick={() => router.push('/client/proposals')}
+                        className={style.creditsbtn}
+                      >
+                        View All
+                      </button>
+                    </div>
+                    <div>
+                      <p>On going jobs</p>
+                      <h2>
+                        {receivedProposals.filter(
+                          (proposal) => proposal.status === 'accepted',
+                        ).length +
+                          sentProposals.filter(
+                            (proposal) => proposal.status === 'accepted',
+                          ).length}
+                      </h2>
+                      <button
+                        onClick={() => router.push('/client/on-going')}
+                        className={style.creditsbtn}
+                      >
+                        View All
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -239,30 +252,46 @@ const Client = ({ user, jobs, sentProposals, receivedProposals,transactions }) =
                 <div>
                   <p className={style.transactionHeader}>Transactions</p>
                   <div className={style.transactions}>
-                    {transactions?.deposits.slice(0,3).map((deposit,index)=>{
-                      return ( <p key={index}>
-                        <span>{deposit.credits} Credits</span> have been deposited
-                      </p>)
-                    })}
-                     {transactions?.transfers.slice(0,3).map((transfer,index)=>{
-                      return ( <p key={index}>
-                        <span>{transfer.credits} Credits</span> have been transfered
-                      </p>)
-                    })}
-                      {transactions?.received.slice(0,3).map((receive,index)=>{
-                      return ( <p key={index}>
-                        <span>{receive.credits} Credits</span> have been received
-                      </p>)
-                    })}
-                   
+                    {transactions?.deposits
+                      .slice(0, 3)
+                      .map((deposit, index) => {
+                        return (
+                          <p key={index}>
+                            <span>{deposit.credits} Credits</span> have been
+                            deposited
+                          </p>
+                        )
+                      })}
+                    {transactions?.transfers
+                      .slice(0, 3)
+                      .map((transfer, index) => {
+                        return (
+                          <p key={index}>
+                            <span>{transfer.credits} Credits</span> have been
+                            transfered
+                          </p>
+                        )
+                      })}
+                    {transactions?.received
+                      .slice(0, 3)
+                      .map((receive, index) => {
+                        return (
+                          <p key={index}>
+                            <span>{receive.credits} Credits</span> have been
+                            received
+                          </p>
+                        )
+                      })}
                   </div>
-                  <button onClick={()=>router.push('/client/transactions')} className={style.creditsbtn}>View All</button>
+                  <button
+                    onClick={() => router.push('/client/transactions')}
+                    className={style.creditsbtn}
+                  >
+                    View All
+                  </button>
                 </div>
-                
               </div>
-              
             </div>
-            
           </div>
         ) : (
           <p className={style.err}>Not Authorized</p>
@@ -292,7 +321,8 @@ export async function getServerSideProps(context) {
       ),
       receivedProposals: JSON.parse(
         JSON.stringify(await getClientJobProposals(email)),
-      ),transactions: JSON.parse(JSON.stringify(await getTransactions(email))),
+      ),
+      transactions: JSON.parse(JSON.stringify(await getTransactions(email))),
     },
   }
 }

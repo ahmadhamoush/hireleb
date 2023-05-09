@@ -154,7 +154,7 @@
 }
 .wrapper .details {
   margin: 20px;
-  padding:10px;
+  padding: 10px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 .desc {
@@ -187,7 +187,7 @@
   justify-content: center;
   align-items: center;
 }
-  
+
 .showcase .options label:after {
   content: '';
   width: 0;
@@ -240,7 +240,6 @@
 .creditsWrapper {
   width: 30%;
   padding: 10px;
- 
 }
 .creditsWrapper button {
   width: 6.5em;
@@ -314,16 +313,15 @@
   color: rgb(204, 70, 70);
   padding: 20px;
 }
-.leftWrapper{
+.leftWrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.proposals{
+.proposals {
   display: flex;
-
 }
 .proposals div button {
   width: 6.5em;
@@ -372,7 +370,7 @@
 .proposals div {
   margin: 5px;
 }
-.proposals  div{
+.proposals div {
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -24,7 +24,7 @@ const Freelancer = ({
   services,
   receivedProposals,
   sentProposals,
-  transactions
+  transactions,
 }) => {
   const [isPortfolio, setIsPortfolio] = useState(true)
   const [isServices, setIsServices] = useState(false)
@@ -171,46 +171,52 @@ const Freelancer = ({
                   </div>
                 </div>
                 <div className={style.leftWrapper}>
-                 <div className={style.btns}>
-                 <button
-                    onClick={() => router.push('/freelancer/add-project')}
-                  >
-                    Add New Project
-                  </button>
-                  <button
-                    onClick={() => router.push('/freelancer/add-service')}
-                  >
-                    Add a Service
-                  </button>
-                  <button>Build CV</button>
-                  <button>Build Porfolio</button>
-                 </div>
-                 <div className={style.proposals}>
-                 <div >
-                  <p>Sent Proposals</p>
-                  <h2>{sentProposals.length}</h2>
-                  <p>Recieved Proposals</p>
-                  <h2>{receivedProposals.length}</h2>
-                  <button
-                    onClick={() => router.push('/freelancer/proposals')}
-                    className={style.creditsbtn}
-                  >
-                    View All
-                  </button>
+                  <div className={style.btns}>
+                    <button
+                      onClick={() => router.push('/freelancer/add-project')}
+                    >
+                      Add New Project
+                    </button>
+                    <button
+                      onClick={() => router.push('/freelancer/add-service')}
+                    >
+                      Add a Service
+                    </button>
+                    <button>Build CV</button>
+                    <button>Build Porfolio</button>
+                  </div>
+                  <div className={style.proposals}>
+                    <div>
+                      <p>Sent Proposals</p>
+                      <h2>{sentProposals.length}</h2>
+                      <p>Recieved Proposals</p>
+                      <h2>{receivedProposals.length}</h2>
+                      <button
+                        onClick={() => router.push('/freelancer/proposals')}
+                        className={style.creditsbtn}
+                      >
+                        View All
+                      </button>
+                    </div>
+                    <div>
+                      <p>On going jobs</p>
+                      <h2>
+                        {receivedProposals.filter(
+                          (proposal) => proposal.status === 'accepted',
+                        ).length +
+                          sentProposals.filter(
+                            (proposal) => proposal.status === 'accepted',
+                          ).length}
+                      </h2>
+                      <button
+                        onClick={() => router.push('/freelancer/on-going')}
+                        className={style.creditsbtn}
+                      >
+                        View All
+                      </button>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <p>On going jobs</p>
-                  <h2>{receivedProposals.filter(proposal=>proposal.status ==='accepted').length +sentProposals.filter(proposal=>proposal.status ==='accepted').length}</h2>
-                  <button
-                    onClick={() => router.push('/freelancer/on-going')}
-                    className={style.creditsbtn}
-                  >
-                    View All
-                  </button>
-                </div>
-                 </div>
-                </div>
-                
               </div>
               <div className={style.showcase}>
                 <div className={style.options}>
@@ -302,26 +308,44 @@ const Freelancer = ({
                 <div>
                   <p className={style.transactionHeader}>Transactions</p>
                   <div className={style.transactions}>
-                    {transactions?.deposits.slice(0,3).map((deposit,index)=>{
-                      return ( <p key={index}>
-                        <span>{deposit.credits} Credits</span> have been deposited
-                      </p>)
-                    })}
-                     {transactions?.transfers.slice(0,3).map((transfer,index)=>{
-                      return ( <p key={index}>
-                        <span>{transfer.credits} Credits</span> have been transfered
-                      </p>)
-                    })}
-                      {transactions?.received.slice(0,3).map((receive,index)=>{
-                      return ( <p key={index}>
-                        <span>{receive.credits} Credits</span> have been received
-                      </p>)
-                    })}
-                   
+                    {transactions?.deposits
+                      .slice(0, 3)
+                      .map((deposit, index) => {
+                        return (
+                          <p key={index}>
+                            <span>{deposit.credits} Credits</span> have been
+                            deposited
+                          </p>
+                        )
+                      })}
+                    {transactions?.transfers
+                      .slice(0, 3)
+                      .map((transfer, index) => {
+                        return (
+                          <p key={index}>
+                            <span>{transfer.credits} Credits</span> have been
+                            transfered
+                          </p>
+                        )
+                      })}
+                    {transactions?.received
+                      .slice(0, 3)
+                      .map((receive, index) => {
+                        return (
+                          <p key={index}>
+                            <span>{receive.credits} Credits</span> have been
+                            received
+                          </p>
+                        )
+                      })}
                   </div>
-                  <button onClick={()=>router.push('/freelancer/transactions')} className={style.creditsbtn}>View All</button>
+                  <button
+                    onClick={() => router.push('/freelancer/transactions')}
+                    className={style.creditsbtn}
+                  >
+                    View All
+                  </button>
                 </div>
-               
               </div>
             </div>
           </div>
@@ -353,8 +377,8 @@ export async function getServerSideProps(context) {
         JSON.stringify(
           await getFreelancerJobProposals((await session)?.user.email),
         ),
-      
-      ),transactions: JSON.parse(JSON.stringify(await getTransactions(email))),
-    },  
+      ),
+      transactions: JSON.parse(JSON.stringify(await getTransactions(email))),
+    },
   }
 }
