@@ -76,12 +76,34 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
       console.log(data)
       if (data.foundProposal.paid) {
         setLoading(false)
-        toast('Job Completed!')
+        toast('Service Completed!')
         const refreshData = () => router.replace(router.asPath)
         refreshData()
       } else {
         setLoading(false)
         toast('Cannot mark as complete since service is not paid')
+      }
+    } catch (err) {
+      console.log(err)
+      setLoading(false)
+    }
+  }
+  const markJobAsComplete = async (id) => {
+    setLoading(true)
+    try {
+      const formData = new FormData()
+      formData.append('id', id)
+      formData.append('sender', session.data.user.email)
+      const { data } = await axios.post('/api/complete-job', formData)
+      console.log(data)
+      if (data.foundProposal.paid) {
+        setLoading(false)
+        toast('Job Completed!')
+        const refreshData = () => router.replace(router.asPath)
+        refreshData()
+      } else {
+        setLoading(false)
+        toast('Cannot mark as complete since job is not paid')
       }
     } catch (err) {
       console.log(err)
@@ -236,9 +258,19 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
                       <h3>Description</h3>
                       <p>{proposal.job.description}</p>
                       <h3 style={{ color: '#feff5c' }}>In Progress...</h3>
+                      <h3>Paid</h3>
+                      <p>{proposal.paid ? 'yes' : 'no'}</p>
                     </div>
                     <div className={style.updatesContainer}>
-                      <h3>Update</h3>
+                    <div className={style.updatesHeader}>
+                        <h3>Updates</h3>
+                        <ul>
+                          <li onClick={() => markJobAsComplete(proposal._id)}>
+                            Mark as complete
+                          </li>
+                          <li>Send project file</li>
+                        </ul>
+                      </div>
                       <div className={style.updates}>
                         {proposal.updates.map((update) => {
                           return (

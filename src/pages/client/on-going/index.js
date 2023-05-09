@@ -90,6 +90,27 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
       setLoading(false)
     }
   }
+  const markJobAsPaid = async (id, credits, to) => {
+    setLoading(true)
+    try {
+      const formData = new FormData()
+      formData.append('id', id)
+      formData.append('from', session.data.user.email)
+      formData.append('to', to)
+      formData.append('credits', credits)
+      const { data } = await axios.post('/api/pay-job', formData)
+      if (data.done === 'ok') {
+        setLoading(false)
+        toast('Payment Successfull! Credits has been transfered.')
+        setIsPaying(false)
+        const refreshData = () => router.replace(router.asPath)
+        refreshData()
+      }
+    } catch (err) {
+      console.log(err)
+      setLoading(false)
+    }
+  }
 
   return (
     <Layout>
@@ -151,6 +172,30 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
                 return (
                   <>
                     <div className={style.proposalFlex}>
+                    {isPaying.clicked && isPaying.id === proposal._id && (
+                        <div className={style.pay}>
+                          <h3>Credits to be paid</h3>
+                          <h1>{proposal.job.credits}</h1>
+                          <div className={style.btns}>
+                            <button
+                              onClick={() =>
+                                markJobAsPaid(
+                                  proposal._id,
+                                  proposal.job.credits,
+                                  proposal.freelancer,
+                                )
+                              }
+                            >
+                              Pay
+                            </button>
+                            <button
+                              onClick={() => setIsPaying({ clicked: false })}
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        </div>
+                      )}
                       <div className={style.proposals} key={proposal._id}>
                         <Link
                           href={`/client/job/${proposal.job._id.toString()}`}
@@ -164,9 +209,32 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
                         <h3>Description</h3>
                         <p>{proposal.job.description}</p>
                         <h3 style={{ color: '#feff5c' }}>In Progress...</h3>
+                        <h3>Paid</h3>
+                      <p>{proposal.paid ? 'yes' : 'no'}</p>
                       </div>
                       <div className={style.updatesContainer}>
-                        <h3>Update</h3>
+                      <div className={style.updatesHeader}>
+                          <h3>Updates</h3>
+                          <ul>
+                            {!proposal.paid && (
+                              <li
+                                onClick={() =>
+                                  setIsPaying({
+                                    id: proposal._id,
+                                    clicked: true,
+                                  })
+                                }
+                              >
+                                Pay ({proposal.job.credits} credits)
+                              </li>
+                            )}
+                            {proposal.paid && (
+                              <li style={{ fontWeight: '800' }}>
+                                JOB PAID
+                              </li>
+                            )}
+                          </ul>
+                        </div>
                         <div className={style.updates}>
                           {proposal.updates.map((update) => {
                             return (
