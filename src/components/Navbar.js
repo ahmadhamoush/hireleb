@@ -28,9 +28,9 @@ const Navbar = () => {
           <div className={style.links}>
             <ul>
               <li>
-                <Link href="/">How it works</Link>
+                <Link href="/how-it-works">How it works</Link>
               </li>
-              {/* display login and sign up if no user is logged in else display logout */}
+              {/* display login and sifgn up if no user is logged in else display logout */}
               {!session.data?.user && <li onClick={() => signIn()}>Login</li>}
 
               {session.data?.user && (
