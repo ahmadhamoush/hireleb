@@ -11,8 +11,8 @@ const Completed = ({receivedProposals,sentProposals}) => {
   return (
     <Layout>
      <div className={style.container}>
-     {receivedProposals.map(completed=>{
-       return  <div className={style.completed}>
+     {receivedProposals.map((completed,index)=>{
+       return  <div key={index} className={style.completed}>
         <h3>Type</h3>
         <p>Service</p>
         <h3>Service Name</h3>
@@ -25,8 +25,8 @@ const Completed = ({receivedProposals,sentProposals}) => {
         <button>Rate</button>
        </div>
       })}
-      {sentProposals.map(completed=>{
-       return <div className={style.completed}>
+      {sentProposals.map((completed,index)=>{
+       return <div key={index} className={style.completed}>
          <h3>Type</h3>
          <p>Job</p>
          <h3>Job Name:</h3>

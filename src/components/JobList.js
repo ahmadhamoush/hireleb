@@ -7,13 +7,7 @@ const JobList = ({ jobs }) => {
       <h2>Trending Jobs</h2>
       <div className={style.services}>
         {jobs.map((job) => {
-          return <JobCard currentUser={false} job={job} />
-        })}
-        {jobs.map((job) => {
-          return <JobCard currentUser={false} job={job} />
-        })}
-        {jobs.map((job) => {
-          return <JobCard currentUser={false} job={job} />
+          return <JobCard key={job._id} currentUser={false} job={job} />
         })}
       </div>
     </div>

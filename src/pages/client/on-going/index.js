@@ -236,9 +236,9 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
                           </ul>
                         </div>
                         <div className={style.updates}>
-                          {proposal.updates.map((update) => {
+                          {proposal.updates.map((update,index) => {
                             return (
-                              <div
+                              <div key={index}
                                 className={
                                   update.sender === proposal.freelancer
                                     ? style.updateSender
@@ -346,9 +346,9 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
                         </div>
 
                         <div className={style.updates}>
-                          {proposal.updates.map((update) => {
+                          {proposal.updates.map((update,index) => {
                             return (
-                              <div
+                              <div key={index}
                                 className={
                                   update.sender === proposal.freelancer
                                     ? style.updateSender

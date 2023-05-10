@@ -37,7 +37,6 @@ const EditService = ({ service }) => {
 
   useEffect(() => {
     setCategoriesList(jobCategories.categories)
-    console.log(service)
   }, [categoriesList])
 
   const handleUpload = async () => {

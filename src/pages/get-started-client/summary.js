@@ -12,7 +12,7 @@ import Layout from '@/components/Layout'
 import { toast } from 'react-toastify'
 import Loader from '@/components/Loader'
 
-const index = () => {
+const Summary = () => {
   const session = useSession()
   const router = useRouter()
   const [loading, setLoading] = useState(false)
@@ -176,4 +176,4 @@ const index = () => {
   )
 }
 
-export default index
+export default Summary

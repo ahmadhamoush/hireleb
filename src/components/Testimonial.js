@@ -9,7 +9,7 @@ const Testimonial = () => {
         <div className={style.container}>
           <p className={style.sentence}>
             I was so relieved to find out that HireLeb accepts payment through
-            OMT. With the current state of credit card usage in Lebanon, it's
+            OMT. With the current state of credit card usage in Lebanon, its
             been tough to find reliable payment options. Thanks to HireLeb, I
             can focus on delivering great work without worrying about payment
             issues.
@@ -31,9 +31,9 @@ const Testimonial = () => {
         <div className={style.container}>
           <p className={style.sentence}>
             I was hesitant to try out a freelance platform at first, but
-            HireLeb’s payment system through OMT made the whole process much
+            HireLebs payment system through OMT made the whole process much
             easier and more accessible. I was able to find the perfect
-            freelancer for my project and I couldn't be happier with the
+            freelancer for my project and I couldnt be happier with the
             results. Highly recommend!
           </p>
           <div className={style.user}>

@@ -79,6 +79,7 @@ const Client = ({
             {profileClicked && (
               <div className={style.profileClickedContainer}>
                 <Image
+                alt='profile'
                   className={style.profileClicked}
                   src={user.image}
                   width={300}
@@ -149,6 +150,7 @@ const Client = ({
                         src={user.image}
                         width={80}
                         height={80}
+                        alt='profile'
                       />
                     ) : (
                       <FontAwesomeIcon className={style.user} icon={faUser} />
@@ -229,7 +231,7 @@ const Client = ({
                 <div className={style.services}>
                   {jobs.map((job) => {
                     return (
-                      <div
+                      <div key={job._id}
                         onClick={() => router.push(`/client/job/${job._id}`)}
                       >
                         <Job job={job} />

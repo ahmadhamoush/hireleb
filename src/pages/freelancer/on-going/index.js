@@ -169,7 +169,7 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
             <div className={style.proposalsContainer}>
               {receivedProposals.map((proposal) => {
                 return (
-                  <div className={style.proposalFlex}>
+                  <div key={proposal._id} className={style.proposalFlex}>
                     <div className={style.proposals} key={proposal._id}>
                       <Link
                         href={`/freelancer/service/${proposal.service[0]._id}`}
@@ -203,9 +203,9 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
                       </div>
 
                       <div className={style.updates}>
-                        {proposal.updates.map((update) => {
+                        {proposal.updates.map((update,index) => {
                           return (
-                            <div
+                            <div key={index}
                               className={
                                 update.sender === proposal.client
                                   ? style.updateSender
@@ -246,7 +246,7 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
             <div className={style.proposalsContainer}>
               {sentProposals.map((proposal) => {
                 return (
-                  <div className={style.proposalFlex}>
+                  <div key={proposal._id}  className={style.proposalFlex}>
                     <div className={style.proposals} key={proposal._id}>
                       <Link href={`/jobs/job/${proposal.job._id}`}>
                         <p>View Job</p>
@@ -272,9 +272,9 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
                         </ul>
                       </div>
                       <div className={style.updates}>
-                        {proposal.updates.map((update) => {
+                        {proposal.updates.map((update,index) => {
                           return (
-                            <div
+                            <div key={index}
                               className={
                                 update.sender === proposal.client
                                   ? style.updateSender

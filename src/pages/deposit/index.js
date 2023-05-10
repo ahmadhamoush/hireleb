@@ -143,7 +143,7 @@ const Deposit = () => {
                     To deposit credits, upload a receipt as proof of payment.
                   </li>
                   <li>
-                    It may take some time to verify the payment, but once it's
+                    It may take some time to verify the payment, but once its
                     verified, the credits will be deposited into your account.
                   </li>
                   <li>
@@ -170,7 +170,7 @@ const Deposit = () => {
               the platform.
             </li>
             <li>
-              When you pay for a freelancer's services, the payment will be
+              When you pay for a freelancers services, the payment will be
               deducted from your credit balance. The freelancer will then
               receive the payment in credits, which they can use to purchase
               services or withdraw as cash.

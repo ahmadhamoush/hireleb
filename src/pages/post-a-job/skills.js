@@ -10,7 +10,7 @@ import jobCategories from '../../../lib/jobCategories'
 import Layout from '@/components/Layout'
 import { toast } from 'react-toastify'
 
-const index = () => {
+const Skills = () => {
   const session = useSession()
   const router = useRouter()
 
@@ -146,4 +146,4 @@ const index = () => {
   )
 }
 
-export default index
+export default Skills

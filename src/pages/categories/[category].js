@@ -18,6 +18,7 @@ const Category = () => {
         { categoriesList.filter(category=>category.name === router.query.category).map(category=>category.subcategories.map(sub=>{
       return (
         <CategoryCard
+        key={sub.name}
         category={sub.name}
         image={sub.image}
       />

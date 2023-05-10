@@ -282,7 +282,7 @@ const Freelancer = ({
                     {!services.length && <h4>No Services</h4>}
                     {services.map((service) => {
                       return (
-                        <div
+                        <div key={service._id}
                           onClick={() => {
                             router.push(`/freelancer/service/${service._id}`)
                           }}

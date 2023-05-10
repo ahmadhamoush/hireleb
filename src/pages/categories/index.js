@@ -15,7 +15,7 @@ const Categories = () => {
         <div style={{display:'flex',flexWrap:'wrap',gap:'20px',justifyContent:'center',alignItems:'center',padding:'25px'}}>
         {categoriesList.map(category=>{
       return (
-       <div onClick={()=>router.push(`/categories/${category.name}`)}>
+       <div key={category.name} onClick={()=>router.push(`/categories/${category.name}`)}>
          <CategoryCard
         category={category.name}
         image={category.image}

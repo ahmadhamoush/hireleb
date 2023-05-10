@@ -10,7 +10,7 @@ import GetStartedContext from '@/components/GetStartedContext'
 import Layout from '@/components/Layout'
 import { toast } from 'react-toastify'
 
-const index = () => {
+const Home = () => {
   const session = useSession()
   const router = useRouter()
   const { selectedImage, setSelectedImage, selectedFile, setSelectedFile } =
@@ -106,4 +106,4 @@ const index = () => {
   )
 }
 
-export default index
+export default Home

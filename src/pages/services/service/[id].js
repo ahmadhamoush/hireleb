@@ -31,7 +31,7 @@ const Service = ({ service, proposed, ongoing }) => {
       )
     }
     fetchFreelancer()
-  }, [])
+  }, [service])
 
   const handleUpload = async () => {
     setLoading(true)
@@ -62,7 +62,7 @@ const Service = ({ service, proposed, ongoing }) => {
         <div className={style.container}>
           <div>
             <div className={style.freelancerDetails}>
-              <Image src={freelancer?.image} width={80} height={80} />
+              <Image alt='freelancer' src={freelancer?.image} width={80} height={80} />
               <div>
                 <h3>
                   {freelancer?.fName} {freelancer?.lName}
@@ -80,9 +80,9 @@ const Service = ({ service, proposed, ongoing }) => {
             <p>{service[0].subcategory}</p>
             <h3>Service Skills</h3>
             <div className={style.skills}>
-              {service[0].skills.split(',').map((skill) => {
+              {service[0].skills.split(',').map((skill,index) => {
                 return (
-                  <div>
+                  <div key={index}>
                     <p>{skill}</p>
                   </div>
                 )

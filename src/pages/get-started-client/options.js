@@ -9,7 +9,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import Layout from '@/components/Layout'
 
-const index = () => {
+const Options = () => {
   const router = useRouter()
   return (
     <Layout>
@@ -19,8 +19,8 @@ const index = () => {
       <Animate play start={{ opacity: 0 }} end={{ opacity: 1 }}>
         <div className={style.container}>
           <div className={style.header}>
-            <h1>Great - You're now part of the HireLeb community!</h1>
-            <p>So, what's next? </p>
+            <h1>Great - You are now part of the HireLeb community!</h1>
+            <p>So, whats next? </p>
           </div>
           <div className={style.optionsContainer}>
             <div>
@@ -69,4 +69,4 @@ const index = () => {
   )
 }
 
-export default index
+export default Options

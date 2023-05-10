@@ -29,9 +29,9 @@ const Service = ({ service }) => {
             <p>{service[0].subcategory}</p>
             <h3>Service Skills</h3>
             <div className={style.skills}>
-              {service[0].skills.split(',').map((skill) => {
+              {service[0].skills.split(',').map((skill,index) => {
                 return (
-                  <div>
+                  <div key={index}>
                     <p>{skill}</p>
                   </div>
                 )

@@ -82,9 +82,9 @@ const Proposals = ({ transactions }) => {
 
           {isReceived && (
             <div className={style.transactionsContainer}>
-              {transactions.received.map((receive) => {
+              {transactions.received.map((receive,index) => {
                 return (
-                  <div className={style.transactions}>
+                  <div key={index} className={style.transactions}>
                     <h3>
                       Credits <span>({receive.credits})</span>
                     </h3>
@@ -99,9 +99,9 @@ const Proposals = ({ transactions }) => {
           )}
           {isDeposit && (
             <div className={style.transactionsContainer}>
-              {transactions.deposits.map((deposit) => {
+              {transactions.deposits.map((deposit,index) => {
                 return (
-                  <div className={style.transactions}>
+                  <div key={index} className={style.transactions}>
                     <h3>
                       Credits <span>({deposit.credits})</span>
                     </h3>
@@ -116,9 +116,9 @@ const Proposals = ({ transactions }) => {
           )}
           {isTransfers && (
             <div className={style.transactionsContainer}>
-              {transactions.transfers.map((transfer) => {
+              {transactions.transfers.map((transfer,index) => {
                 return (
-                  <div className={style.transactions}>
+                  <div key={index} className={style.transactions}>
                     <h3>
                       Credits <span>({transfer.credits})</span>
                     </h3>

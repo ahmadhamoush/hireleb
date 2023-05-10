@@ -264,7 +264,7 @@ const AddService = () => {
             </div>
             <h3>
               The amount of credits that will be charged for the service
-              provided."{' '}
+              provided.{' '}
               <span style={{ color: '#2d646d' }}>(1 Credit = 1 USD)</span>
             </h3>
             <div>

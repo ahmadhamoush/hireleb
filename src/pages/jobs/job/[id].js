@@ -31,7 +31,7 @@ const Job = ({ job, proposed, ongoing }) => {
       )
     }
     fetchClient()
-  }, [])
+  }, [job.postedBy])
 
   const handleUpload = async () => {
     setLoading(true)
@@ -61,7 +61,7 @@ const Job = ({ job, proposed, ongoing }) => {
         <div className={style.container}>
           <div>
             <div className={style.freelancerDetails}>
-              <Image src={client?.image} width={80} height={80} />
+              <Image alt='client' src={client?.image} width={80} height={80} />
               <div>
                 <h3>
                   {client?.fName} {client?.lName}
@@ -79,9 +79,9 @@ const Job = ({ job, proposed, ongoing }) => {
             <p>{job.subcategory}</p>
             <h3>Job Skills</h3>
             <div className={style.skills}>
-              {job.skills.split(',').map((skill) => {
+              {job.skills.split(',').map((skill,index) => {
                 return (
-                  <div>
+                  <div key={index}>
                     <p>{skill}</p>
                   </div>
                 )

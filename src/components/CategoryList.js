@@ -20,6 +20,7 @@ const CategoryList = () => {
      {categoriesList.map(category=>{
       return (
         <CategoryCard
+        key={category._id}
         category={category.name}
         image={category.image}
       />

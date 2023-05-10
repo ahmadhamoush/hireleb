@@ -50,7 +50,7 @@ const Login = () => {
         router.push(`/client/${session.data.user.email}`)
       }
     }
-  }, [session])
+  }, [session,router])
 
   return (
     <Layout>
@@ -89,7 +89,7 @@ const Login = () => {
               <button onClick={() => router.push('/')}>Cancel</button>
             </div>
             <p>
-              Don't have an account?{' '}
+              Dont have an account?{' '}
               <Link href="/signup">Sign Up Right Now!</Link>
             </p>
           </form>

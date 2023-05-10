@@ -54,6 +54,7 @@ const Landing = () => {
                 src="/showcase1.png"
                 width={200}
                 height={350}
+                alt='img'
               />
               <ProfileCard />
             </div>
@@ -63,6 +64,7 @@ const Landing = () => {
                 src="/showcase1.png"
                 width={200}
                 height={350}
+                alt='img'
               />
               <ProfileCard />
             </div>

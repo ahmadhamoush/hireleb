@@ -7,7 +7,7 @@ import GetStartedContext from '@/components/GetStartedContext'
 import Layout from '@/components/Layout'
 import { toast } from 'react-toastify'
 
-const index = () => {
+const Hourly = () => {
   const session = useSession()
   const router = useRouter()
 
@@ -78,4 +78,4 @@ const index = () => {
   )
 }
 
-export default index
+export default Hourly

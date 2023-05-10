@@ -223,7 +223,7 @@ const Jobs = ({ jobs }) => {
                 {jobs
                   .filter((job) => job.category === category)
                   .map((job) => {
-                    return <JobCard currentUser={false} job={job} />
+                    return <JobCard key={job._id} currentUser={false} job={job} />
                   })}
               </div>
             )}
@@ -240,7 +240,7 @@ const Jobs = ({ jobs }) => {
                       job.subcategory === subcategory,
                   )
                   .map((job) => {
-                    return <JobCard currentUser={false} job={job} />
+                    return <JobCard key={job._id} currentUser={false} job={job} />
                   })}
               </div>
             )}
@@ -259,7 +259,7 @@ const Jobs = ({ jobs }) => {
                       ),
                   )
                   .map((job) => {
-                    return <JobCard currentUser={false} job={job} />
+                    return <JobCard key={job._id} currentUser={false} job={job} />
                   })}
               </div>
             )}
@@ -278,7 +278,7 @@ const Jobs = ({ jobs }) => {
                       job.delivery === delivery,
                   )
                   .map((job) => {
-                    return <JobCard currentUser={false} job={job} />
+                    return <JobCard key={job._id} currentUser={false} job={job} />
                   })}
               </div>
             )}
@@ -292,7 +292,7 @@ const Jobs = ({ jobs }) => {
                 {jobs
                   .filter((job) => job.payment === payment)
                   .map((job) => {
-                    return <JobCard currentUser={false} job={job} />
+                    return <JobCard key={job._id} currentUser={false} job={job} />
                   })}
               </div>
             )}
@@ -306,7 +306,7 @@ const Jobs = ({ jobs }) => {
                 {jobs
                   .filter((job) => job.delivery === delivery)
                   .map((job) => {
-                    return <JobCard currentUser={false} job={job} />
+                    return <JobCard key={job._id} currentUser={false} job={job} />
                   })}
               </div>
             )}
@@ -330,7 +330,7 @@ const Jobs = ({ jobs }) => {
                       ),
                   )
                   .map((job) => {
-                    return <JobCard currentUser={false} job={job} />
+                    return <JobCard  key={job._id} currentUser={false} job={job} />
                   })}
               </div>
             )}
@@ -352,7 +352,7 @@ const Jobs = ({ jobs }) => {
                       ),
                   )
                   .map((job) => {
-                    return <JobCard currentUser={false} job={job} />
+                    return <JobCard key={job._id} currentUser={false} job={job} />
                   })}
               </div>
             )}
@@ -374,7 +374,7 @@ const Jobs = ({ jobs }) => {
                       ),
                   )
                   .map((job) => {
-                    return <JobCard currentUser={false} job={job} />
+                    return <JobCard key={job._id} currentUser={false} job={job} />
                   })}
               </div>
             )}
@@ -395,7 +395,7 @@ const Jobs = ({ jobs }) => {
                       job.subcategory === subcategory,
                   )
                   .map((job) => {
-                    return <JobCard currentUser={false} job={job} />
+                    return <JobCard key={job._id} currentUser={false} job={job} />
                   })}
               </div>
             )}
@@ -414,7 +414,7 @@ const Jobs = ({ jobs }) => {
                       job.subcategory === subcategory,
                   )
                   .map((job) => {
-                    return <JobCard currentUser={false} job={job} />
+                    return <JobCard key={job._id} currentUser={false} job={job} />
                   })}
               </div>
             )}
@@ -433,7 +433,7 @@ const Jobs = ({ jobs }) => {
                       job.subcategory === subcategory,
                   )
                   .map((job) => {
-                    return <JobCard currentUser={false} job={job} />
+                    return <JobCard key={job._id} currentUser={false} job={job} />
                   })}
               </div>
             )}
@@ -453,7 +453,7 @@ const Jobs = ({ jobs }) => {
                       job.category === category,
                   )
                   .map((job) => {
-                    return <JobCard currentUser={false} job={job} />
+                    return <JobCard key={job._id} currentUser={false} job={job} />
                   })}
               </div>
             )}
@@ -471,7 +471,7 @@ const Jobs = ({ jobs }) => {
                       job.category === category,
                   )
                   .map((job) => {
-                    return <JobCard currentUser={false} job={job} />
+                    return <JobCard key={job._id} currentUser={false} job={job} />
                   })}
               </div>
             )}
@@ -489,7 +489,7 @@ const Jobs = ({ jobs }) => {
                       job.category === category,
                   )
                   .map((job) => {
-                    return <JobCard currentUser={false} job={job} />
+                    return <JobCard key={job._id} currentUser={false} job={job} />
                   })}
               </div>
             )}
@@ -500,7 +500,7 @@ const Jobs = ({ jobs }) => {
             !delivery.length && (
               <div className={style.display}>
                 {jobs.map((job) => {
-                  return <JobCard currentUser={false} job={job} />
+                  return <JobCard key={job._id} currentUser={false} job={job} />
                 })}
               </div>
             )}
@@ -511,7 +511,7 @@ const Jobs = ({ jobs }) => {
                   job.title.toLowerCase().includes(search),
                 )
                 .map((job) => {
-                  return <JobCard currentUser={false} job={job} />
+                  return <JobCard key={job._id} currentUser={false} job={job} />
                 })}
             </div>
           )}
