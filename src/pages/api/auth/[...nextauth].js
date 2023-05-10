@@ -4,6 +4,7 @@ import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { initMongoose } from '../../../../lib/initMongoose'
 
+
 export const authOptions = {
   callbacks: {
     async redirect({ url, baseUrl }) {
@@ -22,6 +23,7 @@ export const authOptions = {
       return token
     },
   },
+  secret: process.env.NEXTAUTH_SECRET,
   // Using Credentials Provider (Taking email and password from user)
   providers: [
     CredentialsProvider({
@@ -51,6 +53,6 @@ export const authOptions = {
   pages: {
     signIn: '/login',
   },
-  secret:process.env.AUTH_SECRET
+  
 }
 export default NextAuth(authOptions)

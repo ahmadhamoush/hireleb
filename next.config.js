@@ -6,7 +6,9 @@ const nextConfig = {
     CLOUD_NAME: process.env.CLOUD,
     API_KEY: process.env.CLOUD_API,
     API_SECRET: process.env.CLOUD_SECRET,
-    AUTH_SECRET: process.env.SECRET_AUTH
+    NEXTAUTH_SECRET: process.env.SECRET_AUTH,
+    NEXTAUTH_URL: process.env.NEXT_URL,
+    NEXTAUTH_URL_INTERNAL:process.env.NEXT_INTERAL
   },
   images: {
     domains: [
