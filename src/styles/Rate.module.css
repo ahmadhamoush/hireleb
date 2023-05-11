@@ -151,3 +151,12 @@
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
   }
+  .container textarea {
+    padding: 12px 20px;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    width: 100%;
+    font-size: 16px;
+    background-color: #eeeded;
+  }

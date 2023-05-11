@@ -1,0 +1,208 @@
+.container{
+    padding: 20px;
+    background-color: #f8f8f8;
+    height: 100vh;
+}
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .header label {
+    margin: 0 10px;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .selected {
+    color: #10b3af;
+    font-weight: 800;
+    transition: color 0.5 ease-in-out;
+    -webkit-transition: color 0.5s ease-in-out;
+    -moz-transition: color 0.5s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .header label:after {
+    content: '';
+    width: 0;
+    height: 5px;
+    background-color: #10b3af;
+    transition: 0.5 ease-in-out;
+    -webkit-transition: 0.5s ease-in-out;
+    -moz-transition: 0.5s ease-in-out;
+    border-radius: 10px;
+  }
+  #label:checked ~ .selected::after {
+    width: 100%;
+  }
+  #label:checked ~ .selected::after {
+    width: 100%;
+  }
+  #label1:checked ~ .selected::after {
+    width: 100%;
+  }
+  #label1:checked ~ .selected::after {
+    width: 100%;
+  }
+  #label3:checked ~ .selected::after {
+    width: 100%;
+  }
+  #label3:checked ~ .selected::after {
+    width: 100%;
+  }
+
+  #label4:checked ~ .selected::after {
+    width: 100%;
+  }
+  #label4:checked ~ .selected::after {
+    width: 100%;
+  }
+  .wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    gap: 20px;
+  }
+  .card {
+    max-width: 450px;
+    border-radius: 1rem;
+    background-color: rgba(31, 41, 55, 1);
+    padding: 1rem;
+
+  }
+  
+  .infos {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    grid-gap: 1rem;
+    gap: 1rem;
+  }
+  
+  .image {
+    object-fit: cover;
+    border-radius: 50%;
+    background-color:#10b3af;
+
+  }
+  
+  .info {
+    height: 7rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .name {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 1);
+    text-transform: capitalize;
+  }
+  
+  .function {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    text-transform: capitalize;
+    color: rgba(156, 163, 175, 1);
+  }
+  
+  .stats {
+    width: 100%;
+    border-radius: 0.5rem;
+    background-color: rgba(255, 255, 255, 1);
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    color: rgba(0, 0, 0, 1);
+
+  }
+  
+  .flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 4px;
+  }
+  
+  .stateValue {
+    font-weight: 700;
+    color: #10b3af;
+  }
+  
+  .request {
+    margin-top: 1.5rem;
+    width: 100%;
+    border: 1px solid transparent;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    transition: all .3s ease;
+  }
+  
+ 
+  .container button {
+    width: 6.5em;
+    height: 2.3em;
+    margin: 0.5em;
+    background: #fff;
+  
+    background-color: rgb(251, 120, 120);
+    color: red;
+    border: none;
+    border-radius: 0.625em;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+  }
+  
+  .container button:hover {
+    color: red;
+  }
+  
+  .container button:after {
+    content: '';
+    background-color: rgba(31, 41, 55, 1);
+    position: absolute;
+    z-index: -1;
+    left: -20%;
+    right: -20%;
+    top: 0;
+    bottom: 0;
+    transform: skewX(-45deg) scale(0, 1);
+    transition: all 0.5s;
+  }
+  
+  .container button:hover:after {
+    transform: skewX(-45deg) scale(1, 1);
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+  }
+  .btns {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  
+    margin: auto;
+  }
+  .btns button:first-child {
+ 
+    color: green;
+    background-color: rgb(75, 186, 75);
+  }
+  

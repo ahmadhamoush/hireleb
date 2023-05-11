@@ -142,6 +142,9 @@ const Deposit = () => {
                   <li>
                     To deposit credits, upload a receipt as proof of payment.
                   </li>
+                  <li style={{fontWeight:'bold'}}>
+                   Send to: Ahmad Hamoush
+                  </li>
                   <li>
                     It may take some time to verify the payment, but once its
                     verified, the credits will be deposited into your account.

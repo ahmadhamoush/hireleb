@@ -19,6 +19,7 @@ const User = ({user}) => {
     const [responsive,setResponsive] = useState('')
     const [communication,setCommunication] = useState('')
     const [outcome,setOutcome] = useState('')
+    const [comment,setComment] = useState('')
     const [loading,setLoading] = useState(false)
     const router = useRouter()
 
@@ -56,6 +57,7 @@ const User = ({user}) => {
             formData.append('responsive', responsive)
             formData.append('communication', communication)
             formData.append('outcome', outcome)
+            formData.append('comment', comment)
             const { data } = await axios.post('/api/rate', formData)
             if (data) {
               toast('Rate Success')
@@ -156,7 +158,17 @@ const User = ({user}) => {
   <label htmlFor="star1" title="text"></label>
 </div>
               </div>
-         
+              <div>
+              <label htmlFor={style.about}>Comment</label>
+              <textarea
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                rows="8"
+                cols="30"
+                id={style.about}
+                placeholder="Comment on user"
+              />
+            </div>
                
             </div>
             <button onClick={rate}>Rate</button>

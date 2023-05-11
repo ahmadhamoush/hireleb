@@ -1,5 +1,5 @@
 import formidable from 'formidable'
-import User from 'models/User'
+import Deposit from 'models/Deposit'
 import { initMongoose } from 'lib/initMongoose'
 
 export const config = {
@@ -20,27 +20,16 @@ const parseForm = (req) => {
       resolve({ fields })
       //connecting to db
       await initMongoose()
-      // updating user with rates and saving it to db
-      
-      const rateUser = await User.updateOne(
+      // creating new project and saving it to db
+      const updatedDeposit = await Deposit.updateOne(
         {
-          email: fields.rated,
+          _id: fields.id,
         },
         {
-          $push: {
-            rates: {
-              quality:(Number(fields.quality)*100)/5,
-              deadline:(Number(fields.deadline)*100)/5,
-              responsive:(Number(fields.responsive)*100)/5,
-              communication:(Number(fields.communication)*100)/5,
-              outcome:(Number(fields.outcome)*100)/5,
-              comment:fields.comment,
-              date: new Date().toLocaleString(),
-              ratedby: fields.ratedBy,
-            },
-          },
+          status: 'declined',
         },
       )
+         
     })
   })
 }
