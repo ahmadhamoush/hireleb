@@ -33,7 +33,7 @@ const Options = () => {
                 Find your perfect solution with our fixed-price services that
                 can be completed in as little as 1 hour!
               </p>
-              <button type="button">Browse Services</button>
+              <button onClick={()=>router.push('/services')} type="button">Browse Services</button>
             </div>
             <div>
               <div className={style.iconContainer}>
@@ -60,7 +60,7 @@ const Options = () => {
                 Explore our network of skilled freelancers and find the right
                 match for your project needs.
               </p>
-              <button type="button">Find Freelancers</button>
+              <button onClick={() => router.push('/profiles')}  type="button">Search Profiles</button>
             </div>
           </div>
         </div>

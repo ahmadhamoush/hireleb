@@ -1,6 +1,8 @@
 import style from '@/styles/Footer.module.css'
+import { useRouter } from 'next/router'
 
 const Footer = () => {
+  const router = useRouter()
   return (
     <div className={style.container}>
       <div className={style.banner}>
@@ -9,8 +11,8 @@ const Footer = () => {
           Free
         </h2>
         <div className={style.btns}>
-          <button>Create Profile</button>
-          <button>Search Profiles</button>
+          <button onClick={()=>router.push('/signup')}>Create Profile</button>
+          <button onClick={()=>router.push('/profiles')}>Search Profiles</button>
         </div>
       </div>
       <div className={style.footerContainer}>

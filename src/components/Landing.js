@@ -20,7 +20,11 @@ const Landing = () => {
             {' '}
             <li>Browse Jobs</li>
           </Link>
-          <li>Find Talent</li>
+          <Link href="/profiles">
+            {' '}
+            <li>Find Freelancers and Clients</li>
+          </Link>
+        
         </ul>
       </div>
       <div className={style.banner}>

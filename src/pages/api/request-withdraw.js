@@ -22,7 +22,7 @@ const readFile = (req) => {
       await initMongoose()
       // creating new deposit and saving it to db
       const withdraw = await Withdraw.create({
-        user: fields.email,
+        user: fields.user,
         credits: fields.credits,
         status: 'pending',
         date: new Date().toISOString().slice(0, 10),

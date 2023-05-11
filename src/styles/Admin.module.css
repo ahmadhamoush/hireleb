@@ -3,10 +3,87 @@
     background-color: #f8f8f8;
     height: 100vh;
 }
+.nav {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #f8f8f8;
+    width: 100%;
+    z-index: 4;
+  }
+  .nav {
+    color: #2d646d;
+  }
+  
+  .nav span {
+    color: #10b3af;
+  }
+  .nav .logo {
+    object-fit: contain;
+    z-index: 1;
+  }
+  
+  .nav .links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 20px;
+  }
+  
+  .nav .links ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 0;
+  }
+  .nav h1 {
+    font-size: 35px;
+  }
+  
+  .nav .links ul li {
+    list-style: none;
+    margin: 0 20px;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  
+  .nav .links ul:last-child {
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .nav .links ul:first-child {
+    font-weight: 200;
+    text-transform: capitalize;
+  }
+  
+  .nav .links ul li::after {
+    content: '';
+    width: 0;
+    height: 3px;
+    background-color: #10b3af;
+    transition: 0.5s ease-in-out;
+  }
+  
+  .nav .links ul li:hover::after {
+    width: 100%;
+  }
+  
 .header {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 20px;
   }
   .header label {
     margin: 0 10px;
@@ -61,6 +138,12 @@
     width: 100%;
   }
   #label4:checked ~ .selected::after {
+    width: 100%;
+  }
+  #label5:checked ~ .selected::after {
+    width: 100%;
+  }
+  #label5:checked ~ .selected::after {
     width: 100%;
   }
   .wrapper{
@@ -140,18 +223,7 @@
     font-weight: 700;
     color: #10b3af;
   }
-  
-  .request {
-    margin-top: 1.5rem;
-    width: 100%;
-    border: 1px solid transparent;
-    border-radius: 0.5rem;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    line-height: 1.5rem;
-    transition: all .3s ease;
-  }
-  
+
  
   .container button {
     width: 6.5em;

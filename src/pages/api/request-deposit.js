@@ -47,7 +47,7 @@ const readFile = (req) => {
       await initMongoose()
       // creating new deposit and saving it to db
       const deposit = await Deposit.create({
-        user: fields.email,
+        user: fields.user,
         credits: fields.credits,
         status: 'pending',
         receipt: `https://res.cloudinary.com/hamoush/image/upload/v1678284450/hireleb-deposits/${files.img.originalFilename}`,

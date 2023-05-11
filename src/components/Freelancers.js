@@ -87,24 +87,7 @@ const Freelancers = () => {
                   ></div>
                 </div>
               </div>
-              <div className={style.rate}>
-                <h3>Satisfaction with outcome</h3>
-                <div className={style.progressBar}>
-                  <div
-                    style={{ '--i': '60%' }}
-                    className={style.progress}
-                  ></div>
-                </div>
-              </div>
-              <div className={style.rate}>
-                <h3>Satisfaction with outcome</h3>
-                <div className={style.progressBar}>
-                  <div
-                    style={{ '--i': '60%' }}
-                    className={style.progress}
-                  ></div>
-                </div>
-              </div>
+              
             </div>
           </div>
           <Image

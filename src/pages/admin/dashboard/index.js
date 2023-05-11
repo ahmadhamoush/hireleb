@@ -11,13 +11,16 @@ import Loader from '@/components/Loader'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
+import { signOut } from 'next-auth/react'
+import { getWithdraws } from '@/pages/api/get-withdraws'
 
 
-const Dashboard = ({users,jobs,services,deposits}) => {
+const Dashboard = ({users,jobs,services,deposits,withdraws}) => {
     const [isUsers,setIsUsers] = useState(true)
     const [isJobs,setIsJobs] = useState(false)
     const [isServices,setIsServices] = useState(false)
     const [isDeposits,setIsDeposits] = useState(false)
+    const [isWithdraws,setIsWithdraws] = useState(false)
     const [loading,setLoading] = useState(false)
     const router = useRouter()
 
@@ -59,8 +62,26 @@ const Dashboard = ({users,jobs,services,deposits}) => {
       }
 
   return (
+    <>
+    <nav className={style.nav}>
+    
+    <h1>
+      Hire<span>Leb</span>
+    </h1>
+  
+    <div className={style.links}>
+      <ul>
+        <li onClick={() => signOut()}>Logout</li>         
+      </ul>
+    </div>
+ 
+</nav>
     <div className={style.container}>
         {loading && <Loader />}
+    
+
+      <hr />
+ 
   <div className={style.header}>
             <input
               checked={isUsers}
@@ -69,6 +90,7 @@ const Dashboard = ({users,jobs,services,deposits}) => {
                 setIsJobs(false)
                 setIsServices(false)
                 setIsDeposits(false)
+                setIsWithdraws(false)
               }}
               id={style.label1}
               hidden
@@ -84,6 +106,7 @@ const Dashboard = ({users,jobs,services,deposits}) => {
                 setIsJobs(true)
                 setIsServices(false)
                 setIsDeposits(false)
+                setIsWithdraws(false)
               }}
               id={style.label}
               hidden
@@ -96,6 +119,7 @@ const Dashboard = ({users,jobs,services,deposits}) => {
                 setIsJobs(true)
                 setIsServices(false)
                 setIsDeposits(false)
+                setIsWithdraws(false)
               }}
               className={isJobs && style.selected}
             >
@@ -108,6 +132,7 @@ const Dashboard = ({users,jobs,services,deposits}) => {
                 setIsJobs(false)
                 setIsServices(true)
                 setIsDeposits(false)
+                setIsWithdraws(false)
               }}
               id={style.label3}
               hidden
@@ -120,6 +145,7 @@ const Dashboard = ({users,jobs,services,deposits}) => {
                 setIsJobs(false)
                 setIsServices(true)
                 setIsDeposits(false)
+                setIsWithdraws(false)
               }}
               className={isServices && style.selected}
             >
@@ -132,6 +158,7 @@ const Dashboard = ({users,jobs,services,deposits}) => {
                 setIsJobs(false)
                 setIsServices(false)
                 setIsDeposits(true)
+                setIsWithdraws(false)
               }}
               id={style.label4}
               hidden
@@ -143,11 +170,38 @@ const Dashboard = ({users,jobs,services,deposits}) => {
                 setIsUsers(false)
                 setIsJobs(false)
                 setIsServices(false)
+                setIsWithdraws(false)
                 setIsDeposits(true)
               }}
               className={isDeposits && style.selected}
             >
               Deposits ({deposits.length})
+            </label>
+            <input
+              checked={isDeposits}
+              onChange={() => {
+                setIsUsers(false)
+                setIsJobs(false)
+                setIsServices(false)
+                setIsDeposits(false)
+                setIsWithdraws(true)
+              }}
+              id={style.label5}
+              hidden
+              type="checkbox"
+            />
+            <label
+              htmlFor={style.label5}
+              onClick={() => {
+                setIsUsers(false)
+                setIsJobs(false)
+                setIsServices(false)
+                setIsWithdraws(true)
+                setIsDeposits(false)
+              }}
+              className={isWithdraws && style.selected}
+            >
+              Withdraws ({withdraws.length})
             </label>
           </div>
 
@@ -303,7 +357,47 @@ const Dashboard = ({users,jobs,services,deposits}) => {
           </div>
 
 }
+{/* displaying withdrawals */}
+{isWithdraws &&  <div className={style.wrapper}>
+         {withdraws.map(withdraw=> {  return <div key={withdraw._id} className={style.card}>
+             <div className={style.infos}>
+                 <div className={style.info}>
+                     <div>
+                         <p className={style.name}>
+                             {withdraw.user}
+                         </p>
+                         <p className={style.function}>
+                            {withdraw.date}
+                         </p>
+                     </div>
+                     <div className={style.stats}>
+                             <p className={`${style.flex} ${style.flexCol}`}>
+                                 Status
+                                 <span className={style.stateValue}>
+                                     {withdraw.status}
+                                 </span>
+                             </p>
+                             <p className={style.flex}>
+                                 Credits
+                                 <span className={style.stateValue}>
+                                     {withdraw.credits}
+                                 </span>
+                             </p>
+                             
+                     </div>
+                   {withdraw.status === 'pending' && <div className={style.btns}>
+                   <button onClick={()=>approve(withdraw._id,withdraw.user,withdraw.credits)}>Approve</button>
+                     <button onClick={()=>decline(withdraw._id)}>Decline</button>
+                   </div>}
+                 </div>
+             </div>
+         </div>
+         })}
+          </div>
+
+}
     </div>
+    </>
   )
 }
 
@@ -318,6 +412,7 @@ export async function getServerSideProps(){
             services: JSON.parse(JSON.stringify(await getAllServices())),
             transactions: JSON.parse(JSON.stringify(await getTransactions())),
             deposits: JSON.parse(JSON.stringify(await getDeposits())),
+            withdraws: JSON.parse(JSON.stringify(await getWithdraws())),
         }
     }
 }
