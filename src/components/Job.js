@@ -16,7 +16,7 @@ const Job = (props) => {
         <p>Job Description: {props.job.description}</p>
       </div>
       <div className={style.skills}>
-        {props.job.skills.split(',').map((skill,index) => {
+        {props.job.skills.split(',').map((skill, index) => {
           return (
             <div key={index}>
               <p>{skill}</p>

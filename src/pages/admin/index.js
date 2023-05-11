@@ -9,7 +9,6 @@ import { toast } from 'react-toastify'
 import Loader from '@/components/Loader'
 import { Animate } from 'react-simple-animate'
 const Admin = () => {
-
   const session = useSession()
   const router = useRouter()
   const [email, setEmail] = useState('')
@@ -44,21 +43,21 @@ const Admin = () => {
     }
   }
 
-//   useEffect(() => {
-//     if (session.status === 'authenticated') {
-//       if (session.data.user.type === 'freelancer') {
-//         router.push(`/freelancer/${session.data.user.email}`)
-//       } else if (session.data.user.type === 'client') {
-//         router.push(`/client/${session.data.user.email}`)
-//       }
-//     }
-//   }, [session,router])
+  //   useEffect(() => {
+  //     if (session.status === 'authenticated') {
+  //       if (session.data.user.type === 'freelancer') {
+  //         router.push(`/freelancer/${session.data.user.email}`)
+  //       } else if (session.data.user.type === 'client') {
+  //         router.push(`/client/${session.data.user.email}`)
+  //       }
+  //     }
+  //   }, [session,router])
 
   return (
     <>
       {loading && <Loader />}
       <Animate play start={{ opacity: 0 }} end={{ opacity: 1 }}>
-        <div style={{marginTop:'100px'}} className={style.container}>
+        <div style={{ marginTop: '100px' }} className={style.container}>
           <form>
             <h2>Login</h2>
             <div className={style.userDetails}>
@@ -90,7 +89,6 @@ const Admin = () => {
               </button>
               <button onClick={() => router.push('/')}>Cancel</button>
             </div>
-
           </form>
         </div>
       </Animate>

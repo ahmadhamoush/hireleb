@@ -32,7 +32,12 @@ const Service = (props) => {
           {props.currentUser && <h3>{props.service.category}</h3>}
           {!props.currentUser && (
             <div className={style.freelancerDetails}>
-              <Image alt='freelancer' src={freelancer?.image} width={80} height={80} />
+              <Image
+                alt="freelancer"
+                src={freelancer?.image}
+                width={80}
+                height={80}
+              />
               <div>
                 <h3>
                   {freelancer?.fName} {freelancer?.lName}
@@ -55,7 +60,7 @@ const Service = (props) => {
               </p>
             </div>
             <div className={style.skills}>
-              {props.service.skills.split(',').map((skill,index) => {
+              {props.service.skills.split(',').map((skill, index) => {
                 return (
                   <div key={index}>
                     <p>{skill}</p>

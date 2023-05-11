@@ -8,7 +8,7 @@ const ProfileCard = () => {
   return (
     <div className={style.container}>
       <div className={style.imageContainer}>
-        <Image   alt='img' className={style.image} src="/guy.webp" fill />
+        <Image alt="img" className={style.image} src="/guy.webp" fill />
       </div>
       <p>Graphic Designer</p>
       <span>John Doe</span>

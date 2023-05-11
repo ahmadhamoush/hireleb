@@ -33,8 +33,8 @@ const Users = ({ users }) => {
             <span>Leb</span>.
           </h1>
           <p>
-            Find the users you need - Search and discover top-rated
-            freelancers and their users
+            Find the users you need - Search and discover top-rated freelancers
+            and their users
           </p>
           <div className={style.search}>
             <input
@@ -224,7 +224,9 @@ const Users = ({ users }) => {
                 {users
                   .filter((user) => user.category === category)
                   .map((user) => {
-                    return <Profile key={user._id} currentUser={false} user={user} />
+                    return (
+                      <Profile key={user._id} currentUser={false} user={user} />
+                    )
                   })}
               </div>
             )}
@@ -241,7 +243,9 @@ const Users = ({ users }) => {
                       user.subcategory === subcategory,
                   )
                   .map((user) => {
-                    return <Profile key={user._id} currentUser={false} user={user} />
+                    return (
+                      <Profile key={user._id} currentUser={false} user={user} />
+                    )
                   })}
               </div>
             )}
@@ -260,7 +264,9 @@ const Users = ({ users }) => {
                       ),
                   )
                   .map((user) => {
-                    return <Profile key={user._id} currentUser={false} user={user} />
+                    return (
+                      <Profile key={user._id} currentUser={false} user={user} />
+                    )
                   })}
               </div>
             )}
@@ -275,11 +281,12 @@ const Users = ({ users }) => {
                 {users
                   .filter(
                     (user) =>
-                      user.payment === payment &&
-                      user.delivery === delivery,
+                      user.payment === payment && user.delivery === delivery,
                   )
                   .map((user) => {
-                    return <Profile key={user._id} currentUser={false} user={user} />
+                    return (
+                      <Profile key={user._id} currentUser={false} user={user} />
+                    )
                   })}
               </div>
             )}
@@ -293,7 +300,9 @@ const Users = ({ users }) => {
                 {users
                   .filter((user) => user.payment === payment)
                   .map((user) => {
-                    return <Profile key={user._id} currentUser={false} user={user} />
+                    return (
+                      <Profile key={user._id} currentUser={false} user={user} />
+                    )
                   })}
               </div>
             )}
@@ -307,7 +316,9 @@ const Users = ({ users }) => {
                 {users
                   .filter((user) => user.delivery === delivery)
                   .map((user) => {
-                    return <Profile key={user._id} currentUser={false} user={user} />
+                    return (
+                      <Profile key={user._id} currentUser={false} user={user} />
+                    )
                   })}
               </div>
             )}
@@ -331,7 +342,9 @@ const Users = ({ users }) => {
                       ),
                   )
                   .map((user) => {
-                    return <Profile  key={user._id} currentUser={false} user={user} />
+                    return (
+                      <Profile key={user._id} currentUser={false} user={user} />
+                    )
                   })}
               </div>
             )}
@@ -353,7 +366,9 @@ const Users = ({ users }) => {
                       ),
                   )
                   .map((user) => {
-                    return <Profile key={user._id} currentUser={false} user={user} />
+                    return (
+                      <Profile key={user._id} currentUser={false} user={user} />
+                    )
                   })}
               </div>
             )}
@@ -375,7 +390,9 @@ const Users = ({ users }) => {
                       ),
                   )
                   .map((user) => {
-                    return <Profile key={user._id} currentUser={false} user={user} />
+                    return (
+                      <Profile key={user._id} currentUser={false} user={user} />
+                    )
                   })}
               </div>
             )}
@@ -396,7 +413,9 @@ const Users = ({ users }) => {
                       user.subcategory === subcategory,
                   )
                   .map((user) => {
-                    return <Profile key={user._id} currentUser={false} user={user} />
+                    return (
+                      <Profile key={user._id} currentUser={false} user={user} />
+                    )
                   })}
               </div>
             )}
@@ -415,7 +434,9 @@ const Users = ({ users }) => {
                       user.subcategory === subcategory,
                   )
                   .map((user) => {
-                    return <Profile key={user._id} currentUser={false} user={user} />
+                    return (
+                      <Profile key={user._id} currentUser={false} user={user} />
+                    )
                   })}
               </div>
             )}
@@ -434,7 +455,9 @@ const Users = ({ users }) => {
                       user.subcategory === subcategory,
                   )
                   .map((user) => {
-                    return <Profile key={user._id} currentUser={false} user={user} />
+                    return (
+                      <Profile key={user._id} currentUser={false} user={user} />
+                    )
                   })}
               </div>
             )}
@@ -454,7 +477,9 @@ const Users = ({ users }) => {
                       user.category === category,
                   )
                   .map((user) => {
-                    return <Profile key={user._id} currentUser={false} user={user} />
+                    return (
+                      <Profile key={user._id} currentUser={false} user={user} />
+                    )
                   })}
               </div>
             )}
@@ -468,11 +493,12 @@ const Users = ({ users }) => {
                 {users
                   .filter(
                     (user) =>
-                      user.payment === payment &&
-                      user.category === category,
+                      user.payment === payment && user.category === category,
                   )
                   .map((user) => {
-                    return <Profile key={user._id} currentUser={false} user={user} />
+                    return (
+                      <Profile key={user._id} currentUser={false} user={user} />
+                    )
                   })}
               </div>
             )}
@@ -486,11 +512,12 @@ const Users = ({ users }) => {
                 {users
                   .filter(
                     (user) =>
-                      user.delivery === delivery &&
-                      user.category === category,
+                      user.delivery === delivery && user.category === category,
                   )
                   .map((user) => {
-                    return <Profile key={user._id} currentUser={false} user={user} />
+                    return (
+                      <Profile key={user._id} currentUser={false} user={user} />
+                    )
                   })}
               </div>
             )}
@@ -501,18 +528,24 @@ const Users = ({ users }) => {
             !delivery.length && (
               <div className={style.display}>
                 {users.map((user) => {
-                  return <Profile key={user._id} currentUser={false} user={user} />
+                  return (
+                    <Profile key={user._id} currentUser={false} user={user} />
+                  )
                 })}
               </div>
             )}
           {search.length > 0 && (
             <div className={style.display}>
               {users
-                .filter((user) =>
-                  user.fName.toLowerCase().includes(search) || user.lName.toLowerCase().includes(search),
+                .filter(
+                  (user) =>
+                    user.fName.toLowerCase().includes(search) ||
+                    user.lName.toLowerCase().includes(search),
                 )
                 .map((user) => {
-                  return <Profile key={user._id} currentUser={false} user={user} />
+                  return (
+                    <Profile key={user._id} currentUser={false} user={user} />
+                  )
                 })}
             </div>
           )}

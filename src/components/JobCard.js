@@ -31,7 +31,7 @@ const JobCard = (props) => {
           {props.currentUser && <h3>{props.job.category}</h3>}
           {!props.currentUser && (
             <div className={style.freelancerDetails}>
-              <Image alt='client' src={client?.image} width={80} height={80} />
+              <Image alt="client" src={client?.image} width={80} height={80} />
               <div>
                 <h3>
                   {client?.fName} {client?.lName}
@@ -52,7 +52,7 @@ const JobCard = (props) => {
               </p>
             </div>
             <div className={style.skills}>
-              {props.job.skills.split(',').map((skill,index) => {
+              {props.job.skills.split(',').map((skill, index) => {
                 return (
                   <div key={index}>
                     <p>{skill}</p>

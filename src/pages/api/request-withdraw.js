@@ -7,7 +7,7 @@ export const config = {
     bodyParser: false,
   },
 }
- 
+
 //function to be called in body
 const readFile = (req) => {
   return new Promise((resolve, reject) => {
@@ -17,7 +17,7 @@ const readFile = (req) => {
       //checking if there are errors
       if (err) reject(err)
       resolve({ fields })
-      
+
       //connecting to db
       await initMongoose()
       // creating new deposit and saving it to db

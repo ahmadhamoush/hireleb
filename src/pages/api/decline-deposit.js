@@ -29,7 +29,6 @@ const parseForm = (req) => {
           status: 'declined',
         },
       )
-         
     })
   })
 }

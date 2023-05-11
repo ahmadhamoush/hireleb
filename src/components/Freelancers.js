@@ -14,15 +14,15 @@ const Freelancers = () => {
           </h2>
           <div className={style.descriptions}>
             <div>
-              <Image alt='img' src="/check-mark.png" width={40} height={40} />
+              <Image alt="img" src="/check-mark.png" width={40} height={40} />
               <p>Access top talent, fast and effortlessly.</p>
             </div>
             <div>
-              <Image alt='img' src="/check-mark.png" width={40} height={40} />
+              <Image alt="img" src="/check-mark.png" width={40} height={40} />
               <p>Quick and streamlined hiring made easy.</p>
             </div>
             <div>
-              <Image alt='img' src="/check-mark.png" width={40} height={40} />
+              <Image alt="img" src="/check-mark.png" width={40} height={40} />
               <p>Guaranteed high-quality talent, every time.</p>
             </div>
           </div>
@@ -30,7 +30,7 @@ const Freelancers = () => {
         <div className={style.phone}>
           <div className={style.freelancer}>
             <div className={style.imageContainer}>
-              <Image alt='img' className={style.image} src="/guy.webp" fill />
+              <Image alt="img" className={style.image} src="/guy.webp" fill />
             </div>
             <p>Graphic Designer</p>
             <span>John Doe</span>
@@ -87,7 +87,6 @@ const Freelancers = () => {
                   ></div>
                 </div>
               </div>
-              
             </div>
           </div>
           <Image

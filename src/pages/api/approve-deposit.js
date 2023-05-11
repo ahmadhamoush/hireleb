@@ -32,7 +32,7 @@ const parseForm = (req) => {
           status: 'accepted',
         },
       )
-        //checking if user currently has a transaction object
+      //checking if user currently has a transaction object
       let foundUser = await Transaction.findOne({ user: fields.user })
 
       //update transaction if found

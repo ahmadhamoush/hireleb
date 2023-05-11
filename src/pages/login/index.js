@@ -50,7 +50,7 @@ const Login = () => {
         router.push(`/client/${session.data.user.email}`)
       }
     }
-  }, [session,router])
+  }, [session, router])
 
   return (
     <Layout>

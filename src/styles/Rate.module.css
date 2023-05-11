@@ -1,162 +1,162 @@
 .freelancer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    line-height: 2;
-    height: 100%;
-    margin: 30px;
-  }
-  
-  .freelancer span {
-    font-weight: 200;
-    font-size: 12px;
-  }
-  
-  .phoneImage {
-    z-index: -1;
-    transform: translateX(8px);
-    object-fit: cover;
-  }
-  .image {
-    border-radius: 50%;
-    object-fit: cover;
-  }
-  .imageContainer {
-    position: relative;
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-  }
-  .icon {
-    color: #ffd700;
-    margin-right: 5px;
-  }
-  .rate h3 {
-    font-size: 15px;
-  }
-  .rates {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 20px;
-    margin: 10px 0;
-  }
-  .rate {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  .totalProjects {
-    font-size: 15px;
-  }
-  .totalProjects span {
-    font-weight: 600;
-    font-size: 15px;
-    margin: 0 2px;
-  }
-  .progressBar {
-    background-color: #e3e3e3;
-    border-radius: 20px;
-    width: 200px;
-    height: 15px;
-  }
-  .progress {
-    background-color: #10b3af;
-    border-radius: 20px;
-    width: var(--i);
-    height: 15px;
-    animation: progressAnim 0.5s ease-in-out;
-  }
-  .all {
-    color: #10b3af;
-    text-transform: uppercase;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .all p {
-    margin-right: 5px;
-  }
-  
-  .rating:not(:checked) > input {
-    position: absolute;
-    appearance: none;
-  }
-  
-  .rating:not(:checked) > label {
-    float: right;
-    cursor: pointer;
-    font-size: 50px;
-    color: #666;
-  }
-  
-  .rating:not(:checked) > label:before {
-    content: '★';
-  }
-  
-  .rating > input:checked + label:hover,
-  .rating > input:checked + label:hover ~ label,
-  .rating > input:checked ~ label:hover,
-  .rating > input:checked ~ label:hover ~ label,
-  .rating > label:hover ~ input:checked ~ label {
-    color: #e58e09;
-  }
-  
-  .rating:not(:checked) > label:hover,
-  .rating:not(:checked) > label:hover ~ label {
-    color: #ff9e0b;
-  }
-   
-  .rating > input:checked ~ label {
-    color: #ffa723;
-  }
-  
-  .container button {
-    width: 6.5em;
-    height: 2.3em;
-    margin: 0.5em;
-    background: #2d646d;
-    color: white;
-    border: none;
-    border-radius: 0.625em;
-    font-size: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    position: relative;
-    z-index: 1;
-    overflow: hidden;
-  }
-  
-  .container button:hover {
-    color: black;
-  }
-  
-  .container button:after {
-    content: '';
-    background: white;
-    position: absolute;
-    z-index: -1;
-    left: -20%;
-    right: -20%;
-    top: 0;
-    bottom: 0;
-    transform: skewX(-45deg) scale(0, 1);
-    transition: all 0.5s;
-  }
-  
-  .container button:hover:after {
-    transform: skewX(-45deg) scale(1, 1);
-    -webkit-transition: all 0.5s;
-    transition: all 0.5s;
-  }
-  .container textarea {
-    padding: 12px 20px;
-    border-radius: 10px;
-    outline: none;
-    border: none;
-    width: 100%;
-    font-size: 16px;
-    background-color: #eeeded;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  line-height: 2;
+  height: 100%;
+  margin: 30px;
+}
+
+.freelancer span {
+  font-weight: 200;
+  font-size: 12px;
+}
+
+.phoneImage {
+  z-index: -1;
+  transform: translateX(8px);
+  object-fit: cover;
+}
+.image {
+  border-radius: 50%;
+  object-fit: cover;
+}
+.imageContainer {
+  position: relative;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+}
+.icon {
+  color: #ffd700;
+  margin-right: 5px;
+}
+.rate h3 {
+  font-size: 15px;
+}
+.rates {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  margin: 10px 0;
+}
+.rate {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.totalProjects {
+  font-size: 15px;
+}
+.totalProjects span {
+  font-weight: 600;
+  font-size: 15px;
+  margin: 0 2px;
+}
+.progressBar {
+  background-color: #e3e3e3;
+  border-radius: 20px;
+  width: 200px;
+  height: 15px;
+}
+.progress {
+  background-color: #10b3af;
+  border-radius: 20px;
+  width: var(--i);
+  height: 15px;
+  animation: progressAnim 0.5s ease-in-out;
+}
+.all {
+  color: #10b3af;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.all p {
+  margin-right: 5px;
+}
+
+.rating:not(:checked) > input {
+  position: absolute;
+  appearance: none;
+}
+
+.rating:not(:checked) > label {
+  float: right;
+  cursor: pointer;
+  font-size: 50px;
+  color: #666;
+}
+
+.rating:not(:checked) > label:before {
+  content: '★';
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+  color: #e58e09;
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+  color: #ff9e0b;
+}
+
+.rating > input:checked ~ label {
+  color: #ffa723;
+}
+
+.container button {
+  width: 6.5em;
+  height: 2.3em;
+  margin: 0.5em;
+  background: #2d646d;
+  color: white;
+  border: none;
+  border-radius: 0.625em;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.container button:hover {
+  color: black;
+}
+
+.container button:after {
+  content: '';
+  background: white;
+  position: absolute;
+  z-index: -1;
+  left: -20%;
+  right: -20%;
+  top: 0;
+  bottom: 0;
+  transform: skewX(-45deg) scale(0, 1);
+  transition: all 0.5s;
+}
+
+.container button:hover:after {
+  transform: skewX(-45deg) scale(1, 1);
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+.container textarea {
+  padding: 12px 20px;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  width: 100%;
+  font-size: 16px;
+  background-color: #eeeded;
+}

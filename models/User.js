@@ -28,7 +28,7 @@ const UserSchema = new mongoose.Schema({
     hourlyrate: Number,
     banner: String,
   },
-  rates:Array
+  rates: Array,
 })
 
 module.exports = mongoose.models.User || mongoose.model('User', UserSchema)

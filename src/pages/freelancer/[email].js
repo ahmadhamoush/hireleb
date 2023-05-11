@@ -163,9 +163,11 @@ const Freelancer = ({
                     <p>{user?.freelancer.about}</p>
                   </div>
                   <div className={style.hourlyrate}>
-                    <p style={{marginRight:'3px'}}>{user?.freelancer.hourlyrate}</p>
+                    <p style={{ marginRight: '3px' }}>
+                      {user?.freelancer.hourlyrate}
+                    </p>
                     <p>
-                         Credits
+                      Credits
                       <span>/hr</span>{' '}
                     </p>
                   </div>
@@ -282,7 +284,8 @@ const Freelancer = ({
                     {!services.length && <h4>No Services</h4>}
                     {services.map((service) => {
                       return (
-                        <div key={service._id}
+                        <div
+                          key={service._id}
                           onClick={() => {
                             router.push(`/freelancer/service/${service._id}`)
                           }}
@@ -353,15 +356,22 @@ const Freelancer = ({
                   </button>
                 </div>
                 <div>
-                      <p>Rate Completed Jobs</p>
-                      <h2>{sentProposals.filter(proposal=>proposal.status==='completed').length +receivedProposals.filter(proposal=>proposal.status==='completed').length }</h2>
-                      <button
-                        onClick={() => router.push('/freelancer/rate-clients')}
-                        className={style.creditsbtn}
-                      >
-                        View All
-                      </button>
-                    </div>  
+                  <p>Rate Completed Jobs</p>
+                  <h2>
+                    {sentProposals.filter(
+                      (proposal) => proposal.status === 'completed',
+                    ).length +
+                      receivedProposals.filter(
+                        (proposal) => proposal.status === 'completed',
+                      ).length}
+                  </h2>
+                  <button
+                    onClick={() => router.push('/freelancer/rate-clients')}
+                    className={style.creditsbtn}
+                  >
+                    View All
+                  </button>
+                </div>
               </div>
             </div>
           </div>

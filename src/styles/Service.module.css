@@ -107,9 +107,8 @@
   }
 }
 
-
 /* users */
-.users{
+.users {
   display: flex;
   flex-wrap: wrap;
   padding: 20px;
@@ -120,7 +119,7 @@
   border-radius: 1rem;
   background-color: #c5eded92;
   padding: 1rem;
-cursor: pointer;
+  cursor: pointer;
 }
 
 .infos {
@@ -134,8 +133,7 @@ cursor: pointer;
 .image {
   object-fit: cover;
   border-radius: 50%;
-  background-color:#10b3af;
-
+  background-color: #10b3af;
 }
 
 .info {
@@ -172,7 +170,6 @@ cursor: pointer;
   font-size: 0.75rem;
   line-height: 1rem;
   color: rgba(0, 0, 0, 1);
-
 }
 
 .flex {

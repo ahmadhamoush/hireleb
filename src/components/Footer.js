@@ -11,8 +11,10 @@ const Footer = () => {
           Free
         </h2>
         <div className={style.btns}>
-          <button onClick={()=>router.push('/signup')}>Create Profile</button>
-          <button onClick={()=>router.push('/profiles')}>Search Profiles</button>
+          <button onClick={() => router.push('/signup')}>Create Profile</button>
+          <button onClick={() => router.push('/profiles')}>
+            Search Profiles
+          </button>
         </div>
       </div>
       <div className={style.footerContainer}>

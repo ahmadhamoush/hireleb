@@ -203,9 +203,10 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
                       </div>
 
                       <div className={style.updates}>
-                        {proposal.updates.map((update,index) => {
+                        {proposal.updates.map((update, index) => {
                           return (
-                            <div key={index}
+                            <div
+                              key={index}
                               className={
                                 update.sender === proposal.client
                                   ? style.updateSender
@@ -246,7 +247,7 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
             <div className={style.proposalsContainer}>
               {sentProposals.map((proposal) => {
                 return (
-                  <div key={proposal._id}  className={style.proposalFlex}>
+                  <div key={proposal._id} className={style.proposalFlex}>
                     <div className={style.proposals} key={proposal._id}>
                       <Link href={`/jobs/job/${proposal.job._id}`}>
                         <p>View Job</p>
@@ -262,7 +263,7 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
                       <p>{proposal.paid ? 'yes' : 'no'}</p>
                     </div>
                     <div className={style.updatesContainer}>
-                    <div className={style.updatesHeader}>
+                      <div className={style.updatesHeader}>
                         <h3>Updates</h3>
                         <ul>
                           <li onClick={() => markJobAsComplete(proposal._id)}>
@@ -272,9 +273,10 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
                         </ul>
                       </div>
                       <div className={style.updates}>
-                        {proposal.updates.map((update,index) => {
+                        {proposal.updates.map((update, index) => {
                           return (
-                            <div key={index}
+                            <div
+                              key={index}
                               className={
                                 update.sender === proposal.client
                                   ? style.updateSender

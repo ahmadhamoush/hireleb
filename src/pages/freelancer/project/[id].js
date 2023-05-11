@@ -26,7 +26,12 @@ const Project = ({ project }) => {
             <p>{project[0].desc}</p>
             <h3>Project URL</h3>
             <p>{project[0].url}</p>
-            <Image  alt='project' src={project[0].image} width={380} height={200} />
+            <Image
+              alt="project"
+              src={project[0].image}
+              width={380}
+              height={200}
+            />
             <div className={style.btns}>
               <button type="button" onClick={navigateBack}>
                 Back

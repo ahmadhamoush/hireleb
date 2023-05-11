@@ -33,8 +33,8 @@ const Testimonial = () => {
             I was hesitant to try out a freelance platform at first, but
             HireLebs payment system through OMT made the whole process much
             easier and more accessible. I was able to find the perfect
-            freelancer for my project and I couldnt be happier with the
-            results. Highly recommend!
+            freelancer for my project and I couldnt be happier with the results.
+            Highly recommend!
           </p>
           <div className={style.user}>
             <Image

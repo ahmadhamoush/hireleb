@@ -172,7 +172,7 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
                 return (
                   <>
                     <div className={style.proposalFlex}>
-                    {isPaying.clicked && isPaying.id === proposal._id && (
+                      {isPaying.clicked && isPaying.id === proposal._id && (
                         <div className={style.pay}>
                           <h3>Credits to be paid</h3>
                           <h1>{proposal.job.credits}</h1>
@@ -210,10 +210,10 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
                         <p>{proposal.job.description}</p>
                         <h3 style={{ color: '#feff5c' }}>In Progress...</h3>
                         <h3>Paid</h3>
-                      <p>{proposal.paid ? 'yes' : 'no'}</p>
+                        <p>{proposal.paid ? 'yes' : 'no'}</p>
                       </div>
                       <div className={style.updatesContainer}>
-                      <div className={style.updatesHeader}>
+                        <div className={style.updatesHeader}>
                           <h3>Updates</h3>
                           <ul>
                             {!proposal.paid && (
@@ -229,16 +229,15 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
                               </li>
                             )}
                             {proposal.paid && (
-                              <li style={{ fontWeight: '800' }}>
-                                JOB PAID
-                              </li>
+                              <li style={{ fontWeight: '800' }}>JOB PAID</li>
                             )}
                           </ul>
                         </div>
                         <div className={style.updates}>
-                          {proposal.updates.map((update,index) => {
+                          {proposal.updates.map((update, index) => {
                             return (
-                              <div key={index}
+                              <div
+                                key={index}
                                 className={
                                   update.sender === proposal.freelancer
                                     ? style.updateSender
@@ -346,9 +345,10 @@ const Proposals = ({ receivedProposals, sentProposals, authenticated }) => {
                         </div>
 
                         <div className={style.updates}>
-                          {proposal.updates.map((update,index) => {
+                          {proposal.updates.map((update, index) => {
                             return (
-                              <div key={index}
+                              <div
+                                key={index}
                                 className={
                                   update.sender === proposal.freelancer
                                     ? style.updateSender

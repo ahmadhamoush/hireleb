@@ -67,7 +67,7 @@ const Withdraw = () => {
           <div className={style.details}>
             <h3>Withdraw Details</h3>
             <div>
-              <label htmlFor={style.name}>Credits*  (1 Credit = 1USD)</label>
+              <label htmlFor={style.name}>Credits* (1 Credit = 1USD)</label>
               <input
                 value={credits}
                 onChange={(e) => setCredits(e.target.value)}
@@ -81,11 +81,13 @@ const Withdraw = () => {
               <div>
                 <ul>
                   <li>
-                    To withdraw credits, enter amount of credits to be withdrawed
+                    To withdraw credits, enter amount of credits to be
+                    withdrawed
                   </li>
                   <li>
                     It may take some time to verify the withdraw, but once its
-                    verified, the credits will be withdraw and an omt receipt will be sent to you.
+                    verified, the credits will be withdraw and an omt receipt
+                    will be sent to you.
                   </li>
                   <li>
                     You will receive a notification once the withdraw has been

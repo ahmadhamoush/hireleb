@@ -4,7 +4,6 @@ import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { initMongoose } from '../../../../lib/initMongoose'
 
-
 export const authOptions = {
   callbacks: {
     async redirect({ url, baseUrl }) {
@@ -53,6 +52,5 @@ export const authOptions = {
   pages: {
     signIn: '/login',
   },
-  
 }
 export default NextAuth(authOptions)

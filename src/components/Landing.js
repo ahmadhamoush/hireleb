@@ -24,7 +24,6 @@ const Landing = () => {
             {' '}
             <li>Find Freelancers and Clients</li>
           </Link>
-        
         </ul>
       </div>
       <div className={style.banner}>
@@ -58,7 +57,7 @@ const Landing = () => {
                 src="/showcase1.png"
                 width={200}
                 height={350}
-                alt='img'
+                alt="img"
               />
               <ProfileCard />
             </div>
@@ -68,7 +67,7 @@ const Landing = () => {
                 src="/showcase1.png"
                 width={200}
                 height={350}
-                alt='img'
+                alt="img"
               />
               <ProfileCard />
             </div>

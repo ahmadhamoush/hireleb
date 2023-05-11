@@ -7,8 +7,7 @@ const nextConfig = {
     API_KEY: process.env.CLOUD_API,
     API_SECRET: process.env.CLOUD_SECRET,
     // NEXTAUTH_SECRET: process.env.SECRET_AUTH,
-    NEXTAUTH_SECRET:'78zFZvyspgAIBXPKdA0AhFqcNWXX16/CEmBFOHU3iOg='
-
+    NEXTAUTH_SECRET: '78zFZvyspgAIBXPKdA0AhFqcNWXX16/CEmBFOHU3iOg=',
   },
   images: {
     domains: [
@@ -61,8 +60,7 @@ const nextConfig = {
       'quickbooks.intuit.com',
       'online.imt-pm.com',
       'www.projectmanager.com',
-    ]
-    ,
+    ],
   },
 }
 

@@ -7,7 +7,9 @@ const ServiceList = ({ services }) => {
       <h2>Trending Services</h2>
       <div className={style.services}>
         {services.map((service) => {
-          return <Service key={service._id} currentUser={false} service={service} />
+          return (
+            <Service key={service._id} currentUser={false} service={service} />
+          )
         })}
       </div>
     </div>

@@ -32,8 +32,8 @@ const Jobs = ({ jobs }) => {
             <span>Leb</span>.
           </h1>
           <p>
-            Find the jobs you need - Search and discover top-rated
-            freelancers and their jobs
+            Find the jobs you need - Search and discover top-rated freelancers
+            and their jobs
           </p>
           <div className={style.search}>
             <input
@@ -223,7 +223,9 @@ const Jobs = ({ jobs }) => {
                 {jobs
                   .filter((job) => job.category === category)
                   .map((job) => {
-                    return <JobCard key={job._id} currentUser={false} job={job} />
+                    return (
+                      <JobCard key={job._id} currentUser={false} job={job} />
+                    )
                   })}
               </div>
             )}
@@ -240,7 +242,9 @@ const Jobs = ({ jobs }) => {
                       job.subcategory === subcategory,
                   )
                   .map((job) => {
-                    return <JobCard key={job._id} currentUser={false} job={job} />
+                    return (
+                      <JobCard key={job._id} currentUser={false} job={job} />
+                    )
                   })}
               </div>
             )}
@@ -259,7 +263,9 @@ const Jobs = ({ jobs }) => {
                       ),
                   )
                   .map((job) => {
-                    return <JobCard key={job._id} currentUser={false} job={job} />
+                    return (
+                      <JobCard key={job._id} currentUser={false} job={job} />
+                    )
                   })}
               </div>
             )}
@@ -274,11 +280,12 @@ const Jobs = ({ jobs }) => {
                 {jobs
                   .filter(
                     (job) =>
-                      job.payment === payment &&
-                      job.delivery === delivery,
+                      job.payment === payment && job.delivery === delivery,
                   )
                   .map((job) => {
-                    return <JobCard key={job._id} currentUser={false} job={job} />
+                    return (
+                      <JobCard key={job._id} currentUser={false} job={job} />
+                    )
                   })}
               </div>
             )}
@@ -292,7 +299,9 @@ const Jobs = ({ jobs }) => {
                 {jobs
                   .filter((job) => job.payment === payment)
                   .map((job) => {
-                    return <JobCard key={job._id} currentUser={false} job={job} />
+                    return (
+                      <JobCard key={job._id} currentUser={false} job={job} />
+                    )
                   })}
               </div>
             )}
@@ -306,7 +315,9 @@ const Jobs = ({ jobs }) => {
                 {jobs
                   .filter((job) => job.delivery === delivery)
                   .map((job) => {
-                    return <JobCard key={job._id} currentUser={false} job={job} />
+                    return (
+                      <JobCard key={job._id} currentUser={false} job={job} />
+                    )
                   })}
               </div>
             )}
@@ -330,7 +341,9 @@ const Jobs = ({ jobs }) => {
                       ),
                   )
                   .map((job) => {
-                    return <JobCard  key={job._id} currentUser={false} job={job} />
+                    return (
+                      <JobCard key={job._id} currentUser={false} job={job} />
+                    )
                   })}
               </div>
             )}
@@ -352,7 +365,9 @@ const Jobs = ({ jobs }) => {
                       ),
                   )
                   .map((job) => {
-                    return <JobCard key={job._id} currentUser={false} job={job} />
+                    return (
+                      <JobCard key={job._id} currentUser={false} job={job} />
+                    )
                   })}
               </div>
             )}
@@ -374,7 +389,9 @@ const Jobs = ({ jobs }) => {
                       ),
                   )
                   .map((job) => {
-                    return <JobCard key={job._id} currentUser={false} job={job} />
+                    return (
+                      <JobCard key={job._id} currentUser={false} job={job} />
+                    )
                   })}
               </div>
             )}
@@ -395,7 +412,9 @@ const Jobs = ({ jobs }) => {
                       job.subcategory === subcategory,
                   )
                   .map((job) => {
-                    return <JobCard key={job._id} currentUser={false} job={job} />
+                    return (
+                      <JobCard key={job._id} currentUser={false} job={job} />
+                    )
                   })}
               </div>
             )}
@@ -414,7 +433,9 @@ const Jobs = ({ jobs }) => {
                       job.subcategory === subcategory,
                   )
                   .map((job) => {
-                    return <JobCard key={job._id} currentUser={false} job={job} />
+                    return (
+                      <JobCard key={job._id} currentUser={false} job={job} />
+                    )
                   })}
               </div>
             )}
@@ -433,7 +454,9 @@ const Jobs = ({ jobs }) => {
                       job.subcategory === subcategory,
                   )
                   .map((job) => {
-                    return <JobCard key={job._id} currentUser={false} job={job} />
+                    return (
+                      <JobCard key={job._id} currentUser={false} job={job} />
+                    )
                   })}
               </div>
             )}
@@ -453,7 +476,9 @@ const Jobs = ({ jobs }) => {
                       job.category === category,
                   )
                   .map((job) => {
-                    return <JobCard key={job._id} currentUser={false} job={job} />
+                    return (
+                      <JobCard key={job._id} currentUser={false} job={job} />
+                    )
                   })}
               </div>
             )}
@@ -467,11 +492,12 @@ const Jobs = ({ jobs }) => {
                 {jobs
                   .filter(
                     (job) =>
-                      job.payment === payment &&
-                      job.category === category,
+                      job.payment === payment && job.category === category,
                   )
                   .map((job) => {
-                    return <JobCard key={job._id} currentUser={false} job={job} />
+                    return (
+                      <JobCard key={job._id} currentUser={false} job={job} />
+                    )
                   })}
               </div>
             )}
@@ -485,11 +511,12 @@ const Jobs = ({ jobs }) => {
                 {jobs
                   .filter(
                     (job) =>
-                      job.delivery === delivery &&
-                      job.category === category,
+                      job.delivery === delivery && job.category === category,
                   )
                   .map((job) => {
-                    return <JobCard key={job._id} currentUser={false} job={job} />
+                    return (
+                      <JobCard key={job._id} currentUser={false} job={job} />
+                    )
                   })}
               </div>
             )}
@@ -507,9 +534,7 @@ const Jobs = ({ jobs }) => {
           {search.length > 0 && (
             <div className={style.display}>
               {jobs
-                .filter((job) =>
-                  job.title.toLowerCase().includes(search),
-                )
+                .filter((job) => job.title.toLowerCase().includes(search))
                 .map((job) => {
                   return <JobCard key={job._id} currentUser={false} job={job} />
                 })}

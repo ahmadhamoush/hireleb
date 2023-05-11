@@ -74,7 +74,7 @@ const Deposit = () => {
           <div className={style.details}>
             <h3>Deposit Details</h3>
             <div>
-              <label htmlFor={style.name}>Credits*  (1 Credit = 1USD)</label>
+              <label htmlFor={style.name}>Credits* (1 Credit = 1USD)</label>
               <input
                 value={credits}
                 onChange={(e) => setCredits(e.target.value)}
@@ -142,9 +142,7 @@ const Deposit = () => {
                   <li>
                     To deposit credits, upload a receipt as proof of payment.
                   </li>
-                  <li style={{fontWeight:'bold'}}>
-                   Send to: Ahmad Hamoush
-                  </li>
+                  <li style={{ fontWeight: 'bold' }}>Send to: Ahmad Hamoush</li>
                   <li>
                     It may take some time to verify the payment, but once its
                     verified, the credits will be deposited into your account.

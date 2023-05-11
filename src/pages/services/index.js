@@ -223,7 +223,13 @@ const Services = ({ services }) => {
                 {services
                   .filter((service) => service.category === category)
                   .map((service) => {
-                    return <Service key={service._id} currentUser={false} service={service} />
+                    return (
+                      <Service
+                        key={service._id}
+                        currentUser={false}
+                        service={service}
+                      />
+                    )
                   })}
               </div>
             )}
@@ -240,7 +246,13 @@ const Services = ({ services }) => {
                       service.subcategory === subcategory,
                   )
                   .map((service) => {
-                    return <Service key={service._id} currentUser={false} service={service} />
+                    return (
+                      <Service
+                        key={service._id}
+                        currentUser={false}
+                        service={service}
+                      />
+                    )
                   })}
               </div>
             )}
@@ -259,7 +271,13 @@ const Services = ({ services }) => {
                       ),
                   )
                   .map((service) => {
-                    return <Service key={service._id} currentUser={false} service={service} />
+                    return (
+                      <Service
+                        key={service._id}
+                        currentUser={false}
+                        service={service}
+                      />
+                    )
                   })}
               </div>
             )}
@@ -278,7 +296,13 @@ const Services = ({ services }) => {
                       service.delivery === delivery,
                   )
                   .map((service) => {
-                    return <Service key={service._id} currentUser={false} service={service} />
+                    return (
+                      <Service
+                        key={service._id}
+                        currentUser={false}
+                        service={service}
+                      />
+                    )
                   })}
               </div>
             )}
@@ -292,7 +316,13 @@ const Services = ({ services }) => {
                 {services
                   .filter((service) => service.payment === payment)
                   .map((service) => {
-                    return <Service key={service._id} currentUser={false} service={service} />
+                    return (
+                      <Service
+                        key={service._id}
+                        currentUser={false}
+                        service={service}
+                      />
+                    )
                   })}
               </div>
             )}
@@ -306,7 +336,13 @@ const Services = ({ services }) => {
                 {services
                   .filter((service) => service.delivery === delivery)
                   .map((service) => {
-                    return <Service key={service._id} currentUser={false} service={service} />
+                    return (
+                      <Service
+                        key={service._id}
+                        currentUser={false}
+                        service={service}
+                      />
+                    )
                   })}
               </div>
             )}
@@ -330,7 +366,13 @@ const Services = ({ services }) => {
                       ),
                   )
                   .map((service) => {
-                    return <Service key={service._id} currentUser={false} service={service} />
+                    return (
+                      <Service
+                        key={service._id}
+                        currentUser={false}
+                        service={service}
+                      />
+                    )
                   })}
               </div>
             )}
@@ -352,7 +394,13 @@ const Services = ({ services }) => {
                       ),
                   )
                   .map((service) => {
-                    return <Service key={service._id} currentUser={false} service={service} />
+                    return (
+                      <Service
+                        key={service._id}
+                        currentUser={false}
+                        service={service}
+                      />
+                    )
                   })}
               </div>
             )}
@@ -374,7 +422,13 @@ const Services = ({ services }) => {
                       ),
                   )
                   .map((service) => {
-                    return <Service key={service._id} currentUser={false} service={service} />
+                    return (
+                      <Service
+                        key={service._id}
+                        currentUser={false}
+                        service={service}
+                      />
+                    )
                   })}
               </div>
             )}
@@ -395,7 +449,13 @@ const Services = ({ services }) => {
                       service.subcategory === subcategory,
                   )
                   .map((service) => {
-                    return <Service key={service._id} currentUser={false} service={service} />
+                    return (
+                      <Service
+                        key={service._id}
+                        currentUser={false}
+                        service={service}
+                      />
+                    )
                   })}
               </div>
             )}
@@ -414,7 +474,13 @@ const Services = ({ services }) => {
                       service.subcategory === subcategory,
                   )
                   .map((service) => {
-                    return <Service key={service._id} currentUser={false} service={service} />
+                    return (
+                      <Service
+                        key={service._id}
+                        currentUser={false}
+                        service={service}
+                      />
+                    )
                   })}
               </div>
             )}
@@ -433,7 +499,13 @@ const Services = ({ services }) => {
                       service.subcategory === subcategory,
                   )
                   .map((service) => {
-                    return <Service key={service._id} currentUser={false} service={service} />
+                    return (
+                      <Service
+                        key={service._id}
+                        currentUser={false}
+                        service={service}
+                      />
+                    )
                   })}
               </div>
             )}
@@ -453,7 +525,13 @@ const Services = ({ services }) => {
                       service.category === category,
                   )
                   .map((service) => {
-                    return <Service key={service._id} currentUser={false} service={service} />
+                    return (
+                      <Service
+                        key={service._id}
+                        currentUser={false}
+                        service={service}
+                      />
+                    )
                   })}
               </div>
             )}
@@ -471,7 +549,13 @@ const Services = ({ services }) => {
                       service.category === category,
                   )
                   .map((service) => {
-                    return <Service key={service._id} currentUser={false} service={service} />
+                    return (
+                      <Service
+                        key={service._id}
+                        currentUser={false}
+                        service={service}
+                      />
+                    )
                   })}
               </div>
             )}
@@ -489,7 +573,13 @@ const Services = ({ services }) => {
                       service.category === category,
                   )
                   .map((service) => {
-                    return <Service key={service._id} currentUser={false} service={service} />
+                    return (
+                      <Service
+                        key={service._id}
+                        currentUser={false}
+                        service={service}
+                      />
+                    )
                   })}
               </div>
             )}
@@ -500,7 +590,13 @@ const Services = ({ services }) => {
             !delivery.length && (
               <div className={style.display}>
                 {services.map((service) => {
-                  return <Service key={service._id} currentUser={false} service={service} />
+                  return (
+                    <Service
+                      key={service._id}
+                      currentUser={false}
+                      service={service}
+                    />
+                  )
                 })}
               </div>
             )}
@@ -511,7 +607,13 @@ const Services = ({ services }) => {
                   service.name.toLowerCase().includes(search),
                 )
                 .map((service) => {
-                  return <Service key={service._id} currentUser={false} service={service} />
+                  return (
+                    <Service
+                      key={service._id}
+                      currentUser={false}
+                      service={service}
+                    />
+                  )
                 })}
             </div>
           )}
