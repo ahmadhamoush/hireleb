@@ -12,7 +12,7 @@ const Service = (props) => {
       setFreelancer(
         (
           await axios.get(
-            `http://localhost:3000/api/get-user?email=${props.service.freelancer}`,
+            `http://hireleb.vercel.app/api/get-user?email=${props.service.freelancer}`,
           )
         ).data,
       )

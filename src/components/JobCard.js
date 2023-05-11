@@ -12,7 +12,7 @@ const JobCard = (props) => {
       setClient(
         (
           await axios.get(
-            `http://localhost:3000/api/get-user?email=${props.job.postedBy}`,
+            `http://hireleb.vercel.app/api/get-user?email=${props.job.postedBy}`,
           )
         ).data,
       )
