@@ -249,6 +249,12 @@ const Client = ({
                   >
                     Deposit
                   </button>
+                  <button
+                    onClick={() => router.push('/withdraw')}
+                    className={style.creditsbtn}
+                  >
+                    Withdraw
+                  </button>
                 </div>
                 <div>
                   <p className={style.transactionHeader}>Transactions</p>
