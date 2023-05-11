@@ -405,3 +405,53 @@
     transform: translateY(-60px);
   }
 }
+
+.rate h3 {
+  font-size: 15px;
+}
+.rates {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: scroll;
+  height: 200px;
+  padding: 20px;
+  margin: 10px 0;
+}
+.rate {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.totalProjects {
+  font-size: 15px;
+}
+.totalProjects span {
+  font-weight: 600;
+  font-size: 15px;
+  margin: 0 2px;
+}
+.progressBar {
+  background-color: #e3e3e3;
+  border-radius: 20px;
+  width: 200px;
+  height: 15px;
+}
+.progress {
+  background-color: #10b3af;
+  border-radius: 20px;
+  width: var(--i);
+  height: 15px;
+  animation: progressAnim 0.5s ease-in-out;
+}
+.all {
+  color: #10b3af;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.all p {
+  margin-right: 5px;
+}

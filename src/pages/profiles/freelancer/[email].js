@@ -101,6 +101,58 @@ const Freelancer = ({
                   </p>
                 </div>
               </div>
+              <div className={style.rates}>
+             {user?.rates.map(rate=>{
+                return(
+                <>
+                    <div className={style.rate}>
+                    <h3>Quality of work</h3>
+                    <div className={style.progressBar}>
+                      <div
+                        style={{ '--i': '30%' }}
+                        className={style.progress}
+                      ></div>
+                    </div>
+                  </div>
+                  <div className={style.rate}>
+                    <h3>Adherence to deadlines</h3>
+                    <div className={style.progressBar}>
+                      <div
+                        style={{ '--i': '50%' }}
+                        className={style.progress}
+                      ></div>
+                    </div>
+                  </div>
+                  <div className={style.rate}>
+                    <h3>Responsiveness</h3>
+                    <div className={style.progressBar}>
+                      <div
+                        style={{ '--i': '60%' }}
+                        className={style.progress}
+                      ></div>
+                    </div>
+                  </div>
+                  <div className={style.rate}>
+                    <h3>Communication skills</h3>
+                    <div className={style.progressBar}>
+                      <div
+                        style={{ '--i': '60%' }}
+                        className={style.progress}
+                      ></div>
+                    </div>
+                  </div>
+                  <div className={style.rate}>
+                    <h3>Satisfaction with outcome</h3>
+                    <div className={style.progressBar}>
+                      <div
+                        style={{ '--i': '60%' }}
+                        className={style.progress}
+                      ></div>
+                    </div>
+                  </div></>
+                )
+             })}
+            </div>
             </div>
             <div className={style.showcase}>
               <div className={style.options}>
