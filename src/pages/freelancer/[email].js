@@ -163,9 +163,9 @@ const Freelancer = ({
                     <p>{user?.freelancer.about}</p>
                   </div>
                   <div className={style.hourlyrate}>
-                    <p>{user?.freelancer.hourlyrate}</p>
+                    <p style={{marginRight:'3px'}}>{user?.freelancer.hourlyrate}</p>
                     <p>
-                      {user?.freelancer.currency === 'USD' ? '$' : 'LL'}{' '}
+                         Credits
                       <span>/hr</span>{' '}
                     </p>
                   </div>

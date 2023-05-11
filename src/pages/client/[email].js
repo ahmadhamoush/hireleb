@@ -165,9 +165,9 @@ const Client = ({
                     <p>{user.client.about}</p>
                   </div>
                   <div className={style.hourlyrate}>
-                    <p>{user.client.hourlyrate}</p>
+                    <p style={{marginRight:'3px'}}>{user?.freelancer.hourlyrate}</p>
                     <p>
-                      {user.client.currency === 'USD' ? '$' : 'LL'}{' '}
+                         Credits
                       <span>/hr</span>{' '}
                     </p>
                   </div>
@@ -177,7 +177,6 @@ const Client = ({
                     <button onClick={() => router.push('/post-a-job')}>
                       Post a Job
                     </button>
-                    <button>Change Account Type</button>
                   </div>
                   <div className={style.proposals}>
                     <div>
@@ -292,6 +291,16 @@ const Client = ({
                     View All
                   </button>
                 </div>
+                <div>
+                      <p>Rate Completed Jobs</p>
+                      <h2>{sentProposals.filter(proposal=>proposal.status==='completed').length +receivedProposals.filter(proposal=>proposal.status==='completed').length }</h2>
+                      <button
+                        onClick={() => router.push('/client/rate-freelancers')}
+                        className={style.creditsbtn}
+                      >
+                        View All
+                      </button>
+                    </div>  
               </div>
             </div>
           </div>

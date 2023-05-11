@@ -127,16 +127,6 @@ const Signup = () => {
                 >
                   Work as a Freelancer
                 </button>
-                <button
-                  type="button"
-                  style={type === 'company' ? clicked : {}}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    setType('company')
-                  }}
-                >
-                  Own An Agency
-                </button>
               </div>
             </div>
             <div className={style.name}>
